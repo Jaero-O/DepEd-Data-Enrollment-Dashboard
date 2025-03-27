@@ -1,7 +1,9 @@
-Big Data Analytics Case Study
-DepEd Enrolment Data Dashboarding
-March 2025
+**_Big Data Analytics Case Study
 
+DepEd Enrolment Data Dashboarding
+
+March 2025
+_**
 **Situation**
 
 The Department of Education (DepEd) recently underwent a change of administration. This means that its management is keen on understanding the current state of the Philippine education system. This requires an inventory of key indicators that the agency has been collecting– one of which is the annual enrollment data.
