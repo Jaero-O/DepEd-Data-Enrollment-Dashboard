@@ -1,0 +1,17 @@
+1. Make sure your Python Version is 3.12.4 and your VSCode is 1.98.2
+
+2. Open up any python file
+
+3. Ctrl + Shift + P
+
+4. Type this: Python: Create Environment
+
+5. select venv
+
+6. Select Python 3.12.4 64-bit
+
+7. Wait until the virtual environment is initialized
+
+8. Run this in the terminal: .\.venv\Scripts\activate
+
+9. Run this in the terminal: pip install -r required_packages.txt

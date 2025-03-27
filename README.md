@@ -34,3 +34,4 @@ The following parameters shall serve as guide in producing a quality output for 
 - Is the data aggregated reliable and free from inconsistency? 
 - Does the dashboard employ effective and engaging visualization? Is the layout logical and easy to follow? Does it feature filters or drill-downs to enhance user engagement and exploration?
 - Does the dashboard tell a story and offer actionable insights for its target users?
+
