@@ -2,7 +2,7 @@ import dash
 from dash import html, dcc
 from dash.dependencies import Input, Output
 
-app = dash.Dash()
+app = dash.Dash(__name__)
 
 # Create a Dash layout
 app.layout = html.Div([
