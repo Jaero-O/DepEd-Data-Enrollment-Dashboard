@@ -4,7 +4,6 @@ from dash.dependencies import Input, Output
 
 app = dash.Dash()
 
-# Create a Dash layout
 app.layout = html.Div([
     html.Div(
         html.H1('My Dashboard')
