@@ -1,14 +1,11 @@
 import pandas as pd
 
 # Load CSV file
-file_path = "SY 2023-2024 School Level Data on Official Enrollment 13.xlsx - DB.csv"
-df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School ID': 'Int64'})  # Corrected dtype column name
+file_path = "cleaned_enrollment_data.csv"
+df = pd.read_csv(file_path, dtype={'BEIS School ID': 'Int64'})
 
 # Strip spaces from column names (in case of extra spaces)
 df.columns = df.columns.str.strip()
-
-# Drop rows with any null values
-df_cleaned = df.dropna()
 
 # Extract unique values dynamically from relevant columns
 regions = df['Region'].dropna().unique().tolist() if 'Region' in df.columns else []
@@ -77,7 +74,7 @@ def filter_modified_coc(df, modified_coc_name):
     return filter_dataframe(df, "Modified COC", modified_coc_name, modified_cocs)
 
 # Example usage: Store filtered data in a new DataFrame
-#region_a_df = filter_region(df, "CARAGA")
+region_a_df = filter_region(df, "Region I")
 #division_b_df = filter_division(df, "Cebu")
 #district_c_df = filter_district(df, "Badoc")
 #beis_school_id_d_df = filter_beis_school_id(df, 105098)
