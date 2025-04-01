@@ -8,17 +8,17 @@ df = pd.read_csv(file_path, dtype={'BEIS School ID': 'Int64'})
 df.columns = df.columns.str.strip()
 
 # Extract unique values dynamically from relevant columns
-regions = df['Region'].dropna().unique().tolist() if 'Region' in df.columns else []
-divisions = df['Division'].dropna().unique().tolist() if 'Division' in df.columns else []
-districts = df['District'].dropna().unique().tolist() if 'District' in df.columns else []
-beis_school_ids = df['BEIS School ID'].dropna().unique().tolist() if 'BEIS School ID' in df.columns else []
-school_names = df['School Name'].dropna().unique().tolist() if 'School Name' in df.columns else []
-provinces = df['Province'].dropna().unique().tolist() if 'Province' in df.columns else []
-legislative_districts = df['Legislative District'].dropna().unique().tolist() if 'Legislative District' in df.columns else []
-sectors = df['Sector'].dropna().unique().tolist() if 'Sector' in df.columns else []
-school_subclassifications = df['School Subclassification'].dropna().unique().tolist() if 'School Subclassification' in df.columns else []
-school_types = df['School Type'].dropna().unique().tolist() if 'School Type' in df.columns else []
-modified_cocs = df['Modified COC'].dropna().unique().tolist() if 'Modified COC' in df.columns else []
+regions = df['Region'].unique().tolist() if 'Region' in df.columns else []
+divisions = df['Division'].unique().tolist() if 'Division' in df.columns else []
+districts = df['District'].unique().tolist() if 'District' in df.columns else []
+beis_school_ids = df['BEIS School ID'].unique().tolist() if 'BEIS School ID' in df.columns else []
+school_names = df['School Name'].unique().tolist() if 'School Name' in df.columns else []
+provinces = df['Province'].unique().tolist() if 'Province' in df.columns else []
+legislative_districts = df['Legislative District'].unique().tolist() if 'Legislative District' in df.columns else []
+sectors = df['Sector'].unique().tolist() if 'Sector' in df.columns else []
+school_subclassifications = df['School Subclassification'].unique().tolist() if 'School Subclassification' in df.columns else []
+school_types = df['School Type'].unique().tolist() if 'School Type' in df.columns else []
+modified_cocs = df['Modified COC'].unique().tolist() if 'Modified COC' in df.columns else []
 
 
 # Function to filter based on a given column and value
