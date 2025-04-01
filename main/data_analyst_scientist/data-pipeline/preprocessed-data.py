@@ -1,18 +1,5 @@
 import pandas as pd
 
-<<<<<<< HEAD
-file_path = "SY 2023-2024 School Level Data on Official Enrollment 13.xlsx - DB.csv"
-df = pd.read_csv(file_path)
-
-def filter_region(df, region_name="Region 1"):
-    """Filters the DataFrame for rows where the Region column matches the given region_name."""
-    filtered_df = df[df["Region"] == region_name]
-    return filtered_df
-
-region_1_df = filter_region(df)
-
-print(region_1_df.head())
-=======
 # Load CSV file
 file_path = "SY 2023-2024 School Level Data on Official Enrollment 13.xlsx - DB.csv"
 df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School ID': 'Int64'})  # Corrected dtype column name
@@ -114,4 +101,3 @@ print(region_a_df)
 #print(school_subclassification_j_df)
 #print(school_type_k_df)
 #print(modified_coc_l_df)
->>>>>>> cbaedc9199ec76db3c12fa4412502eb4d66dd6fa
