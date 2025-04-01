@@ -1,0 +1,229 @@
+$darkblue: #1d2845;
+$darkerblue: #081434;
+$navbarli: #90b1d7;
+$medyowhite:#e0e6f1;
+$grayforunusedtab:#2a384f;
+$grayforunusedtabtext:#929fb7;
+
+@font-face {
+    font-family: "Inter"; 
+    src: url('Inter Variable/Single axis/Inter.ttf');
+}
+
+@font-face {
+    font-family: "Inter-Bold"; 
+    src: url('Inter Desktop/Inter-Bold.otf');
+}
+
+body{
+    background-color:$darkerblue;
+}
+
+div.main-page{
+    display:flex;
+}
+
+//navbar css
+div.nav-bar-div{
+    background-color: $darkblue;
+    width:16em;
+    height:100vh;
+    padding-left:1em;
+    padding-right:1em;
+    display:flex;
+    position:sticky;
+    top:0;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction:column;
+  
+    img.depEd-logo, img.depEd-title{
+     width:100px;
+     height:auto;
+     padding-top:1em;
+    }
+    div.header-footer{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        gap:0.25em;
+    }
+
+    span.title-page-text{
+        color: $medyowhite;
+        text-align:center;
+        font-size:1.2em;
+        font-family: "Inter-Bold";
+    }
+
+    span.all-rights-served{
+        font-size:10px;
+        color:#546175;
+
+    }
+
+    div.nav-items{
+        display:flex;
+        flex-direction:column;
+        height:400px;
+        width:220px;
+        justify-content: space-evenly;
+        padding-left:2em;
+        margin-bottom:3em;
+
+        span.nav-bar-li{
+            font-family:"Inter";
+        }
+
+        span.nav-bar-li.hovered{
+            font-family: "Inter-Bold";
+        }
+        
+        span.nav-bar-li.hovered, I.hovered{
+            color:$medyowhite;
+            font-size:1.2em;
+        }
+
+        span.nav-bar-li, I{
+            color: $navbarli;
+            display:flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content:center;
+            font-size:0.95em;
+        }
+
+        div{
+            display:flex;
+            align-content: center;
+            gap: 0.5em;
+        }
+
+        div.nav-bar-li-div-hovered{
+            border-left:0.6em solid $medyowhite;
+            padding-left:2.75em;
+            margin-left:-3.5em;
+        }
+    }
+}
+
+//header css
+
+div.header-div{
+    display:flex;
+    justify-content: space-between;
+    align-content: center;
+    width:75em;
+    margin:2em;
+    span, I{
+        color:$medyowhite;
+        display:flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content:center;
+        font-size:1.2em;
+    }
+
+    span{
+        font-family: "Inter";
+        font-size:1em;
+    }
+
+    span.My-Dashboard-title{
+        font-size:2em;
+        font-family:"Inter-Bold"
+    }
+
+    div.header-icons-div{
+        display:flex;
+        justify-content: space-around;
+        align-items: center;
+        width:60%;
+
+        .search-bar{
+            width: 60%;
+            height:50%;
+            max-width: 500px; /* Adjust width as needed */
+            padding: 2px;
+            padding-left:1em;
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 5em; /* Rounded corners */
+            outline: none;
+            font-size: 0.75em;
+            transition: all 0.3s ease-in-out;
+        }
+
+        div.header-username-div{
+            display:flex;
+            gap:0.65em;
+        }
+    }
+
+
+}
+
+
+//tabs
+
+div.tab-div{
+    display:flex;
+    flex-direction: column;
+    outline:none;
+    border-radius:1em;
+    margin:2em;
+    margin-top:3em;
+
+    .tabs-dcc{
+        display:flex;
+        gap:0.5em;
+        padding:0px;
+        margin:0px;
+        .tab {
+            display:flex;
+            height:2.7em;
+            width:10em;
+            border: 2px solid transparent;
+            outline:none;
+            background-color:$grayforunusedtab;
+            color: $grayforunusedtabtext;
+            font-size:1em;
+            border-radius: 0.5em;
+            justify-content: center;
+            align-items: center;
+            padding:0px;
+            margin-bottom:0px;
+        }
+        
+        /* Style for the active tab */
+        .tab-selected {
+            display:flex !important;
+            height: 3em !important;
+            width: 10em !important;
+            justify-content: center !important;
+            border: none !important;
+            outline:none !important;
+            background-color: $darkblue !important;
+            color: $medyowhite !important;
+            box-shadow:none !important;
+            font-weight: bold !important;
+            border-radius: 0.5em 0.5em 0em 0em !important;
+        }
+    }
+
+    .tabs-dcc {
+        display: flex;
+        background-color: #081434;  /* Dark background */
+        justify-content: start;
+    }
+}
+
+// content css
+
+div.content-page{
+    display:flex;
+    background-color:$darkblue;
+    width:100%;
+    height:100%;
+    min-height:33em;
+    border-radius: 0em 1em 1em 1em;
+}

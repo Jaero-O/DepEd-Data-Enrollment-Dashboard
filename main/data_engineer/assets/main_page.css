@@ -1,0 +1,193 @@
+@font-face {
+  font-family: "Inter";
+  src: url("Inter Variable/Single axis/Inter.ttf");
+}
+@font-face {
+  font-family: "Inter-Bold";
+  src: url("Inter Desktop/Inter-Bold.otf");
+}
+body {
+  background-color: #081434;
+}
+
+div.main-page {
+  display: flex;
+}
+
+div.nav-bar-div {
+  background-color: #1d2845;
+  width: 16em;
+  height: 100vh;
+  padding-left: 1em;
+  padding-right: 1em;
+  display: flex;
+  position: sticky;
+  top: 0;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+div.nav-bar-div img.depEd-logo, div.nav-bar-div img.depEd-title {
+  width: 100px;
+  height: auto;
+  padding-top: 1em;
+}
+div.nav-bar-div div.header-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
+}
+div.nav-bar-div span.title-page-text {
+  color: #e0e6f1;
+  text-align: center;
+  font-size: 1.2em;
+  font-family: "Inter-Bold";
+}
+div.nav-bar-div span.all-rights-served {
+  font-size: 10px;
+  color: #546175;
+}
+div.nav-bar-div div.nav-items {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 220px;
+  justify-content: space-evenly;
+  padding-left: 2em;
+  margin-bottom: 3em;
+}
+div.nav-bar-div div.nav-items span.nav-bar-li {
+  font-family: "Inter";
+}
+div.nav-bar-div div.nav-items span.nav-bar-li.hovered {
+  font-family: "Inter-Bold";
+}
+div.nav-bar-div div.nav-items span.nav-bar-li.hovered, div.nav-bar-div div.nav-items I.hovered {
+  color: #e0e6f1;
+  font-size: 1.2em;
+}
+div.nav-bar-div div.nav-items span.nav-bar-li, div.nav-bar-div div.nav-items I {
+  color: #90b1d7;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  font-size: 0.95em;
+}
+div.nav-bar-div div.nav-items div {
+  display: flex;
+  align-content: center;
+  gap: 0.5em;
+}
+div.nav-bar-div div.nav-items div.nav-bar-li-div-hovered {
+  border-left: 0.6em solid #e0e6f1;
+  padding-left: 2.75em;
+  margin-left: -3.5em;
+}
+
+div.header-div {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  width: 75em;
+  margin: 2em;
+}
+div.header-div span, div.header-div I {
+  color: #e0e6f1;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  font-size: 1.2em;
+}
+div.header-div span {
+  font-family: "Inter";
+  font-size: 1em;
+}
+div.header-div span.My-Dashboard-title {
+  font-size: 2em;
+  font-family: "Inter-Bold";
+}
+div.header-div div.header-icons-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+}
+div.header-div div.header-icons-div .search-bar {
+  width: 60%;
+  height: 50%;
+  max-width: 500px; /* Adjust width as needed */
+  padding: 2px;
+  padding-left: 1em;
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5em; /* Rounded corners */
+  outline: none;
+  font-size: 0.75em;
+  transition: all 0.3s ease-in-out;
+}
+div.header-div div.header-icons-div div.header-username-div {
+  display: flex;
+  gap: 0.65em;
+}
+
+div.tab-div {
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  border-radius: 1em;
+  margin: 2em;
+  margin-top: 3em;
+}
+div.tab-div .tabs-dcc {
+  display: flex;
+  gap: 0.5em;
+  padding: 0px;
+  margin: 0px;
+  /* Style for the active tab */
+}
+div.tab-div .tabs-dcc .tab {
+  display: flex;
+  height: 2.7em;
+  width: 10em;
+  border: 2px solid transparent;
+  outline: none;
+  background-color: #2a384f;
+  color: #929fb7;
+  font-size: 1em;
+  border-radius: 0.5em;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  margin-bottom: 0px;
+}
+div.tab-div .tabs-dcc .tab-selected {
+  display: flex !important;
+  height: 3em !important;
+  width: 10em !important;
+  justify-content: center !important;
+  border: none !important;
+  outline: none !important;
+  background-color: #1d2845 !important;
+  color: #e0e6f1 !important;
+  box-shadow: none !important;
+  font-weight: bold !important;
+  border-radius: 0.5em 0.5em 0em 0em !important;
+}
+div.tab-div .tabs-dcc {
+  display: flex;
+  background-color: #081434; /* Dark background */
+  justify-content: start;
+}
+
+div.content-page {
+  display: flex;
+  background-color: #1d2845;
+  width: 100%;
+  height: 100%;
+  min-height: 33em;
+  border-radius: 0em 1em 1em 1em;
+}
+
+/*# sourceMappingURL=main_page.css.map */
