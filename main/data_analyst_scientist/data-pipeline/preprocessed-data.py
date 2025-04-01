@@ -2,24 +2,27 @@ import pandas as pd
 
 # Load CSV file
 file_path = "SY 2023-2024 School Level Data on Official Enrollment 13.xlsx - DB.csv"
-df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School': 'Int64'})
+df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School ID': 'Int64'})  # Corrected dtype column name
 
 # Strip spaces from column names (in case of extra spaces)
 df.columns = df.columns.str.strip()
 
+# Drop rows with any null values
+df_cleaned = df.dropna()
+
 # Extract unique values dynamically from relevant columns
-regions = df['Region'].dropna().unique().tolist() if 'Region' in df.columns else []
-divisions = df['Division'].dropna().unique().tolist() if 'Division' in df.columns else []
-districts = df['District'].dropna().unique().tolist() if 'District' in df.columns else []
-beis_school_ids = df['BEIS School ID'].dropna().unique().tolist() if 'BEIS School ID' in df.columns else []
-school_names = df['School Name'].dropna().unique().tolist() if 'School Name' in df.columns else []
-provinces = df['Province'].dropna().unique().tolist() if 'Province' in df.columns else []
-municipalities = df['Municipality'].dropna().unique().tolist() if 'Municipality' in df.columns else []
-legislative_districts = df['Legislative District'].dropna().unique().tolist() if 'Legislative District' in df.columns else []
-sectors = df['Sector'].dropna().unique().tolist() if 'Sector' in df.columns else []
-school_subclassifications = df['School Subclassification'].dropna().unique().tolist() if 'School Subclassification' in df.columns else []
-school_types = df['School Type'].dropna().unique().tolist() if 'School Type' in df.columns else []
-modified_cocs = df['Modified COC'].dropna().unique().tolist() if 'Modified COC' in df.columns else []
+regions = df_cleaned['Region'].unique().tolist() if 'Region' in df_cleaned.columns else []
+divisions = df_cleaned['Division'].unique().tolist() if 'Division' in df_cleaned.columns else []
+districts = df_cleaned['District'].unique().tolist() if 'District' in df_cleaned.columns else []
+beis_school_ids = df_cleaned['BEIS School ID'].unique().tolist() if 'BEIS School ID' in df_cleaned.columns else []
+school_names = df_cleaned['School Name'].unique().tolist() if 'School Name' in df_cleaned.columns else []
+provinces = df_cleaned['Province'].unique().tolist() if 'Province' in df_cleaned.columns else []
+municipalities = df_cleaned['Municipality'].unique().tolist() if 'Municipality' in df_cleaned.columns else []
+legislative_districts = df_cleaned['Legislative District'].unique().tolist() if 'Legislative District' in df_cleaned.columns else []
+sectors = df_cleaned['Sector'].unique().tolist() if 'Sector' in df_cleaned.columns else []
+school_subclassifications = df_cleaned['School Subclassification'].unique().tolist() if 'School Subclassification' in df_cleaned.columns else []
+school_types = df_cleaned['School Type'].unique().tolist() if 'School Type' in df_cleaned.columns else []
+modified_cocs = df_cleaned['Modified COC'].unique().tolist() if 'Modified COC' in df_cleaned.columns else []
 
 # Function to filter based on a given column and value
 def filter_dataframe(df, column_name, value, unique_values):
@@ -77,21 +80,21 @@ def filter_modified_coc(df, modified_coc_name):
     return filter_dataframe(df, "Modified COC", modified_coc_name, modified_cocs)
 
 # Example usage: Store filtered data in a new DataFrame
-#region_a_df = filter_region(df, "CARAGA")
-#division_b_df = filter_division(df, "Cebu")
-#district_c_df = filter_district(df, "Badoc")
-#beis_school_id_d_df = filter_beis_school_id(df, 105098)
-#school_name_e_df = filter_school_name(df, "San Miguel National High School")
-#province_f_df = filter_province(df, "ILOCOS NORTE")
-#municipality_g_df = filter_municipality(df, "BACARRA")
-#legislative_district_h_df = filter_legislative_district(df, "1st District")
-#sector_i_df = filter_sector(df, "Public")
-#school_subclassification_j_df = filter_school_subclassification(df, "LUC")
-#school_type_k_df = filter_school_type(df, "School with no Annexes")
-#modified_coc_l_df = filter_modified_coc(df, "Purely ES")
+region_a_df = filter_region(df_cleaned, "Region I")
+#division_b_df = filter_division(df_cleaned, "Cebu")
+#district_c_df = filter_district(df_cleaned, "Badoc")
+#beis_school_id_d_df = filter_beis_school_id(df_cleaned, 105098)
+#school_name_e_df = filter_school_name(df_cleaned, "San Miguel National High School")
+#province_f_df = filter_province(df_cleaned, "ILOCOS NORTE")
+#municipality_g_df = filter_municipality(df_cleaned, "BACARRA")
+#legislative_district_h_df = filter_legislative_district(df_cleaned, "1st District")
+#sector_i_df = filter_sector(df_cleaned, "Public")
+#school_subclassification_j_df = filter_school_subclassification(df_cleaned, "LUC")
+#school_type_k_df = filter_school_type(df_cleaned, "School with no Annexes")
+#modified_coc_l_df = filter_modified_coc(df_cleaned, "Purely ES")
 
 # Display filtered data
-#print(region_a_df)
+print(region_a_df)
 #print(division_b_df)
 #print(district_c_df)
 #print(beis_school_id_d_df)
