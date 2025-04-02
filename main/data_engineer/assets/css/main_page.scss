@@ -7,12 +7,12 @@ $grayforunusedtabtext:#929fb7;
 
 @font-face {
     font-family: "Inter"; 
-    src: url('Inter Variable/Single axis/Inter.ttf');
+    src: url('/assets/Inter Variable/Single axis/Inter.ttf');
 }
 
 @font-face {
     font-family: "Inter-Bold"; 
-    src: url('Inter Desktop/Inter-Bold.otf');
+    src: url('/assets/Inter Desktop/Inter-Bold.otf');
 }
 
 body{
@@ -226,4 +226,5 @@ div.content-page{
     height:100%;
     min-height:33em;
     border-radius: 0em 1em 1em 1em;
+    padding:1em;
 }

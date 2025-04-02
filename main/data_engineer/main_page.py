@@ -1,11 +1,18 @@
+import sys
 import dash
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 from dash.dependencies import Input, Output
+from dashboard_page.district.district_page import districtPage
+from dashboard_page.divisional.divisional_page import divisionalPage
+from dashboard_page.regional.regional_page import regionalPage
+from dashboard_page.national.national_page import nationalPage
+
 
 # Initialize the Dash app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME])
 
+# Navigation Bar 
 navBar = html.Div([
     html.Div([
         html.Img(src='/assets/images/deped_logo.png', className='depEd-logo'),
@@ -25,22 +32,22 @@ navBar = html.Div([
     ],className='header-footer')
 ], className='nav-bar-div')
 
+# Header
 header = html.Div([
     html.Span('My Dashboard', className='My-Dashboard-title'),
     html.Div([
         dcc.Input(type="text", placeholder="Search...", className='search-bar'),
-        # html.Div([html.I(className="fa-solid fa-magnifying-glass"),html.I(className="fa-solid fa-xmark")],className='search-bar'),
         html.I(className='fa fa-envelope'),
         html.I(className='fa fa-bell'),
         html.Div([html.I(className='fa fa-user-circle'), html.Span('Jane Doe')], className='header-username-div')
     ], className='header-icons-div')
 ],className='header-div')
 
+# Content 
 content = html.Div([
-    # Tabs Component
     dcc.Tabs(
         id="tabs",
-        value="National",  # Default active tab
+        value="National",
         children=[
             dcc.Tab(label="National", value="National", className='tab', selected_className='tab-selected'),
             dcc.Tab(label="Regional", value="Regional", className='tab', selected_className='tab-selected'),
@@ -52,6 +59,7 @@ content = html.Div([
     html.Div(id="tab-content", className='content-page active-tab')
 ], className='tab-div')
 
+# Application Layout Initialization
 app.layout = html.Div([
     navBar,
     html.Div([
@@ -67,14 +75,14 @@ app.layout = html.Div([
 )
 def update_tab_content(selected_tab):
     if selected_tab == "National":
-        return 
+        return nationalPage()
     elif selected_tab == "Regional":
-        return 
+        return regionalPage()
     elif selected_tab == "Divisional":
-        return 
+        return divisionalPage()
     elif selected_tab == "District":
-        return 
-    return
+        return districtPage()
+    return nationalPage
 
 
 if __name__ == '__main__':
