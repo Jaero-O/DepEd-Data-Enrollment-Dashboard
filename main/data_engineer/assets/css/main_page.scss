@@ -5,6 +5,31 @@ $medyowhite:#e0e6f1;
 $grayforunusedtab:#2a384f;
 $grayforunusedtabtext:#929fb7;
 
+:root {
+    --web-background-color: #f0f4fc;
+    --web-background-color-two: #ffffff;
+    --text-color: #e0e6f1;
+    --navbar-color-inactive:#90b1d7;
+    --navbar-color-active:#0053b2;
+    --header-icons:#3871af;
+    --tab-active:#e0e6f1;
+    --tab-inactive:#e0e6f1;
+    --tab-inactive-text:#929fb7;
+}
+
+.dark-mode{
+    --web-background-color: #081434;
+    --web-background-color-two: #1d2845;
+    --text-color: #e0e6f1;
+    --navbar-color-inactive:#90b1d7;
+    --navbar-color-active:#e0e6f1;
+    --header-icons:#e0e6f1;
+    --tab-active:#1d2845;
+    --tab-inactive:#2a384f;
+    --tab-inactive-text:#929fb7;
+    --all-rights-served:#546175;
+}
+
 @font-face {
     font-family: "Inter"; 
     src: url('/assets/Inter Variable/Single axis/Inter.ttf');
@@ -16,16 +41,17 @@ $grayforunusedtabtext:#929fb7;
 }
 
 body{
-    background-color:$darkerblue;
+    background-color:var(--web-background-color);
 }
 
 div.main-page{
     display:flex;
+    background-color:var(--web-background-color);
 }
 
 //navbar css
 div.nav-bar-div{
-    background-color: $darkblue;
+    background-color: var(--web-background-color-two);
     width:16em;
     height:100vh;
     padding-left:1em;
@@ -50,7 +76,7 @@ div.nav-bar-div{
     }
 
     span.title-page-text{
-        color: $medyowhite;
+        color: var(--navbar-color-active);
         text-align:center;
         font-size:1.2em;
         font-family: "Inter-Bold";
@@ -58,7 +84,7 @@ div.nav-bar-div{
 
     span.all-rights-served{
         font-size:10px;
-        color:#546175;
+        color:var(--all-rights-served);
 
     }
 
@@ -72,7 +98,7 @@ div.nav-bar-div{
         margin-bottom:3em;
 
         span.nav-bar-li{
-            font-family:"Inter";
+            font-family:"Inter-Bold";
         }
 
         span.nav-bar-li.hovered{
@@ -80,12 +106,12 @@ div.nav-bar-div{
         }
         
         span.nav-bar-li.hovered, I.hovered{
-            color:$medyowhite;
+            color:var(--navbar-color-active);
             font-size:1.2em;
         }
 
         span.nav-bar-li, I{
-            color: $navbarli;
+            color: var(--navbar-color-inactive);
             display:flex;
             flex-direction: column;
             align-content: center;
@@ -100,12 +126,33 @@ div.nav-bar-div{
         }
 
         div.nav-bar-li-div-hovered{
-            border-left:0.6em solid $medyowhite;
-            padding-left:2.75em;
+            border-left:2.5em solid var(--navbar-color-active);
+            padding-left:1em;
             margin-left:-3.5em;
         }
     }
+
+    .theme-toggle-container {
+        display: flex;
+        justify-content: center;
+    }
 }
+
+.toggle-switch-theme .form-check-input {
+    background-color: #e3ebf9; /* Light gray */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Switch background when turned ON */
+.toggle-switch-theme .form-check-input:checked {
+    background-color: var(--tab-inactive-text); /* Bootstrap primary blue */
+    border:none;
+}
+
+.toggle-switch-theme .form-check-input:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
 
 //header css
 
@@ -116,7 +163,7 @@ div.header-div{
     width:75em;
     margin:2em;
     span, I{
-        color:$medyowhite;
+        color:var(--header-icons);
         display:flex;
         flex-direction: column;
         align-content: center;
@@ -184,8 +231,8 @@ div.tab-div{
             width:10em;
             border: 2px solid transparent;
             outline:none;
-            background-color:$grayforunusedtab;
-            color: $grayforunusedtabtext;
+            background-color:var(--tab-inactive);
+            color: var(--tab-inactive-text);
             font-size:1em;
             border-radius: 0.5em;
             justify-content: center;
@@ -202,8 +249,8 @@ div.tab-div{
             justify-content: center !important;
             border: none !important;
             outline:none !important;
-            background-color: $darkblue !important;
-            color: $medyowhite !important;
+            background-color: var(--web-background-color-two)!important;
+            color: var(--navbar-color-active) !important;
             box-shadow:none !important;
             font-weight: bold !important;
             border-radius: 0.5em 0.5em 0em 0em !important;
@@ -212,7 +259,7 @@ div.tab-div{
 
     .tabs-dcc {
         display: flex;
-        background-color: #081434;  /* Dark background */
+        background-color: var(--web-background-color);  /* Dark background */
         justify-content: start;
     }
 }
@@ -221,7 +268,7 @@ div.tab-div{
 
 div.content-page{
     display:flex;
-    background-color:$darkblue;
+    background-color:var(--web-background-color-two);
     width:100%;
     height:100%;
     min-height:33em;

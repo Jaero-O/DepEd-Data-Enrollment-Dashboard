@@ -2,7 +2,7 @@ import sys
 import dash
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 from dashboard_page.district.district_page import districtPage
 from dashboard_page.divisional.divisional_page import divisionalPage
 from dashboard_page.regional.regional_page import regionalPage
@@ -27,7 +27,7 @@ navBar = html.Div([
         html.Div([html.I(className="fa fa-sign-out log-out"), html.Span('Log Out', className='nav-bar-li log-out')]),
     ], className='nav-items'),
     html.Div([
-        # html.Img(src='/assets/images/deped_title.png',className='depEd-title'),
+        html.Div(dbc.Switch(id="theme-toggle-switch", label=None, value=False, className="toggle-switch-theme"),className="theme-toggle-container"),
         html.Span('All Rights Served 2025', className='title-page-text all-rights-served'),
     ],className='header-footer')
 ], className='nav-bar-div')
@@ -61,12 +61,13 @@ content = html.Div([
 
 # Application Layout Initialization
 app.layout = html.Div([
+    dcc.Store(id="theme-store", data="light"),  # Default theme is light
     navBar,
     html.Div([
         header,
         content
     ])
-],className='main-page')
+],className='main-page', id="main-container")
 
 # Callback to update content based on active tab
 @app.callback(
@@ -84,6 +85,14 @@ def update_tab_content(selected_tab):
         return districtPage()
     return nationalPage
 
+@app.callback(
+    Output("main-container", "className"),
+    Output("theme-store", "data"),
+    Input("theme-toggle-switch", "value")  # Removed State
+)
+def toggle_theme(is_dark_mode):
+    new_theme = "main-page dark-mode" if is_dark_mode else "main-page"
+    return new_theme, new_theme
 
 if __name__ == '__main__':
     app.run(debug=True)
