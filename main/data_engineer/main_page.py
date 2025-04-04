@@ -1,23 +1,30 @@
-import sys
 import dash
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 from dash.dependencies import Input, Output, State
-from dashboard_page.district.district_page import districtPage
-from dashboard_page.divisional.divisional_page import divisionalPage
-from dashboard_page.regional.regional_page import regionalPage
-from dashboard_page.national.national_page import nationalPage
+import requests
+import pandas as pd
+import base64
+import io
 
+# Import pages
+from dashboard.district.district_page import districtPage
+from dashboard.divisional.divisional_page import divisionalPage
+from dashboard.regional.regional_page import regionalPage
+from dashboard.national.national_page import nationalPage
+
+# Import Flask Server
+from main_server import server
 
 # Initialize the Dash app
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME])
+app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME])
 
 # Navigation Bar 
 navBar = html.Div([
     html.Div([
-        html.Img(src='/assets/images/deped_logo.png', className='depEd-logo'),
+        html.Img(src='./assets/images/deped_logo.png', className='depEd-logo'),
         html.Span('DepEd Learning Management System', className='title-page-text'),
-    ],className='header-footer'),
+    ], className='header-footer'),
     html.Div([
         html.Div([html.I(className="fa fa-area-chart hovered"), html.Span('My Dashboard', className='nav-bar-li hovered')], className='nav-bar-li-div-hovered'),
         html.Div([html.I(className="fa fa-home"), html.Span('Homepage', className='nav-bar-li')]),
@@ -27,9 +34,9 @@ navBar = html.Div([
         html.Div([html.I(className="fa fa-sign-out log-out"), html.Span('Log Out', className='nav-bar-li log-out')]),
     ], className='nav-items'),
     html.Div([
-        html.Div(dbc.Switch(id="theme-toggle-switch", label=None, value=False, className="toggle-switch-theme"),className="theme-toggle-container"),
+        html.Div(dbc.Switch(id="theme-toggle-switch", label=None, value=False, className="toggle-switch-theme"), className="theme-toggle-container"),
         html.Span('All Rights Served 2025', className='title-page-text all-rights-served'),
-    ],className='header-footer')
+    ], className='header-footer')
 ], className='nav-bar-div')
 
 # Header
@@ -41,7 +48,7 @@ header = html.Div([
         html.I(className='fa fa-bell'),
         html.Div([html.I(className='fa fa-user-circle'), html.Span('Jane Doe')], className='header-username-div')
     ], className='header-icons-div')
-],className='header-div')
+], className='header-div')
 
 # Content 
 content = html.Div([
@@ -56,18 +63,24 @@ content = html.Div([
         ],
         className='tabs-dcc',
     ),
-    html.Div(id="tab-content", className='content-page active-tab')
+    html.Div(id="tab-content", className='content-page active-tab'),
+    dcc.Upload(
+        id="upload-data",
+        children=html.Button("Upload File"),
+        multiple=False,
+    ),
+    html.Div(id="output-data-upload")
 ], className='tab-div')
 
 # Application Layout Initialization
 app.layout = html.Div([
-    dcc.Store(id="theme-store", data="light"),  # Default theme is light
+    dcc.Store(id="theme-store", data="light"),
     navBar,
     html.Div([
         header,
         content
     ])
-],className='main-page', id="main-container")
+], className='main-page', id="main-container")
 
 # Callback to update content based on active tab
 @app.callback(
@@ -83,16 +96,55 @@ def update_tab_content(selected_tab):
         return divisionalPage()
     elif selected_tab == "District":
         return districtPage()
-    return nationalPage
+    return nationalPage()
 
+# Callback for changing the theme of the page
 @app.callback(
     Output("main-container", "className"),
     Output("theme-store", "data"),
-    Input("theme-toggle-switch", "value")  # Removed State
+    Input("theme-toggle-switch", "value")
 )
 def toggle_theme(is_dark_mode):
     new_theme = "main-page dark-mode" if is_dark_mode else "main-page"
     return new_theme, new_theme
 
+# Callback for uploading the file into the server
+ALLOWED_EXTENSIONS = ['.csv', '.xlsx']
+
+def allowed_file(filename):
+    """Check if the file extension is allowed."""
+    return any(filename.endswith(ext) for ext in ALLOWED_EXTENSIONS)
+
+@app.callback(
+    Output("output-data-upload", "children"),
+    [Input("upload-data", "contents")],
+    [State("upload-data", "filename")]
+)
+def upload_file(contents, filename):
+    if contents is None:
+        return "No file uploaded"
+    
+    if not allowed_file(filename):
+        return html.Div([html.H5("Invalid file type. Please upload a CSV or Excel file.")])
+    
+    content_type, content_string = contents.split(',')
+    decoded = base64.b64decode(content_string)
+
+    # if "csv" not in content_type and "excel" not in content_type:
+    #     return html.Div([html.H5("Invalid file format. Only CSV or Excel files are allowed.")])
+    
+    files = {
+        'file': (filename, io.BytesIO(decoded), 'application/octet-stream')
+    }
+    
+    try:
+        response = requests.post('http://127.0.0.1:5000/api/upload-file', files=files)
+        if response.status_code == 200:
+            return html.Div([html.H5(response.json().get('message'))])
+        else:
+            return html.Div([html.H5(f"Upload failed with status {response.status_code}")])
+    except requests.exceptions.RequestException as e:
+        return html.Div([html.H5(f"Error occurred: {str(e)}")])
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="127.0.0.1", port=5000)
