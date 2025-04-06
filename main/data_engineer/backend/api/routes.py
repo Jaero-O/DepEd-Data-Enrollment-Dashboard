@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 import os
 import pandas as pd
-from sql.models import db, UploadedFile
+from main.data_engineer.backend.sql_models.models import db, UploadedFile
 
 # Define the blueprint
 api_bp = Blueprint("api_bp", __name__)
@@ -23,9 +23,9 @@ def upload_file():
     try:
         # Attempt to read the file using pandas (it will handle both CSV and Excel)
         if file.filename.endswith(".csv"):
-            df = pd.read_csv(upload_path)
+            df = pd.read_csv(upload_path, skiprows=4)
         elif file.filename.endswith(".xlsx"):
-            df = pd.read_excel(upload_path)
+            df = pd.read_excel(upload_path, sheet_name=0, skiprows=4)
         else:
             return jsonify({"error": "Unsupported file format. Only CSV and Excel files are allowed."}), 400
 
@@ -64,6 +64,7 @@ def list_files():
     return jsonify([{
         "filename": f.filename,
         "file_size": f.file_size,
+
         "upload_time": f.upload_time.isoformat(),
-        "columns": f.columns.split(",")
+        "columns": f.columns.split(",") if f.columns else []
     } for f in files])

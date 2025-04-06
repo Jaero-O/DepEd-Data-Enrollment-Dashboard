@@ -8,16 +8,21 @@ import base64
 import io
 
 # Import pages
-from dashboard.district.district_page import districtPage
-from dashboard.divisional.divisional_page import divisionalPage
-from dashboard.regional.regional_page import regionalPage
-from dashboard.national.national_page import nationalPage
+from main.data_engineer.frontend.dashboard.district.district_page import districtPage
+from main.data_engineer.frontend.dashboard.divisional.divisional_page import divisionalPage
+from main.data_engineer.frontend.dashboard.regional.regional_page import regionalPage
+from main.data_engineer.frontend.dashboard.national.national_page import nationalPage
 
 # Import Flask Server
-from main_server import server
+from main.data_engineer.backend.main_server import app as server
 
 # Initialize the Dash app
-app = dash.Dash(__name__, server=server, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME])
+app = dash.Dash(
+    __name__,
+    server=server,
+    external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME],
+    suppress_callback_exceptions=True
+)
 
 # Navigation Bar 
 navBar = html.Div([
@@ -89,6 +94,9 @@ app.layout = html.Div([
 )
 def update_tab_content(selected_tab):
     if selected_tab == "National":
+        response = requests.get("http://127.0.0.1:5000/api/uploaded-files")
+        files = response.json()
+        print(files)
         return nationalPage()
     elif selected_tab == "Regional":
         return regionalPage()
@@ -114,6 +122,7 @@ ALLOWED_EXTENSIONS = ['.csv', '.xlsx']
 def allowed_file(filename):
     """Check if the file extension is allowed."""
     return any(filename.endswith(ext) for ext in ALLOWED_EXTENSIONS)
+
 
 @app.callback(
     Output("output-data-upload", "children"),
@@ -146,5 +155,5 @@ def upload_file(contents, filename):
     except requests.exceptions.RequestException as e:
         return html.Div([html.H5(f"Error occurred: {str(e)}")])
 
-if __name__ == '__main__':
-    app.run(debug=True, host="127.0.0.1", port=5000)
+# if __name__ == '__main__':
+#     app.run(debug=True, host="127.0.0.1", port=5000)
