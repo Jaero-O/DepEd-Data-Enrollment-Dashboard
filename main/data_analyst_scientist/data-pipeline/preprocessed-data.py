@@ -1,8 +1,8 @@
 import pandas as pd
 
 # Load CSV file
-file_path = "SY 2023-2024 School Level Data on Official Enrollment 13.xlsx - DB.csv"
-df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School': 'Int64'})
+file_path = "enrollment_csv_file\preprocessed_data\cleaned_enrollment_data.csv" 
+df = pd.read_csv(file_path, dtype={'BEIS School ID': 'Int64'})
 
 # Strip spaces from column names (in case of extra spaces)
 df.columns = df.columns.str.strip()
@@ -14,12 +14,12 @@ districts = df['District'].dropna().unique().tolist() if 'District' in df.column
 beis_school_ids = df['BEIS School ID'].dropna().unique().tolist() if 'BEIS School ID' in df.columns else []
 school_names = df['School Name'].dropna().unique().tolist() if 'School Name' in df.columns else []
 provinces = df['Province'].dropna().unique().tolist() if 'Province' in df.columns else []
-municipalities = df['Municipality'].dropna().unique().tolist() if 'Municipality' in df.columns else []
 legislative_districts = df['Legislative District'].dropna().unique().tolist() if 'Legislative District' in df.columns else []
 sectors = df['Sector'].dropna().unique().tolist() if 'Sector' in df.columns else []
 school_subclassifications = df['School Subclassification'].dropna().unique().tolist() if 'School Subclassification' in df.columns else []
 school_types = df['School Type'].dropna().unique().tolist() if 'School Type' in df.columns else []
 modified_cocs = df['Modified COC'].dropna().unique().tolist() if 'Modified COC' in df.columns else []
+
 
 # Function to filter based on a given column and value
 def filter_dataframe(df, column_name, value, unique_values):
@@ -77,7 +77,7 @@ def filter_modified_coc(df, modified_coc_name):
     return filter_dataframe(df, "Modified COC", modified_coc_name, modified_cocs)
 
 # Example usage: Store filtered data in a new DataFrame
-#region_a_df = filter_region(df, "CARAGA")
+region_a_df = filter_region(df, "Region I")
 #division_b_df = filter_division(df, "Cebu")
 #district_c_df = filter_district(df, "Badoc")
 #beis_school_id_d_df = filter_beis_school_id(df, 105098)
