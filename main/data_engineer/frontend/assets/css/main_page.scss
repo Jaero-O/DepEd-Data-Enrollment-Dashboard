@@ -15,6 +15,7 @@ $grayforunusedtabtext:#929fb7;
     --tab-active:#e0e6f1;
     --tab-inactive:#e0e6f1;
     --tab-inactive-text:#929fb7;
+    transition: all 0.3s ease;
 }
 
 .dark-mode{
@@ -28,6 +29,7 @@ $grayforunusedtabtext:#929fb7;
     --tab-inactive:#2a384f;
     --tab-inactive-text:#929fb7;
     --all-rights-served:#546175;
+    transition: all 0.3s ease;
 }
 
 @font-face {
@@ -39,14 +41,17 @@ $grayforunusedtabtext:#929fb7;
     font-family: "Inter-Bold"; 
     src: url('/assets/Inter Desktop/Inter-Bold.otf');
 }
-
 body{
     background-color:var(--web-background-color);
+    -webkit-transition: background-color 1000ms linear;
+    -ms-transition: background-color 1000ms linear;
+    transition: background-color 1000ms linear;
 }
 
 div.main-page{
     display:flex;
     background-color:var(--web-background-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 //navbar css
@@ -62,6 +67,7 @@ div.nav-bar-div{
     align-items: center;
     justify-content: space-around;
     flex-direction:column;
+    transition: background-color 0.3s ease, color 0.3s ease;
   
     img.depEd-logo, img.depEd-title{
      width:100px;
@@ -80,6 +86,7 @@ div.nav-bar-div{
         text-align:center;
         font-size:1.2em;
         font-family: "Inter-Bold";
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     span.all-rights-served{
@@ -108,6 +115,7 @@ div.nav-bar-div{
         span.nav-bar-li.hovered, I.hovered{
             color:var(--navbar-color-active);
             font-size:1.2em;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         span.nav-bar-li, I{
@@ -117,6 +125,7 @@ div.nav-bar-div{
             align-content: center;
             justify-content:center;
             font-size:0.95em;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         div{
@@ -129,6 +138,7 @@ div.nav-bar-div{
             border-left:2.5em solid var(--navbar-color-active);
             padding-left:1em;
             margin-left:-3.5em;
+            transition: border-left 0.3s ease, color 0.3s ease;
         }
     }
 
@@ -141,16 +151,19 @@ div.nav-bar-div{
 .toggle-switch-theme .form-check-input {
     background-color: #e3ebf9; /* Light gray */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Switch background when turned ON */
 .toggle-switch-theme .form-check-input:checked {
     background-color: var(--tab-inactive-text); /* Bootstrap primary blue */
     border:none;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .toggle-switch-theme .form-check-input:focus {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    transition: box-shadow 0.3s ease, color 0.3s ease;
 }
 
 
@@ -169,6 +182,7 @@ div.header-div{
         align-content: center;
         justify-content:center;
         font-size:1.2em;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     span{
@@ -239,6 +253,7 @@ div.tab-div{
             align-items: center;
             padding:0px;
             margin-bottom:0px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         /* Style for the active tab */
@@ -254,6 +269,7 @@ div.tab-div{
             box-shadow:none !important;
             font-weight: bold !important;
             border-radius: 0.5em 0.5em 0em 0em !important;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
     }
 
@@ -261,6 +277,7 @@ div.tab-div{
         display: flex;
         background-color: var(--web-background-color);  /* Dark background */
         justify-content: start;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 }
 
@@ -274,4 +291,36 @@ div.content-page{
     min-height:33em;
     border-radius: 0em 1em 1em 1em;
     padding:1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// body, div.main-page, div.nav-bar-div, div.header-div, div.tab-div {
+//     transition: background-color 0.3s ease, color 0.3s ease;
+// }
+
+// /* Example for tab-active */
+// div.tab-div .tabs-dcc .tab-selected {
+//     transition: background-color 0.3s ease, color 0.3s ease;
+// }
+
+// /* Navbar items */
+// div.nav-bar-div .nav-items span.nav-bar-li, 
+// div.nav-bar-div .nav-items I {
+//     transition: color 0.3s ease;
+// }
+
+// /* Theme switch example */
+// .toggle-switch-theme .form-check-input {
+//     transition: background-color 0.3s ease;
+// }
+
+// /* When the theme is toggled */
+// body.dark-mode {
+//     transition: background-color 0.3s ease, color 0.3s ease;
+// }
+
+* {
+    -webkit-transition: background-color 300ms linear;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    
 }
