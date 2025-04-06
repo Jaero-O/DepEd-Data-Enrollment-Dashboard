@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the cleaned enrollment data CSV file
-data_file = "cleaned_enrollment_data.csv"
+data_file = "enrollment_csv_file\preprocessed_data\cleaned_enrollment_data.csv"
 df = pd.read_csv(data_file)
 
 # Strip spaces from column names
@@ -24,7 +24,7 @@ df["Total Female Enrollment"] = df[female_columns].sum(axis=1)
 df["Total Enrollment"] = df["Total Male Enrollment"] + df["Total Female Enrollment"]
 
 # Save the updated dataset
-df.to_csv("cleaned_enrollment_with_totals.csv", index=False)
+df.to_csv("enrollment_csv_file\preprocessed_data\cleaned_enrollment_with_totals.csv", index=False)
 
 # Display the first few rows
 print(df.head(20))

@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load CSV file
-file_path = "cleaned_enrollment_data.csv"
+file_path = "enrollment_csv_file\preprocessed_data\cleaned_enrollment_data.csv" 
 df = pd.read_csv(file_path, dtype={'BEIS School ID': 'Int64'})
 
 # Strip spaces from column names (in case of extra spaces)
