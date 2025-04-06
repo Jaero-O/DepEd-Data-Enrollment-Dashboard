@@ -1,4 +1,4 @@
-1. Make sure your Python Version is 3.12.4 and your VSCode is 1.98.2
+1. Make sure your Python Version is 3.12.4 or above and your VSCode is 1.98.2 or above
 
 2. Open up any python file
 
@@ -14,4 +14,4 @@
 
 8. Run this in the terminal: .\.venv\Scripts\activate
 
-9. Run this in the terminal: pip install -r required_packages.txt
+9. Run this in the terminal: pip install -r requirements.txt
