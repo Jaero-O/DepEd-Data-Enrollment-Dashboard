@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-file_path = "enrollment_csv_file\\raw_data\\SY 2023-2024 School Level Data on Official Enrollment 13.xlsx - DB.csv"
+file_path = "enrollment_csv_file\\raw_data\\cleaned_enrollment_data.csv"
 df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School': 'Int64'})
 
 # Create hierarchical structure and prepare rows for CSV
