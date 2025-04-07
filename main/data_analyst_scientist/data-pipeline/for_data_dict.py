@@ -15,6 +15,13 @@ for index, row in df.iterrows():
     district = row['District']
     barangay = row['Barangay']
     
+    # Handle missing or NaN values for barangay
+    if pd.isna(barangay):  # Skip rows with missing barangay values
+        continue
+    
+    province = str(province).title()
+    barangay = str(barangay).title()  # Convert barangay to string and apply title casing
+    
     # Add region if it doesn't exist
     if region not in structured_data:
         structured_data[region] = {}
@@ -42,9 +49,10 @@ for region, provinces in structured_data.items():
         
         for district, barangays in districts.items():
             output_lines.append(f"    District: {district}")
+            output_lines.append(f"      Barangays:")
             
             for barangay in barangays:
-                output_lines.append(f"      Barangay: {barangay}")
+                output_lines.append(f"        {barangay}")
 
 # Make sure the output directory exists
 output_dir = 'enrollment_csv_file\\preprocessed_data'
