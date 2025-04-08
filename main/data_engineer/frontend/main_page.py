@@ -8,6 +8,7 @@ import base64
 import io
 
 # Import pages
+from main.data_engineer.frontend.dashboard.baranggay.baranggay_page import baranggayPage
 from main.data_engineer.frontend.dashboard.district.district_page import districtPage
 from main.data_engineer.frontend.dashboard.divisional.divisional_page import divisionalPage
 from main.data_engineer.frontend.dashboard.regional.regional_page import regionalPage
@@ -46,38 +47,108 @@ navBar = html.Div([
 
 # Header
 header = html.Div([
-    html.Span('My Dashboard', className='My-Dashboard-title'),
     html.Div([
+        html.I(className='fa fa-search'),
         dcc.Input(type="text", placeholder="Search...", className='search-bar'),
+    ], className='header-search-div'),
+    html.Div([
         html.I(className='fa fa-envelope'),
         html.I(className='fa fa-bell'),
-        html.Div([html.I(className='fa fa-user-circle'), html.Span('Jane Doe')], className='header-username-div')
+        html.Span('I', className='header-divider'),
+        html.Div([
+            html.I(className='fa fa-user-circle profile-pic'),
+            html.Div([
+                html.Span('Jane Doe', className='username-text'),
+                html.Span('Admin', className='access-level-text')], className='user-info'),
+        ], className='header-profile-div'),
+        html.I(className='fa fa-ellipsis-v')
     ], className='header-icons-div')
 ], className='header-div')
 
-# Content 
+# Content Part ----------------------------------------------------------------------------------------------------------------
+
+labels = ['Region', 'Province', 'Division', 'District', 'Barangay']
+tab_labels = ["National", "Regional", "Divisional", "District", "Baranggay"]
+options = ["Option 1", "Option 2", "Option 3"]
+
 content = html.Div([
+    html.Div([
+        html.Span('School Enrollment Dashboard', className='My-Dashboard-title'),
+        html.Button(
+            children=[
+                html.I(className="fa fa-filter"), html.Span('Hide Filter', className='hide-filter', id='filter-button-text')
+            ],
+            className='filter-button', 
+            id='toggle-button', 
+            n_clicks=0
+        )
+    ], className='header-tab'),
+    html.Div([  # Wrapper div for filters and dropdown
+        html.Span('Filtering Menu', className='filter-menu-title'),
+        html.Div([
+            html.Span("Select range of school year:", className='label-text'),
+                dcc.RangeSlider(
+                id='year-range-slider',
+                min=2000,
+                max=2025,
+                step=1,
+                marks={str(year): str(year) for year in range(2000, 2026)},
+                value=[2000, 2025],  # Default range (min: 2000, max: 2025)
+                tooltip={"placement": "bottom", "always_visible": True}
+            ),
+        ], className='slider-filtering-div'),
+        html.Div([  # Wrapper div for dropdown menus
+            html.Div([
+                html.Div([  # For each label, create a dropdown
+                    html.Span(label, className='label-text'),  # Display each label
+                    dbc.DropdownMenu(
+                        label="Select Options",  # Default label text
+                        children=[
+                            dbc.Checklist(
+                                id={'type': 'chk', 'index': label},
+                                options=[{'label': opt, 'value': opt} for opt in options],
+                                value=[],  # Default value (empty list means no selection)
+                                inline=True,
+                                className='checklist-menu'
+                            )
+                        ],
+                        className="dropdown-menu-class",
+                        toggle_class_name='dropdown-menu-button',
+                        direction="down",
+                        size="sm"
+                    )
+                ], className='dropdown-filtering-div2') for label in labels  # Loop through labels
+            ], className='dropdown-filtering-div1'),
+            html.Div([
+                html.Label('School Finder Search Bar'),
+                dcc.Input(type="text", placeholder="Search...", className='search-bar')
+            ],className='search-filtering-div')
+        ], className='dropdown-search-filtering-div')
+    ],className='filtering-div open', id='filter-container'),
+
+    # Tabs for navigation
     dcc.Tabs(
         id="tabs",
         value="National",
         children=[
-            dcc.Tab(label="National", value="National", className='tab', selected_className='tab-selected'),
-            dcc.Tab(label="Regional", value="Regional", className='tab', selected_className='tab-selected'),
-            dcc.Tab(label="Divisional", value="Divisional", className='tab', selected_className='tab-selected'),
-            dcc.Tab(label="District", value="District", className='tab', selected_className='tab-selected'),
+            dcc.Tab(
+                label=label,
+                value=label,
+                className='tab',
+                selected_className='tab-selected'
+            ) for label in tab_labels
         ],
         className='tabs-dcc',
     ),
+    
+    # Content area for tab display
     html.Div(id="tab-content", className='content-page active-tab'),
-    dcc.Upload(
-        id="upload-data",
-        children=html.Button("Upload File"),
-        multiple=False,
-    ),
     html.Div(id="output-data-upload")
 ], className='tab-div')
 
-# Application Layout Initialization
+
+# Application Layout Initialization ------------------------------------------------------------------------------------------------
+
 app.layout = html.Div([
     dcc.Store(id="theme-store", data="light"),
     navBar,
@@ -87,7 +158,10 @@ app.layout = html.Div([
     ])
 ], className='main-page', id="main-container")
 
-# Callback to update content based on active tab
+
+
+# Callback to update content based on active tab ------------------------------------------------------------------------------------------------
+
 @app.callback(
     Output("tab-content", "children"),
     Input("tabs", "value")
@@ -104,9 +178,14 @@ def update_tab_content(selected_tab):
         return divisionalPage()
     elif selected_tab == "District":
         return districtPage()
+    elif selected_tab == "Baranggay":
+        return baranggayPage()
     return nationalPage()
 
-# Callback for changing the theme of the page
+
+
+# Callback for changing the theme of the page ------------------------------------------------------------------------------------------------
+
 @app.callback(
     Output("main-container", "className"),
     Output("theme-store", "data"),
@@ -116,7 +195,27 @@ def toggle_theme(is_dark_mode):
     new_theme = "main-page dark-mode" if is_dark_mode else "main-page"
     return new_theme, new_theme
 
-# Callback for uploading the file into the server
+
+# Callback for Showing/hiding filters
+
+@app.callback(
+    [Output('filter-container', 'className'),
+     Output('filter-button-text', 'children')],
+    Input('toggle-button', 'n_clicks'),
+    prevent_initial_call=True
+)
+def toggle_filters(n_clicks):
+    if n_clicks % 2 == 1:
+        return 'filtering-div close', "Show Filters"
+    elif n_clicks % 2 == 0:
+        return 'filtering-div open', "Hide Filters"
+    else:
+        return 'filtering-div close', "Show Filters"
+
+
+
+# Callback for uploading the file into the server ------------------------------------------------------------------------------------------------
+
 ALLOWED_EXTENSIONS = ['.csv', '.xlsx']
 
 def allowed_file(filename):
@@ -154,6 +253,3 @@ def upload_file(contents, filename):
             return html.Div([html.H5(f"Upload failed with status {response.status_code}")])
     except requests.exceptions.RequestException as e:
         return html.Div([html.H5(f"Error occurred: {str(e)}")])
-
-# if __name__ == '__main__':
-#     app.run(debug=True, host="127.0.0.1", port=5000)
