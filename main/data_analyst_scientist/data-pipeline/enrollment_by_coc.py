@@ -37,15 +37,20 @@ other_needed_cols = [
     "school_subclassification", "school_type", "modified_coc"
 ]
 
-# Compute gender and non-graded totals
-male_cols = [col for col in df.columns if "male" in col]
-female_cols = [col for col in df.columns if "female" in col]
+# Compute gender-specific totals, including Non-Graded columns
+male_cols = [col for col in df.columns if col.endswith("_male")]
+female_cols = [col for col in df.columns if col.endswith("_female")]
 
+# Total male enrollment: Sum only the male-related columns (including non-graded male columns)
 df["total_male_enrollment"] = df[male_cols].sum(axis=1)
+
+# Total female enrollment: Sum only the female-related columns (including non-graded female columns)
 df["total_female_enrollment"] = df[female_cols].sum(axis=1)
+
+# Total non-graded enrollment (NG Male and NG Female)
 df["total_non_graded_enrollment"] = df[ng_cols].sum(axis=1)
 
-# Compute total enrollment from male + female
+# Total enrollment: Sum of male and female enrollment (including non-graded)
 df["total_enrollment"] = df["total_male_enrollment"] + df["total_female_enrollment"]
 
 # Function to filter based on Modified COC, keep relevant columns, and save to CSV
@@ -73,10 +78,10 @@ def save_data(coc_value, columns_to_keep, output_file):
     print(f"Data for {coc_value} has been saved to {output_file}")
 
 # Save data by school type
-save_data("Purely ES", g1_g6_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/purely_es_data.csv")
+save_data("Purely ES", kinder_cols + g1_g6_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/purely_es_data.csv")
 save_data("Purely JHS", jhs_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/purely_jhs_data.csv")
 save_data("Purely SHS", shs_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/purely_shs_data.csv")
-save_data("ES and JHS", g1_g6_cols + jhs_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/es_and_jhs_data.csv")
+save_data("ES and JHS", kinder_cols + g1_g6_cols + jhs_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/es_and_jhs_data.csv")
 save_data("JHS with SHS", jhs_cols + shs_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/jhs_and_shs_data.csv")
 save_data("All Offering", kinder_cols + g1_g6_cols + jhs_cols + shs_cols, "enrollment_csv_file/preprocessed_data/data_by_coc/all_offering_data.csv")
 

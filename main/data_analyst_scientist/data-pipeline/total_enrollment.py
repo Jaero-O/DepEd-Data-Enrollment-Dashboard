@@ -41,8 +41,8 @@ df = insert_column_after(df, g12_cols[-1], "total_shs_enrollment", df[shs_cols].
 df = insert_column_after(df, "total_shs_enrollment", "total_non_graded_enrollment", df[ng_cols].sum(axis=1))
 
 # Compute total enrollment per gender
-male_columns = [col for col in df.columns if "male" in col]
-female_columns = [col for col in df.columns if "female" in col]
+male_columns = [col for col in df.columns if col.endswith("_male")]
+female_columns = [col for col in df.columns if col.endswith("_female")]
 
 total_male = df[male_columns].sum(axis=1)
 total_female = df[female_columns].sum(axis=1)
