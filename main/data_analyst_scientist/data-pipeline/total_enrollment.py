@@ -33,7 +33,7 @@ def insert_column_after(df, ref_col, new_col_name, new_col_values):
 
 # Insert computed totals in appropriate positions
 df = insert_column_after(df, "k_female", "total_kinder_enrollment", df[kinder_cols].sum(axis=1))
-df = insert_column_after(df, "elem_ng_female", "total_elem_enrollment", df[g1_g6_cols].sum(axis=1))  # Updated column name
+df = insert_column_after(df, "elem_ng_female", "total_elem_enrollment", df[g1_g6_cols].sum(axis=1))
 df = insert_column_after(df, "jhs_ng_female", "total_jhs_enrollment", df[jhs_cols].sum(axis=1))
 df = insert_column_after(df, g12_cols[-1], "total_shs_enrollment", df[shs_cols].sum(axis=1))
 
