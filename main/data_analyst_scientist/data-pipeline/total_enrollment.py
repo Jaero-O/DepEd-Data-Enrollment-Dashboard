@@ -14,6 +14,7 @@ jhs_cols = [f"G{i} Male" for i in range(7, 11)] + [f"G{i} Female" for i in range
 g11_cols = [col for col in df.columns if col.startswith("G11 ")]
 g12_cols = [col for col in df.columns if col.startswith("G12 ")]
 shs_cols = g11_cols + g12_cols
+ng_cols = [col for col in df.columns if "NG Male" in col or "NG Female" in col]
 
 # Helper function to insert a column after a reference column 
 def insert_column_after(df, ref_col, new_col_name, new_col_values):
@@ -28,6 +29,9 @@ df = insert_column_after(df, "G6 Female", "Total G1-G6 Enrollment", df[g1_g6_col
 df = insert_column_after(df, "JHS NG Female", "Total JHS Enrollment", df[jhs_cols].sum(axis=1))
 df = insert_column_after(df, g12_cols[-1], "Total SHS Enrollment", df[shs_cols].sum(axis=1))
 
+# Insert Total Non-Graded Enrollment after SHS
+df = insert_column_after(df, "Total SHS Enrollment", "Total Non-Graded Enrollment", df[ng_cols].sum(axis=1))
+
 # Compute total enrollment per gender
 male_columns = [col for col in df.columns if "Male" in col]
 female_columns = [col for col in df.columns if "Female" in col]
@@ -35,8 +39,8 @@ female_columns = [col for col in df.columns if "Female" in col]
 total_male = df[male_columns].sum(axis=1)
 total_female = df[female_columns].sum(axis=1)
 
-# Insert gender totals AFTER "Total SHS Enrollment"
-df = insert_column_after(df, "Total SHS Enrollment", "Total Male Enrollment", total_male)
+# Insert gender totals AFTER "Total Non-Graded Enrollment"
+df = insert_column_after(df, "Total Non-Graded Enrollment", "Total Male Enrollment", total_male)
 df = insert_column_after(df, "Total Male Enrollment", "Total Female Enrollment", total_female)
 
 # Compute and insert final total
@@ -52,12 +56,12 @@ df = df.drop(columns=["BEIS School"])
 output_file = "enrollment_csv_file/preprocessed_data/total_enrollment.csv"
 df.to_csv(output_file, index=False)
 
-
 # Display sample output
 print(df.loc[:, [
     "School Name",
     "Total Kinder Enrollment", "Total G1-G6 Enrollment",
     "Total JHS Enrollment", "Total SHS Enrollment",
+    "Total Non-Graded Enrollment",
     "Total Male Enrollment", "Total Female Enrollment",
     "Total Enrollment"
 ]].head(10))
