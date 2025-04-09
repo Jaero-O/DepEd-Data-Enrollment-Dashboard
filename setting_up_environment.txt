@@ -14,4 +14,4 @@
 
 8. Run this in the terminal: .\.venv\Scripts\activate
 
-9. Run this in the terminal: pip install -r required_packages.txt
+9. Run this in the terminal: pip install -r requirements.txt
