@@ -453,6 +453,21 @@ div.tab-div{
             transition: all 0.5s linear;
         }
 
+        .dropdown-menu-button {
+            background-color:var(--navbar-color-active) !important;
+            color:var(--web-background-color-two) !important;
+            font-size:0.85em !important;
+            border-radius:0.5em !important;
+            width:11em !important;
+            border:none;
+            outline:none;
+
+            .reset-button{
+                height:auto;
+                padding:0.5em !important;
+            }
+        }
+
         div.dropdown-filtering-div1{
             display:flex;
             flex-direction: column;
@@ -504,7 +519,60 @@ div.tab-div{
                 .dropdown-menu{
                     background-color:var(--web-background-color-two);
                     color:var(--header-icons);
+                    padding:0;
                 }
+
+                // dropdowns search, checklist, and load more
+
+                .search-input{
+                    width:100% !important;
+                    height:1em;
+                    border:none;
+                    outline:none;
+                    padding:1em !important;
+                    margin:0;
+                    width: 90%;
+                    color:var(--web-background-color-two) !important;
+                    background-color:var(--navbar-color-active);
+                    border-bottom: 0.15em solid var(--navbar-color-inactive) !important;
+                }
+
+                .search-input::placeholder{
+                    color:var(--web-background-color-two);
+                }
+
+                .checklist-menu{
+                    background-color:var(--web-background-color-two);
+                    color:var(--header-icons);
+                    font-size:0.85em !important;
+                    padding:0.5em !important;
+                    max-width:12em !important;
+                    overflow: auto;
+                    max-height:200px !important;
+                    // border: 0.25em solid var(--navbar-color-active);
+
+                }
+
+                .load-more-button{
+                    width:100%;
+                    height:auto;
+                    padding:0;
+                    margin:0 !important;
+                    text-align:center;
+                    border:none;
+                    outline:none;
+                    background-color:var(--navbar-color-active);
+                    border-top: 0.15em solid var(--navbar-color-inactive) !important;
+
+                    .fa-arrow-down{
+                        color:var(--web-background-color-two);
+                        font-size:1em;
+                        cursor: pointer;
+                        transition: all 0.5s linear;
+                    }
+                }
+
+
 
                 div.dropdown-filtering-div3{
                     display:flex;

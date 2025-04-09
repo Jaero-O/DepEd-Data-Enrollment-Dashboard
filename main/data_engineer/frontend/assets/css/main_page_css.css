@@ -392,6 +392,19 @@ div.tab-div div.filtering-div div.slider-filtering-div {
   margin: 0em;
   transition: all 0.5s linear;
 }
+div.tab-div div.filtering-div .dropdown-menu-button {
+  background-color: var(--navbar-color-active) !important;
+  color: var(--web-background-color-two) !important;
+  font-size: 0.85em !important;
+  border-radius: 0.5em !important;
+  width: 11em !important;
+  border: none;
+  outline: none;
+}
+div.tab-div div.filtering-div .dropdown-menu-button .reset-button {
+  height: auto;
+  padding: 0.5em !important;
+}
 div.tab-div div.filtering-div div.dropdown-filtering-div1 {
   display: flex;
   flex-direction: column;
@@ -436,6 +449,48 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .dropdown-menu {
   background-color: var(--web-background-color-two);
   color: var(--header-icons);
+  padding: 0;
+}
+div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .search-input {
+  width: 100% !important;
+  height: 1em;
+  border: none;
+  outline: none;
+  padding: 1em !important;
+  margin: 0;
+  width: 90%;
+  color: var(--web-background-color-two) !important;
+  background-color: var(--navbar-color-active);
+  border-bottom: 0.15em solid var(--navbar-color-inactive) !important;
+}
+div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .search-input::placeholder {
+  color: var(--web-background-color-two);
+}
+div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .checklist-menu {
+  background-color: var(--web-background-color-two);
+  color: var(--header-icons);
+  font-size: 0.85em !important;
+  padding: 0.5em !important;
+  max-width: 12em !important;
+  overflow: auto;
+  max-height: 200px !important;
+}
+div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .load-more-button {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0 !important;
+  text-align: center;
+  border: none;
+  outline: none;
+  background-color: var(--navbar-color-active);
+  border-top: 0.15em solid var(--navbar-color-inactive) !important;
+}
+div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .load-more-button .fa-arrow-down {
+  color: var(--web-background-color-two);
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.5s linear;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 div.dropdown-filtering-div3 {
   display: flex;

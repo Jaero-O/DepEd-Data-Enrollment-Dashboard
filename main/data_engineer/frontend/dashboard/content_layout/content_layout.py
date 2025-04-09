@@ -81,7 +81,7 @@ content_layout = html.Div([
                 ], className='dropdown-filtering-div12'),
                 html.Span('Local Government Units', className='filter-menu-title units'),
                 html.Div([
-                    html.Div([
+                    *[html.Div([
                         # html.Span(label, className='label-text'),
                         html.Div([
                             dbc.DropdownMenu(
@@ -92,19 +92,19 @@ content_layout = html.Div([
                                         type="text",
                                         placeholder="Search...",
                                         debounce=True,
-                                        style={"margin": "0.5rem", "width": "90%"}
+                                        className='search-input',
                                     ),
                                     dbc.Checklist(
                                         id={'type': 'chk', 'index': label},
                                         options=[],
                                         value=[],
                                         className='checklist-menu px-3',
-                                        style={'maxHeight': '200px', 'overflowY': 'auto'}
                                     ),
                                     html.Button(
-                                        "Load More",
+                                        html.I(className='fa fa-arrow-down'),
                                         id={'type': 'load-more', 'index': label},
                                         n_clicks=0,
+                                        className='load-more-button',
                                         style={'marginTop': '10px'}
                                     )
                                 ],
@@ -115,7 +115,8 @@ content_layout = html.Div([
                             ),
                             html.I(className='fa fa-trash', id={'type': 'delete', 'index': label}, n_clicks=0),
                         ], className='dropdown-filtering-div3')
-                    ], className='dropdown-filtering-div2') for label in labels_2
+                    ], className='dropdown-filtering-div2') for label in labels_2],
+                    html.Button([html.I(className='fa fa-times'),'Reset All Dropdowns'], id='reset-button', n_clicks=0, className='dropdown-menu-button reset-button'),
                 ], className='dropdown-filtering-div12'),
             ], className='dropdown-filtering-div1'),
         ], className='dropdown-search-filtering-div')
