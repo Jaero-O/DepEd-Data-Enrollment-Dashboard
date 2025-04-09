@@ -1,6 +1,6 @@
 from dash import html, dcc
 
-def nationalPage():
+def dashboardContent(filter):
     return ([
         html.P('hi')
     ])
