@@ -4,55 +4,54 @@ import pandas as pd
 data_file = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
 df = pd.read_csv(data_file)
 
-# Strip extra spaces from column names
-df.columns = df.columns.str.strip()
+# Clean column names: strip, lowercase, and replace spaces with underscores
+df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
-# Define grade group columns
-kinder_cols = ["K Male", "K Female"]
+# Define grade group columns (with updated naming)
+kinder_cols = ["k_male", "k_female"]
 
-# Add Elementary NG
+# Elementary including Non-Graded
 g1_g6_cols = (
-    [f"G{i} Male" for i in range(1, 7)] +
-    [f"G{i} Female" for i in range(1, 7)] +
-    ["Elem NG Male", "Elem NG Female"]
+    [f"g{i}_male" for i in range(1, 7)] +
+    [f"g{i}_female" for i in range(1, 7)] +
+    ["elem_ng_male", "elem_ng_female"]
 )
 
-# Add JHS NG
+# JHS including Non-Graded
 jhs_cols = (
-    [f"G{i} Male" for i in range(7, 11)] +
-    [f"G{i} Female" for i in range(7, 11)] +
-    ["JHS NG Male", "JHS NG Female"]
+    [f"g{i}_male" for i in range(7, 11)] +
+    [f"g{i}_female" for i in range(7, 11)] +
+    ["jhs_ng_male", "jhs_ng_female"]
 )
 
-shs_cols = [col for col in df.columns if col.startswith("G11 ") or col.startswith("G12 ")]
+# SHS columns (starts with g11_ or g12_)
+shs_cols = [col for col in df.columns if col.startswith("g11_") or col.startswith("g12_")]
 
 # Identify all Non-Graded columns (for total NG computation)
-ng_cols = [col for col in df.columns if "NG Male" in col or "NG Female" in col]
+ng_cols = [col for col in df.columns if "ng_male" in col or "ng_female" in col]
 
-# Other metadata columns
+# Other metadata columns (updated names)
 other_needed_cols = [
-    "Region", "Division", "District", "BEIS School ID", "School Name", "Street Address",
-    "Province", "Municipality", "Legislative District", "Barangay", "Sector",
-    "School Subclassification", "School Type", "Modified COC"
+    "region", "division", "district", "beis_school_id", "school_name", "street_address",
+    "province", "municipality", "legislative_district", "barangay", "sector",
+    "school_subclassification", "school_type", "modified_coc"
 ]
 
 # Compute gender and non-graded totals
-male_cols = [col for col in df.columns if "Male" in col]
-female_cols = [col for col in df.columns if "Female" in col]
+male_cols = [col for col in df.columns if "male" in col]
+female_cols = [col for col in df.columns if "female" in col]
 
-df["Total Male Enrollment"] = df[male_cols].sum(axis=1)
-df["Total Female Enrollment"] = df[female_cols].sum(axis=1)
-df["Total Non-Graded Enrollment"] = df[ng_cols].sum(axis=1)
+df["total_male_enrollment"] = df[male_cols].sum(axis=1)
+df["total_female_enrollment"] = df[female_cols].sum(axis=1)
+df["total_non_graded_enrollment"] = df[ng_cols].sum(axis=1)
 
-# Optional: compute Total Enrollment if needed
-if "Total Enrollment" not in df.columns:
-    grade_total_cols = kinder_cols + g1_g6_cols + jhs_cols + shs_cols
-    df["Total Enrollment"] = df[grade_total_cols].sum(axis=1)
+# Compute total enrollment from male + female
+df["total_enrollment"] = df["total_male_enrollment"] + df["total_female_enrollment"]
 
 # Function to filter based on Modified COC, keep relevant columns, and save to CSV
 def save_data(coc_value, columns_to_keep, output_file):
     # Filter rows based on COC value
-    df_filtered = df[df["Modified COC"].str.strip() == coc_value]
+    df_filtered = df[df["modified_coc"].str.strip() == coc_value]
     
     # If no data found, skip and return
     if df_filtered.empty:
@@ -63,7 +62,7 @@ def save_data(coc_value, columns_to_keep, output_file):
     cols_to_keep = (
         [col for col in other_needed_cols if col in df_filtered.columns] +
         [col for col in columns_to_keep if col in df_filtered.columns] +
-        [col for col in ["Total Non-Graded Enrollment", "Total Male Enrollment", "Total Female Enrollment", "Total Enrollment"] if col in df_filtered.columns]
+        [col for col in ["total_non_graded_enrollment", "total_male_enrollment", "total_female_enrollment", "total_enrollment"] if col in df_filtered.columns]
     )
 
     # Keep only the relevant columns
