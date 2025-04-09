@@ -1,8 +1,9 @@
 import pandas as pd
 import os
 
-file_path = "enrollment_csv_file\\raw_data\\cleaned_enrollment_data.csv"
-df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School': 'Int64'})
+# Load the CSV file
+file_path = "enrollment_csv_file\\preprocessed_data\\total_enrollment_per_educational_level.csv"
+df = pd.read_csv(file_path, dtype={'BEIS School': 'Int64'})
 
 # Create hierarchical structure and prepare rows for CSV
 hierarchy = {}
@@ -17,20 +18,26 @@ for region in df['Region'].unique():
     for province in region_df['Province'].unique():
         hierarchy[region][province] = {}
         
-        # Filter districts in province
+        # Filter municipalities in province
         province_df = region_df[region_df['Province'] == province]
-        for district in province_df['District'].unique():
-            barangays = list(province_df[province_df['District'] == district]['Barangay'].unique())
-            hierarchy[region][province][district] = barangays
+        for municipality in province_df['Municipality'].unique():
+            hierarchy[region][province][municipality] = {}
             
-            # Add rows for CSV
-            for barangay in barangays:
-                rows.append({
-                    'Region': region,
-                    'Province': province,
-                    'District': district,
-                    'Barangay': barangay
-                })
+            # Filter legislative districts in municipality
+            municipality_df = province_df[province_df['Municipality'] == municipality]
+            for district in municipality_df['District'].unique():
+                barangays = list(municipality_df[municipality_df['District'] == district]['Barangay'].unique())
+                hierarchy[region][province][municipality][district] = barangays
+                
+                # Add rows for CSV
+                for barangay in barangays:
+                    rows.append({
+                        'Region': region,
+                        'Province': province,
+                        'Municipality': municipality,
+                        'District': district,
+                        'Barangay': barangay
+                    })
 
 # Create a DataFrame from the rows
 csv_df = pd.DataFrame(rows)
