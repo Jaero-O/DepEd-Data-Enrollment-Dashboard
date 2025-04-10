@@ -1,4 +1,5 @@
 from dash import Input, Output, State, MATCH, ALL, ctx, html, dcc
+import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
 from main.data_engineer.frontend.dashboard.content.content import dashboardContent
@@ -12,25 +13,36 @@ tab_labels = ['Region', 'Division', 'District', 'Province', 'Municipality', 'Leg
 
 # Layout (content)
 content_layout = html.Div([
+    dcc.Store(id='current-filter-dict'),
     html.Div([
         html.Span('School Enrollment Dashboard', className='My-Dashboard-title'),
         html.Button(
             children=[
-                html.I(className="fa fa-filter"), html.Span('Hide Filter', className='hide-filter', id='filter-button-text')
+                html.I(className="fa fa-filter"), html.Span('Show Filter', className='hide-filter', id='filter-button-text')
             ],
             className='filter-button',
-            id='toggle-button',
+            id='toggle-button-open',
             n_clicks=0
         )
     ], className='header-tab'),
 
     html.Div([
-        html.Span('Filtering Menu', className='filter-menu-title'),
         html.Div([
-            html.Span("Select range of school year:", className='label-text'),
+            html.Button(html.I(className='fa fa-times'),id='toggle-button-exit', n_clicks=0,className='exit-filter-menu'),
+            html.Span('Filtering Menu', className='filter-menu-title'),
+            html.Button(
+                html.I(className='fa fa-refresh'), 
+                id='reset-button', 
+                n_clicks=0, 
+                className='reset-button'
+            )
+        ], className='header-filter-menu'),
+        html.Span("School Year Range", className='lower-title outside'),
+        html.Div([
             dcc.RangeSlider(
                 id='year-range-slider',
-                min=2000,
+                className='year-slider',
+                min=2010,
                 max=2025,
                 step=1,
                 marks={str(year): str(year) for year in range(2000, 2026)},
@@ -41,32 +53,33 @@ content_layout = html.Div([
         
         html.Div([
             html.Div([
-                html.Span('Educational Divisions', className='filter-menu-title'),
+                html.Span('Educational Divisions', className='lower-title'),
                 html.Div([
                     html.Div([
-                        # html.Span(label, className='label-text'),
+                        html.Span(label, className='label-text'),
                         html.Div([
                             dbc.DropdownMenu(
-                                label=label,
+                                id={'type': 'dropdown-label', 'index': label},
+                                label='All',
                                 children=[
                                     dcc.Input(
                                         id={'type': 'search', 'index': label},
                                         type="text",
                                         placeholder="Search...",
                                         debounce=True,
-                                        style={"margin": "0.5rem", "width": "90%"}
+                                        className='search-input',
                                     ),
                                     dbc.Checklist(
                                         id={'type': 'chk', 'index': label},
                                         options=[],
                                         value=[],
                                         className='checklist-menu px-3',
-                                        style={'maxHeight': '200px', 'overflowY': 'auto'}
                                     ),
                                     html.Button(
-                                        "Load More",
+                                        html.I(className='fa fa-arrow-down'),
                                         id={'type': 'load-more', 'index': label},
                                         n_clicks=0,
+                                        className='load-more-button',
                                         style={'marginTop': '10px'}
                                     )
                                 ],
@@ -79,13 +92,14 @@ content_layout = html.Div([
                         ], className='dropdown-filtering-div3')
                     ], className='dropdown-filtering-div2') for label in labels_1
                 ], className='dropdown-filtering-div12'),
-                html.Span('Local Government Units', className='filter-menu-title units'),
+                html.Span('Local Government Units', className='lower-title'),
                 html.Div([
                     *[html.Div([
-                        # html.Span(label, className='label-text'),
+                        html.Span(label, className='label-text'),
                         html.Div([
                             dbc.DropdownMenu(
-                                label=label,
+                                id={'type': 'dropdown-label', 'index': label},
+                                label='All',
                                 children=[
                                     dcc.Input(
                                         id={'type': 'search', 'index': label},
@@ -116,11 +130,12 @@ content_layout = html.Div([
                             html.I(className='fa fa-trash', id={'type': 'delete', 'index': label}, n_clicks=0),
                         ], className='dropdown-filtering-div3')
                     ], className='dropdown-filtering-div2') for label in labels_2],
-                    html.Button([html.I(className='fa fa-times'),'Reset All Dropdowns'], id='reset-button', n_clicks=0, className='dropdown-menu-button reset-button'),
                 ], className='dropdown-filtering-div12'),
             ], className='dropdown-filtering-div1'),
-        ], className='dropdown-search-filtering-div')
-    ], className='filtering-div open', id='filter-container'),
+        ], className='dropdown-search-filtering-div'),
+        html.Span("Filter Table Output", className='lower-title table'),
+        html.Div(id='filter-table-output', className='filter-table-output')
+    ], className='filtering-div', id='filter-container'),
 
     dcc.Tabs(
         id="tabs",
@@ -135,7 +150,6 @@ content_layout = html.Div([
         ],
         className='tabs-dcc',
     ),
-    
     html.Div(id="tab-content", className='content-page active-tab'),
     html.Div(id="output-data-upload")
 ], className='tab-div')
@@ -149,33 +163,41 @@ def content_layout_register_callbacks(app):
     # Callback to update content based on active tab
     @app.callback(
         Output("tab-content", "children"),
-        Input("tabs", "value")
+        [
+            Input("tabs", "value"),
+            Input('current-filter-dict', 'data')
+        ]
     )
-    def update_tab_content(selected_tab):
-        return dashboardContent(selected_tab)
+    def update_tab_content(selected_tab, data_dict):
+        return dashboardContent(selected_tab, data_dict)
 
     # Callback to toggle filter visibility
     @app.callback(
-        [Output('filter-container', 'className'),
-         Output('filter-button-text', 'children')],
-        Input('toggle-button', 'n_clicks'),
+        Output('filter-container', 'className'),
+        [Input('toggle-button-open', 'n_clicks'),
+        Input('toggle-button-exit','n_clicks')],
         prevent_initial_call=True
     )
-    def toggle_filters(n_clicks):
-        if n_clicks % 2 == 1:
-            return 'filtering-div close', "Show Filters"
+    def toggle_filters(n_clicks,n_clicks_exit):
+        if n_clicks <= n_clicks_exit:
+            return 'filtering-div close'
         else:
-            return 'filtering-div open', "Hide Filters"
+            return 'filtering-div open'
         
     # Callback to update checklist options based on selected values and search input
     @app.callback(
-        Output({'type': 'chk', 'index': ALL}, 'options'),
+        [
+            Output({'type': 'chk', 'index': ALL}, 'options'),
+            Output({'type': 'dropdown-label', 'index': ALL}, 'label'),
+            Output('current-filter-dict', 'data')
+        ],
         Input({'type': 'chk', 'index': ALL}, 'value'),
         Input({'type': 'search', 'index': ALL}, 'value'),
         Input({'type': 'load-more', 'index': ALL}, 'n_clicks'),
         State({'type': 'chk', 'index': ALL}, 'options'),
         State({'type': 'chk', 'index': ALL}, 'id')
     )
+
     def unified_update_checklists(all_values, all_searches, all_clicks, all_options, all_ids):
         triggered = ctx.triggered_id
         df = data.copy()
@@ -217,15 +239,85 @@ def content_layout_register_callbacks(app):
 
             new_options.append(options)
 
-        return new_options
+        labels = []
+        for val in all_values:
+            if not val:
+                labels.append("All")
+            elif len(val) == 1:
+                labels.append(val[0])
+            else:
+                labels.append("Multiple Selection")
 
+        current_selection_dict = {
+                item['index']: val for item, val in zip(all_ids, all_values) if val
+        }
+        print(current_selection_dict)
 
+        return new_options, labels, current_selection_dict
 
-    # Reset checklist when the delete icon is clicked
+    # Callback to reset all dropdowns or specific dropdowns based on delete icon clicks
     @app.callback(
-        Output({'type': 'chk', 'index': MATCH}, 'value'),
-        Input({'type': 'delete', 'index': MATCH}, 'n_clicks'),
+        [
+            Output({'type': 'chk', 'index': ALL}, 'value'),
+            Output({'type': 'search', 'index': ALL}, 'value'),
+        ],
+        [
+            Input('reset-button', 'n_clicks'),
+            Input({'type': 'delete', 'index': ALL}, 'n_clicks'),
+        ],
+        State({'type': 'chk', 'index': ALL}, 'id'),
         prevent_initial_call=True
     )
-    def reset_checklist(n_clicks):
-        return []
+    def reset_checklist_or_all(reset_click, delete_clicks, all_ids):
+        triggered = ctx.triggered_id
+
+        # Reset all dropdowns
+        if triggered == 'reset-button':
+            return [[] for _ in all_ids], ['' for _ in all_ids]
+
+        # If a delete icon was clicked
+        elif isinstance(triggered, dict) and triggered.get('type') == 'delete':
+            reset_values = []
+            for item in all_ids:
+                if item['index'] == triggered['index']:
+                    reset_values.append([])  # reset this one
+                else:
+                    reset_values.append(dash.no_update)  # leave others unchanged
+
+            return reset_values, [dash.no_update] * len(all_ids)
+
+        return [dash.no_update] * len(all_ids), [dash.no_update] * len(all_ids)
+    
+    # Callback to update the filter table output
+    @app.callback(
+        Output('filter-table-output', 'children'),
+        Input('current-filter-dict', 'data')
+    )
+    def render_filter_table(data_dict):
+        if not data_dict:
+            return html.P("No filters selected.", className='no-data-msg')
+
+        # Get the filter categories
+        headers = list(data_dict.keys())
+
+        # Find the max number of values among all keys to determine how many rows we need
+        max_len = max(len(values) for values in data_dict.values())
+
+        # Build table header row
+        header_row = html.Tr([html.Th(key) for key in headers])
+
+        # Build table rows for selected values (transpose values)
+        rows = []
+        for i in range(max_len):
+            row = []
+            for key in headers:
+                values = data_dict[key]
+                value = values[i] if i < len(values) else ""  # Handle uneven lists
+                row.append(html.Td(value))
+            rows.append(html.Tr(row))
+
+        return html.Table(
+            [header_row] + rows,
+            className='filter-table'
+        )
+

@@ -143,7 +143,7 @@ def plot_shs_track_distribution(cleaned_file, filters=None):
     )
     return fig
 
-def plot_gender_distribution_shs_tracks(cleaned_file, filters=None):
+def plot_gender_distribution_by_shs_tracks(cleaned_file, filters=None):
     df = pd.read_csv(cleaned_file)
     df.columns = df.columns.str.strip()
 

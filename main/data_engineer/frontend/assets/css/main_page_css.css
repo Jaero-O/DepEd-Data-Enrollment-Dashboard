@@ -319,60 +319,82 @@ div.tab-div .filter-button span {
 div.tab-div div.filtering-div {
   display: flex;
   flex-direction: column;
-  background-color: var(--web-background-color);
-  width: 100%;
-  border-radius: 0.5em;
-  margin-bottom: 1em;
-  max-height: 28em;
+  background-color: var(--web-background-color-two);
+  width: 43em;
+  border-radius: 1em;
+  padding: 1em;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: -800px;
+  z-index: 1002;
   gap: 1em;
+  box-shadow: 0em 0em 3em rgba(222, 222, 222, 0.25), 0em 0em 1em rgba(111, 111, 111, 0.1);
 }
 div.tab-div div.filtering-div.open {
-  animation: show-content 2s ease forwards;
+  animation: show-content 1.5s ease forwards;
 }
 div.tab-div div.filtering-div.close {
   pointer-events: none;
   overflow: hidden;
-  animation: hide-content 2s ease forwards;
+  animation: hide-content 1.5s ease forwards;
 }
 @keyframes show-content {
   0% {
-    max-height: 2.5em;
-    margin-top: 0em;
-    overflow: hidden;
-  }
-  50% {
-    max-height: 28em;
+    right: -800px;
     margin-top: 0em;
     overflow: hidden;
   }
   100% {
-    max-height: 28em;
+    right: 0px;
     margin-top: 0em;
     overflow: visible;
   }
 }
 @keyframes hide-content {
   0% {
-    max-height: 28em;
+    right: 0px;
   }
   100% {
-    max-height: 2.5em;
+    right: -800px;
   }
 }
 div.tab-div div.filtering-div span.filter-menu-title {
   width: 100%;
   font-family: "Inter-Bold";
-  padding: 0.5em;
   font-size: 1em;
   border-radius: 0.5em;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--navbar-color-active);
-  background-color: var(--web-background-color-two);
 }
 div.tab-div div.filtering-div span.filter-menu-title .units {
   font-family: "Inter-Medium";
   font-size: 0.75em;
   color: var(--navbar-color-inactive);
+}
+div.tab-div div.filtering-div span.lower-title {
+  text-align: left;
+  font-size: 1em;
+  font-family: "Inter-Bold";
+  padding-bottom: 0.5em;
+  padding-left: 0.25em;
+  color: var(--navbar-color-active);
+}
+div.tab-div div.filtering-div span.lower-title.outside {
+  padding-left: 1em;
+}
+div.tab-div div.filtering-div span.lower-title.table {
+  text-align: center;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+div.tab-div div.filtering-div div.slider-filtering-div {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div, div.tab-div div.filtering-div div.slider-filtering-div {
   display: flex;
@@ -381,15 +403,14 @@ div.tab-div div.filtering-div div.dropdown-filtering-div, div.tab-div div.filter
 div.tab-div div.filtering-div div.dropdown-search-filtering-div {
   display: flex;
   gap: 1em;
-  background-color: var(--web-background-color);
   width: 100%;
+  margin: 0.5em;
   transition: all 0.5s linear;
 }
 div.tab-div div.filtering-div div.slider-filtering-div {
-  background-color: var(--web-background-color-two);
-  padding: 1em;
   border-radius: 0.5em;
   margin: 0em;
+  margin-top: -1em;
   transition: all 0.5s linear;
 }
 div.tab-div div.filtering-div .dropdown-menu-button {
@@ -401,28 +422,18 @@ div.tab-div div.filtering-div .dropdown-menu-button {
   border: none;
   outline: none;
 }
-div.tab-div div.filtering-div .dropdown-menu-button .reset-button {
-  height: auto;
-  padding: 0.5em !important;
-}
 div.tab-div div.filtering-div div.dropdown-filtering-div1 {
   display: flex;
   flex-direction: column;
-  gap: 1em;
-  background-color: var(--web-background-color);
   border-radius: 0.5em;
+  width: 100%;
   transition: all 0.5s linear;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div12 {
   display: flex;
   width: auto;
-  gap: 3em;
-  background-color: var(--web-background-color-two);
-  padding: 1em;
-  padding-left: 2em;
-  padding-right: 2em;
-  margin-bottom: 0.5em;
-  margin-top: -0.5em;
+  gap: 1em;
+  padding-bottom: 1em;
   border-radius: 0.5em;
   transition: all 0.5s linear;
 }
@@ -438,9 +449,9 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .dropdown-menu-button {
   background-color: var(--navbar-color-active) !important;
   color: var(--web-background-color-two) !important;
-  font-size: 0.85em !important;
+  font-size: 0.75em !important;
   border-radius: 0.5em !important;
-  width: 11em !important;
+  width: 9em !important;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .dropdown-menu-class {
   color: var(--web-background-color-two) !important;
@@ -494,21 +505,27 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 div.dropdown-filtering-div3 {
   display: flex;
-  gap: 0.5em;
+  gap: 0.25em;
   width: 10em;
+  padding-left: 0.6em;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 div.dropdown-filtering-div3 .fa-trash {
   color: var(--navbar-color-active);
+  background-color: var(--web-background-color-two);
+  padding: 0.27em;
   font-size: 1em;
+  border-radius: 0.25em;
   cursor: pointer;
   transition: all 0.5s linear;
 }
 div.tab-div div.filtering-div span.label-text {
   color: var(--navbar-color-active);
   font-family: "Inter-Medium";
-  font-size: 1em;
+  font-size: 0.75em;
+  text-align: left;
+  width: 100%;
 }
 div.tab-div div.filtering-div div.search-filtering-div {
   display: flex;
@@ -516,10 +533,79 @@ div.tab-div div.filtering-div div.search-filtering-div {
   gap: 0.5em;
   height: 100%;
   width: 100%;
-  background-color: var(--web-background-color-two);
   padding: 1em;
   border-radius: 0.5em;
   transition: all 0.5s linear;
+}
+div.tab-div div.filtering-div div.header-filter-menu {
+  display: flex;
+  align-items: center;
+}
+div.tab-div div.filtering-div div.header-filter-menu button.exit-filter-menu {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: 1.25em;
+  color: var(--navbar-color-inactive);
+  cursor: pointer;
+}
+div.tab-div div.filtering-div div.header-filter-menu button.reset-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+  border: none;
+  outline: none;
+  gap: 0.5em;
+  background-color: var(--header-icons);
+  color: var(--web-background-color-two);
+  height: 75%;
+  padding: 0.5em;
+  font-size: 0.75em;
+}
+div.tab-div div.filtering-div .filter-table-output {
+  max-height: 260px;
+  overflow-y: auto;
+  font-family: "Inter", sans-serif;
+}
+div.tab-div div.filtering-div .filter-table-output .filter-table-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+div.tab-div div.filtering-div .filter-table-output .filter-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+div.tab-div div.filtering-div .filter-table-output .filter-table th, div.tab-div div.filtering-div .filter-table-output .filter-table td {
+  padding: 10px 14px;
+  text-align: left;
+  font-family: "Inter", sans-serif;
+}
+div.tab-div div.filtering-div .filter-table-output .filter-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-size: 0.75em;
+}
+div.tab-div div.filtering-div .filter-table-output .filter-table td {
+  background-color: #d9edf7;
+  font-size: 0.65em;
+}
+div.tab-div div.filtering-div .filter-table-output .filter-table tr:nth-child(even) td {
+  background-color: #e6f5fc;
+}
+div.tab-div div.filtering-div .filter-table-output .filter-table tr {
+  border-bottom: 1px solid #ccc;
+}
+div.tab-div div.filtering-div .filter-table-output .no-data-msg {
+  color: #999;
+  font-style: italic;
+  padding: 12px;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  font-size: 0.85em;
 }
 div.tab-div div.filtering-div.closed {
   max-height: 0em;
