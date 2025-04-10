@@ -18,14 +18,13 @@ def dashboardContent(selection, filters):
     fig_shs = plot_shs_track_distribution(cleaned_file, filters)
     fig_gender_track = plot_gender_distribution_by_shs_tracks(cleaned_file, filters)
 
-    return ([
-        html.Div([
-            # Lalei dito ka maglagay ng mga graphs
+    return [
             html.P('Hi'),
+            html.P('Hello'),
             dcc.Graph(figure=fig_gender),
             dcc.Graph(figure=fig_sector),
             dcc.Graph(figure=fig_enrollment),
             dcc.Graph(figure=fig_shs),
             dcc.Graph(figure=fig_gender_track)
-        ], className='content-div'),
-    ])
+        ]
+    
