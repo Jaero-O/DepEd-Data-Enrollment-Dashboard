@@ -1,6 +1,27 @@
 import pandas as pd
 import dash_html_components as html
 
+def styled_summary_box(count, label):
+    return html.Div([
+        html.Div(str(count), style={
+            'fontSize': '24px',
+            'fontWeight': 'bold',
+            'color': '#2c3e50'
+        }),
+        html.Div(label, style={
+            'fontSize': '14px',
+            'color': '#7f8c8d'
+        })
+    ], style={
+        'marginBottom': '15px',
+        'textAlign': 'center',
+        'padding': '10px',
+        'borderRadius': '10px',
+        'backgroundColor': '#f9f9f9',
+        'boxShadow': '0px 2px 4px rgba(0, 0, 0, 0.05)'
+    })
+
+
 def create_school_count_summary(cleaned_file, filters=None):
     df = pd.read_csv(cleaned_file)
     df.columns = df.columns.str.strip()
@@ -10,7 +31,7 @@ def create_school_count_summary(cleaned_file, filters=None):
         for region in df['Region'].unique():
             region_df = df[df['Region'] == region]
             count = region_df.shape[0]
-            summary_items.append(html.Div(f"Region ({region}): {count} School(s)"))
+            summary_items.append(styled_summary_box(count, f"Region ({region})"))
     else:
         matched_regions = {}
 
@@ -26,30 +47,28 @@ def create_school_count_summary(cleaned_file, filters=None):
                                 'details': []
                             }
                         matched_count = filtered.shape[0]
-                        # 🛑 Skip duplicate Region label
                         if filter_column == "Region" and value == region:
                             continue
-
                         matched_regions[region]['details'].append({
                             'label': f"{filter_column} ({value})",
                             'count': matched_count
                         })
 
         for region, data in matched_regions.items():
-            summary_items.append(html.Div(f"Region ({region}): {data['total']} School(s)"))
-            # 🔽 Sort details in descending order by count
+            summary_items.append(styled_summary_box(data['total'], f"Region ({region})"))
             sorted_details = sorted(data['details'], key=lambda x: x['count'], reverse=True)
             for d in sorted_details:
-                summary_items.append(html.Div(f"↳ {d['label']}: {d['count']} School(s)"))
+                summary_items.append(styled_summary_box(d['count'], f"↳ {d['label']}"))
 
     return html.Div([
-        html.H3("School Count Summary"),
+        html.H3("School Count Summary", style={'marginBottom': '20px'}),
         html.Div(summary_items)
     ], style={
-        'background-color': 'white',
-        'padding': '10px',
-        'box-shadow': '0px 4px 6px rgba(0, 0, 0, 0.1)',
-        'line-height': '1.8'
+        'backgroundColor': 'white',
+        'padding': '20px',
+        'borderRadius': '10px',
+        'boxShadow': '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        'lineHeight': '1.8'
     })
 
 
@@ -81,7 +100,7 @@ def create_student_enrollment_summary(cleaned_file, filters=None):
         for region in df['Region'].unique():
             region_df = df[df['Region'] == region]
             total = int(region_df['Enrollment'].sum())
-            summary_items.append(html.Div(f"Region ({region}): {total} Student(s)"))
+            summary_items.append(styled_summary_box(total, f"Region ({region})"))
     else:
         matched_regions = {}
 
@@ -97,28 +116,26 @@ def create_student_enrollment_summary(cleaned_file, filters=None):
                                 'details': []
                             }
                         matched_total = int(filtered['Enrollment'].sum())
-                        # 🛑 Skip duplicate Region label
                         if filter_column == "Region" and value == region:
                             continue
-
                         matched_regions[region]['details'].append({
                             'label': f"{filter_column} ({value})",
                             'count': matched_total
                         })
 
         for region, data in matched_regions.items():
-            summary_items.append(html.Div(f"Region ({region}): {data['total']} Student(s)"))
-            # 🔽 Sort details in descending order by count
+            summary_items.append(styled_summary_box(data['total'], f"Region ({region})"))
             sorted_details = sorted(data['details'], key=lambda x: x['count'], reverse=True)
             for d in sorted_details:
-                summary_items.append(html.Div(f"↳ {d['label']}: {d['count']} Student(s)"))
+                summary_items.append(styled_summary_box(d['count'], f"↳ {d['label']}"))
 
     return html.Div([
-        html.H3("Student Enrollment Summary"),
+        html.H3("Student Enrollment Summary", style={'marginBottom': '20px'}),
         html.Div(summary_items)
     ], style={
-        'background-color': 'white',
-        'padding': '10px',
-        'box-shadow': '0px 4px 6px rgba(0, 0, 0, 0.1)',
-        'line-height': '1.8'
+        'backgroundColor': 'white',
+        'padding': '20px',
+        'borderRadius': '10px',
+        'boxShadow': '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        'lineHeight': '1.8'
     })
