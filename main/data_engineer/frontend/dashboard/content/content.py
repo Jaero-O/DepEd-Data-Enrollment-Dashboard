@@ -31,15 +31,17 @@ def dashboardContent(selection, filters):
 
     # Return the layout including graphs and summaries
     return [
-        html.P('Hi'),
-        html.P('Hello'),
-        dcc.Graph(figure=fig_gender),
-        dcc.Graph(figure=fig_sector),
-        dcc.Graph(figure=fig_enrollment),
-        dcc.Graph(figure=fig_shs),
-        dcc.Graph(figure=fig_gender_track),
-        dcc.Graph(figure=fig_non_graded),
-        dcc.Graph(figure=fig_ng_enrollees),
-        summary_schools,  # Show the school summary inside a box
-        summary_students  # Show the student enrollment summary inside a box
+        html.Div([html.P('Hi'), html.P('Hello')]),
+        html.Div(dcc.Graph(figure=fig_gender), style={'marginBottom': '30px'}),
+        html.Div(dcc.Graph(figure=fig_sector), style={'marginBottom': '30px'}),
+        html.Div(dcc.Graph(figure=fig_enrollment), style={'marginBottom': '30px'}),
+        html.Div(dcc.Graph(figure=fig_shs), style={'marginBottom': '30px'}),
+        html.Div(dcc.Graph(figure=fig_gender_track), style={'marginBottom': '30px'}),
+        html.Div(dcc.Graph(figure=fig_non_graded), style={'marginBottom': '30px'}),
+        html.Div(dcc.Graph(figure=fig_ng_enrollees), style={'marginBottom': '30px'}),
+        html.Div([
+            html.Div(summary_schools, style={'marginBottom': '30px'}),
+            html.Div(summary_students, style={'marginBottom': '30px'})
+        ], style={'display': 'flex', 'flexWrap': 'wrap'})
     ]
+
