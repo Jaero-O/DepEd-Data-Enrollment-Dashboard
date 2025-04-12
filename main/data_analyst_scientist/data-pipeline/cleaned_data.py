@@ -47,11 +47,9 @@ def insert_column_after(df, ref_col, new_col_name, new_col_values):
 if "beis_school" in df.columns:
     df = df.drop(columns=["beis_school"])
 
-if df[['Region']] == 'PSO':
-    df['Province'] == 'Others'
 
 df.dtypes.to_csv("enrollment_csv_file\preprocessed_data\data_types.csv")
 
 df.to_csv("enrollment_csv_file\preprocessed_data\cleaned_enrollment_data.csv", index=False)
 
-print(df)
+print(df.columns)

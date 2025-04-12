@@ -3,81 +3,81 @@ import pandas as pd
 df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
 # ===========
-regions_df = df[['Region']].drop_duplicates().reset_index(drop=True)
-regions_df['Region ID'] = regions_df.index + 1
-region_map = dict(zip(regions_df['Region'], regions_df['Region ID']))
+regions_df = df[['region']].drop_duplicates().reset_index(drop=True)
+regions_df['region_id'] = regions_df.index + 1
+region_map = dict(zip(regions_df['region'], regions_df['region_id']))
 
 # ===========
-divisions_df = df[['Division', 'Region']].drop_duplicates().reset_index(drop=True)
-divisions_df['Region ID'] = divisions_df['Region'].map(region_map)
-divisions_df['Division ID'] = divisions_df.index + 1
-division_map = dict(zip(divisions_df['Division'], divisions_df['Division ID']))
+divisions_df = df[['division', 'region']].drop_duplicates().reset_index(drop=True)
+divisions_df['region_id'] = divisions_df['region'].map(region_map)
+divisions_df['division_id'] = divisions_df.index + 1
+division_map = dict(zip(divisions_df['division'], divisions_df['division_id']))
 
 # ===========
-district_df = df[['District', 'Division']].drop_duplicates().reset_index(drop=True)
-district_df['Division ID'] = district_df['Division'].map(division_map)
-district_df['District ID'] = district_df.index + 1
-district_map = dict(zip(district_df['District'], district_df['District ID']))
+district_df = df[['district', 'division']].drop_duplicates().reset_index(drop=True)
+district_df['division_id'] = district_df['division'].map(division_map)
+district_df['district_id'] = district_df.index + 1
+district_map = dict(zip(district_df['district'], district_df['district_id']))
 
 # ===========
-district_df = df[['District', 'Division']].drop_duplicates().reset_index(drop=True)
-district_df['Division ID'] = district_df['Division'].map(division_map)
-district_df['District ID'] = district_df.index + 1
-district_map = dict(zip(district_df['District'], district_df['District ID']))
+district_df = df[['district', 'division']].drop_duplicates().reset_index(drop=True)
+district_df['division_id'] = district_df['division'].map(division_map)
+district_df['district_id'] = district_df.index + 1
+district_map = dict(zip(district_df['district'], district_df['district_id']))
 
 # ===========
-legislative_district_df = df[['Legislative District', 'District']].drop_duplicates().reset_index(drop=True)
-legislative_district_df['District ID'] = legislative_district_df['District'].map(district_map)
-legislative_district_df['Legislative District ID'] = legislative_district_df.index + 1
-legislative_district_map = dict(zip(legislative_district_df['Legislative District'], legislative_district_df['Legislative District ID']))
+legislative_district_df = df[['legislative_district', 'district']].drop_duplicates().reset_index(drop=True)
+legislative_district_df['district_id'] = legislative_district_df['district'].map(district_map)
+legislative_district_df['Legislative district_id'] = legislative_district_df.index + 1
+legislative_district_map = dict(zip(legislative_district_df['legislative_district'], legislative_district_df['Legislative district_id']))
 
 
 # ===========
-province_df = df[['Province', 'Region']].drop_duplicates().reset_index(drop=True)
-province_df['Region ID'] = province_df['Region'].map(region_map)
-province_df['Province ID'] = province_df.index + 1
-province_map = dict(zip(province_df['Province'], province_df['Province ID']))
+province_df = df[['province', 'region']].drop_duplicates().reset_index(drop=True)
+province_df['region_id'] = province_df['region'].map(region_map)
+province_df['province_id'] = province_df.index + 1
+province_map = dict(zip(province_df['province'], province_df['province_id']))
 
 # ===========
-municipality_df = df[['Municipality', 'Province']].drop_duplicates().reset_index(drop=True)
-municipality_df['Province ID'] = municipality_df['Province'].map(province_map)
-municipality_df['Municipality ID'] = municipality_df.index + 1
-municipality_map = dict(zip(municipality_df['Municipality'], municipality_df['Municipality ID']))
+municipality_df = df[['municipality', 'province']].drop_duplicates().reset_index(drop=True)
+municipality_df['province_id'] = municipality_df['province'].map(province_map)
+municipality_df['municipality_id'] = municipality_df.index + 1
+municipality_map = dict(zip(municipality_df['municipality'], municipality_df['municipality_id']))
 
 # ===========
-barangay_df = df[['Barangay', 'Municipality']].drop_duplicates().reset_index(drop=True)
-barangay_df['Municipality ID'] = barangay_df['Municipality'].map(municipality_map)
-barangay_df['Barangay ID'] = barangay_df.index + 1
-barangay_map = dict(zip(barangay_df['Barangay'], barangay_df['Barangay ID']))
+barangay_df = df[['barangay', 'municipality']].drop_duplicates().reset_index(drop=True)
+barangay_df['municipality_id'] = barangay_df['municipality'].map(municipality_map)
+barangay_df['barangay_id'] = barangay_df.index + 1
+barangay_map = dict(zip(barangay_df['barangay'], barangay_df['barangay_id']))
 
 # ===========
-school_loc_df = df[['School Name', 'Barangay']].drop_duplicates().reset_index(drop=True)
-school_loc_df['Barangay ID'] = school_loc_df['Barangay'].map(barangay_map)
-school_loc_df['School ID'] = df['BEIS School ID']
-school_loc_map = dict(zip(school_loc_df['School Name'], school_loc_df['School ID']))
+school_loc_df = df[['school_name', 'barangay']].drop_duplicates().reset_index(drop=True)
+school_loc_df['barangay_id'] = school_loc_df['barangay'].map(barangay_map)
+school_loc_df['School ID'] = df['beis_school_id']
+school_loc_map = dict(zip(school_loc_df['school_name'], school_loc_df['School ID']))
 
 # ===========
-schools_df = df[['BEIS School ID', 'School Name', 'School Type', 'Division', 'Modified COC', 'School Subclassification', 'Sector']].copy()
+schools_df = df[['beis_school_id', 'school_name', 'school_type', 'division', 'modified_coc', 'school_subclassification', 'sector']].copy()
 
-schools_df['Division ID'] = schools_df['Division'].map(division_map)
-schools_df = schools_df[['BEIS School ID', 'School Name', 'School Type', 'Modified COC', 'School Subclassification', 'Sector']]
+schools_df['division_id'] = schools_df['division'].map(division_map)
+schools_df = schools_df[['beis_school_id', 'school_name', 'school_type', 'modified_coc', 'school_subclassification', 'sector']]
 
 # ======
 enrollment_columns = df.columns[14:]  # enrollment starts at column 14
 enrollments_df = df.melt(
-    id_vars=['BEIS School ID'],
+    id_vars=['beis_school_id'],
     value_vars=enrollment_columns,
     var_name='Grade_Gender',
-    value_name='Enrollment Count'
+    value_name='enrollment_count'
 )
 
 # Extract grade level and gender
-enrollments_df[['Grade Level', 'Gender']] = enrollments_df['Grade_Gender'].str.extract(r'(.*)\s+(Male|Female)', expand=True)
+enrollments_df[['grade_level', 'gender']] = enrollments_df['Grade_Gender'].str.extract(r'(.*)\s+(Male|Female)', expand=True)
 
 # Clean up
-enrollments_df['Enrollment Count'] = pd.to_numeric(enrollments_df['Enrollment Count'], errors='coerce')
-enrollments_df = enrollments_df.dropna(subset=['Enrollment Count'])
-enrollments_df = enrollments_df[['BEIS School ID', 'Grade Level', 'Gender', 'Enrollment Count']]
+enrollments_df['enrollment_count'] = pd.to_numeric(enrollments_df['enrollment_count'], errors='coerce')
+enrollments_df = enrollments_df.dropna(subset=['enrollment_count'])
+enrollments_df = enrollments_df[['beis_school_id', 'grade_level', 'gender', 'enrollment_count']]
 
 # ======
 regions_df.to_csv("enrollment_csv_file/normalized_dataset/regions.csv", index=False)
@@ -90,4 +90,4 @@ municipality_df.to_csv("enrollment_csv_file/normalized_dataset/municipalities.cs
 barangay_df.to_csv("enrollment_csv_file/normalized_dataset/barangays.csv", index=False)
 
 schools_df.to_csv("enrollment_csv_file/normalized_dataset/schools.csv", index=False)
-enrollments_df.to_csv("enrollment_csv_file/normalized_dataset/enrollments.csv", index=False)
+enrollments_df.to_csv("enrollment_csv_file/normalized_dataset/enrollments.csv.gzip", compression="gzip", index=False)
