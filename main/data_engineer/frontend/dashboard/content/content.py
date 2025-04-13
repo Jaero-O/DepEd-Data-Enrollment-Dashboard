@@ -1,16 +1,8 @@
 from dash import html, dcc
-from main.data_engineer.frontend.dashboard.content.graph.stacked_bar_graph import (
-    plot_gender_distribution,
-    plot_sector_distribution,
-    plot_enrollment_distribution_by_sector,
-    plot_enrollment_distribution_by_school_type,
-    plot_enrollment_distribution_by_modified_coc,
-    plot_shs_track_distribution,
-    plot_gender_distribution_by_shs_tracks,
-    plot_school_type_distribution,
-    plot_modified_coc_distribution
+from main.data_engineer.frontend.dashboard.content.graph.data_story_1 import (
+    get_total_enrollment_kpi,
+    plot_gender_ratio_donut
 )
-
 # Path to preprocessed file
 cleaned_file = "enrollment_csv_file/preprocessed_data/total_enrollment.csv"
 
@@ -40,29 +32,13 @@ def dashboardContent(selection, filters):
         filtered_filters = {}
 
     # Generate the relevant figures for the current selection
-    fig_gender = plot_gender_distribution(cleaned_file, filtered_filters)
-    fig_sector = plot_sector_distribution(cleaned_file, filtered_filters)
-    fig_school_type = plot_school_type_distribution(cleaned_file, filtered_filters)
-    fig_modified_coc = plot_modified_coc_distribution(cleaned_file, filtered_filters)
+    fig_total_enrollment= get_total_enrollment_kpi(cleaned_file, filtered_filters)
+    fig_gender_ratio = plot_gender_ratio_donut(cleaned_file, filtered_filters)
     
-    # Updated: Separate graphs for enrollment distribution by sector, school type, and modified COC
-    fig_enrollment_by_sector = plot_enrollment_distribution_by_sector(cleaned_file, filtered_filters)
-    fig_enrollment_by_school_type = plot_enrollment_distribution_by_school_type(cleaned_file, filtered_filters)
-    fig_enrollment_by_modified_coc = plot_enrollment_distribution_by_modified_coc(cleaned_file, filtered_filters)
-    
-    fig_shs = plot_shs_track_distribution(cleaned_file, filtered_filters)
-    fig_gender_track = plot_gender_distribution_by_shs_tracks(cleaned_file, filtered_filters)
 
     # Return the layout with relevant data for the selected tab
     return [
         html.P(f"Displaying data for {selection}", style={"fontWeight": "bold"}),
-        dcc.Graph(figure=fig_gender),
-        dcc.Graph(figure=fig_sector),
-        dcc.Graph(figure=fig_school_type),
-        dcc.Graph(figure=fig_modified_coc),
-        dcc.Graph(figure=fig_enrollment_by_sector),
-        dcc.Graph(figure=fig_enrollment_by_school_type),
-        dcc.Graph(figure=fig_enrollment_by_modified_coc),
-        dcc.Graph(figure=fig_shs),
-        dcc.Graph(figure=fig_gender_track)
+        dcc.Graph (fig_total_enrollment),
+        dcc.Graph (fig_gender_ratio)
     ]
