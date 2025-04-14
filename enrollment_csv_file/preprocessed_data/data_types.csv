@@ -1,74 +1,73 @@
 ,0
-Region,object
-Division,object
-District,object
-BEIS School ID,int64
-School Name,object
-Street Address,object
-Province,object
-Municipality,object
-Legislative District,object
-Barangay,object
-Sector,object
-School Subclassification,object
-School Type,object
-Modified COC,object
-K Male,int64
-K Female,int64
-G1 Male,int64
-G1 Female,int64
-G2 Male,int64
-G2 Female,int64
-G3 Male,int64
-G3 Female,int64
-G4 Male,int64
-G4 Female,int64
-G5 Male,int64
-G5 Female,int64
-G6 Male,int64
-G6 Female,int64
-Elem NG Male,int64
-Elem NG Female,int64
-G7 Male,int64
-G7 Female,int64
-G8 Male,int64
-G8 Female,int64
-G9 Male,int64
-G9 Female,int64
-G10 Male,int64
-G10 Female,int64
-JHS NG Male,int64
-JHS NG Female,int64
-G11 ACAD - ABM Male,int64
-G11 ACAD - ABM Female,int64
-G11 ACAD - HUMSS Male,int64
-G11 ACAD - HUMSS Female,int64
-G11 ACAD STEM Male,int64
-G11 ACAD STEM Female,int64
-G11 ACAD GAS Male,int64
-G11 ACAD GAS Female,int64
-G11 ACAD PBM Male,int64
-G11 ACAD PBM Female,int64
-G11 TVL Male,int64
-G11 TVL Female,int64
-G11 SPORTS Male,int64
-G11 SPORTS Female,int64
-G11 ARTS Male,int64
-G11 ARTS Female,int64
-G12 ACAD - ABM Male,int64
-G12 ACAD - ABM Female,int64
-G12 ACAD - HUMSS Male,int64
-G12 ACAD - HUMSS Female,int64
-G12 ACAD STEM Male,int64
-G12 ACAD STEM Female,int64
-G12 ACAD GAS Male,int64
-G12 ACAD GAS Female,int64
-G12 ACAD PBM Male,int64
-G12 ACAD PBM Female,int64
-G12 TVL Male,int64
-G12 TVL Female,int64
-G12 SPORTS Male,int64
-G12 SPORTS Female,int64
-G12 ARTS Male,int64
-G12 ARTS Female,int64
-BEIS School,object
+region,object
+division,object
+district,object
+beis_school_id,object
+school_name,object
+street_address,object
+province,object
+municipality,object
+legislative_district,object
+barangay,object
+sector,object
+school_subclassification,object
+school_type,object
+modified_coc,object
+k_male,int64
+k_female,int64
+g1_male,int64
+g1_female,int64
+g2_male,int64
+g2_female,int64
+g3_male,int64
+g3_female,int64
+g4_male,int64
+g4_female,int64
+g5_male,int64
+g5_female,int64
+g6_male,int64
+g6_female,int64
+elem_ng_male,int64
+elem_ng_female,int64
+g7_male,int64
+g7_female,int64
+g8_male,int64
+g8_female,int64
+g9_male,int64
+g9_female,int64
+g10_male,int64
+g10_female,int64
+jhs_ng_male,int64
+jhs_ng_female,int64
+g11_acad_-_abm_male,int64
+g11_acad_-_abm_female,int64
+g11_acad_-_humss_male,int64
+g11_acad_-_humss_female,int64
+g11_acad_stem_male,int64
+g11_acad_stem_female,int64
+g11_acad_gas_male,int64
+g11_acad_gas_female,int64
+g11_acad_pbm_male,int64
+g11_acad_pbm_female,int64
+g11_tvl_male,int64
+g11_tvl_female,int64
+g11_sports_male,int64
+g11_sports_female,int64
+g11_arts_male,int64
+g11_arts_female,int64
+g12_acad_-_abm_male,int64
+g12_acad_-_abm_female,int64
+g12_acad_-_humss_male,int64
+g12_acad_-_humss_female,int64
+g12_acad_stem_male,int64
+g12_acad_stem_female,int64
+g12_acad_gas_male,int64
+g12_acad_gas_female,int64
+g12_acad_pbm_male,int64
+g12_acad_pbm_female,int64
+g12_tvl_male,int64
+g12_tvl_female,int64
+g12_sports_male,int64
+g12_sports_female,int64
+g12_arts_male,int64
+g12_arts_female,int64
