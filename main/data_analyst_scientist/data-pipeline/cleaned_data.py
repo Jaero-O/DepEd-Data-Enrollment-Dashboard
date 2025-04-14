@@ -1,55 +1,58 @@
 import pandas as pd
+import os
+import shutil
 
-file_path = "enrollment_csv_file\\raw_data\SY 2023-2024 School Level Data on Official Enrollment 13.xlsx - DB.csv"
-df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School ID': 'object'})
+def clean_dataset(csv_path):
+    filename_no_ext = os.path.splitext(os.path.basename(csv_path))[0]
+    print(csv_path)
+    df = pd.read_csv(csv_path, skiprows=4, dtype={'BEIS School ID': 'object'})
+    df_dropped = df.dropna(how='all').drop_duplicates()
 
-df_dropped = df.dropna(how='all').drop_duplicates()
+    valid_format = df_dropped['BEIS School ID'].str.match(r'^\d{6}$')
+    print(f"Valid BEIS School IDs: {valid_format.sum()}")
+    print(f"Invalid BEIS School IDs: {(~valid_format).sum()}")
 
-data_info = (df_dropped.shape, df_dropped.size)
+    df = df_dropped.copy()
+    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 
-valid_format = df_dropped['BEIS School ID'].str.match(r'^\d{6}$')
+    if "beis_school" in df.columns:
+        df = df.drop(columns=["beis_school"])
 
-valid_count = valid_format.sum()
-invalid_count = (~valid_format).sum()
+    df.loc[df['region'] == 'PSO', ['province', 'municipality', 'legislative_district', 'barangay']] = 'Others'
 
-print(f"Valid BEIS School IDs: {valid_count}")
-print(f"Invalid BEIS School IDs: {invalid_count}")
+    os.makedirs("enrollment_csv_file\\cleaned_separate_datasets", exist_ok=True)
+    df.dtypes.to_csv(f"enrollment_csv_file\\cleaned_separate_datasets\\data_types\\{filename_no_ext}_data_types.csv")
+    df.to_csv(f"enrollment_csv_file\\cleaned_separate_datasets\\{filename_no_ext}.csv", index=False)
 
-df = df_dropped.copy()
-# Clean column names: strip, lowercase, and replace spaces with underscores
-df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
+    print(df.columns)
 
-# Define grade group columns with lowercase names
-kinder_cols = ["k_male", "k_female"]
-g1_g6_cols = (
-    [f"g{i}_male" for i in range(1, 7)] +
-    [f"g{i}_female" for i in range(1, 7)] +
-    ["elem_ng_male", "elem_ng_female"]
-)
-jhs_cols = (
-    [f"g{i}_male" for i in range(7, 11)] +
-    [f"g{i}_female" for i in range(7, 11)] +
-    ["jhs_ng_male", "jhs_ng_female"]
-)
-g11_cols = [col for col in df.columns if col.startswith("g11_")]
-g12_cols = [col for col in df.columns if col.startswith("g12_")]
-shs_cols = g11_cols + g12_cols
-ng_cols = [col for col in df.columns if "ng_male" in col or "ng_female" in col]
+base_dir = 'enrollment_database'
+unconverted_dir = os.path.join(base_dir, 'unconverted_xlsx_files')
+os.makedirs(unconverted_dir, exist_ok=True)
 
-# Helper function to insert a column after a reference column 
-def insert_column_after(df, ref_col, new_col_name, new_col_values):
-    ref_index = df.columns.get_loc(ref_col)
-    new_df = df.copy()
-    new_df.insert(ref_index + 1, new_col_name, new_col_values)
-    return new_df
+print(os.listdir(base_dir))
+files = [f for f in os.listdir(base_dir) if os.path.isfile(os.path.join(base_dir, f))]
 
-# Remove 'beis_school' before saving, if it exists
-if "beis_school" in df.columns:
-    df = df.drop(columns=["beis_school"])
+for file_name in files:
+    file_path = os.path.join(base_dir, file_name)
 
+    base_name = ''.join(os.path.basename(file_name).strip().split())[:-5]
+    csv_name = f"{base_name}.csv"
+    csv_path = os.path.join(base_dir, csv_name)
 
-df.dtypes.to_csv("enrollment_csv_file\preprocessed_data\data_types.csv")
+    counter = 1
+    while os.path.exists(csv_path):
+        csv_name = f"{base_name}_{counter}.csv"
+        csv_path = os.path.join(base_dir, csv_name)
+        counter += 1
 
-df.to_csv("enrollment_csv_file\preprocessed_data\cleaned_enrollment_data.csv", index=False)
+    if file_name.endswith('.xlsx'):
+        temp = pd.read_excel(file_path)
+        temp.to_csv(csv_path, index=None, header=True)
+        shutil.move(file_path, os.path.join(unconverted_dir, os.path.basename(file_name)))
 
-print(df.columns)
+    else:
+        csv_path = file_path
+
+    print("Using file:", csv_path)
+    clean_dataset(csv_path)
