@@ -1,0 +1,238 @@
+division,region,region_id,division_id
+Ilocos Norte,Region I,1,1
+Ilocos Sur,Region I,1,2
+La Union,Region I,1,3
+"Pangasinan I, Lingayen",Region I,1,4
+"Pangasinan II, Binalonan",Region I,1,5
+Dagupan City,Region I,1,6
+Laoag City,Region I,1,7
+San Carlos City,Region I,1,8
+Urdaneta City,Region I,1,9
+Candon City,Region I,1,10
+Alaminos City,Region I,1,11
+Vigan City,Region I,1,12
+San Fernando City,Region I,1,13
+Batac City,Region I,1,14
+Batanes,Region II,2,15
+Cagayan,Region II,2,16
+Isabela,Region II,2,17
+Nueva Vizcaya,Region II,2,18
+Quirino,Region II,2,19
+Tuguegarao City,Region II,2,20
+Cauayan City,Region II,2,21
+Santiago City,Region II,2,22
+City of Ilagan,Region II,2,23
+San Jose City,Region III,3,24
+Aurora,Region III,3,25
+Bataan,Region III,3,26
+Bulacan,Region III,3,27
+Nueva Ecija,Region III,3,28
+Pampanga,Region III,3,29
+Tarlac,Region III,3,30
+Zambales,Region III,3,31
+Angeles City,Region III,3,32
+Cabanatuan City,Region III,3,33
+Olongapo City,Region III,3,34
+City of San Jose Del Monte,Region III,3,35
+San Fernando City,Region III,3,36
+Gapan City,Region III,3,37
+Tarlac City,Region III,3,38
+Science City of Muñoz,Region III,3,39
+Balanga City,Region III,3,40
+Malolos City,Region III,3,41
+Meycauayan City,Region III,3,42
+Mabalacat City,Region III,3,43
+Dasmarinas City,Region IV-A,4,44
+Batangas,Region IV-A,4,45
+Cavite,Region IV-A,4,46
+Laguna,Region IV-A,4,47
+Quezon,Region IV-A,4,48
+Rizal,Region IV-A,4,49
+Batangas City,Region IV-A,4,50
+Cavite City,Region IV-A,4,51
+Lipa City,Region IV-A,4,52
+Lucena City,Region IV-A,4,53
+San Pablo City,Region IV-A,4,54
+Calamba City,Region IV-A,4,55
+Antipolo City,Region IV-A,4,56
+Tanauan City,Region IV-A,4,57
+Sta. Rosa City,Region IV-A,4,58
+Tayabas City,Region IV-A,4,59
+Bacoor City,Region IV-A,4,60
+Imus City,Region IV-A,4,61
+Binan City,Region IV-A,4,62
+Cabuyao City,Region IV-A,4,63
+General Trias City,Region IV-A,4,64
+San Pedro City,Region IV-A,4,65
+Sto. Tomas City,Region IV-A,4,66
+Marinduque,MIMAROPA,5,67
+Occidental Mindoro,MIMAROPA,5,68
+Oriental Mindoro,MIMAROPA,5,69
+Palawan,MIMAROPA,5,70
+Romblon,MIMAROPA,5,71
+Puerto Princesa City,MIMAROPA,5,72
+Calapan City,MIMAROPA,5,73
+Albay,Region V,6,74
+Camarines Norte,Region V,6,75
+Camarines Sur,Region V,6,76
+Catanduanes,Region V,6,77
+Masbate,Region V,6,78
+Sorsogon,Region V,6,79
+Iriga City,Region V,6,80
+Legaspi City,Region V,6,81
+Naga City,Region V,6,82
+Sorsogon City,Region V,6,83
+Tabaco City,Region V,6,84
+Ligao City,Region V,6,85
+Masbate City,Region V,6,86
+Aklan,Region VI,7,87
+Antique,Region VI,7,88
+Capiz,Region VI,7,89
+Guimaras,Region VI,7,90
+Iloilo,Region VI,7,91
+Negros Occidental,Region VI,7,92
+Bacolod City,Region VI,7,93
+Bago City,Region VI,7,94
+Cadiz City,Region VI,7,95
+Iloilo City,Region VI,7,96
+La Carlota City,Region VI,7,97
+Roxas City,Region VI,7,98
+Sagay City,Region VI,7,99
+San Carlos City,Region VI,7,100
+Silay City,Region VI,7,101
+Kabankalan City,Region VI,7,102
+Passi City,Region VI,7,103
+Escalante City,Region VI,7,104
+Himamaylan City,Region VI,7,105
+Sipalay City,Region VI,7,106
+Victorias City,Region VI,7,107
+Bohol,Region VII,8,108
+Cebu,Region VII,8,109
+Cebu City,Region VII,8,110
+Dumaguete City,Region VII,8,111
+Lapu-Lapu City,Region VII,8,112
+Mandaue City,Region VII,8,113
+Negros Oriental,Region VII,8,114
+Siquijor,Region VII,8,115
+Toledo City,Region VII,8,116
+Bayawan City,Region VII,8,117
+Danao City,Region VII,8,118
+Tagbilaran City,Region VII,8,119
+Talisay City,Region VII,8,120
+Tanjay City,Region VII,8,121
+Bais City,Region VII,8,122
+Guihulngan City,Region VII,8,123
+Carcar City,Region VII,8,124
+Bogo City,Region VII,8,125
+"City of Naga, Cebu",Region VII,8,126
+Canlaon City,Region VII,8,127
+Biliran,Region VIII,9,128
+Leyte,Region VIII,9,129
+Southern Leyte,Region VIII,9,130
+Eastern Samar,Region VIII,9,131
+Northern Samar,Region VIII,9,132
+Samar (Western Samar),Region VIII,9,133
+Calbayog City,Region VIII,9,134
+Ormoc City,Region VIII,9,135
+Tacloban City,Region VIII,9,136
+Maasin City,Region VIII,9,137
+Catbalogan City,Region VIII,9,138
+Borongan City,Region VIII,9,139
+Baybay City,Region VIII,9,140
+Zamboanga del Norte,Region IX,10,141
+Zamboanga del Sur,Region IX,10,142
+Zamboanga Sibugay,Region IX,10,143
+Dapitan City,Region IX,10,144
+Dipolog City,Region IX,10,145
+Isabela City,Region IX,10,146
+Pagadian City,Region IX,10,147
+Zamboanga City,Region IX,10,148
+Malaybalay City,Region X,11,149
+Bukidnon,Region X,11,150
+Camiguin,Region X,11,151
+Lanao del Norte,Region X,11,152
+Misamis Occidental,Region X,11,153
+Misamis Oriental,Region X,11,154
+Cagayan de Oro City,Region X,11,155
+Gingoog City,Region X,11,156
+Iligan City,Region X,11,157
+Ozamis City,Region X,11,158
+Oroquieta City,Region X,11,159
+Tangub City,Region X,11,160
+Valencia City,Region X,11,161
+El Salvador,Region X,11,162
+Davao De Oro,Region XI,12,163
+Davao del Norte,Region XI,12,164
+Davao del Sur,Region XI,12,165
+Davao Oriental,Region XI,12,166
+Davao City,Region XI,12,167
+Digos City,Region XI,12,168
+Panabo City,Region XI,12,169
+Tagum City,Region XI,12,170
+Island Garden City of Samal,Region XI,12,171
+Mati City,Region XI,12,172
+Davao Occidental,Region XI,12,173
+North Cotabato,Region XII,13,174
+Sarangani,Region XII,13,175
+South Cotabato,Region XII,13,176
+Sultan Kudarat,Region XII,13,177
+General Santos City,Region XII,13,178
+Kidapawan City,Region XII,13,179
+Koronadal City,Region XII,13,180
+Tacurong City,Region XII,13,181
+Agusan del Norte,CARAGA,14,182
+Agusan del Sur,CARAGA,14,183
+Butuan City,CARAGA,14,184
+Siargao,CARAGA,14,185
+Surigao City,CARAGA,14,186
+Surigao del Norte,CARAGA,14,187
+Surigao del Sur,CARAGA,14,188
+Bislig City,CARAGA,14,189
+Dinagat Island,CARAGA,14,190
+Bayugan City,CARAGA,14,191
+Cabadbaran City,CARAGA,14,192
+Tandag City,CARAGA,14,193
+Maguindanao II,BARMM,15,194
+Cotabato City,BARMM,15,195
+Basilan,BARMM,15,196
+Lanao del Sur - I,BARMM,15,197
+Lanao del Sur - II,BARMM,15,198
+Maguindanao I,BARMM,15,199
+Sulu,BARMM,15,200
+Tawi-Tawi,BARMM,15,201
+Marawi City,BARMM,15,202
+Lamitan City,BARMM,15,203
+Special Geographic Area Division,BARMM,15,204
+Abra,CAR,16,205
+Apayao,CAR,16,206
+Benguet,CAR,16,207
+Ifugao,CAR,16,208
+Kalinga,CAR,16,209
+Mt. Province,CAR,16,210
+Baguio City,CAR,16,211
+Tabuk City,CAR,16,212
+City of San Juan,NCR,17,213
+Navotas,NCR,17,214
+Manila,NCR,17,215
+Quezon City,NCR,17,216
+Pasay City,NCR,17,217
+Caloocan City,NCR,17,218
+Mandaluyong City,NCR,17,219
+Marikina City,NCR,17,220
+Makati City,NCR,17,221
+Pasig City,NCR,17,222
+Paranaque City,NCR,17,223
+Las Piñas City,NCR,17,224
+Valenzuela City,NCR,17,225
+Malabon City,NCR,17,226
+Taguig City and Pateros,NCR,17,227
+Muntinlupa City,NCR,17,228
+Kingdom of Saudi Arabia,PSO,18,229
+Kingdom of Bahrain,PSO,18,230
+Qatar,PSO,18,231
+United Arab Emirates,PSO,18,232
+East Timor,PSO,18,233
+Italy,PSO,18,234
+Sultanate of Oman,PSO,18,235
+State of Kuwait,PSO,18,236
+Greece,PSO,18,237

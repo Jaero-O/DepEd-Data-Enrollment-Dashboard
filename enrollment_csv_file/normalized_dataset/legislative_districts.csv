@@ -1,0 +1,3088 @@
+legislative_district,district,district_id,Legislative district_id
+1st District,Bacarra I,1,1
+1st District,Bacarra II,2,2
+2nd District,Badoc,3,3
+1st District,Bangui,4,4
+2nd District,Banna (Espiritu),5,5
+1st District,Burgos,2176,6
+2nd District,Currimao,7,7
+2nd District,Dingras I,8,8
+2nd District,Dingras II,9,9
+2nd District,Marcos-Nueva Era,10,10
+1st District,Adams-Pagudpud,11,11
+2nd District,Paoay,12,12
+1st District,Pasuquin,13,13
+1st District,Piddig,14,14
+2nd District,Pinili,15,15
+2nd District,San Nicolas,2576,16
+1st District,San Nicolas,2576,17
+1st District,Sarrat,17,18
+2nd District,Solsona,18,19
+1st District,Vintar I,19,20
+1st District,Vintar II,20,21
+2nd District,Alilem-Sugpon,21,22
+1st District,Alilem-Sugpon,21,23
+2nd District,Banayoyo-Lidlidda-San Emilio,22,24
+1st District,Banayoyo-Lidlidda-San Emilio,22,25
+1st District,Bantay,23,26
+2nd District,Burgos-San Esteban,24,27
+1st District,Cabugao,25,28
+1st District,Caoayan,26,29
+2nd District,Cervantes-Quirino,27,30
+1st District,Cervantes-Quirino,27,31
+1st District,Magsingal,28,32
+2nd District,Narvacan North,29,33
+2nd District,Narvacan South-Nagbukel,30,34
+1st District,Narvacan South-Nagbukel,30,35
+2nd District,Salcedo-Galimuyod-Sigay-Del Pilar,31,36
+1st District,San Juan,2468,37
+1st District,San Vicente,1486,38
+2nd District,Santa,34,39
+2nd District,Santiago,2116,40
+1st District,Santiago,2116,41
+1st District,Sinait,36,42
+1st District,Sta. Catalina,37,43
+2nd District,Sta. Cruz,719,44
+2nd District,Sta. Lucia,39,45
+2nd District,Sta. Maria,1955,46
+1st District,Sto. Domingo-San Ildefonso,41,47
+2nd District,Suyo,42,48
+2nd District,Tagudin,43,49
+1st District,Tagudin,43,50
+2nd District,Agoo East,44,51
+2nd District,Agoo West,45,52
+2nd District,Aringay,46,53
+1st District,Bacnotan,47,54
+2nd District,Bagulin,48,55
+1st District,Balaoan,49,56
+1st District,Bangar,50,57
+2nd District,Bauang North,51,58
+1st District,Bauang North,51,59
+2nd District,Bauang South,52,60
+2nd District,Burgos,2176,61
+2nd District,Caba,54,62
+1st District,Luna I,55,63
+1st District,Luna II,56,64
+2nd District,Naguilian,226,65
+2nd District,Pugo,58,66
+1st District,Pugo,58,67
+2nd District,Rosario,1481,68
+1st District,San Gabriel,60,69
+1st District,Santol,62,70
+2nd District,Sto. Tomas,403,71
+1st District,Sudipen,64,72
+2nd District,Tubao,65,73
+1st District,Agno,66,74
+2nd District,Agno,66,75
+3rd District,Agno,66,76
+2nd District,Aguilar,67,77
+1st District,Anda,1170,78
+1st District,Bani,69,79
+2nd District,Bani,69,80
+2nd District,Basista,70,81
+3rd District,Bayambang I,71,82
+1st District,Bayambang I,71,83
+3rd District,Bayambang II,72,84
+2nd District,Binmaley I,73,85
+2nd District,Binmaley II,74,86
+1st District,Bolinao,75,87
+2nd District,Bugallon I,76,88
+1st District,Bugallon I,76,89
+2nd District,Bugallon II,77,90
+3rd District,Calasiao I,79,91
+2nd District,Calasiao I,79,92
+3rd District,Calasiao II,80,93
+1st District,Dasol,81,94
+1st District,Infanta,585,95
+2nd District,Labrador,83,96
+2nd District,Lingayen I,84,97
+2nd District,Lingayen II,85,98
+2nd District,Lingayen III,86,99
+1st District,Mabini,1859,100
+3rd District,Malasiqui I,88,101
+3rd District,Malasiqui II,89,102
+2nd District,Mangatarem I,90,103
+2nd District,Mangatarem II,91,104
+3rd District,Mapandan,92,105
+3rd District,Sta. Barbara I,93,106
+3rd District,Sta. Barbara II,94,107
+2nd District,Sta. Barbara II,94,108
+1st District,Sual,95,109
+2nd District,Urbiztondo,96,110
+5th District,Alcala,97,111
+4th District,Alcala,97,112
+6th District,Alcala,97,113
+6th District,Asingan I,98,114
+6th District,Asingan II,99,115
+6th District,Balungao,100,116
+5th District,Balungao,100,117
+5th District,Bautista,101,118
+5th District,Binalonan I,102,119
+5th District,Binalonan II,103,120
+5th District,Laoac,104,121
+4th District,Manaoag,105,122
+4th District,Mangaldan I,106,123
+4th District,Mangaldan II,107,124
+6th District,Natividad,108,125
+5th District,Pozorrubio I,109,126
+5th District,Pozorrubio II,110,127
+6th District,Rosales I,111,128
+6th District,Rosales II,112,129
+4th District,San Fabian I,113,130
+4th District,San Fabian II,114,131
+4th District,San Jacinto,911,132
+6th District,San Manuel,435,133
+6th District,San Nicolas I,117,134
+6th District,San Nicolas II,118,135
+6th District,San Quintin,2478,136
+5th District,Sison,2197,137
+6th District,Sta. Maria,1955,138
+5th District,Sto. Tomas,403,139
+6th District,Tayug I,123,140
+6th District,Tayug II,124,141
+6th District,Umingan I,125,142
+6th District,Umingan II,126,143
+5th District,Villasis I,127,144
+5th District,Villasis II,128,145
+4th District,Dagupan City District I,129,146
+4th District,Dagupan City District II,130,147
+4th District,Dagupan City District III,131,148
+4th District,Dagupan City District IV,132,149
+1st District,Laoag City District I,133,150
+1st District,Laoag City District II,134,151
+1st District,Laoag City District III,135,152
+3rd District,San Carlos City District I,136,153
+1st District,San Carlos City District I,136,154
+3rd District,San Carlos City District II,137,155
+3rd District,San Carlos City District III,138,156
+3rd District,San Carlos City District IV,139,157
+5th District,Urdaneta City District I,140,158
+5th District,Urdaneta City District II,141,159
+2nd District,District I,2540,160
+2nd District,District II,2541,161
+1st District,District I,2540,162
+1st District,District II,2541,163
+1st District,District III,2542,164
+1st District,San Fernando I,1719,165
+1st District,San Fernando II,1727,166
+2nd District,San Fernando II,1727,167
+2nd District,Batac I,152,168
+1st District,Batac I,152,169
+2nd District,Batac II,153,170
+Lone District,Basco,154,171
+Lone District,Itbayat,155,172
+Lone District,Ivana-Uyugan,156,173
+Lone District,Mahatao,157,174
+Lone District,Sabtang,158,175
+2nd District,Abulug,159,176
+3rd District,Abulug,159,177
+1st District,Alcala East,160,178
+2nd District,Allacapan North,161,179
+3rd District,Amulung East,162,180
+3rd District,Amulung West,163,181
+1st District,Aparri East,164,182
+1st District,Aparri West,165,183
+1st District,Baggao North,166,184
+1st District,Baggao West,167,185
+2nd District,Ballesteros,168,186
+1st District,Buguey North,169,187
+2nd District,Calayan West,170,188
+1st District,Calayan West,170,189
+1st District,Camalaniugan,171,190
+2nd District,Claveria East,172,191
+3rd District,Enrile East,173,192
+3rd District,Enrile West,174,193
+1st District,Gattaran East,175,194
+1st District,Gattaran West,176,195
+1st District,Gonzaga West,177,196
+3rd District,Iguig,178,197
+1st District,Lal-lo North,179,198
+1st District,Lal-lo South,180,199
+2nd District,Lasam East,181,200
+2nd District,Pamplona,855,201
+3rd District,Penablanca East,183,202
+3rd District,Penablanca West,184,203
+2nd District,Piat,185,204
+2nd District,Rizal,2523,205
+2nd District,Sanchez Mira,187,206
+3rd District,Solana North,188,207
+3rd District,Solana South,189,208
+1st District,Sta. Ana,1925,209
+2nd District,Sta. Praxedes,191,210
+1st District,Sta. Teresita,518,211
+2nd District,Sto. Nino,1531,212
+3rd District,Tuao East,194,213
+3rd District,Tuao West,195,214
+1st District,Baggao East,196,215
+1st District,Gattaran Central,197,216
+3rd District,Solana West Educational Zone,198,217
+1st District,Alcala West,199,218
+1st District,Aparri South Educational Zone,200,219
+1st District,Buguey South,201,220
+1st District,Gonzaga East,202,221
+1st District,Lal-lo Central,203,222
+2nd District,Allacapan South,204,223
+2nd District,Lasam West,205,224
+2nd District,Calayan East,206,225
+1st District,Baggao South,207,226
+3rd District,Alicia North,208,227
+3rd District,Alicia South,209,228
+3rd District,Angadanan East,210,229
+3rd District,Angadanan West,211,230
+2nd District,Aurora,212,231
+2nd District,Benito Soliven,213,232
+1st District,Cabagan,215,233
+4th District,Cordon North,216,234
+1st District,Delfin Albano,217,235
+4th District,Echague East,218,236
+4th District,Echague South,219,237
+4th District,Echague West,220,238
+2nd District,Gamu,221,239
+1st District,Gamu,221,240
+4th District,Jones East,222,241
+4th District,Jones West,223,242
+3rd District,Luna,2489,243
+2nd District,Mallig,225,244
+2nd District,Palanan,227,245
+1st District,Palanan,227,246
+4th District,Palanan,227,247
+2nd District,Quezon,600,248
+2nd District,Quirino,229,249
+4th District,Ramon,230,250
+3rd District,Ramon,230,251
+3rd District,Reina Mercedes,231,252
+2nd District,Reina Mercedes,231,253
+2nd District,Roxas East,232,254
+2nd District,Roxas West,233,255
+4th District,San Agustin,2216,256
+3rd District,San Guillermo,235,257
+4th District,San Isidro,2476,258
+2nd District,San Manuel,435,259
+2nd District,San Mariano I,238,260
+2nd District,San Mariano II,239,261
+3rd District,San Mateo North,240,262
+3rd District,San Mateo South,241,263
+1st District,San Pablo,1637,264
+1st District,Sta. Maria,1955,265
+1st District,Sto. Tomas,403,266
+1st District,Tumauini North,245,267
+1st District,Tumauini South,246,268
+3rd District,Cabatuan East,247,269
+3rd District,Cabatuan West,248,270
+3rd District,Alicia East,249,271
+4th District,Cordon South,250,272
+Lone District,Aritao East,251,273
+Lone District,Bagabag I,252,274
+Lone District,Bambang I,253,275
+Lone District,Bambang II,254,276
+Lone District,Bayombong I,255,277
+Lone District,Bayombong II,256,278
+Lone District,Diadi,257,279
+Lone District,Dupax del Norte I,258,280
+Lone District,Dupax del Sur,259,281
+Lone District,Kasibu East,260,282
+Lone District,Eastern Kayapa,261,283
+Lone District,Quezon,600,284
+Lone District,Solano I,263,285
+Lone District,Solano II,264,286
+Lone District,Sta. Fe,1416,287
+Lone District,Villaverde,266,288
+Lone District,Ambaguio,267,289
+Lone District,Alfonso Castañeda,268,290
+Lone District,Kasibu West,269,291
+Lone District,Western Kayapa,270,292
+Lone District,Aritao West,271,293
+Lone District,Bagabag II,272,294
+Lone District,Dupax del Norte II,273,295
+Lone District,Aglipay,274,296
+Lone District,Cabarroguis,275,297
+Lone District,Diffun I,276,298
+Lone District,Diffun II,277,299
+Lone District,Maddela Zone I,278,300
+Lone District,Nagtipunan,279,301
+Lone District,Saguday,280,302
+Lone District,Maddela Zone II,281,303
+3rd District,Tuguegarao East Educational Zone,282,304
+3rd District,Tuguegarao North Educational Zone,283,305
+3rd District,Tuguegarao West Educational Zone,284,306
+2nd District,Tuguegarao West Educational Zone,284,307
+3rd District,Tuguegarao Northeast Educational Zone,285,308
+3rd District,Cauayan East District,286,309
+3rd District,Cauayan North District,287,310
+3rd District,Cauayan South District,288,311
+4th District,Cauayan South District,288,312
+3rd District,Cauayan West District,289,313
+3rd District,Cauayan Northeast District,290,314
+4th District,Santiago East,291,315
+4th District,Santiago North,292,316
+4th District,Santiago South,293,317
+4th District,Santiago West,294,318
+1st District,East,295,319
+1st District,South,296,320
+1st District,West,297,321
+1st District,North,298,322
+1st District,Northwest,299,323
+1st District,San Antonio,1482,324
+2nd District,San Jose City East,301,325
+2nd District,San Jose City West,302,326
+Lone District,Baler,303,327
+Lone District,Casiguran,925,328
+Lone District,Dilasag,305,329
+Lone District,Dinalungan,306,330
+Lone District,Dingalan,307,331
+Lone District,Dipaculao,308,332
+Lone District,Ma. Aurora,309,333
+Lone District,San Luis,515,334
+1st District,Abucay,311,335
+2nd District,Bagac,312,336
+1st District,Dinalupihan East,313,337
+1st District,Hermosa,314,338
+2nd District,Limay,315,339
+2nd District,Mariveles,316,340
+1st District,Morong,619,341
+1st District,Orani,318,342
+2nd District,Orion,319,343
+2nd District,Pilar,2466,344
+1st District,Samal,1941,345
+1st District,Dinalupihan West,322,346
+3rd District,Angat,323,347
+2nd District,Angat,323,348
+4th District,Angat,323,349
+2nd District,Balagtas,324,350
+4th District,Balagtas,324,351
+2nd District,Baliuag North,325,352
+2nd District,Baliuag South,326,353
+2nd District,Bocaue,327,354
+1st District,Bulacan,328,355
+2nd District,Bustos,329,356
+1st District,Calumpit,330,357
+4th District,Calumpit,330,358
+2nd District,Guiguinto,331,359
+1st District,Hagonoy East,332,360
+1st District,Hagonoy West,333,361
+4th District,Marilao,334,362
+3rd District,Norzagaray,335,363
+4th District,Norzagaray,335,364
+4th District,Obando,336,365
+3rd District,Obando,336,366
+2nd District,Pandi,337,367
+4th District,Pandi,337,368
+1st District,Paombong,338,369
+2nd District,Plaridel,598,370
+1st District,Pulilan,340,371
+3rd District,San Ildefonso North,341,372
+3rd District,San Ildefonso South,342,373
+3rd District,San Miguel North,883,374
+4th District,San Miguel North,883,375
+3rd District,San Miguel South,884,376
+3rd District,San Rafael,1034,377
+4th District,Sta. Maria,1955,378
+3rd District,Sta. Maria,1955,379
+3rd District,Dona Remedios Trinidad,347,380
+1st District,Dona Remedios Trinidad,347,381
+1st District,Aliaga,348,382
+3rd District,Aliaga,348,383
+2nd District,Aliaga,348,384
+4th District,Aliaga,348,385
+3rd District,Bongabon,349,386
+4th District,Cabiao,350,387
+2nd District,Carranglan,351,388
+1st District,Cuyapo,352,389
+3rd District,Gabaldon,353,390
+3rd District,Gen. M. Natividad,354,391
+4th District,Gen. M. Natividad,354,392
+1st District,Gen. M. Natividad,354,393
+4th District,Gen. Tinio,355,394
+1st District,Guimba East,356,395
+1st District,Guimba West,357,396
+4th District,Jaen,358,397
+1st District,Jaen,358,398
+3rd District,Laur,359,399
+1st District,Licab,360,400
+2nd District,Llanera,361,401
+2nd District,Lupao,362,402
+1st District,Nampicuan,363,403
+3rd District,Palayan City,364,404
+2nd District,Pantabangan,365,405
+1st District,Pantabangan,365,406
+4th District,Penaranda,366,407
+1st District,Quezon,600,408
+4th District,San Antonio,1482,409
+4th District,San Leonardo,371,410
+3rd District,Sta. Rosa,372,411
+4th District,Sta. Rosa,372,412
+1st District,Sto. Domingo,812,413
+1st District,Talavera North,374,414
+1st District,Talavera South,375,415
+2nd District,Talugtug,376,416
+1st District,Zaragoza,377,417
+4th District,Apalit,378,418
+1st District,Apalit,378,419
+3rd District,Apalit,378,420
+2nd District,Apalit,378,421
+3rd District,Arayat East,379,422
+3rd District,Arayat West,380,423
+4th District,Arayat West,380,424
+1st District,Bacolor North,381,425
+3rd District,Bacolor North,381,426
+2nd District,Bacolor North,381,427
+4th District,Candaba East,382,428
+4th District,Candaba West,383,429
+2nd District,Floridablanca East,384,430
+1st District,Floridablanca East,384,431
+2nd District,Floridablanca West,385,432
+2nd District,Guagua East,386,433
+2nd District,Guagua West,387,434
+2nd District,Lubao East,388,435
+2nd District,Lubao West,389,436
+4th District,Macabebe East,390,437
+4th District,Macabebe West,391,438
+1st District,Magalang North,392,439
+2nd District,Magalang North,392,440
+4th District,Masantol North,393,441
+1st District,Masantol North,393,442
+3rd District,Mexico North,394,443
+3rd District,Mexico South,395,444
+4th District,Minalin,396,445
+2nd District,Porac East,397,446
+3rd District,Porac East,397,447
+4th District,Porac East,397,448
+4th District,San Luis,515,449
+4th District,San Simon,399,450
+2nd District,Sasmuan,400,451
+3rd District,Sta. Ana,1925,452
+2nd District,Sta. Rita,402,453
+4th District,Sta. Rita,402,454
+4th District,Sto. Tomas,403,455
+2nd District,Porac West,404,456
+1st District,Magalang South,405,457
+3rd District,Bacolor South,406,458
+4th District,Candaba North,407,459
+2nd District,Lubao North,408,460
+4th District,Masantol South,409,461
+3rd District,Mexico West,410,462
+1st District,Anao,411,463
+3rd District,Anao,411,464
+3rd District,Bamban,412,465
+2nd District,Bamban,412,466
+1st District,Bamban,412,467
+1st District,Camiling Central,413,468
+1st District,Camiling East,414,469
+1st District,Camiling West,415,470
+3rd District,Camiling West,415,471
+3rd District,Capas East,416,472
+1st District,Capas East,416,473
+3rd District,Capas West,417,474
+1st District,Capas West,417,475
+3rd District,Concepcion East,418,476
+1st District,Concepcion East,418,477
+3rd District,Concepcion North,419,478
+1st District,Concepcion North,419,479
+3rd District,Concepcion South,420,480
+3rd District,Concepcion West,421,481
+2nd District,Gerona North,422,482
+1st District,Gerona North,422,483
+2nd District,Gerona South,423,484
+3rd District,La Paz North,424,485
+3rd District,La Paz South,425,486
+1st District,Mayantoc,426,487
+1st District,Moncada North,427,488
+1st District,Moncada South,428,489
+1st District,Paniqui North,429,490
+3rd District,Paniqui North,429,491
+1st District,Paniqui South,430,492
+1st District,Pura,431,493
+1st District,Ramos,432,494
+1st District,San Clemente,433,495
+2nd District,San Jose,2235,496
+3rd District,San Jose,2235,497
+1st District,San Jose,2235,498
+1st District,San Manuel,435,499
+1st District,Sta. Ignacia,436,500
+2nd District,Victoria East,437,501
+2nd District,Victoria West,438,502
+2nd District,Botolan North,439,503
+1st District,Botolan North,439,504
+2nd District,Botolan South,440,505
+2nd District,Cabangan,441,506
+2nd District,Candelaria,442,507
+1st District,Castillejos,443,508
+2nd District,Iba,444,509
+2nd District,Masinloc,445,510
+2nd District,Palauig,446,511
+2nd District,San Antonio,1482,512
+2nd District,San Felipe,448,513
+1st District,San Marcelino,449,514
+2nd District,San Narciso,606,515
+2nd District,Sta. Cruz North,1891,516
+2nd District,Sta. Cruz South,1892,517
+1st District,Subic,453,518
+1st District,North District,2429,519
+1st District,East District,2427,520
+1st District,South District,486,521
+1st District,West District,2430,522
+3rd District,Cabanatuan City East District,458,523
+1st District,Cabanatuan City East District,458,524
+2nd District,Cabanatuan City East District,458,525
+3rd District,Cabanatuan City West District,459,526
+3rd District,Cabanatuan City North District,460,527
+3rd District,Cabanatuan City South District,461,528
+1st District,Olongapo City District I,462,529
+1st District,Olongapo City District II,463,530
+1st District,Olongapo City District III,464,531
+1st District,Olongapo City District IV,465,532
+Lone District,San Jose Del Monte East,466,533
+Lone District,San Jose Del Monte West,467,534
+3rd District,San Fernando East,468,535
+1st District,San Fernando East,468,536
+3rd District,San Fernando North,469,537
+3rd District,San Fernando West,470,538
+4th District,Gapan North,471,539
+4th District,Gapan South,472,540
+2nd District,Tarlac Central District,473,541
+2nd District,Tarlac East District,474,542
+2nd District,Tarlac North District A,475,543
+2nd District,Tarlac South District A,476,544
+2nd District,Tarlac West District A,477,545
+2nd District,Tarlac North District B,478,546
+2nd District,Tarlac South District B,479,547
+2nd District,Tarlac West District B,480,548
+2nd District,Tarlac West District C,481,549
+2nd District,Munoz,482,550
+1st District,Munoz,482,551
+2nd District,Balanga City East,483,552
+1st District,Balanga City East,483,553
+2nd District,Balanga City West,484,554
+4th District,North District,2429,555
+4th District,Meycauayan East,487,556
+1st District,Meycauayan East,487,557
+3rd District,Meycauayan East,487,558
+4th District,Meycauayan West,488,559
+1st District,Mabalacat North,489,560
+1st District,Mabalacat South,490,561
+1st District,Mabalacat East,491,562
+4th District,Dasmariñas I,492,563
+7th District,Dasmariñas I,492,564
+2nd District,Dasmariñas I,492,565
+4th District,Dasmariñas II,493,566
+2nd District,Dasmariñas II,493,567
+3rd District,Agoncillo,494,568
+3rd District,Alitagtag,495,569
+1st District,Balayan East,496,570
+3rd District,Balete,968,571
+2nd District,Bauan,498,572
+1st District,Calaca,499,573
+1st District,Calatagan,500,574
+3rd District,Cuenca,501,575
+4th District,Ibaan,502,576
+3rd District,Laurel,503,577
+1st District,Lemery,1070,578
+3rd District,Lemery,1070,579
+1st District,Lian,505,580
+2nd District,Lobo,506,581
+2nd District,Mabini,1859,582
+3rd District,Malvar,508,583
+3rd District,Mataas Na Kahoy,509,584
+1st District,Nasugbu East,510,585
+4th District,Padre Garcia,511,586
+3rd District,Padre Garcia,511,587
+4th District,Rosario East,512,588
+4th District,San Jose,2235,589
+4th District,San Juan East,514,590
+2nd District,San Luis,515,591
+3rd District,San Nicolas,2576,592
+2nd District,San Pascual,517,593
+3rd District,Sta. Teresita,518,594
+1st District,Taal,519,595
+3rd District,Talisay,829,596
+4th District,Taysan,521,597
+2nd District,Tingloy,522,598
+1st District,Tuy,523,599
+1st District,Balayan West,524,600
+4th District,San Juan West,525,601
+1st District,Nasugbu West,526,602
+4th District,Rosario West,527,603
+1st District,Nasugbu North,528,604
+7th District,Alfonso,529,605
+6th District,Amadeo,530,606
+7th District,Amadeo,530,607
+5th District,Carmona,531,608
+2nd District,Carmona,531,609
+7th District,General E. Aguinaldo,532,610
+5th District,General Mariano Alvarez,533,611
+7th District,Indang I,534,612
+3rd District,Indang I,534,613
+7th District,Indang II,535,614
+1st District,Kawit,536,615
+7th District,Magallanes,2112,616
+7th District,Maragondon,538,617
+7th District,Mendez,539,618
+7th District,Naic I,540,619
+7th District,Naic II,541,620
+1st District,Noveleta,542,621
+1st District,Rosario,1481,622
+5th District,Silang I,544,623
+4th District,Silang I,544,624
+5th District,Silang II,545,625
+7th District,Tagaytay City,546,626
+3rd District,Tagaytay City,546,627
+6th District,Tanza,547,628
+7th District,Tanza,547,629
+2nd District,Tanza,547,630
+7th District,Ternate,548,631
+6th District,Trece Martirez City,549,632
+7th District,Trece Martirez City,549,633
+3rd District,Alaminos,550,634
+4th District,Alaminos,550,635
+2nd District,Alaminos,550,636
+2nd District,Bay,551,637
+3rd District,Calauan,552,638
+4th District,Cavinti,553,639
+4th District,Famy-Mabitac,554,640
+3rd District,Liliw,555,641
+1st District,Liliw,555,642
+2nd District,Los Baños,556,643
+1st District,Los Baños,556,644
+4th District,Luisiana,557,645
+4th District,Lumban-Kalayaan,558,646
+4th District,Magdalena,559,647
+4th District,Majayjay,560,648
+3rd District,Nagcarlan-Rizal,561,649
+1st District,Nagcarlan-Rizal,561,650
+4th District,Nagcarlan-Rizal,561,651
+4th District,Paete,562,652
+4th District,Pagsanjan,563,653
+4th District,Pangil-Pakil,564,654
+4th District,Pila,565,655
+4th District,Santa Cruz,566,656
+4th District,Santa Maria,567,657
+4th District,Siniloan,568,658
+1st District,Siniloan,568,659
+3rd District,Victoria,1488,660
+4th District,Alabat,570,661
+4th District,Atimonan,571,662
+3rd District,Buenavista,1177,663
+1st District,Burdeos,573,664
+4th District,Calauag East,574,665
+4th District,Calauag West,575,666
+2nd District,Candelaria East,576,667
+2nd District,Candelaria West,577,668
+3rd District,Catanauan,578,669
+2nd District,Dolores,2460,670
+3rd District,Gen. Luna,580,671
+1st District,Gen. Nakar,581,672
+4th District,Guinayangan,582,673
+4th District,Gumaca East,583,674
+4th District,Gumaca West,584,675
+4th District,Lopez East,586,676
+4th District,Lopez West,587,677
+1st District,Lucban,588,678
+3rd District,Macalelon,589,679
+1st District,Mauban North,590,680
+1st District,Mauban South,591,681
+3rd District,Mulanay,592,682
+3rd District,Padre Burgos-Agdangan,593,683
+1st District,Pagbilao,594,684
+1st District,Patnanungan-Jomalig,595,685
+4th District,Perez,596,686
+3rd District,Pitogo,1634,687
+4th District,Plaridel,598,688
+1st District,Polillo,599,689
+4th District,Quezon,600,690
+3rd District,Quezon,600,691
+1st District,Real,601,692
+1st District,Sampaloc,602,693
+3rd District,San Andres,2590,694
+3rd District,San Francisco,1443,695
+3rd District,San Narciso,606,696
+2nd District,Sariaya East,607,697
+2nd District,Sariaya West,608,698
+4th District,Tagkawayan,609,699
+2nd District,Tiaong,610,700
+3rd District,Unisan,611,701
+1st District,Panukulan,612,702
+1st District,Angono,613,703
+2nd District,Angono,613,704
+2nd District,Teresa,614,705
+1st District,Binangonan I,615,706
+1st District,Binangonan II,616,707
+1st District,Cainta I (Cainta),617,708
+2nd District,Cardona,618,709
+2nd District,Morong,619,710
+2nd District,Pililla,620,711
+2nd District,Rodriguez I (Rodriguez),621,712
+1st District,Rodriguez I (Rodriguez),621,713
+2nd District,San Mateo,622,714
+2nd District,Tanay I,623,715
+1st District,Taytay I,755,716
+1st District,Taytay II,759,717
+2nd District,Taytay II,759,718
+1st District,Cainta II,626,719
+2nd District,Rodriguez II,627,720
+1st District,Binangonan III,628,721
+2nd District,Baras,629,722
+2nd District,Jalajala,630,723
+2nd District,Tanay II,631,724
+2nd District,Batangas City East District,632,725
+2nd District,Batangas City New District,633,726
+2nd District,Batangas City North District,634,727
+2nd District,Batangas City South District,635,728
+4th District,Batangas City South District,635,729
+2nd District,Batangas City West District,636,730
+2nd District,Batangas City Coastal District,637,731
+2nd District,Batangas City Verde Island District,638,732
+1st District,Cavite City I District,639,733
+1st District,Cavite City II District,640,734
+1st District,Cavite City III District,641,735
+4th District,Lipa City East District,642,736
+4th District,Lipa City North Disrict,643,737
+1st District,Lipa City North Disrict,643,738
+4th District,Lipa City South District,644,739
+4th District,Lipa City West District,645,740
+2nd District,Lucena East District,646,741
+2nd District,Lucena North District,647,742
+2nd District,Lucena South District,648,743
+2nd District,Lucena West District,649,744
+3rd District,Ambray,650,745
+3rd District,Dapdapan,651,746
+3rd District,Del Remedio,652,747
+3rd District,Fule Almeda,653,748
+3rd District,Lakeside,654,749
+3rd District,Sto. Angel,656,750
+2nd District,Calamba City East I,657,751
+1st District,Calamba City East I,657,752
+2nd District,Calamba City East II,658,753
+2nd District,Calamba City West,659,754
+1st District,District I-A,660,755
+2nd District,District I-A,660,756
+2nd District,District II-A,661,757
+2nd District,District II-B,662,758
+2nd District,District II-C,663,759
+1st District,District I-B,664,760
+1st District,District I-C,665,761
+2nd District,District II-D,666,762
+1st District,District II-D,666,763
+3rd District,Tanauan City East I,667,764
+3rd District,Tanauan City North I,668,765
+3rd District,Tanauan City South I,669,766
+3rd District,Tanauan City West I,670,767
+3rd District,Tanauan City East II,671,768
+3rd District,Tanauan City East III,672,769
+3rd District,Tanauan City North II,673,770
+3rd District,Tanauan City North III,674,771
+3rd District,Tanauan City South II,675,772
+3rd District,Tanauan City West II,676,773
+1st District,City of Sta. Rosa District I,677,774
+1st District,City of Sta. Rosa District II,678,775
+1st District,City of Sta. Rosa District III,679,776
+1st District,Tayabas East,680,777
+1st District,Tayabas West,681,778
+2nd District,Bacoor I,682,779
+1st District,Bacoor I,682,780
+2nd District,Bacoor II,683,781
+3rd District,Imus I,684,782
+2nd District,Imus I,684,783
+3rd District,Imus II,685,784
+1st District,Binan,686,785
+2nd District,District III,2542,786
+2nd District,District IV,1851,787
+4th District,District IV,1851,788
+2nd District,District V,1852,789
+6th District,General Trias I,692,790
+2nd District,General Trias I,692,791
+6th District,General Trias II,693,792
+1st District,San Pedro,694,793
+3rd District,Sto. Tomas North,695,794
+4th District,Sto. Tomas North,695,795
+3rd District,Sto. Tomas South,696,796
+Lone District,Boac North,697,797
+Lone District,Boac South,698,798
+Lone District,Buenavista,1177,799
+Lone District,Gasan,700,800
+Lone District,Mogpog,701,801
+Lone District,Santa Cruz East,702,802
+Lone District,Santa Cruz North,703,803
+Lone District,Santa Cruz South,704,804
+Lone District,Torrijos,705,805
+Lone District,Abra De Ilog-Paluan,706,806
+Lone District,Calintaan,707,807
+Lone District,Looc,778,808
+Lone District,Lubang,709,809
+Lone District,Magsaysay,1747,810
+Lone District,Mamburao,711,811
+Lone District,Rizal,2523,812
+Lone District,Sablayan North,713,813
+Lone District,Sablayan South,714,814
+Lone District,San Jose East,715,815
+Lone District,San Jose North,716,816
+Lone District,San Jose South,717,817
+Lone District,San Jose West,718,818
+Lone District,Sta. Cruz,719,819
+1st District,Baco,720,820
+2nd District,Baco,720,821
+2nd District,Bansud,721,822
+2nd District,Bongabong North,722,823
+2nd District,Bongabong South,723,824
+2nd District,Bulalacao,724,825
+2nd District,Gloria,725,826
+2nd District,Mansalay,726,827
+1st District,Naujan East,727,828
+1st District,Naujan South,728,829
+1st District,Naujan West,729,830
+2nd District,Pinamalayan East,730,831
+2nd District,Pinamalayan West,731,832
+1st District,Pola,732,833
+1st District,Puerto Galera,733,834
+2nd District,Roxas,734,835
+1st District,San Teodoro,735,836
+2nd District,San Teodoro,735,837
+1st District,Socorro,736,838
+2nd District,Socorro,736,839
+1st District,Victoria,1488,840
+2nd District,Aborlan Central,738,841
+1st District,Agutaya,739,842
+1st District,Araceli (Araceli-Dumaran),740,843
+2nd District,Balabac,741,844
+2nd District,Bataraza District I,742,845
+2nd District,South Brooke's Point,743,846
+2nd District,Brooke'S Point II (S. Espanola),744,847
+1st District,Busuanga,745,848
+1st District,Caganyancillo,746,849
+1st District,Coron Coastal,747,850
+1st District,Cuyo,748,851
+1st District,El Nido del Sur,749,852
+1st District,Magsaysay,1747,853
+2nd District,Narra District I,751,854
+1st District,Narra District I,751,855
+2nd District,Quezon North,752,856
+1st District,Quezon North,752,857
+1st District,Roxas North,753,858
+1st District,Dumaran Island District,756,859
+1st District,Roxas South,757,860
+2nd District,North Brooke's Point,760,861
+1st District,Culion,761,862
+1st District,Linapacan,762,863
+2nd District,Narra District II,763,864
+2nd District,Aborlan East,764,865
+2nd District,Aborlan West,765,866
+2nd District,Quezon South,766,867
+2nd District,Bataraza District II,767,868
+1st District,Dumaran Mainland District,768,869
+1st District,Coron Inland,769,870
+1st District,El Nido del Norte,770,871
+1st District,Roxas Central,771,872
+1st District,Taytay III,772,873
+Lone District,Alcantara,1220,874
+Lone District,Banton,774,875
+Lone District,Cajidiocan-Magdiwang,775,876
+Lone District,Concepcion,1766,877
+Lone District,Corcuera,777,878
+Lone District,Odiongan North,779,879
+Lone District,Odiongan South,780,880
+Lone District,Romblon,781,881
+Lone District,San Agustin-Calatrava,782,882
+Lone District,San Andres,2590,883
+Lone District,San Fernando,1261,884
+Lone District,San Jose-Santa Fe,785,885
+2nd District,Puerto Princesa I District,786,886
+2nd District,Puerto Princesa II District,787,887
+2nd District,Puerto Princesa III District,788,888
+1st District,Calapan East,789,889
+1st District,Calapan South,790,890
+1st District,Calapan West,791,891
+1st District,Bacacay East,792,892
+3rd District,Bacacay East,792,893
+2nd District,Bacacay East,792,894
+1st District,Bacacay West,793,895
+2nd District,Camalig North,794,896
+2nd District,Camalig South,795,897
+2nd District,Daraga North,796,898
+2nd District,Daraga South,797,899
+3rd District,Guinobatan East,798,900
+3rd District,Guinobatan West,799,901
+3rd District,Jovellar,800,902
+3rd District,Libon East,801,903
+3rd District,Libon West,802,904
+1st District,Malilipot,803,905
+1st District,Malinao,981,906
+2nd District,Manito,805,907
+3rd District,Oas North,806,908
+1st District,Oas North,806,909
+3rd District,Oas South,807,910
+3rd District,Pioduran West (Pioduran North),808,911
+3rd District,Polangui North,809,912
+3rd District,Polangui South,810,913
+2nd District,Rapu-Rapu East (Rapu-Rapu),811,914
+1st District,Tiwi,813,915
+1st District,Bacacay South,814,916
+3rd District,Pioduran East (Pioduran South),815,917
+2nd District,Rapu-Rapu West,816,918
+2nd District,Basud,817,919
+1st District,Capalonga,818,920
+2nd District,Daet North,819,921
+2nd District,Daet South,820,922
+1st District,Jose Panganiban East,821,923
+1st District,Jose Panganiban West,822,924
+1st District,Labo East,823,925
+1st District,Labo West,824,926
+2nd District,Mercedes,1684,927
+1st District,Paracale,826,928
+2nd District,Sn Vicente-San Lorenzo Ruiz,827,929
+1st District,Sta. Elena,828,930
+2nd District,Talisay,829,931
+2nd District,Vinzons,830,932
+5th District,Baao,831,933
+2nd District,Baao,831,934
+4th District,Baao,831,935
+3rd District,Baao,831,936
+5th District,Balatan,832,937
+5th District,Bato,1378,938
+4th District,Bato,1378,939
+5th District,Buhi,834,940
+4th District,Buhi,834,941
+5th District,Bula,2080,942
+4th District,Bula,2080,943
+1st District,Cabusao,836,944
+3rd District,Calabanga,837,945
+2nd District,Calabanga,837,946
+3rd District,Camaligan,838,947
+3rd District,Canaman,839,948
+4th District,Caramoan,840,949
+1st District,Del Gallego,841,950
+4th District,Garchitorena,842,951
+4th District,Goa,843,952
+4th District,Lagonoy North,844,953
+1st District,Lagonoy North,844,954
+4th District,Lagonoy South,845,955
+2nd District,Libmanan North,846,956
+2nd District,Libmanan South,847,957
+1st District,Lupi,848,958
+3rd District,Magarao-Bombon,849,959
+2nd District,Milaor-Gainza,850,960
+2nd District,Minalabac,851,961
+5th District,Nabua East,852,962
+5th District,Nabua West,853,963
+3rd District,Ocampo,854,964
+2nd District,Ocampo,854,965
+4th District,Parubcan-Presentacion,856,966
+2nd District,Pasacao,857,967
+1st District,Pasacao,857,968
+3rd District,Pili,858,969
+1st District,Ragay,859,970
+2nd District,Ragay,859,971
+4th District,Sagñay,860,972
+2nd District,Sagñay,860,973
+3rd District,Sagñay,860,974
+2nd District,San Fernando,1261,975
+1st District,San Fernando,1261,976
+4th District,Siruma,863,977
+1st District,Sipocot North,864,978
+1st District,Sipocot South,865,979
+4th District,Tigaon,866,980
+4th District,Tinambac North,867,981
+3rd District,Tinambac North,867,982
+4th District,Tinambac South,868,983
+Lone District,Bagamanoc North,869,984
+Lone District,Bagamanoc South,870,985
+Lone District,Baras North,871,986
+Lone District,Baras South,872,987
+Lone District,Bato East,873,988
+Lone District,Bato West,874,989
+Lone District,Caramoran North,875,990
+Lone District,Caramoran South,876,991
+Lone District,Gigmoto,877,992
+Lone District,Pandan East,878,993
+Lone District,Pandan West,879,994
+Lone District,Panganiban,880,995
+Lone District,San Andres East,881,996
+Lone District,San Andres West,882,997
+Lone District,San Miguel North,883,998
+Lone District,San Miguel South,884,999
+Lone District,Viga East,885,1000
+Lone District,Viga West,886,1001
+Lone District,Virac North,887,1002
+Lone District,Virac South,888,1003
+2nd District,Aroroy East,889,1004
+3rd District,Aroroy East,889,1005
+1st District,Aroroy East,889,1006
+2nd District,Aroroy West,890,1007
+2nd District,Baleno,891,1008
+2nd District,Balud North,892,1009
+1st District,Batuan,1174,1010
+3rd District,Cataingan East,894,1011
+3rd District,Cataingan West,895,1012
+3rd District,Cawayan East (Cawayan),896,1013
+1st District,Claveria North,897,1014
+3rd District,Dimasalang,898,1015
+3rd District,Esperanza,899,1016
+2nd District,Mandaon North,900,1017
+2nd District,Milagros East,901,1018
+2nd District,Milagros West,902,1019
+2nd District,Mobo North,903,1020
+1st District,Monreal,904,1021
+3rd District,Palanas North,905,1022
+3rd District,Palanas South,906,1023
+3rd District,Pio V. Corpuz,907,1024
+3rd District,Placer East,908,1025
+3rd District,Placer West,909,1026
+1st District,San Jacinto,911,1027
+1st District,San Pascual North,912,1028
+3rd District,Uson South,913,1029
+3rd District,Uson-North,914,1030
+3rd District,Cawayan West,915,1031
+2nd District,Balud South,916,1032
+1st District,Claveria South,917,1033
+2nd District,Mandaon South,918,1034
+2nd District,Mobo South,919,1035
+1st District,San Pascual South,920,1036
+2nd District,Barcelona,1661,1037
+1st District,Barcelona,1661,1038
+2nd District,Bulan North,922,1039
+2nd District,Bulan South,923,1040
+2nd District,Bulusan,924,1041
+1st District,Casiguran,925,1042
+1st District,Castilla East,926,1043
+1st District,Castilla West,927,1044
+1st District,Donsol East,928,1045
+1st District,Donsol West,929,1046
+2nd District,Gubat North,930,1047
+2nd District,Gubat South,931,1048
+2nd District,Irosin,932,1049
+2nd District,Juban,933,1050
+1st District,Magallanes North,934,1051
+1st District,Magallanes South,935,1052
+2nd District,Matnog,936,1053
+1st District,Pilar I,937,1054
+1st District,Pilar II,938,1055
+2nd District,Prieto Diaz,939,1056
+2nd District,Sta. Magdalena,940,1057
+5th District,Iriga Central District,941,1058
+5th District,Iriga North District,942,1059
+5th District,Iriga South District,943,1060
+2nd District,Albay I District,944,1061
+2nd District,Albay II District,945,1062
+2nd District,Legazpi Port I District,946,1063
+2nd District,Legazpi Port II District,947,1064
+3rd District,Naga East District,948,1065
+2nd District,Naga East District,948,1066
+3rd District,Naga North District,949,1067
+2nd District,Naga North District,949,1068
+3rd District,Naga South District,950,1069
+3rd District,Naga West District,951,1070
+1st District,Bacon East,952,1071
+1st District,Bacon West,953,1072
+1st District,Sorsogon East,954,1073
+1st District,Sorsogon West,955,1074
+1st District,Tabaco North,956,1075
+1st District,Tabaco South,957,1076
+1st District,Tabaco East,958,1077
+1st District,Tabaco West,959,1078
+3rd District,Ligao East District,960,1079
+3rd District,Ligao West District,961,1080
+3rd District,Ligao South District,962,1081
+2nd District,Masbaste North District 1,963,1082
+1st District,Masbaste North District 1,963,1083
+2nd District,Masbate South District 1,964,1084
+2nd District,Masbaste North District 2,965,1085
+2nd District,Masbate South District 2,966,1086
+Lone District,Altavas,967,1087
+Lone District,Balete,968,1088
+Lone District,Banga,969,1089
+Lone District,Batan,970,1090
+Lone District,Buruanga,971,1091
+Lone District,Ibajay I,972,1092
+Lone District,Ibajay II,973,1093
+Lone District,Kalibo I,974,1094
+Lone District,Kalibo II,975,1095
+Lone District,Lezo,976,1096
+Lone District,Libacao,977,1097
+Lone District,Madalag,978,1098
+Lone District,Makato,979,1099
+Lone District,Malay,980,1100
+Lone District,Malinao,981,1101
+Lone District,Nabas,982,1102
+Lone District,New Washington,983,1103
+Lone District,Numancia,984,1104
+Lone District,Tangalan,985,1105
+Lone District,Anini-y,986,1106
+Lone District,Barbaza,987,1107
+Lone District,Belison,988,1108
+Lone District,Bugasong,989,1109
+Lone District,Caluya,990,1110
+Lone District,Culasi,991,1111
+Lone District,Hamtic North,992,1112
+Lone District,Hamtic South,993,1113
+Lone District,Laua-an,994,1114
+Lone District,Libertad,1784,1115
+Lone District,Pandan,996,1116
+Lone District,Patnongon I,997,1117
+Lone District,Patnongon II,998,1118
+Lone District,San Jose,2235,1119
+Lone District,San Remegio I,1263,1120
+Lone District,San Remegio II,1264,1121
+Lone District,Sebaste,1002,1122
+Lone District,Sibalom North,1003,1123
+Lone District,Sibalom South,1004,1124
+Lone District,Tibiao,1005,1125
+Lone District,Tobias Fornier,1006,1126
+Lone District,Valderama,1007,1127
+2nd District,Cuartero,1008,1128
+1st District,Cuartero,1008,1129
+2nd District,Dao,1009,1130
+1st District,Dao,1009,1131
+2nd District,Dumalag,1010,1132
+2nd District,Dumarao,1011,1133
+1st District,Dumarao,1011,1134
+2nd District,Ivisan,1012,1135
+1st District,Ivisan,1012,1136
+2nd District,Jamindan,1013,1137
+1st District,Jamindan,1013,1138
+1st District,Maayon,1014,1139
+2nd District,Mambusao East,1015,1140
+1st District,Mambusao East,1015,1141
+2nd District,Mambusao West,1016,1142
+1st District,Panay,1017,1143
+1st District,Panit-An,1018,1144
+1st District,Pilar,2466,1145
+1st District,Pontevedra,1020,1146
+1st District,President Roxas,1021,1147
+2nd District,President Roxas,1021,1148
+2nd District,Sapian,1022,1149
+2nd District,Sigma,1023,1150
+2nd District,Tapaz East,1024,1151
+1st District,Tapaz East,1024,1152
+2nd District,Tapaz West,1025,1153
+Lone District,Buenavista I,2114,1154
+Lone District,Buenavista II,2117,1155
+Lone District,San Lorenzo (Buenavista III),1028,1156
+Lone District,Jordan I,1029,1157
+Lone District,Jordan II,1030,1158
+Lone District,Sibunag (Jordan III),1031,1159
+Lone District,Nueva Valencia North,1032,1160
+Lone District,Nueva Valencia South,1033,1161
+5th District,San Rafael,1034,1162
+5th District,Sara,1035,1163
+2nd District,Sta. Barbara,1036,1164
+1st District,Tigbauan,1037,1165
+1st District,Tubungan,1038,1166
+2nd District,Zarraga,1039,1167
+2nd District,Alimodian II,1040,1168
+1st District,San Joaquin South,1041,1169
+5th District,Ajuy,1042,1170
+2nd District,Alimodian I,1043,1171
+4th District,Anilao,1044,1172
+3rd District,Badiangan,1045,1173
+5th District,Balasan,1046,1174
+4th District,Banate,1047,1175
+4th District,Barotac Nuevo,1048,1176
+5th District,Barotac Viejo,1049,1177
+5th District,Batad,1050,1178
+3rd District,Bingawan,1051,1179
+3rd District,Cabatuan I,1052,1180
+3rd District,Cabatuan II,1053,1181
+3rd District,Calinog I,1054,1182
+3rd District,Calinog II,1055,1183
+5th District,Carles,1056,1184
+5th District,Concepcion,1766,1185
+4th District,Dingle,1058,1186
+4th District,Due¤as,1059,1187
+4th District,Dumangas I,1060,1188
+4th District,Dumangas II,1061,1189
+5th District,Estancia,1062,1190
+1st District,Guimbal,1063,1191
+1st District,Igbaras,1064,1192
+3rd District,Janiuay I,1065,1193
+3rd District,Janiuay II,1066,1194
+3rd District,Lambunao East,1067,1195
+3rd District,Lambunao West,1068,1196
+2nd District,Leganes,1069,1197
+Lone District,Leganes,1069,1198
+5th District,Lemery,1070,1199
+2nd District,Leon I,1071,1200
+2nd District,Leon II,1072,1201
+3rd District,Maasin,1073,1202
+1st District,Miagao East,1074,1203
+1st District,Miagao West,1075,1204
+3rd District,Mina,1076,1205
+2nd District,New Lucena,1077,1206
+1st District,Oton,1078,1207
+2nd District,Pavia,1079,1208
+3rd District,Pototan I,1080,1209
+3rd District,Pototan II,1081,1210
+5th District,San Dionisio,1082,1211
+4th District,San Enrique,1111,1212
+1st District,San Joaquin North,1084,1213
+2nd District,San Miguel,1636,1214
+5th District,Binalbagan I,1086,1215
+5th District,Binalbagan II,1087,1216
+1st District,Calatrava I,1088,1217
+1st District,Calatrava II,1089,1218
+6th District,Candoni,1090,1219
+1st District,Candoni,1090,1220
+6th District,Cauayan I,1091,1221
+6th District,Cauayan II,1092,1222
+3rd District,Enrique B. Magalona,1093,1223
+1st District,Enrique B. Magalona,1093,1224
+5th District,Hinigaran I,1094,1225
+1st District,Hinigaran I,1094,1226
+5th District,Hinigaran II,1095,1227
+6th District,Hinobaan,1096,1228
+6th District,Ilog I,1097,1229
+6th District,Ilog II,1098,1230
+5th District,Ilog II,1098,1231
+5th District,Isabela I,1099,1232
+5th District,Isabela II,1100,1233
+5th District,La Castellana I,1101,1234
+5th District,La Castellana II,1102,1235
+2nd District,Manapla,1103,1236
+5th District,Moises Padilla,1104,1237
+3rd District,Murcia I,1105,1238
+Lone District,Murcia I,1105,1239
+3rd District,Murcia II,1106,1240
+4th District,Pontevedra I,1107,1241
+4th District,Pontevedra II,1108,1242
+2nd District,Pontevedra II,1108,1243
+4th District,Pulupandan,1109,1244
+1st District,Salvador Benedicto,1110,1245
+6th District,San Enrique,1111,1246
+3rd District,Talisay I,1112,1247
+3rd District,Talisay II,1113,1248
+3rd District,Talisay III,1114,1249
+1st District,Toboso,1115,1250
+2nd District,Toboso,1115,1251
+4th District,Valladolid,1116,1252
+6th District,Valladolid,1116,1253
+Lone District,Bacolod City I District,1117,1254
+Lone District,Bacolod City II District,1118,1255
+Lone District,Bacolod City III District,1119,1256
+Lone District,Bacolod City IV District,1120,1257
+Lone District,Bacolod City V District,1121,1258
+Lone District,Bacolod City VI District,1122,1259
+Lone District,Bacolod City VII District,1123,1260
+4th District,Bago City I District,1124,1261
+4th District,Bago City II District,1125,1262
+4th District,Bago City III District,1126,1263
+4th District,Bago City IV District,1127,1264
+2nd District,Cadiz City I District,1128,1265
+2nd District,Cadiz City II District,1129,1266
+2nd District,Cadiz City III District,1130,1267
+2nd District,Cadiz City IV District,1131,1268
+Lone District,Arevalo,1132,1269
+Lone District,City Proper,1133,1270
+1st District,City Proper,1133,1271
+Lone District,Jaro,1134,1272
+Lone District,Lapaz,1135,1273
+Lone District,Mandurriao,1136,1274
+Lone District,Molo,1137,1275
+Lone District,Montes-Lapuz,1138,1276
+4th District,La Carlota City District   I,1139,1277
+1st District,La Carlota City District   I,1139,1278
+4th District,La Carlota City District   II,1140,1279
+4th District,La Carlota City District   III,1141,1280
+1st District,Roxas City District I,1142,1281
+1st District,Roxas City District II,1143,1282
+1st District,Roxas City District III,1144,1283
+2nd District,Sagay City District I,1145,1284
+2nd District,Sagay City District II,1146,1285
+2nd District,Sagay City District III,1147,1286
+1st District,San Carlos City District II,137,1287
+1st District,San Carlos City District III,138,1288
+1st District,San Carlos City District IV,139,1289
+1st District,San Carlos City District V,1148,1290
+3rd District,Silay City District I,1149,1291
+3rd District,Silay City District II,1150,1292
+3rd District,Silay City District III,1151,1293
+3rd District,Silay City District IV,1152,1294
+6th District,Kabankalan I,1153,1295
+1st District,Kabankalan I,1153,1296
+6th District,Kabankalan II,1154,1297
+6th District,Kabankalan III,1155,1298
+6th District,Kabankalan IV,1156,1299
+1st District,Kabankalan IV,1156,1300
+6th District,Kabankalan V,1157,1301
+4th District,Passi City District I (West),1158,1302
+4th District,Passi City District II (East),1159,1303
+1st District,Escalante I,1160,1304
+1st District,Escalante II,1161,1305
+5th District,District 1,1164,1306
+5th District,District 2,1165,1307
+6th District,District 1,1164,1308
+3rd District,District 1,1164,1309
+6th District,District 2,1165,1310
+3rd District,Victorias I,1166,1311
+2nd District,Victorias I,1166,1312
+3rd District,Victorias II,1167,1313
+1st District,Alburquerque,1168,1314
+3rd District,Alicia,1645,1315
+1st District,Alicia,1645,1316
+3rd District,Anda,1170,1317
+1st District,Antequera,1171,1318
+1st District,Baclayon,1172,1319
+1st District,Balilihan,1173,1320
+3rd District,Batuan,1174,1321
+2nd District,Bien Unido,1175,1322
+3rd District,Bilar,1176,1323
+2nd District,Buenavista,1177,1324
+1st District,Calape,1178,1325
+3rd District,Candijay,1179,1326
+1st District,Candijay,1179,1327
+3rd District,Carmen,2207,1328
+1st District,Catigbian,1181,1329
+2nd District,Clarin,1182,1330
+1st District,Clarin,1182,1331
+3rd District,Clarin,1182,1332
+1st District,Corella,1183,1333
+1st District,Cortes,2209,1334
+2nd District,Dagohoy,1185,1335
+2nd District,Danao,1186,1336
+1st District,Dauis,1187,1337
+3rd District,Dimiao,1188,1338
+3rd District,Duero,1189,1339
+3rd District,Garcia-Hernandez,1190,1340
+1st District,Garcia-Hernandez,1190,1341
+2nd District,Getafe,1191,1342
+3rd District,Guindulman,1192,1343
+1st District,Guindulman,1192,1344
+2nd District,Inabanga North,1193,1345
+2nd District,Inabanga South,1194,1346
+3rd District,Jagna,1195,1347
+3rd District,Lila,1196,1348
+3rd District,Loay,1197,1349
+1st District,Loay,1197,1350
+3rd District,Loboc,1198,1351
+1st District,Loon North,1199,1352
+1st District,Loon South,1200,1353
+3rd District,Mabini,1859,1354
+1st District,Maribojoc,1202,1355
+1st District,Panglao,1203,1356
+3rd District,Pilar,2466,1357
+2nd District,Pres. C. P. Garcia,1205,1358
+3rd District,Pres. C. P. Garcia,1205,1359
+2nd District,Sagbayan,1206,1360
+2nd District,San Isidro,2476,1361
+3rd District,Sevilla,1209,1362
+3rd District,Sierra Bullones,1210,1363
+1st District,Sikatuna,1211,1364
+2nd District,Talibon I,1212,1365
+1st District,Talibon I,1212,1366
+3rd District,Talibon I,1212,1367
+2nd District,Talibon II,1213,1368
+1st District,Talibon II,1213,1369
+2nd District,Trinidad,1214,1370
+1st District,Trinidad,1214,1371
+1st District,Tubigon,1215,1372
+2nd District,Ubay I (Northeast),1216,1373
+1st District,Ubay I (Northeast),1216,1374
+3rd District,Valencia,1317,1375
+2nd District,Valencia,1317,1376
+1st District,Valencia,1317,1377
+2nd District,Ubay II (East),1218,1378
+2nd District,Ubay III (Southwest),1219,1379
+1st District,Ubay III (Southwest),1219,1380
+2nd District,Alcantara,1220,1381
+1st District,Alcantara,1220,1382
+4th District,Alcantara,1220,1383
+3rd District,Alcantara,1220,1384
+6th District,Alcantara,1220,1385
+5th District,Alcantara,1220,1386
+2nd District,Alcoy,1221,1387
+2nd District,Alegria,2189,1388
+3rd District,Aloguinsan,1223,1389
+2nd District,Argao I,1224,1390
+2nd District,Argao II,1225,1391
+3rd District,Asturias,1226,1392
+2nd District,Badian,1227,1393
+3rd District,Balamban I,1228,1394
+1st District,Balamban I,1228,1395
+4th District,Balamban I,1228,1396
+3rd District,Balamban II,1229,1397
+4th District,Bantayan I,1230,1398
+4th District,Bantayan II,1231,1399
+3rd District,Barili I,1232,1400
+3rd District,Barili II,1233,1401
+2nd District,Boljoon,1234,1402
+5th District,Borbon,1235,1403
+5th District,Carmen,2207,1404
+1st District,Carmen,2207,1405
+5th District,Catmon,1237,1406
+1st District,Catmon,1237,1407
+5th District,Compostela,1857,1408
+1st District,Compostela,1857,1409
+6th District,Consolacion,1239,1410
+1st District,Consolacion,1239,1411
+2nd District,Consolacion,1239,1412
+6th District,Cordova,1240,1413
+4th District,Daanbantayan I,1241,1414
+4th District,Daanbantayan II,1242,1415
+2nd District,Dalaguete I,1243,1416
+2nd District,Dalaguete II,1244,1417
+2nd District,Dumanjug I,1245,1418
+2nd District,Dumanjug II,1246,1419
+2nd District,Ginatilan,1247,1420
+1st District,Ginatilan,1247,1421
+5th District,Liloan,1433,1422
+1st District,Liloan,1433,1423
+4th District,Madridejos,1249,1424
+2nd District,Malabuyoc,1250,1425
+4th District,Medellin,1251,1426
+1st District,Minglanilla I,1252,1427
+1st District,Minglanilla II,1253,1428
+2nd District,Moalboal,1254,1429
+3rd District,Moalboal,1254,1430
+2nd District,Oslob,1255,1431
+5th District,Pilar,2466,1432
+3rd District,Pinamungajan 1,1257,1433
+1st District,Pinamungajan 1,1257,1434
+5th District,Poro,1258,1435
+2nd District,Ronda,1259,1436
+2nd District,Samboan,1260,1437
+5th District,San Francisco,1443,1438
+1st District,San Francisco,1443,1439
+4th District,San Remegio I,1263,1440
+4th District,San Remegio II,1264,1441
+4th District,Santa Fe,1265,1442
+2nd District,Santander,1266,1443
+1st District,Santander,1266,1444
+1st District,Sibonga,1267,1445
+5th District,Sogod,1268,1446
+1st District,Sogod,1268,1447
+4th District,Tabogon,1269,1448
+4th District,Tabuelan,1270,1449
+1st District,Tabuelan,1270,1450
+3rd District,Tuburan I,1271,1451
+3rd District,Tuburan II,1272,1452
+5th District,Tudela,1774,1453
+3rd District,Pinamungajan 2,1274,1454
+1st District,North District 2,1275,1455
+2nd District,North District 2,1275,1456
+1st District,North District 3,1276,1457
+2nd District,North District 3,1276,1458
+1st District,North District 4,1277,1459
+1st District,North District 5,1278,1460
+1st District,North District 6,1279,1461
+1st District,North District 7,1280,1462
+1st District,North District 8,1281,1463
+2nd District,South District 1,1282,1464
+1st District,South District 1,1282,1465
+2nd District,South District 2,1283,1466
+2nd District,South District 3,1284,1467
+2nd District,South District 4,1285,1468
+1st District,South District 4,1285,1469
+2nd District,South District 5,1286,1470
+1st District,South District 5,1286,1471
+2nd District,South District 6,1287,1472
+2nd District,South District 7,1288,1473
+2nd District,South District 8,1289,1474
+1st District,South District 8,1289,1475
+1st District,North District 1,1290,1476
+2nd District,North District 1,1290,1477
+2nd District,Dumaguete City North District,1291,1478
+1st District,Dumaguete City North District,1291,1479
+2nd District,Dumaguete City South District,1292,1480
+2nd District,Dumaguete City West District,1293,1481
+6th District,Lapu-Lapu City East District,1294,1482
+1st District,Lapu-Lapu City East District,1294,1483
+6th District,Lapu-Lapu City North District,1295,1484
+1st District,Lapu-Lapu City North District,1295,1485
+6th District,Lapu-Lapu City South District,1296,1486
+1st District,Lapu-Lapu City South District,1296,1487
+6th District,Lapu-Lapu City West District,1297,1488
+1st District,Lapu-Lapu City West District,1297,1489
+6th District,Mandaue City Central District,1298,1490
+1st District,Mandaue City Central District,1298,1491
+6th District,Mandaue City North District,1299,1492
+6th District,Mandaue City South District,1300,1493
+6th District,Mandaue City West District,1301,1494
+2nd District,Amlan,1302,1495
+1st District,Amlan,1302,1496
+1st District,Ayungon,1303,1497
+3rd District,Bacong,1304,1498
+1st District,Bindoy,1305,1499
+3rd District,Dauin,1306,1500
+2nd District,Dauin,1306,1501
+1st District,Jimalalud,1307,1502
+1st District,La Libertad,1586,1503
+2nd District,Mabinay I,1309,1504
+1st District,Mabinay I,1309,1505
+1st District,Manjuyod,1310,1506
+3rd District,Siaton East,1312,1507
+1st District,Siaton East,1312,1508
+2nd District,Sibulan,1313,1509
+1st District,Sibulan,1313,1510
+3rd District,Sta. Catalina North,1314,1511
+3rd District,Sta. Catalina South,1315,1512
+1st District,Tayasan,1316,1513
+3rd District,Zamboanguita,1318,1514
+1st District,Zamboanguita,1318,1515
+2nd District,Mabinay II,1319,1516
+3rd District,Siaton West,1320,1517
+Lone District,Larena,1321,1518
+Lone District,Lazi,1322,1519
+Lone District,Siquijor,1323,1520
+Lone District,San Juan,2468,1521
+Lone District,Maria,1325,1522
+3rd District,Toledo City East District,1326,1523
+1st District,Toledo City East District,1326,1524
+3rd District,Toledo City North District,1327,1525
+3rd District,Toledo City South District,1328,1526
+3rd District,Toledo City West District,1329,1527
+3rd District,Bayawan East,1330,1528
+1st District,Bayawan East,1330,1529
+3rd District,Bayawan West,1331,1530
+3rd District,Basay,1332,1531
+1st District,Basay,1332,1532
+5th District,Danao City East,1333,1533
+1st District,Danao City East,1333,1534
+5th District,Danao City North,1334,1535
+5th District,Danao City South,1335,1536
+5th District,Danao City West,1336,1537
+1st District,Tagbilaran City,1337,1538
+1st District,Talisay City I,1338,1539
+1st District,Talisay City II,1339,1540
+1st District,Talisay City III,1340,1541
+2nd District,Tanjay City North,1341,1542
+2nd District,Tanjay City South,1342,1543
+2nd District,Tanjay City West,1343,1544
+2nd District,Pamplona District,1344,1545
+2nd District,Bais City North,1345,1546
+1st District,Bais City North,1345,1547
+2nd District,Bais City South,1346,1548
+1st District,Bais City South,1346,1549
+1st District,Guihulngan North,1347,1550
+3rd District,Guihulngan North,1347,1551
+1st District,Guihulngan South,1348,1552
+1st District,Vallehermoso,1349,1553
+1st District,Carcar I,1350,1554
+1st District,Carcar II,1351,1555
+4th District,Bogo I,1352,1556
+1st District,Bogo I,1352,1557
+4th District,Bogo II,1353,1558
+4th District,Bogo III,1354,1559
+1st District,Naga I,1355,1560
+1st District,Naga II,1356,1561
+1st District,Naga III,1357,1562
+1st District,Canlaon City,1358,1563
+Lone District,Almeria,1359,1564
+Lone District,Biliran,1360,1565
+Lone District,Cabucgayan,1361,1566
+Lone District,Caibiran,1362,1567
+Lone District,Culaba,1363,1568
+Lone District,Kawayan,1364,1569
+Lone District,Maripipi,1365,1570
+Lone District,Naval North,1366,1571
+Lone District,Naval South,1367,1572
+5th District,Abuyog East,1368,1573
+2nd District,Abuyog East,1368,1574
+5th District,Abuyog North,1369,1575
+5th District,Abuyog South,1370,1576
+1st District,Alangalang I,1371,1577
+1st District,Alangalang II,1372,1578
+4th District,Albuera North,1373,1579
+4th District,Albuera South,1374,1580
+1st District,Babatngon,1375,1581
+2nd District,Barugo I,1376,1582
+2nd District,Barugo II,1377,1583
+2nd District,Burauen North,1379,1584
+2nd District,Burauen South,1380,1585
+3rd District,Calubian North,1381,1586
+3rd District,Calubian South,1382,1587
+2nd District,Capoocan,1383,1588
+2nd District,Carigara I,1384,1589
+2nd District,Carigara II,1385,1590
+2nd District,Dagami North,1386,1591
+2nd District,Dagami South,1387,1592
+2nd District,Dulag North,1388,1593
+2nd District,Dulag South,1389,1594
+5th District,Hilongos North,1390,1595
+5th District,Hilongos South,1391,1596
+5th District,Hindang,1392,1597
+5th District,Inopacan,1393,1598
+4th District,Isabel,1394,1599
+2nd District,Jaro I,1395,1600
+2nd District,Jaro II,1396,1601
+5th District,Javier,1397,1602
+2nd District,Julita,1398,1603
+4th District,Kananga I,1399,1604
+2nd District,La Paz,2461,1605
+3rd District,Leyte I,1401,1606
+2nd District,Macarthur,1402,1607
+5th District,Mahaplag,1403,1608
+4th District,Matag-Ob,1404,1609
+5th District,Matalom North,1405,1610
+5th District,Matalom South,1406,1611
+2nd District,Mayorga,1407,1612
+4th District,Merida,1408,1613
+1st District,Palo I,1409,1614
+1st District,Palo II,1410,1615
+4th District,Palompon North,1411,1616
+4th District,Palompon South,1412,1617
+2nd District,Pastrana,1413,1618
+3rd District,San Isidro,2476,1619
+1st District,San Miguel,1636,1620
+1st District,Sta. Fe,1416,1621
+3rd District,Tabango North,1417,1622
+3rd District,Tabango South,1418,1623
+2nd District,Tabontabon,1419,1624
+1st District,Tanauan I,1420,1625
+1st District,Tanauan II,1421,1626
+1st District,Tolosa,1422,1627
+2nd District,Tunga,1423,1628
+3rd District,Villaba North,1424,1629
+3rd District,Villaba South,1425,1630
+3rd District,Leyte II,1426,1631
+4th District,Kananga II,1427,1632
+Lone District,Bontoc I,1428,1633
+Lone District,Hinunangan,1429,1634
+Lone District,Silago,1430,1635
+Lone District,Hinundayan,1431,1636
+Lone District,Libagon,1432,1637
+Lone District,Liloan,1433,1638
+Lone District,Macrohon,1434,1639
+Lone District,Malitbog,1713,1640
+Lone District,Padre Burgos,1436,1641
+Lone District,Pintuyan,1437,1642
+Lone District,San Juan (Cabalian),1438,1643
+Lone District,Sogod I,1439,1644
+Lone District,St. Bernard,1440,1645
+Lone District,Tomas Oppus,1441,1646
+Lone District,Bontoc II,1442,1647
+Lone District,San Francisco,1443,1648
+Lone District,Limasawa,1444,1649
+Lone District,San Ricardo,1445,1650
+Lone District,Sogod II,1446,1651
+Lone District,Anahawan,1447,1652
+Lone District,Arteche,1448,1653
+Lone District,Balangiga-Lawaan,1449,1654
+Lone District,Can-Avid,1450,1655
+Lone District,Dolores I,1451,1656
+Lone District,Dolores II,1452,1657
+Lone District,General Macarthur-Hernani,1453,1658
+Lone District,Giporlos,1454,1659
+Lone District,Guiuan East,1455,1660
+Lone District,Guiuan North,1456,1661
+Lone District,Guiuan South,1457,1662
+Lone District,Jipapad,1458,1663
+Lone District,Llorente,1459,1664
+Lone District,Maydolong,1460,1665
+Lone District,Oras East,1461,1666
+Lone District,Oras West,1462,1667
+Lone District,Quinapundan,1463,1668
+Lone District,Salcedo I,1464,1669
+Lone District,Salcedo II,1465,1670
+Lone District,San Julian,1466,1671
+Lone District,San Policarpo,1467,1672
+Lone District,Sulat,1468,1673
+Lone District,Taft,1469,1674
+Lone District,Lawaan,1470,1675
+Lone District,Hernani,1471,1676
+Lone District,Balangkayan,1472,1677
+Lone District,Mercedes,1684,1678
+Lone District,Maslog,1474,1679
+1st District,Lavezares I,1475,1680
+1st District,Lope De Vega,1476,1681
+2nd District,Mapanas,1477,1682
+1st District,Mondragon I,1478,1683
+2nd District,Palapag I,1479,1684
+2nd District,Pambujan I,1480,1685
+1st District,Pambujan I,1480,1686
+1st District,San Isidro,2476,1687
+2nd District,San Roque,1924,1688
+2nd District,Silvino Lubos,1487,1689
+1st District,Silvino Lubos,1487,1690
+2nd District,Palapag II,1489,1691
+1st District,Allen,1490,1692
+1st District,Biri,1491,1693
+1st District,Bobon,1492,1694
+1st District,Capul,1493,1695
+1st District,Catarman III,1494,1696
+1st District,Catarman II,1495,1697
+1st District,Catarman I,1496,1698
+1st District,Catarman IV,1497,1699
+2nd District,Catubig I,1498,1700
+2nd District,Catubig II,1499,1701
+2nd District,Gamay I,1500,1702
+2nd District,Laoang I,1501,1703
+2nd District,Laoang II,1502,1704
+2nd District,Laoang III,1503,1705
+2nd District,Lapinig,1504,1706
+2nd District,Las Navas I,1505,1707
+1st District,Mondragon II,1506,1708
+1st District,Lavezares II,1507,1709
+2nd District,Lavezares II,1507,1710
+2nd District,Gamay II,1508,1711
+2nd District,Las Navas II,1509,1712
+2nd District,Pambujan II,1510,1713
+1st District,Almagro,1511,1714
+2nd District,Basey I,1512,1715
+2nd District,Basey II,1513,1716
+2nd District,Calbiga,1514,1717
+2nd District,Daram I,1515,1718
+2nd District,Daram II,1516,1719
+1st District,Gandara I,1517,1720
+1st District,Gandara II - Matuguinao,1518,1721
+2nd District,Hinabangan,1519,1722
+2nd District,Jiabong,1520,1723
+2nd District,Marabut,1521,1724
+2nd District,Motiong,1522,1725
+1st District,Pagsanghan,1523,1726
+2nd District,Pinabacdao,1524,1727
+1st District,San Jorge,1525,1728
+2nd District,San Sebastian,1526,1729
+1st District,Sta. Margarita I,1527,1730
+1st District,Sta. Margarita II,1528,1731
+2nd District,Sta. Rita I,1529,1732
+2nd District,Sta. Rita II,1530,1733
+1st District,Sto. Nino,1531,1734
+1st District,Tagapul-an,1532,1735
+1st District,Tarangnan,1533,1736
+2nd District,Villareal I,1534,1737
+2nd District,Villareal II,1535,1738
+2nd District,Wright I,1536,1739
+2nd District,Wright II -San Jose De Buan,1537,1740
+2nd District,Zumarraga,1538,1741
+2nd District,Talalora,1539,1742
+1st District,Calbayog District I,1540,1743
+1st District,Calbayog District II,1541,1744
+1st District,Calbayog District III,1542,1745
+1st District,Oquendo District I,1543,1746
+1st District,Oquendo District II,1544,1747
+1st District,Tinambacan District I,1545,1748
+1st District,Tinambacan District II,1546,1749
+1st District,Calbayog District IV,1547,1750
+1st District,Calbayog District V,1548,1751
+1st District,Tinambacan District III,1549,1752
+4th District,Ormoc I,1550,1753
+4th District,Ormoc II,1551,1754
+4th District,Ormoc III,1552,1755
+4th District,Ormoc IV,1553,1756
+4th District,Ormoc V,1554,1757
+4th District,Ormoc VI,1555,1758
+1st District,District Learning Center I,1556,1759
+1st District,District Learning Center II,1557,1760
+1st District,District Learning Center III,1558,1761
+1st District,District Learning Center IV,1559,1762
+1st District,District Learning Center V,1560,1763
+1st District,District Learning Center VI,1561,1764
+5th District,District Learning Center VI,1561,1765
+Lone District,Maasin City I,1562,1766
+Lone District,Maasin City II,1563,1767
+Lone District,Maasin City III,1564,1768
+Lone District,Maasin City IV,1565,1769
+2nd District,Catbalogan I,1566,1770
+2nd District,Catbalogan II,1567,1771
+2nd District,Catbalogan III,1568,1772
+2nd District,Catbalogan IV,1569,1773
+2nd District,Catbalogan V,1570,1774
+Lone District,Borongan East,1571,1775
+Lone District,Borongan North,1572,1776
+Lone District,Borongan South,1573,1777
+5th District,Baybay I,1574,1778
+5th District,Baybay II,1575,1779
+5th District,Baybay III,1576,1780
+5th District,Baybay IV,1577,1781
+3rd District,Baliguian,1578,1782
+2nd District,Baliguian,1578,1783
+3rd District,Godod,1579,1784
+3rd District,Gutalac I,1580,1785
+1st District,Gutalac I,1580,1786
+3rd District,Gutalac II,1581,1787
+2nd District,Ponot (Jose Dalman),1582,1788
+3rd District,Kalawit,1583,1789
+2nd District,Katipunan I,1584,1790
+2nd District,Katipunan II,1585,1791
+3rd District,Labason,1587,1792
+3rd District,Bacungan (Leon Postigo),1588,1793
+3rd District,Liloy I,1589,1794
+3rd District,Liloy II,1590,1795
+2nd District,Roxas I (Manuel A. Roxas),1591,1796
+2nd District,Roxas II (Manuel A. Roxas),1592,1797
+2nd District,Manukan I,1593,1798
+2nd District,Manukan II,1594,1799
+1st District,Mutia,1595,1800
+1st District,Piñan,1596,1801
+1st District,Polanco I,1597,1802
+1st District,Polanco II,1598,1803
+1st District,Rizal,2523,1804
+3rd District,Salug I,1600,1805
+3rd District,Salug II,1601,1806
+1st District,Sergio Osmeña I,1602,1807
+1st District,Sergio Osmeña II,1603,1808
+2nd District,Siayan,1604,1809
+3rd District,Sibuco,1605,1810
+1st District,Sibutad,1606,1811
+2nd District,Sindangan Central,1607,1812
+2nd District,Sindangan North,1608,1813
+2nd District,Sindangan South,1609,1814
+3rd District,Siocon,1610,1815
+2nd District,Siocon,1610,1816
+3rd District,Sirawai,1611,1817
+3rd District,Tampilisan,1612,1818
+1st District,Aurora East,1613,1819
+2nd District,Aurora East,1613,1820
+1st District,Aurora West,1614,1821
+2nd District,Bayog,1615,1822
+2nd District,Dimataling,1616,1823
+2nd District,Dinas,1617,1824
+1st District,Dinas,1617,1825
+2nd District,Dumalinao,1618,1826
+1st District,Dumalinao,1618,1827
+1st District,Dumingag I,1619,1828
+1st District,Dumingag II,1620,1829
+2nd District,Guipos,1621,1830
+1st District,Josefina,1622,1831
+2nd District,Kumalarang,1623,1832
+1st District,Labangan I,1624,1833
+1st District,Labangan II,1625,1834
+2nd District,Lakewood,1626,1835
+2nd District,Lapuyan,1627,1836
+1st District,Mahayag North,1628,1837
+1st District,Mahayag South,1629,1838
+2nd District,Margosatubig,1630,1839
+1st District,Midsalip,1631,1840
+1st District,Molave East,1632,1841
+1st District,Molave West,1633,1842
+2nd District,Pitogo,1634,1843
+1st District,Pitogo,1634,1844
+1st District,Ramon Magsaysay,1635,1845
+2nd District,San Pablo,1637,1846
+1st District,Sominot,1638,1847
+2nd District,Tabina,1639,1848
+1st District,Tambulig,1640,1849
+2nd District,Tigbao,1641,1850
+1st District,Tigbao,1641,1851
+1st District,Tukuran East,1642,1852
+1st District,Tukuran West,1643,1853
+2nd District,Vincenzo Sagun,1644,1854
+1st District,Buug,1646,1855
+1st District,Diplahan,1647,1856
+1st District,Imelda,1648,1857
+2nd District,Ipil,1649,1858
+1st District,Ipil,1649,1859
+2nd District,Kabasalan,1650,1860
+1st District,Mabuhay,1651,1861
+1st District,Malangas,1652,1862
+2nd District,Naga,1653,1863
+1st District,Olutanga,1654,1864
+1st District,Payao,1655,1865
+2nd District,R.T. Lim,1656,1866
+2nd District,Siay,1657,1867
+1st District,Talusan,1658,1868
+2nd District,Titay,1659,1869
+2nd District,Tungawan,1660,1870
+1st District,Baylimango,1662,1871
+1st District,Dapitan Central,1663,1872
+1st District,Potungan,1664,1873
+1st District,Sulangon,1665,1874
+2nd District,Dipolog City East,1666,1875
+2nd District,Dipolog City West,1667,1876
+2nd District,Dipolog City North,1668,1877
+2nd District,Dipolog City South,1669,1878
+Lone District,Isabela City East District,1670,1879
+1st District,Isabela City East District,1670,1880
+Lone District,Isabela City West District,1671,1881
+Lone District,Isabela City North District,1672,1882
+Lone District,Isabela City Island District,1673,1883
+1st District,Pagadian City Central District,1674,1884
+1st District,Pagadian City East District,1675,1885
+1st District,Pagadian City North District,1676,1886
+1st District,Pagadian City South District,1677,1887
+1st District,Pagadian City West District,1678,1888
+1st District,Ayala,1679,1889
+1st District,Baliwasan,1680,1890
+2nd District,Curuan,1681,1891
+1st District,Labuan,1682,1892
+2nd District,Manicahan,1683,1893
+1st District,Manicahan,1683,1894
+2nd District,Putik,1685,1895
+2nd District,Tetuan,1687,1896
+1st District,Tetuan,1687,1897
+2nd District,Vitali,1688,1898
+1st District,Zamboanga Central District,1689,1899
+2nd District,Talon-Talon,1690,1900
+2nd District,Malaybalay City District I,1691,1901
+2nd District,Malaybalay City District II,1692,1902
+2nd District,Malaybalay City District III,1693,1903
+2nd District,Malaybalay City District IV,1694,1904
+2nd District,Malaybalay City District V,1695,1905
+2nd District,Malaybalay City District VI,1696,1906
+2nd District,Malaybalay City District VII,1697,1907
+2nd District,Malaybalay City District VIII,1698,1908
+2nd District,Malaybalay City District IX,1699,1909
+2nd District,Malaybalay City District X,1700,1910
+1st District,Baungon,1701,1911
+3rd District,Baungon,1701,1912
+2nd District,Baungon,1701,1913
+2nd District,Cabanglasan,1702,1914
+3rd District,Damulog,1703,1915
+3rd District,Dangcagan,1704,1916
+3rd District,Don Carlos I,1705,1917
+2nd District,Impasug-Ong I,1706,1918
+3rd District,Kadingilan,1707,1919
+4th District,Kalilangan,1708,1920
+1st District,Kalilangan,1708,1921
+3rd District,Kibawe,1709,1922
+3rd District,Kitaotao I,1710,1923
+2nd District,Lantapan,1711,1924
+1st District,Libona,1712,1925
+1st District,Malitbog,1713,1926
+1st District,Manolo Fortich I,1714,1927
+2nd District,Manolo Fortich I,1714,1928
+3rd District,Maramag I,1715,1929
+4th District,Pangantucan,1716,1930
+1st District,Pangantucan,1716,1931
+3rd District,Quezon I,1717,1932
+3rd District,Quezon II,1718,1933
+2nd District,San Fernando I,1719,1934
+1st District,Sumilao,1720,1935
+1st District,Talakag I,1721,1936
+3rd District,Don Carlos II,1722,1937
+2nd District,Impasug-Ong II,1723,1938
+1st District,Manolo Fortich II,1724,1939
+3rd District,Maramag II,1725,1940
+3rd District,Maramag III,1726,1941
+1st District,Talakag II,1728,1942
+4th District,Talakag II,1728,1943
+3rd District,Kitaotao II,1729,1944
+4th District,Pangantucan South District,1730,1945
+1st District,Pangantucan South District,1730,1946
+Lone District,Catarman,1731,1947
+Lone District,Mahinog,1732,1948
+Lone District,Mambajao,1733,1949
+Lone District,Sagay-Guinsiliban,1734,1950
+1st District,Bacolod,2341,1951
+2nd District,Bacolod,2341,1952
+1st District,Baloi East,1736,1953
+1st District,Baloi West,1737,1954
+2nd District,Baloi West,1737,1955
+1st District,Baroy,1738,1956
+2nd District,Kapatagan East,1739,1957
+2nd District,Kapatagan West,1740,1958
+2nd District,Sultan Naga Dimaporo,1741,1959
+1st District,Kauswagan,1742,1960
+1st District,Kolambugan,1743,1961
+2nd District,Lala North,1744,1962
+2nd District,Lala South,1745,1963
+1st District,Linamon,1746,1964
+2nd District,Magsaysay,1747,1965
+1st District,Maigo,1748,1966
+1st District,Matungao,1749,1967
+2nd District,Pantao-Ragat,1750,1968
+1st District,Pantar,1751,1969
+2nd District,Salvador,1752,1970
+2nd District,Sapad - Nunungan,1753,1971
+1st District,Tagoloan,1790,1972
+2nd District,Tagoloan,1790,1973
+1st District,Tubod East,1755,1974
+1st District,Tubod West,1756,1975
+2nd District,Tangkal,1757,1976
+2nd District,Munai,1758,1977
+2nd District,Poonapiagapo,1759,1978
+1st District,Poonapiagapo,1759,1979
+1st District,Aloran,1760,1980
+1st District,Baliangao,1761,1981
+2nd District,Bonifacio East,1762,1982
+1st District,Calamba,1763,1983
+2nd District,Clarin North,1764,1984
+2nd District,Clarin South,1765,1985
+1st District,Concepcion,1766,1986
+2nd District,Don Victoriano,1767,1987
+1st District,Jimenez,1768,1988
+2nd District,Jimenez,1768,1989
+1st District,Lopez Jaena,1769,1990
+1st District,Panaon,1770,1991
+1st District,Plaridel North,1771,1992
+1st District,Sapang Dalaga,1772,1993
+2nd District,Sinacaban,1773,1994
+2nd District,Tudela,1774,1995
+1st District,Plaridel South,1775,1996
+2nd District,Bonifacio West,1776,1997
+2nd District,Alubijid,1777,1998
+1st District,Alubijid,1777,1999
+1st District,Balingasag North (Balingasag District),1778,2000
+2nd District,Claveria I (Claveria District),1779,2001
+2nd District,Initao,1780,2002
+2nd District,Jasaan,1781,2003
+1st District,Kinoguitan,1782,2004
+1st District,Lagonglong,1783,2005
+2nd District,Libertad,1784,2006
+1st District,Magsaysay I (Magsaysay District),1785,2007
+2nd District,Manticao,1786,2008
+1st District,Medina,1787,2009
+2nd District,Opol,1788,2010
+1st District,Salay,1789,2011
+1st District,Talisayan,1791,2012
+2nd District,Villanueva,1792,2013
+2nd District,Laguindingan,1793,2014
+2nd District,Lugait,1794,2015
+2nd District,Naawan,1795,2016
+1st District,Balingasag South (Balingasag District),1796,2017
+1st District,Sugbongcogon,1797,2018
+1st District,Magsaysay II (Magsaysay District),1798,2019
+2nd District,Magsaysay II (Magsaysay District),1798,2020
+2nd District,Claveria II (Claveria District),1799,2021
+2nd District,Cagayan de Oro City Central I District,1800,2022
+1st District,Cagayan de Oro City Central I District,1800,2023
+2nd District,Cagayan de Oro City East I District,1801,2024
+2nd District,Cagayan de Oro City East II District,1802,2025
+2nd District,Cagayan de Oro City North I District,1803,2026
+1st District,Cagayan de Oro City North II District,1804,2027
+2nd District,Cagayan de Oro City South District,1805,2028
+1st District,Cagayan de Oro City Southwest District I,1806,2029
+1st District,Cagayan de Oro City West I District,1807,2030
+1st District,Cagayan de Oro City West II District,1808,2031
+1st District,Cagayan de Oro City Southwest District II,1809,2032
+2nd District,Cagayan de Oro City Southwest District II,1809,2033
+1st District,Gingoog City East-1 District,1810,2034
+1st District,Gingoog City North-1 District,1811,2035
+1st District,Gingoog City South-1 District,1812,2036
+1st District,Gingoog City West-1 District,1813,2037
+1st District,Gingoog City North-2 District,1814,2038
+1st District,Gingoog City West-2 District,1815,2039
+1st District,Gingoog City North-3 District,1816,2040
+1st District,Gingoog City East-2 District,1817,2041
+1st District,Gingoog City West-3 District,1818,2042
+1st District,Gingoog City South-2 District,1819,2043
+Lone District,Iligan City East I District,1820,2044
+Lone District,Iligan City East II District,1821,2045
+Lone District,Iligan City Central District,1822,2046
+Lone District,Iligan City Northeast I - A District,1823,2047
+Lone District,Iligan City Northeast I - B District,1824,2048
+Lone District,Iligan City Northeast II - A District,1825,2049
+Lone District,Iligan City Northeast II - B District,1826,2050
+Lone District,Iligan City North I District,1827,2051
+Lone District,Iligan City North II District,1828,2052
+Lone District,Iligan City South I - A District,1829,2053
+Lone District,Iligan City South I - B District,1830,2054
+Lone District,Iligan City South II District,1831,2055
+Lone District,Iligan City West District,1832,2056
+2nd District,Ozamis City District I,1833,2057
+2nd District,Ozamis City District II,1834,2058
+2nd District,Ozamis City District III,1835,2059
+2nd District,Ozamis City District IV,1836,2060
+2nd District,Ozamis City Central District,1837,2061
+1st District,Central District I,1838,2062
+1st District,Central District II,1839,2063
+1st District,Southeast District I,1840,2064
+1st District,Southeast District II,1841,2065
+1st District,Southwest District,1842,2066
+1st District,Northwest District,2431,2067
+2nd District,Tangub Central District,1844,2068
+2nd District,Tangub North District,1845,2069
+2nd District,Tangub South District,1846,2070
+1st District,Tangub South District,1846,2071
+2nd District,Tangub Southwest District,1847,2072
+4th District,District I,2540,2073
+4th District,District II,2541,2074
+4th District,District III,2542,2075
+4th District,District V,1852,2076
+4th District,District VI,1853,2077
+4th District,District VII,1854,2078
+2nd District,Laak,1858,2079
+1st District,Laak,1858,2080
+2nd District,Maco North,1860,2081
+1st District,Maco North,1860,2082
+2nd District,Maco South,1861,2083
+1st District,Maragusan,1862,2084
+2nd District,Mawab,1863,2085
+1st District,Moncayo,1864,2086
+2nd District,Moncayo,1864,2087
+1st District,Montevista,1865,2088
+2nd District,Nabunturan East,1866,2089
+2nd District,Nabunturan West,1867,2090
+1st District,New Bataan,1868,2091
+2nd District,New Bataan,1868,2092
+2nd District,Pantukan,1869,2093
+1st District,Asuncion,1870,2094
+2nd District,Asuncion,1870,2095
+2nd District,Braulio Dujali,1871,2096
+1st District,Braulio Dujali,1871,2097
+2nd District,Carmen,2207,2098
+1st District,Kapalong East,1873,2099
+2nd District,Kapalong East,1873,2100
+1st District,Kapalong West,1874,2101
+1st District,New Corella,1875,2102
+2nd District,Sto. Tomas East,1876,2103
+2nd District,Sto. Tomas West,1877,2104
+1st District,Sto. Tomas West,1877,2105
+1st District,Talaingod,1878,2106
+2nd District,Talaingod,1878,2107
+1st District,Bansalan East,1880,2108
+1st District,Bansalan West,1881,2109
+1st District,Hagonoy I,1882,2110
+1st District,Hagonoy II,1883,2111
+2nd District,Kiblawan,1884,2112
+1st District,Kiblawan,1884,2113
+1st District,Magsaysay North,1885,2114
+1st District,Magsaysay South,1886,2115
+2nd District,Malalag,1887,2116
+1st District,Malalag,1887,2117
+1st District,Matanao I,1888,2118
+1st District,Matanao II,1889,2119
+1st District,Padada,1890,2120
+1st District,Sta. Cruz North,1891,2121
+1st District,Sta. Cruz South,1892,2122
+2nd District,Sulop,1893,2123
+1st District,Sulop,1893,2124
+1st District,Baganga North,1894,2125
+1st District,Baganga South,1895,2126
+1st District,Banaybanay,1896,2127
+2nd District,Banaybanay,1896,2128
+1st District,Boston,1897,2129
+1st District,Caraga North,1898,2130
+1st District,Caraga South,1899,2131
+1st District,Cateel I,1900,2132
+1st District,Cateel II,1901,2133
+2nd District,Gov. Generoso North,1902,2134
+1st District,Gov. Generoso North,1902,2135
+2nd District,Gov. Generoso South,1903,2136
+2nd District,Lupon East,1904,2137
+2nd District,Lupon West,1905,2138
+1st District,Manay,1906,2139
+2nd District,San Isidro North,1907,2140
+2nd District,San Isidro South,1908,2141
+1st District,Tarragona,1909,2142
+1st District,San Isidro North,1907,2143
+3rd District,Baguio,1910,2144
+1st District,Baguio,1910,2145
+2nd District,Baguio,1910,2146
+2nd District,Bangoy,1911,2147
+1st District,Bangoy,1911,2148
+3rd District,Binugao,1912,2149
+2nd District,Binugao,1912,2150
+2nd District,Buhangin,1913,2151
+1st District,Buhangin,1913,2152
+2nd District,Bunawan,1914,2153
+3rd District,Calinan,1915,2154
+3rd District,Daliaon,1916,2155
+2nd District,Daliaon,1916,2156
+1st District,Davao Central,1917,2157
+2nd District,Davao Central,1917,2158
+3rd District,General Roxas,1918,2159
+2nd District,Malabog,1919,2160
+3rd District,Marilog,1920,2161
+1st District,Matina,1921,2162
+2nd District,Paquibato,1922,2163
+3rd District,Piedad,1923,2164
+1st District,San Roque,1924,2165
+2nd District,Sta. Ana,1925,2166
+1st District,Talomo,1926,2167
+3rd District,Talomo,1926,2168
+3rd District,Tugbok,1927,2169
+1st District,Tugbok,1927,2170
+2nd District,Tibungco,1928,2171
+1st District,Maa,1929,2172
+3rd District,Maa,1929,2173
+1st District,Digos Occidental,1930,2174
+1st District,Digos Oriental,1931,2175
+1st District,Mt. Apo,1932,2176
+2nd District,Panabo Central,1933,2177
+2nd District,Panabo North,1934,2178
+2nd District,Panabo South,1935,2179
+1st District,Tagum City Central,1936,2180
+2nd District,Tagum City Central,1936,2181
+1st District,Tagum City North,1937,2182
+2nd District,Tagum City North,1937,2183
+1st District,Tagum City South,1938,2184
+2nd District,Babak,1939,2185
+2nd District,Kaputian,1940,2186
+2nd District,Samal,1941,2187
+2nd District,Mati Central,1942,2188
+1st District,Mati Central,1942,2189
+2nd District,Mati North,1943,2190
+2nd District,Mati South,1944,2191
+1st District,Don Marcelino,1945,2192
+Lone District,Don Marcelino,1945,2193
+2nd District,Don Marcelino,1945,2194
+Lone District,Jose Abad Santos,1946,2195
+1st District,Jose Abad Santos,1946,2196
+Lone District,Jose Abad Santos I,1947,2197
+1st District,Jose Abad Santos I,1947,2198
+1st District,Jose Abad Santos II,1948,2199
+1st District,Malita,1949,2200
+Lone District,Malita,1949,2201
+Lone District,Malita East,1950,2202
+1st District,Malita East,1950,2203
+1st District,Malita North,1951,2204
+Lone District,Malita North,1951,2205
+2nd District,Malita North,1951,2206
+Lone District,Malita South,1952,2207
+1st District,Malita South,1952,2208
+1st District,Malita West,1953,2209
+Lone District,Malita West,1953,2210
+1st District,Sarangani,1954,2211
+Lone District,Sarangani,1954,2212
+Lone District,Sta. Maria,1955,2213
+1st District,Sta. Maria East,1956,2214
+Lone District,Sta. Maria East,1956,2215
+Lone District,Sta. Maria West,1957,2216
+1st District,Sta. Maria West,1957,2217
+1st District,Alamada East,1958,2218
+2nd District,Alamada East,1958,2219
+1st District,Alamada North,1959,2220
+1st District,Aleosan East,2440,2221
+2nd District,Antipas,1961,2222
+2nd District,Arakan East,1962,2223
+1st District,Banisilan North,1963,2224
+3rd District,Banisilan North,1963,2225
+2nd District,Banisilan North,1963,2226
+3rd District,Carmen North,2441,2227
+1st District,Carmen North,2441,2228
+3rd District,Carmen South,2442,2229
+1st District,Carmen South,2442,2230
+1st District,Kabacan North,2443,2231
+3rd District,Kabacan North,2443,2232
+1st District,Kabacan South,1967,2233
+3rd District,Kabacan South,1967,2234
+3rd District,Kabacan West,2444,2235
+1st District,Libungan East,1969,2236
+1st District,Libungan West,1970,2237
+2nd District,Magpet  East,1971,2238
+3rd District,Magpet  East,1971,2239
+2nd District,Magpet West,1972,2240
+2nd District,Makilala Central,1973,2241
+2nd District,Makilala East,1974,2242
+2nd District,Makilala West,1975,2243
+3rd District,Matalam North,1976,2244
+2nd District,Matalam North,1976,2245
+1st District,Matalam North,1976,2246
+2nd District,Matalam South,1977,2247
+3rd District,Matalam South,1977,2248
+1st District,Midsayap Central,1978,2249
+1st District,Midsayap North,2445,2250
+1st District,Midsayap South,1980,2251
+1st District,Midsayap West,2446,2252
+3rd District,M'Lang  East,1982,2253
+2nd District,M'Lang  East,1982,2254
+3rd District,M'Lang Central,1983,2255
+2nd District,M'Lang Central,1983,2256
+3rd District,M'Lang North,1984,2257
+2nd District,M'Lang North,1984,2258
+3rd District,M'Lang South,1985,2259
+2nd District,M'Lang South,1985,2260
+1st District,Pigcawayan North,2447,2261
+1st District,Pigcawayan South,2448,2262
+1st District,Pikit North,2449,2263
+1st District,Pikit South,2450,2264
+1st District,Pikit West,2451,2265
+2nd District,President Roxas North,1991,2266
+2nd District,President Roxas South,1992,2267
+2nd District,Tulunan North,1993,2268
+3rd District,Tulunan North,1993,2269
+3rd District,Tulunan South,1994,2270
+2nd District,Tulunan South,1994,2271
+3rd District,Banisilan South,1995,2272
+1st District,Banisilan South,1995,2273
+2nd District,Arakan West,1996,2274
+1st District,Aleosan West,2452,2275
+2nd District,Matalam Central,1998,2276
+3rd District,Matalam Central,1998,2277
+1st District,Pikit East,2453,2278
+1st District,Banisilan West,2000,2279
+3rd District,Banisilan West,2000,2280
+1st District,Alamada West,2001,2281
+2nd District,Arakan North,2002,2282
+1st District,Pigcawayan West,2454,2283
+3rd District,Matalam West,2004,2284
+2nd District,Matalam West,2004,2285
+1st District,Midsayap South-West,2455,2286
+2nd District,Makilala North,2006,2287
+2nd District,President Roxas Central,2007,2288
+2nd District,Tulunan East,2008,2289
+3rd District,Tulunan East,2008,2290
+Lone District,East Alabel,2009,2291
+Lone District,Central Glan,2010,2292
+Lone District,East Kiamba,2011,2293
+Lone District,East Maasim,2012,2294
+Lone District,East Maitum,2013,2295
+Lone District,Malapatan I,2014,2296
+Lone District,North Malungon,2015,2297
+Lone District,South Malungon,2016,2298
+Lone District,West Alabel,2017,2299
+Lone District,East Malungon,2018,2300
+Lone District,North Glan - Cluster A,2019,2301
+Lone District,West Kiamba,2020,2302
+Lone District,Southwest Alabel,2021,2303
+Lone District,South Glan - Cluster A,2022,2304
+Lone District,West Maasim,2023,2305
+Lone District,West Maitum,2024,2306
+Lone District,Malapatan II,2025,2307
+Lone District,Malapatan III,2026,2308
+Lone District,West Malungon,2027,2309
+Lone District,North Glan - Cluster B,2028,2310
+Lone District,North Glan,2029,2311
+Lone District,South Glan,2030,2312
+2nd District,Banga East,2031,2313
+1st District,Banga East,2031,2314
+2nd District,Banga North,2032,2315
+2nd District,Banga South,2033,2316
+2nd District,Lake Sebu East,2034,2317
+2nd District,Norala,2035,2318
+1st District,Polomolok East,2036,2319
+2nd District,Polomolok East,2036,2320
+1st District,Polomolok West,2037,2321
+2nd District,Sto. Niño,2038,2322
+2nd District,Surallah Central,2039,2323
+1st District,Surallah Central,2039,2324
+2nd District,Surallah North,2040,2325
+2nd District,Surallah South,2041,2326
+2nd District,T ' Boli East,2042,2327
+1st District,Tampakan,2043,2328
+2nd District,Tantangan,2044,2329
+1st District,Tantangan,2044,2330
+1st District,Tupi North,2045,2331
+2nd District,Tupi North,2045,2332
+1st District,Tupi South,2046,2333
+2nd District,Tupi South,2046,2334
+2nd District,Lake Sebu West,2047,2335
+2nd District,T ' Boli West,2048,2336
+2nd District,Bagumbayan I,2049,2337
+1st District,Bagumbayan I,2049,2338
+2nd District,Bagumbayan II,2050,2339
+1st District,Bagumbayan II,2050,2340
+2nd District,Bagumbayan III,2051,2341
+1st District,Bagumbayan III,2051,2342
+1st District,Columbio I,2052,2343
+1st District,Columbio II,2053,2344
+2nd District,Esperanza I,2126,2345
+1st District,Esperanza I,2126,2346
+2nd District,Esperanza II,2127,2347
+1st District,Esperanza II,2127,2348
+1st District,Isulan Central,2056,2349
+1st District,Isulan East,2057,2350
+1st District,Isulan West,2058,2351
+2nd District,Kalamansig I,2059,2352
+1st District,Kalamansig I,2059,2353
+2nd District,Kalamansig II,2060,2354
+2nd District,Kulaman I (Sen. N. Aquino),2061,2355
+1st District,Kulaman I (Sen. N. Aquino),2061,2356
+2nd District,Kulaman II,2062,2357
+1st District,Kulaman II,2062,2358
+1st District,Lambayong I,2063,2359
+1st District,Lambayong II,2064,2360
+1st District,Lambayong III,2065,2361
+2nd District,Lebak East,2066,2362
+1st District,Lebak East,2066,2363
+2nd District,Lebak Central,2067,2364
+2nd District,Lebak West,2068,2365
+1st District,Lebak West,2068,2366
+1st District,Lutayan I,2069,2367
+2nd District,Palimbang I,2070,2368
+1st District,Palimbang I,2070,2369
+2nd District,Palimbang II,2071,2370
+1st District,Pres. Quirino North,2072,2371
+1st District,Pres. Quirino South,2073,2372
+1st District,Isulan South,2074,2373
+1st District,Lutayan II,2075,2374
+2nd District,Esperanza III,2148,2375
+1st District,General Santos City North District,2077,2376
+1st District,General Santos City West District,2078,2377
+1st District,General Santos City South District,2079,2378
+1st District,Bula,2080,2379
+1st District,Cahilsot,2081,2380
+1st District,Buayan,2082,2381
+1st District,Pedro Acharon,2083,2382
+1st District,South Fatima,2084,2383
+1st District,Katangawan,2085,2384
+1st District,North Fatima,2086,2385
+1st District,Tambler,2087,2386
+1st District,Acharon,2088,2387
+1st District,Apopong,2089,2388
+1st District,Labangal,2090,2389
+1st District,Conel,2091,2390
+2nd District,Kidapawan City District I,2092,2391
+2nd District,Kidapawan City District II,2093,2392
+2nd District,Kidapawan City District III,2094,2393
+1st District,Kidapawan City District III,2094,2394
+2nd District,Kidapawan City District IV,2095,2395
+2nd District,Kidapawan City District V,2096,2396
+2nd District,Koronadal East District I,2097,2397
+2nd District,Koronadal South District I,2098,2398
+2nd District,Koronadal West District I,2099,2399
+2nd District,Koronadal East District II,2100,2400
+2nd District,Koronadal South District II,2101,2401
+2nd District,Koronadal West District II,2102,2402
+1st District,Tacurong East,2103,2403
+1st District,Tacurong North,2104,2404
+1st District,Tacurong West,2105,2405
+1st District,Tacurong Central,2106,2406
+1st District,Tacurong South,2107,2407
+2nd District,Jabonga I,2109,2408
+2nd District,Kitcharao,2110,2409
+1st District,Las Nieves East,2111,2410
+2nd District,Magallanes,2112,2411
+2nd District,Nasipit East,2113,2412
+2nd District,Buenavista I,2114,2413
+2nd District,R.T. Romualdez,2115,2414
+2nd District,Buenavista II,2117,2415
+2nd District,Tubay I,2118,2416
+1st District,Las Nieves West,2119,2417
+2nd District,Nasipit West,2120,2418
+2nd District,Buenavista III,2121,2419
+2nd District,Jabonga II,2122,2420
+2nd District,Tubay II,2123,2421
+2nd District,Buenavista IV,2124,2422
+2nd District,Bunawan I,2125,2423
+Lone District,Bunawan I,2125,2424
+Lone District,Esperanza I,2126,2425
+2nd District,Loreto North,2128,2426
+1st District,Loreto North,2128,2427
+2nd District,La Paz I,2129,2428
+Lone District,La Paz I,2129,2429
+1st District,Prosperidad I,2130,2430
+Lone District,Prosperidad I,2130,2431
+2nd District,Prosperidad I,2130,2432
+1st District,Prosperidad II,2131,2433
+2nd District,Rosario I,2132,2434
+1st District,Rosario I,2132,2435
+Lone District,Rosario I,2132,2436
+2nd District,San Francisco I,2133,2437
+Lone District,San Francisco I,2133,2438
+2nd District,San Francisco II,2134,2439
+Lone District,San Francisco II,2134,2440
+1st District,Sibagat I,2135,2441
+2nd District,Sibagat I,2135,2442
+Lone District,Sibagat I,2135,2443
+2nd District,Veruela I,2136,2444
+2nd District,Sta. Josefa,2137,2445
+1st District,San Luis I,2138,2446
+Lone District,San Luis I,2138,2447
+1st District,Talacogon East,2139,2448
+2nd District,Trento I,2140,2449
+Lone District,Trento I,2140,2450
+2nd District,Loreto South,2141,2451
+1st District,Prosperidad III,2142,2452
+Lone District,Prosperidad III,2142,2453
+1st District,Sibagat II,2143,2454
+2nd District,Sibagat II,2143,2455
+1st District,San Luis II,2144,2456
+1st District,Talacogon West,2145,2457
+Lone District,Talacogon West,2145,2458
+2nd District,Trento II,2146,2459
+2nd District,Bunawan II,2147,2460
+1st District,Esperanza III,2148,2461
+2nd District,La Paz II,2149,2462
+2nd District,Veruela II,2150,2463
+2nd District,Rosario II,2151,2464
+2nd District,San Francisco III,2152,2465
+Lone District,San Francisco III,2152,2466
+1st District,Prosperidad IV,2153,2467
+2nd District,San Francisco IV,2154,2468
+Lone District,San Francisco IV,2154,2469
+Lone District,Curriculum Implementation Division (Agusan del Sur Division),2155,2470
+1st District,Central Butuan District I,2156,2471
+1st District,Central Butuan District II,2157,2472
+1st District,East Butuan District I,2158,2473
+2nd District,East Butuan District I,2158,2474
+1st District,North Butuan District,2159,2475
+1st District,Northwest Butuan District,2160,2476
+1st District,Southeast I Butuan District,2161,2477
+1st District,South Butuan District I,2162,2478
+1st District,Southwest Butuan District,2163,2479
+1st District,West Butuan District I,2164,2480
+1st District,East Butuan District II,2165,2481
+1st District,South Butuan District II,2166,2482
+1st District,West Butuan District II,2167,2483
+1st District,Southeast II Butuan District,2168,2484
+1st District,Dapa East,2169,2485
+1st District,Dapa West,2170,2486
+1st District,General Luna,2171,2487
+1st District,Numancia East,2172,2488
+1st District,Sapao,2175,2489
+1st District,Socorro East District,2177,2490
+1st District,San Benito,2178,2491
+1st District,Socorro West District,2179,2492
+1st District,Numancia West,2180,2493
+2nd District,Surigao City District I,2181,2494
+1st District,Surigao City District I,2181,2495
+2nd District,Surigao City District II,2182,2496
+2nd District,Surigao City District III,2183,2497
+2nd District,Surigao City District IV,2184,2498
+2nd District,Surigao City District V,2185,2499
+2nd District,Surigao City District VI,2186,2500
+2nd District,Surigao City District VII,2187,2501
+2nd District,Surigao City District VIII,2188,2502
+2nd District,Anao-Aon,2190,2503
+2nd District,Bacuag,2191,2504
+2nd District,Claver,2192,2505
+2nd District,Gigaquit,2193,2506
+2nd District,Mainit I,2194,2507
+2nd District,Malimono,2195,2508
+2nd District,Placer I,2196,2509
+2nd District,Sison,2197,2510
+2nd District,Tagana-An,2198,2511
+2nd District,Tubod,2199,2512
+2nd District,Mainit II,2200,2513
+2nd District,Placer II,2201,2514
+2nd District,Barobo I,2202,2515
+1st District,Barobo I,2202,2516
+1st District,Bayabas,2203,2517
+1st District,Cagwait,2204,2518
+1st District,Cantilan I,2205,2519
+1st District,Cantilan II,2206,2520
+1st District,Carrascal,2208,2521
+2nd District,Hinatuan South,2210,2522
+1st District,Lanuza,2211,2523
+1st District,Lianga,2212,2524
+2nd District,Lianga,2212,2525
+2nd District,Lingig I,2213,2526
+1st District,Lingig I,2213,2527
+1st District,Madrid,2214,2528
+1st District,Marihatag,2215,2529
+1st District,San Agustin,2216,2530
+1st District,San Miguel I,2217,2531
+2nd District,Tagbina I,2218,2532
+1st District,Tago I,2219,2533
+2nd District,Hinatuan North,2220,2534
+2nd District,Barobo II,2221,2535
+2nd District,Lingig II,2222,2536
+1st District,San Miguel II,2223,2537
+1st District,Tago II,2224,2538
+2nd District,Tagbina II,2225,2539
+2nd District,Bislig City I,2226,2540
+2nd District,Bislig City II,2227,2541
+2nd District,Mangagoy I,2228,2542
+2nd District,Mangagoy II,2229,2543
+Lone District,Albor,2230,2544
+Lone District,Cagdianao,2231,2545
+Lone District,Dinagat,2232,2546
+Lone District,Loreto,2233,2547
+Lone District,Tubajon,2236,2548
+Lone District,Rizal II,2237,2549
+1st District,Bayugan East,2238,2550
+Lone District,Bayugan East,2238,2551
+1st District,Bayugan Central,2239,2552
+1st District,Bayugan West,2240,2553
+2nd District,Bayugan West,2240,2554
+1st District,Bayugan North,2241,2555
+1st District,Bayugan South,2242,2556
+2nd District,North Cabadbaran,2243,2557
+2nd District,South Cabadbaran,2244,2558
+2nd District,Northwest Cabadbaran,2245,2559
+2nd District,Southeast Cabadbaran,2246,2560
+1st District,Tandag I,2247,2561
+1st District,Tandag II,2248,2562
+2nd District,Talitay,2249,2563
+1st District,Barira South,2250,2564
+2nd District,Barira South,2250,2565
+1st District,Buldon West,2251,2566
+1st District,DOS North,2252,2567
+2nd District,DOS North,2252,2568
+1st District,DOS South,2253,2569
+2nd District,DOS South,2253,2570
+1st District,Kabuntalan North,2254,2571
+1st District,Matanog,2255,2572
+1st District,Parang North,2256,2573
+2nd District,Parang North,2256,2574
+1st District,Parang South,2257,2575
+2nd District,Parang South,2257,2576
+1st District,Sultan Kudarat I,2258,2577
+2nd District,Sultan Kudarat I,2258,2578
+1st District,Sultan Kudarat II,2259,2579
+2nd District,Sultan Kudarat II,2259,2580
+1st District,Upi North,2260,2581
+2nd District,Upi North,2260,2582
+1st District,Upi West,2261,2583
+1st District,Buldon East,2262,2584
+1st District,Inter Parang,2263,2585
+2nd District,Inter Parang,2263,2586
+1st District,Sultan Mastura,2264,2587
+1st District,Barira North,2265,2588
+1st District,Kabuntalan South,2266,2589
+1st District,Parang Bongo,2267,2590
+1st District,Datu Blah Sinsuat,2268,2591
+1st District,Barira,2269,2592
+1st District,Cotabato City District I,2270,2593
+2nd District,Cotabato City District I,2270,2594
+1st District,Cotabato City District II,2271,2595
+1st District,Cotabato City District III,2272,2596
+1st District,Cotabato City District IV,2273,2597
+1st District,Cotabato City District V,2274,2598
+1st District,Cotabato City District VI,2275,2599
+1st District,Cotabato City District VII,2276,2600
+1st District,Cotabato City District VIII,2277,2601
+Lone District,Lantawan,2278,2602
+Lone District,Maluso East,2279,2603
+Lone District,Maluso West,2280,2604
+Lone District,Pilas,2281,2605
+Lone District,Sumisip South,2282,2606
+Lone District,Sumisip North,2283,2607
+Lone District,Sumisip East,2284,2608
+Lone District,Tipo-Tipo East,2285,2609
+Lone District,Tipo-Tipo West,2286,2610
+Lone District,Tuburan,2287,2611
+1st District,Lumba-Bayabao I,2288,2612
+1st District,Lumba-Bayabao II,2289,2613
+1st District,Lumba-Bayabao III,2290,2614
+1st District,Maguing,2291,2615
+1st District,Masiu I,2292,2616
+1st District,Masiu A District,2293,2617
+1st District,Mulondo,2294,2618
+1st District,Poona-Bayabao North,2295,2619
+1st District,Tamparan District,2296,2620
+1st District,Tamparan I,2297,2621
+1st District,Wao I,2298,2622
+1st District,Wao II,2299,2623
+1st District,Bumbaran,2300,2624
+1st District,South Wao District,2301,2625
+1st District,Poona-Bayabao South,2302,2626
+1st District,Poona-Bayabao West,2303,2627
+1st District,Maguing II,2304,2628
+1st District,Masiu B District,2305,2629
+1st District,Balindong I,2306,2630
+2nd District,Balindong I,2306,2631
+1st District,Balindong II,2307,2632
+2nd District,Balindong II,2307,2633
+1st District,Bubong I,2308,2634
+1st District,Bubong II,2309,2635
+1st District,Buadipuso-Buntong,2310,2636
+1st District,Ditsaan Ramain I,2311,2637
+1st District,Ditsaan Ramain II,2312,2638
+1st District,Ditsaan Ramain III,2313,2639
+1st District,Kapai/Tagoloan,2314,2640
+1st District,Marantao I,2315,2641
+1st District,Marantao II,2316,2642
+1st District,Piagapo West,2317,2643
+1st District,Saguiaran I,2318,2644
+1st District,Saguiaran II,2319,2645
+1st District,Saguiaran III,2320,2646
+1st District,Taraka I,2321,2647
+1st District,Taraka II,2322,2648
+1st District,Piagapo East,2323,2649
+1st District,Masiu II,2324,2650
+2nd District,North Balabagan,2325,2651
+1st District,North Balabagan,2325,2652
+2nd District,South Balabagan,2326,2653
+2nd District,Kapatagan,2327,2654
+1st District,Kapatagan,2327,2655
+2nd District,West Ganassi,2328,2656
+2nd District,South Madalum,2329,2657
+2nd District,North Madalum,2330,2658
+2nd District,Upper Madamba,2331,2659
+2nd District,Lower Madamba,2332,2660
+2nd District,North Malabang,2333,2661
+2nd District,South Malabang,2334,2662
+2nd District,Calanogas,2335,2663
+2nd District,Pagayawan,2336,2664
+2nd District,Sultan Gumander,2337,2665
+2nd District,East Ganassi,2338,2666
+2nd District,Central Ganassi,2339,2667
+2nd District,Kalawi,2340,2668
+2nd District,Upper Bayang,2342,2669
+2nd District,Lower Bayang,2343,2670
+2nd District,Binidayan,2344,2671
+2nd District,Butig,2345,2672
+2nd District,Lumbatan I,2346,2673
+2nd District,Lumbatan II,2347,2674
+2nd District,Lumbayanague I,2348,2675
+2nd District,Marogong,2349,2676
+2nd District,North Pualas,2350,2677
+2nd District,South Pualas,2351,2678
+2nd District,Tubaran,2352,2679
+2nd District,East Tugaya,2353,2680
+2nd District,West Tugaya,2354,2681
+2nd District,Sultan Dumalondong,2355,2682
+2nd District,Diwan,2356,2683
+2nd District,Lumbaca Unayan,2357,2684
+2nd District,Central Tugaya,2358,2685
+2nd District,Lumbayanague II,2359,2686
+2nd District,Ampatuan,2360,2687
+2nd District,Buluan,2361,2688
+1st District,Buluan,2361,2689
+2nd District,Datu Paglas South,2362,2690
+1st District,Datu Paglas South,2362,2691
+2nd District,Datu Piang I,2363,2692
+1st District,Datu Piang I,2363,2693
+2nd District,Shariff Aguak,2364,2694
+1st District,Shariff Aguak,2364,2695
+2nd District,Datu Montawal(Pagagawan),2365,2696
+1st District,Datu Montawal(Pagagawan),2365,2697
+1st District,Pagalungan,2366,2698
+2nd District,Pagalungan,2366,2699
+1st District,Gen. S. K. Pendatun,2367,2700
+2nd District,Gen. S. K. Pendatun,2367,2701
+2nd District,Mamasapano,2368,2702
+1st District,Mamasapano,2368,2703
+2nd District,Sultan Sa Barongis,2369,2704
+2nd District,Talayan,2370,2705
+1st District,Talayan,2370,2706
+2nd District,South Upi,2371,2707
+1st District,South Upi,2371,2708
+2nd District,Paglat,2372,2709
+2nd District,Datu Paglas North,2373,2710
+2nd District,Datu Saudi Uy Ampatuan,2374,2711
+1st District,Datu Saudi Uy Ampatuan,2374,2712
+2nd District,Guindulungan,2375,2713
+1st District,Guindulungan,2375,2714
+2nd District,Datu Unsay,2376,2715
+2nd District,Datu Abdullah Sangki,2377,2716
+2nd District,Rajah Buayan,2378,2717
+1st District,Rajah Buayan,2378,2718
+2nd District,Datu Piang II,2379,2719
+2nd District,Datu Anggal,2380,2720
+1st District,Datu Anggal,2380,2721
+2nd District,Mangudadatu,2381,2722
+1st District,Mangudadatu,2381,2723
+2nd District,Pandag,2382,2724
+2nd District,Shariff Saydona Mustapha,2383,2725
+1st District,Shariff Saydona Mustapha,2383,2726
+2nd District,Datu Salibo,2384,2727
+1st District,Datu Salibo,2384,2728
+2nd District,Datu Hoffer Ampatuan,2385,2729
+2nd District,Mamasapano North,2386,2730
+2nd District,Datu Paglas East,2387,2731
+1st District,Indanan,2388,2732
+1st District,Jolo I,2389,2733
+1st District,Jolo II,2390,2734
+1st District,Jolo III,2391,2735
+1st District,Jolo IV,2392,2736
+1st District,Maimbung,2393,2737
+1st District,Pangutaran,2394,2738
+1st District,Parang,2395,2739
+1st District,Patikul,2396,2740
+1st District,Talipao,2397,2741
+2nd District,Laminusa,2398,2742
+2nd District,Lugus,2399,2743
+2nd District,Luuk (Kalinggalan Calauang),2400,2744
+2nd District,Pata,2401,2745
+2nd District,Panamao,2402,2746
+2nd District,Siasi I,2403,2747
+2nd District,Siasi II,2404,2748
+2nd District,Sibaud,2405,2749
+2nd District,Tapul,2406,2750
+2nd District,Tongkil,2407,2751
+Lone District,Panglima Sugala (Balimbingan),2408,2752
+Lone District,Bongao I,2409,2753
+Lone District,Bongao II,2410,2754
+Lone District,Mapun,2411,2755
+Lone District,Languyan,2412,2756
+Lone District,Sapa-Sapa I,2413,2757
+Lone District,Sapa-Sapa II (Banaran),2414,2758
+Lone District,East Sibutu I (Tando Owak),2415,2759
+Lone District,East Sibutu II (Tandubanak),2416,2760
+Lone District,West Sibutu/Sitangkai,2417,2761
+Lone District,Manukmangkaw,2418,2762
+Lone District,West Simunul,2419,2763
+Lone District,East South Ubian,2420,2764
+Lone District,West South Ubian,2421,2765
+Lone District,Tandubas,2422,2766
+Lone District,Tubig Indangan,2423,2767
+Lone District,Bongao Central,2424,2768
+Lone District,Bongao III,2425,2769
+1st District,Central District,2426,2770
+1st District,Northeast-I District,2428,2771
+1st District,Angoyao District,2432,2772
+1st District,Northeast -II District,2433,2773
+1st District,Angoyao East District,2434,2774
+Lone District,Lamitan East,2435,2775
+Lone District,Lamitan Central,2436,2776
+Lone District,Lamitan West I,2437,2777
+Lone District,Lamitan West II,2438,2778
+Lone District,Lamitan South,2439,2779
+1st District,Kabacan West,2444,2780
+3rd District,(No District) - For SGA Division,2456,2781
+1st District,(No District) - For SGA Division,2456,2782
+Lone District,Bangued East,2457,2783
+Lone District,Bangued West,2458,2784
+Lone District,Bucay,2459,2785
+Lone District,Dolores,2460,2786
+Lone District,La Paz,2461,2787
+Lone District,Lagangilang,2462,2788
+Lone District,Luba,2463,2789
+Lone District,Pennarubia,2464,2790
+Lone District,Pidigan,2465,2791
+Lone District,Pilar,2466,2792
+Lone District,Sallapadan,2467,2793
+Lone District,Manabo,2469,2794
+Lone District,Tayum,2470,2795
+Lone District,Lacub,2471,2796
+Lone District,Baay-Licuan,2472,2797
+Lone District,Malibcong,2473,2798
+Lone District,Danglas,2474,2799
+Lone District,Tubo,2475,2800
+Lone District,San Isidro,2476,2801
+Lone District,Langiden,2477,2802
+Lone District,San Quintin,2478,2803
+Lone District,Villaviciosa,2479,2804
+Lone District,Boliney,2480,2805
+Lone District,Bucloc,2481,2806
+Lone District,Daguioman,2482,2807
+Lone District,Lagayan,2483,2808
+Lone District,Tineg,2484,2809
+Lone District,Calanasan,2485,2810
+Lone District,Northern Conner,2486,2811
+Lone District,Flora,2487,2812
+Lone District,Kabugao,2488,2813
+Lone District,Luna,2489,2814
+Lone District,Pudtol,2490,2815
+Lone District,Sta. Marcela,2491,2816
+Lone District,Southern Conner,2492,2817
+Lone District,Atok,2493,2818
+Lone District,Bakun,2494,2819
+2nd District,Bakun,2494,2820
+Lone District,Bokod,2495,2821
+Lone District,Buguias,2496,2822
+Lone District,Itogon I,2497,2823
+Lone District,Itogon II,2498,2824
+Lone District,Kabayan,2499,2825
+Lone District,Kapangan,2500,2826
+Lone District,Kibungan,2501,2827
+Lone District,La Trinidad,2502,2828
+2nd District,La Trinidad,2502,2829
+Lone District,Mankayan,2503,2830
+2nd District,Mankayan,2503,2831
+Lone District,Sablan,2504,2832
+Lone District,Tuba,2505,2833
+Lone District,Tublay,2506,2834
+Lone District,Aguinaldo,2507,2835
+Lone District,Alfonso Lista I,2508,2836
+Lone District,Asipulo,2509,2837
+Lone District,Banaue,2510,2838
+Lone District,Hingyon,2511,2839
+Lone District,Hungduan,2512,2840
+Lone District,Kiangan,2513,2841
+Lone District,Lagawe,2514,2842
+Lone District,Lamut,2515,2843
+Lone District,Mayoyao,2516,2844
+Lone District,Tinoc,2517,2845
+Lone District,Alfonso Lista II,2518,2846
+Lone District,Balbalan,2519,2847
+Lone District,Lubuagan,2520,2848
+Lone District,Pasil,2521,2849
+Lone District,Northern Pinukpuk,2522,2850
+Lone District,Upper Tanudan,2524,2851
+Lone District,Tinglayan,2525,2852
+Lone District,Southern Pinukpuk,2526,2853
+Lone District,Lower Tanudan,2527,2854
+Lone District,Barlig,2528,2855
+Lone District,Bauko I,2529,2856
+Lone District,Besao,2530,2857
+Lone District,Bontoc,2531,2858
+Lone District,Natonin,2532,2859
+Lone District,Paracelis,2533,2860
+Lone District,Sabangan,2534,2861
+Lone District,Sadanga,2535,2862
+Lone District,Sagada,2536,2863
+Lone District,Tadian I,2537,2864
+Lone District,Bauko II,2538,2865
+Lone District,Tadian II,2539,2866
+Lone District,District I,2540,2867
+Lone District,District II,2541,2868
+Lone District,District III,2542,2869
+Lone District,Nothern  Tabuk District I,2543,2870
+Lone District,Southern Tabuk District I,2544,2871
+Lone District,Western Tabuk District I,2545,2872
+Lone District,Eastern Tabuk District I,2546,2873
+Lone District,Eastern Tabuk District II,2547,2874
+Lone District,Eastern Tabuk District III,2548,2875
+Lone District,Nothern  Tabuk District II,2549,2876
+Lone District,Southern Tabuk District II,2550,2877
+Lone District,Southern Tabuk District III,2551,2878
+Lone District,Western Tabuk District II,2552,2879
+Lone District,San Juan District I,2553,2880
+Lone District,San Juan District II,2554,2881
+Lone District,Navotas District I,2555,2882
+Lone District,Navotas District II,2556,2883
+2nd District,Tondo I,2557,2884
+5th District,Tondo I,2557,2885
+4th District,Tondo I,2557,2886
+1st District,Tondo I,2557,2887
+3rd District,Tondo I,2557,2888
+6th District,Tondo I,2557,2889
+2nd District,Tondo II,2558,2890
+3rd District,Tondo III,2559,2891
+2nd District,Tondo III,2559,2892
+2nd District,Tondo IV,2560,2893
+1st District,Tondo IV,2560,2894
+2nd District,Tondo V,2561,2895
+1st District,Tondo VI,2562,2896
+1st District,Tondo VII,2563,2897
+1st District,Tondo VIII,2564,2898
+1st District,Tondo IX,2565,2899
+1st District,Tondo X,2566,2900
+1st District,Tondo XI,2567,2901
+1st District,Tondo XII,2568,2902
+1st District,Tondo XIII,2569,2903
+2nd District,Tondo XIV,2570,2904
+3rd District,Sta. Cruz I,2571,2905
+3rd District,Sta. Cruz II,2572,2906
+3rd District,Sta. Cruz III,2573,2907
+3rd District,Sta. Cruz IV,2574,2908
+6th District,Sta. Cruz V,2575,2909
+3rd District,Sta. Cruz V,2575,2910
+4th District,Sampaloc I,2577,2911
+5th District,Sampaloc I,2577,2912
+6th District,Sampaloc I,2577,2913
+4th District,Sampaloc II,2578,2914
+4th District,Sampaloc III,2579,2915
+4th District,Sampaloc IV,2580,2916
+4th District,Sampaloc V,2581,2917
+6th District,Sampaloc V,2581,2918
+4th District,Sampaloc VI,2582,2919
+6th District,Sampaloc VI,2582,2920
+4th District,Sampaloc VII,2583,2921
+6th District,Sampaloc VIII,2584,2922
+4th District,Sampaloc VIII,2584,2923
+6th District,Sampaloc IX,2585,2924
+5th District,Paco I,2586,2925
+5th District,Paco II,2587,2926
+6th District,Paco II,2587,2927
+5th District,Singalong,2588,2928
+5th District,Malate,2589,2929
+4th District,Malate,2589,2930
+5th District,San Andres,2590,2931
+6th District,Pandacan I,2591,2932
+6th District,Pandacan II,2592,2933
+5th District,Sta. Ana I,2593,2934
+6th District,Sta. Ana I,2593,2935
+6th District,Sta. Ana II,2594,2936
+5th District,Sta. Ana II,2594,2937
+6th District,Sta. Ana III,2595,2938
+5th District,Sta. Ana III,2595,2939
+1st District,School District I,2596,2940
+3rd District,School District I,2596,2941
+5th District,School District I,2596,2942
+6th District,School District I,2596,2943
+2nd District,School District I,2596,2944
+4th District,School District I,2596,2945
+1st District,School District II,2597,2946
+2nd District,School District II,2597,2947
+4th District,School District II,2597,2948
+1st District,School District III,2598,2949
+3rd District,School District III,2598,2950
+1st District,School District IV,2599,2951
+4th District,School District IV,2599,2952
+5th District,School District IV,2599,2953
+1st District,School District V,2600,2954
+2nd District,School District V,2600,2955
+5th District,School District V,2600,2956
+2nd District,School District VI,2601,2957
+6th District,School District VI,2601,2958
+5th District,School District VI,2601,2959
+2nd District,School District VII,2602,2960
+6th District,School District VII,2602,2961
+3rd District,School District VIII,2603,2962
+5th District,School District VIII,2603,2963
+6th District,School District VIII,2603,2964
+2nd District,School District VIII,2603,2965
+3rd District,School District IX,2604,2966
+5th District,School District IX,2604,2967
+2nd District,School District IX,2604,2968
+6th District,School District IX,2604,2969
+4th District,School District IX,2604,2970
+3rd District,School District X,2605,2971
+5th District,School District X,2605,2972
+2nd District,School District X,2605,2973
+4th District,School District X,2605,2974
+6th District,School District X,2605,2975
+3rd District,School District XI,2606,2976
+2nd District,School District XI,2606,2977
+5th District,School District XI,2606,2978
+4th District,School District XII,2607,2979
+3rd District,School District XII,2607,2980
+4th District,School District XIII,2608,2981
+3rd District,School District XIII,2608,2982
+4th District,School District XIV,2609,2983
+3rd District,School District XIV,2609,2984
+4th District,School District XV,2610,2985
+3rd District,School District XV,2610,2986
+5th District,School District XV,2610,2987
+5th District,School District XVI,2611,2988
+4th District,School District XVI,2611,2989
+1st District,School District XVI,2611,2990
+2nd District,School District XVI,2611,2991
+5th District,School District XVII,2612,2992
+4th District,School District XVII,2612,2993
+6th District,School District XVII,2612,2994
+5th District,School District XVIII,2613,2995
+4th District,School District XVIII,2613,2996
+2nd District,School District XVIII,2613,2997
+3rd District,School District XVIII,2613,2998
+6th District,School District XIX,2614,2999
+4th District,School District XIX,2614,3000
+5th District,School District XIX,2614,3001
+3rd District,School District XIX,2614,3002
+6th District,School District XX,2615,3003
+Lone District,Pasay City North District,2616,3004
+1st District,Pasay City North District,2616,3005
+Lone District,Pasay City South District,2617,3006
+Lone District,Pasay City East District,2618,3007
+Lone District,Pasay City West District,2619,3008
+2nd District,Aromar (Aromahan-Marulas),2620,3009
+1st District,Aromar (Aromahan-Marulas),2620,3010
+2nd District,Pobcaran (Poblacion-Caliparan),2621,3011
+1st District,Pobcaran (Poblacion-Caliparan),2621,3012
+1st District,Tanque,2622,3013
+2nd District,Tanque,2622,3014
+1st District,Caloocan North I,2623,3015
+2nd District,Caloocan North I,2623,3016
+1st District,Caloocan North II,2624,3017
+2nd District,Caloocan North II,2624,3018
+1st District,Caloocan North III,2625,3019
+2nd District,Caloocan North III,2625,3020
+1st District,Caloocan North IV,2626,3021
+2nd District,Caloocan North IV,2626,3022
+Lone District,Mandaluyong City District I,2627,3023
+Lone District,Mandaluyong City District II,2628,3024
+1st District,Marikina City District I,2629,3025
+2nd District,Marikina City District I,2629,3026
+2nd District,Marikina City District II,2630,3027
+2nd District,Makati City District I,2656,3028
+1st District,Makati City District I,2656,3029
+2nd District,Makati City District II,2657,3030
+1st District,Makati City District III,2633,3031
+2nd District,Makati City District III,2633,3032
+1st District,Makati City District IV,2634,3033
+2nd District,Makati City District V,2658,3034
+1st District,Makati City District V,2658,3035
+1st District,Makati City District VI,2636,3036
+2nd District,Makati City District VI,2636,3037
+Lone District,Pasig City District I,2637,3038
+Lone District,Pasig City District II,2638,3039
+Lone District,Pasig City District III,2639,3040
+Lone District,Pasig City District IV,2640,3041
+Lone District,Pasig City District V,2641,3042
+2nd District,Paranaque City District I,2642,3043
+1st District,Paranaque City District I,2642,3044
+2nd District,Paranaque City District II,2643,3045
+1st District,Paranaque City District II,2643,3046
+1st District,Paranaque City District III,2644,3047
+2nd District,Paranaque City District III,2644,3048
+Lone District,Las Piñas City I,2645,3049
+Lone District,Las Piñas City II,2646,3050
+1st District,Valenzuela City Central District,2647,3051
+2nd District,Valenzuela City Central District,2647,3052
+1st District,Valenzuela City North District,2648,3053
+2nd District,Valenzuela City North District,2648,3054
+2nd District,Valenzuela City East District,2649,3055
+1st District,Valenzuela City East District,2649,3056
+2nd District,Valenzuela City South District,2650,3057
+1st District,Valenzuela City South District,2650,3058
+Lone District,Malabon District I,2651,3059
+Lone District,Malabon District II,2652,3060
+Lone District,Malabon District III,2653,3061
+Lone District,Malabon District IV,2654,3062
+Lone District,Malabon District V,2655,3063
+1st District,Taguig District I,2659,3064
+2nd District,Taguig District I,2659,3065
+2nd District,Taguig District II,2660,3066
+1st District,Taguig District II,2660,3067
+2nd District,Taguig District III,2661,3068
+1st District,Pateros,2662,3069
+Lone District,Muntinlupa City District I,2663,3070
+Lone District,Muntinlupa City District II,2664,3071
+Others,Riyadh,2665,3072
+Others,Jeddah,2666,3073
+Others,Al-Khobar,2667,3074
+Others,Al-Qassim,2668,3075
+Others,A' Ali,2669,3076
+Others,Doha,2670,3077
+Others,Ain Khalid,2671,3078
+Others,Dubai,2672,3079
+Others,Abu Dhabi,2673,3080
+Others,Sharjah,2674,3081
+Others,Dili,2675,3082
+Others,Lazio,2676,3083
+Others,Muscat,2677,3084
+Others,Jleeb Al-Shuyoukh,2678,3085
+Others,Fahaheel,2679,3086
+Others,Athens,2680,3087

@@ -12,6 +12,7 @@ structured_data = {}
 for index, row in df.iterrows():
     region = row['Region']
     province = row['Province']
+    municipality = row['Municipality']
     district = row['District']
     barangay = row['Barangay']
     
@@ -20,6 +21,7 @@ for index, row in df.iterrows():
         continue
     
     province = str(province).title()
+    municipality = str(municipality).title()  # Convert municipality to string and apply title casing
     barangay = str(barangay).title()  # Convert barangay to string and apply title casing
     
     # Add region if it doesn't exist
@@ -30,13 +32,17 @@ for index, row in df.iterrows():
     if province not in structured_data[region]:
         structured_data[region][province] = {}
     
+    # Add municipality if it doesn't exist
+    if municipality not in structured_data[region][province]:
+        structured_data[region][province][municipality] = {}
+    
     # Add district if it doesn't exist
-    if district not in structured_data[region][province]:
-        structured_data[region][province][district] = []
+    if district not in structured_data[region][province][municipality]:
+        structured_data[region][province][municipality][district] = []
     
     # Add barangay to the district
-    if barangay not in structured_data[region][province][district]:
-        structured_data[region][province][district].append(barangay)
+    if barangay not in structured_data[region][province][municipality][district]:
+        structured_data[region][province][municipality][district].append(barangay)
 
 # Prepare data for the structured TXT output with indentation
 output_lines = []
@@ -44,15 +50,18 @@ output_lines = []
 for region, provinces in structured_data.items():
     output_lines.append(f"Region: {region}")
     
-    for province, districts in provinces.items():
+    for province, municipalities in provinces.items():
         output_lines.append(f"  Province: {province}")
         
-        for district, barangays in districts.items():
-            output_lines.append(f"    District: {district}")
-            output_lines.append(f"      Barangays:")
+        for municipality, districts in municipalities.items():
+            output_lines.append(f"    Municipality: {municipality}")
             
-            for barangay in barangays:
-                output_lines.append(f"        {barangay}")
+            for district, barangays in districts.items():
+                output_lines.append(f"      District: {district}")
+                output_lines.append(f"        Barangays:")
+                
+                for barangay in barangays:
+                    output_lines.append(f"          {barangay}")
 
 # Make sure the output directory exists
 output_dir = 'enrollment_csv_file\\preprocessed_data'
