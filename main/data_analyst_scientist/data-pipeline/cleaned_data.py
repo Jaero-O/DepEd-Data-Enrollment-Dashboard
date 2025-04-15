@@ -4,21 +4,38 @@ import shutil
 
 def clean_dataset(csv_path):
     filename_no_ext = os.path.splitext(os.path.basename(csv_path))[0]
-    print(csv_path)
+    print(f"Processing file: {csv_path}")
+    
     df = pd.read_csv(csv_path, skiprows=4, dtype={'BEIS School ID': 'object'})
-    df_dropped = df.dropna(how='all').drop_duplicates()
+    
+    df_duplicates = df[df.duplicated(keep=False)]
+    if not df_duplicates.empty:
+        print("Duplicate rows found:")
+        print(df_duplicates)
+    else:
+        print("No duplicate rows found.")
 
-    valid_format = df_dropped['BEIS School ID'].str.match(r'^\d{6}$')
-    print(f"Valid BEIS School IDs: {valid_format.sum()}")
-    print(f"Invalid BEIS School IDs: {(~valid_format).sum()}")
+    df = df.dropna(how='all')
+    df = df.dropna(axis=1, how='all')
 
-    df = df_dropped.copy()
     df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
+
+    df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
     if "beis_school" in df.columns:
         df = df.drop(columns=["beis_school"])
 
     df.loc[df['region'] == 'PSO', ['province', 'municipality', 'legislative_district', 'barangay']] = 'Others'
+
+    df = df.drop_duplicates()
+
+    if 'beis_school_id' in df.columns:
+        valid_format = df['beis_school_id'].str.match(r'^\d{6}$')
+        print(f"Valid BEIS School IDs: {valid_format.sum()}")
+        print(f"Invalid BEIS School IDs: {(~valid_format).sum()}")
+    else:
+        print("Column 'beis_school_id' not found after cleaning.")
+
 
     cleaned_dir = "enrollment_csv_file\\cleaned_separate_datasets"
     data_type_dir = os.path.join(cleaned_dir, "data_types")
@@ -28,7 +45,8 @@ def clean_dataset(csv_path):
     df.dtypes.to_csv(os.path.join(data_type_dir, f"{filename_no_ext}_data_types.csv"))
     df.to_csv(os.path.join(cleaned_dir, f"{filename_no_ext}.csv"), index=False)
 
-    print(df.columns)
+    print(f"Cleaned columns: {df.columns.tolist()}")
+
 
 base_dir = 'enrollment_database'
 unconverted_dir = os.path.join(base_dir, 'unconverted_xlsx_files')
@@ -77,8 +95,10 @@ for csv_file in cleaned_csvs:
         print(f"Deleting outdated file: {file_path}")
         os.remove(file_path)
 
-        # Delete corresponding data type file
         data_type_file = os.path.join(data_type_dir, csv_file.replace('.csv', '_data_types.csv'))
         if os.path.exists(data_type_file):
             print(f"Deleting associated data type file: {data_type_file}")
             os.remove(data_type_file)
+
+testing = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+print(testing[testing['region'] == 'Region I'].count())
