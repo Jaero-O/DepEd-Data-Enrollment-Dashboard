@@ -607,6 +607,16 @@ div.tab-div div.filtering-div .filter-table-output .no-data-msg {
   font-family: "Inter", sans-serif;
   font-size: 0.85em;
 }
+div.tab-div div.filtering-div .filter-checklist-menu {
+  background-color: var(--web-background-color-two);
+  color: var(--header-icons);
+  font-size: 0.85em !important;
+  padding: 0.5em !important;
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  width: 100% !important;
+}
 div.tab-div div.filtering-div.closed {
   max-height: 0em;
   opacity: 0;
