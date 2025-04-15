@@ -30,12 +30,10 @@ def clean_dataset(csv_path):
 
     print(df.columns)
 
-# Prepare directories
 base_dir = 'enrollment_database'
 unconverted_dir = os.path.join(base_dir, 'unconverted_xlsx_files')
 os.makedirs(unconverted_dir, exist_ok=True)
 
-# Get all files from database directory
 files = [f for f in os.listdir(base_dir) if os.path.isfile(os.path.join(base_dir, f))]
 
 expected_csvs = set()
@@ -56,7 +54,6 @@ for file_name in files:
         csv_path = os.path.join(base_dir, csv_name)
         counter += 1
 
-    # If xlsx, convert to CSV
     if file_name.endswith('.xlsx'):
         temp = pd.read_excel(file_path)
         temp.to_csv(csv_path, index=None, header=True)
@@ -67,11 +64,9 @@ for file_name in files:
     print("Using file:", csv_path)
     clean_dataset(csv_path)
 
-    # Track expected CSV filename
     cleaned_name = os.path.splitext(os.path.basename(csv_path))[0] + ".csv"
     expected_csvs.add(cleaned_name)
 
-# Delete outdated files
 cleaned_dir = 'enrollment_csv_file\\cleaned_separate_datasets'
 data_type_dir = os.path.join(cleaned_dir, 'data_types')
 cleaned_csvs = set(f for f in os.listdir(cleaned_dir) if f.endswith('.csv'))
