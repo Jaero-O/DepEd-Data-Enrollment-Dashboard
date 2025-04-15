@@ -7,13 +7,6 @@ def clean_dataset(csv_path):
     print(f"Processing file: {csv_path}")
     
     df = pd.read_csv(csv_path, skiprows=4, dtype={'BEIS School ID': 'object'})
-    
-    df_duplicates = df[df.duplicated(keep=False)]
-    if not df_duplicates.empty:
-        print("Duplicate rows found:")
-        print(df_duplicates)
-    else:
-        print("No duplicate rows found.")
 
     df = df.dropna(how='all')
     df = df.dropna(axis=1, how='all')
