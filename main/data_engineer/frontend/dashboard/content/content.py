@@ -155,4 +155,5 @@ def dashboardContent(final_df, location, mode):
         card_eight(final_df, location, mode)
         # add here your cards after importing  
     )
-    ]
+
+
