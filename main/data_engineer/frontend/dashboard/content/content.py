@@ -1,8 +1,7 @@
 import pandas as pd
 from dash import html, dcc
-from main.data_engineer.frontend.dashboard.content.graph.data_story_1 import (
-    get_total_enrollment_kpi,
-    plot_gender_ratio_donut
+from main.data_engineer.frontend.dashboard.content.cards.card_one import (
+    card_one
 )
 # Path to preprocessed file
 cleaned_file = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
@@ -137,69 +136,8 @@ def convert_filter_to_df(filter_dict):
 
 
 # Load the dataset once to access filter options
-# def dashboardContent(selection, updated_filter):
-
-    # # Determine which filter keys to retain for the current selection
-    # valid_filter_keys = filter_map.get(selection, [])
-
-    # # Initialize a dictionary for effective filters
-    # effective_filters = {}
-
-    # for key in valid_filter_keys:
-    #     if key in updated_filter and updated_filter[key]:
-    #         effective_filters[key] = updated_filter[key]
-    #     elif key in df.columns:
-    #         # Use all unique values as default filter
-    #         effective_filters[key] = df[key].dropna().unique().tolist()
-
-    # print(f"Effective filters applied: {effective_filters}")
-    # print(f"Selection: {selection}")
-
-    # # Generate plots using the updated filters
-    # fig_gender = plot_gender_distribution(cleaned_file, effective_filters)
-    # fig_sector = plot_sector_distribution(cleaned_file, effective_filters)
-    # fig_enrollment = plot_enrollment_distribution(cleaned_file, effective_filters)
-    # fig_shs = plot_shs_track_distribution(cleaned_file, effective_filters)
-    # fig_gender_track = plot_gender_distribution_by_shs_tracks(cleaned_file, effective_filters)
-
-    # return [
-    #     html.P(f"Displaying data for {selection}", style={"fontWeight": "bold"}),
-    #     dcc.Graph(figure=fig_gender),
-    #     dcc.Graph(figure=fig_sector),
-    #     dcc.Graph(figure=fig_enrollment),
-    #     dcc.Graph(figure=fig_shs),
-    #     dcc.Graph(figure=fig_gender_track),
-    # ]
-    'Region': ["Region"],
-    'Division': ["Division"],
-    'District': ["District"],
-    'Province': ["Province"],
-    'Municipality': ["Municipality"],
-    'Legislative District': ["Legislative District"],
-    'Barangay': ["Barangay"]
-}
-
-def dashboardContent(selection, filters):
-    # Determine which filter keys to retain for the current selection
-    valid_filter_keys = filter_map.get(selection, [])
-    
-    # Keep only the relevant filters
-    filtered_filters = {
-        k: v for k, v in filters.items() if k in valid_filter_keys
-    }
-    
-    # Default to empty filters if no valid filters found
-    if not filtered_filters:
-        filtered_filters = {}
-
-    # Generate the relevant figures for the current selection
-    fig_total_enrollment= get_total_enrollment_kpi(cleaned_file, filtered_filters)
-    fig_gender_ratio = plot_gender_ratio_donut(cleaned_file, filtered_filters)
-    
-
-    # Return the layout with relevant data for the selected tab
+def dashboardContent(final_df):
     return [
-        html.P(f"Displaying data for {selection}", style={"fontWeight": "bold"}),
-        dcc.Graph (fig_total_enrollment),
-        dcc.Graph (fig_gender_ratio)
+        card_one(final_df)
+        # add here your cards after importing  
     ]
