@@ -30,7 +30,7 @@ app.config.suppress_callback_exceptions = True
 # title bar
 title=html.Div([
     html.Img(src='./assets/images/deped_title.png', className='depEd-title'),
-    html.I(className="fa fa-bars")
+    # html.I(className="fa fa-bars")
 ], className='title-div-navbar')
 
 # Navigation Bar 

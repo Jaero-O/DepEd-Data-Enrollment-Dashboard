@@ -1,7 +1,8 @@
-$darkblue: #1d2845;
+$blue1: #1A2D9C; //blue ng deped
 $darkerblue: #081434;
 $navbarli: #90b1d7;
 $medyowhite:#e0e6f1;
+$white: #ffffff; //white ng deped
 $grayforunusedtab:#2a384f;
 $grayforunusedtabtext:#929fb7;
 
@@ -65,11 +66,11 @@ div.main-page{
 //navbar 
 div.title-div-navbar{
     display:flex;
-    justify-content: space-between;
+    justify-content: left;
     align-content: center;
     width:auto;
     height:62px;
-    padding:0.3em;
+    padding:0.5em;
     padding-left:0.75em;
     padding-right:0.75em;
     background-color:var(--web-background-color-two);
