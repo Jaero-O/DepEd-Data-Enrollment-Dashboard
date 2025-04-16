@@ -7,8 +7,8 @@ import os
 from datetime import datetime
 
 def detect_school_year(df, file_path=None):
-    if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+    # if df.empty:
+    #     df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
         
     """Detects the school year from the dataset or filename"""
     for col in df.columns:
@@ -28,8 +28,8 @@ def detect_school_year(df, file_path=None):
     return f"<b>A.Y. <br>{start_year}–{end_year}</b>"
 
 def card_one(df, location, mode):
-    if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+    # if df.empty:
+    #     df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
     if mode == 'student':
         school_year = detect_school_year(df)
@@ -74,9 +74,9 @@ def card_one(df, location, mode):
         gender_legend = html.Div([
             html.Div([
                 html.Span(style={
-                    'width': '18px', 'height': '18px',
+                    'width': '26px', 'height': '13px',
                     'backgroundColor': '#2a4d69',
-                    'borderRadius': '50%',
+                    'borderRadius': '8px',
                     'display': 'inline-block',
                     'marginRight': '8px'
                 }),
@@ -86,9 +86,9 @@ def card_one(df, location, mode):
 
             html.Div([
                 html.Span(style={
-                    'width': '18px', 'height': '18px',
+                    'width': '26px', 'height': '13px',
                     'backgroundColor': '#f28cb1',
-                    'borderRadius': '50%',
+                    'borderRadius': '8px',
                     'display': 'inline-block',
                     'marginRight': '8px'
                 }),
