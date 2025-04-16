@@ -31,25 +31,6 @@ def card_one(df, location, mode):
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
-    # Ensure consistent column naming
-    column_rename_map = {
-        'region': 'Region',
-        'division': 'Division',
-        'district': 'District',
-        'beis_school_id': 'BEIS School ID',
-        'school_name': 'School Name',
-        'street_address': 'Street Address',
-        'province': 'Province',
-        'municipality': 'Municipality',
-        'legislative_district': 'Legislative District',
-        'barangay': 'Barangay',
-        'sector': 'Sector',
-        'school_subclassification': 'School Subclassification',
-        'school_type': 'School Type',
-        'modified_coc': 'Modified COC'
-    }
-    df.rename(columns=column_rename_map, inplace=True)
-
     if mode == 'student':
         school_year = detect_school_year(df)
 
