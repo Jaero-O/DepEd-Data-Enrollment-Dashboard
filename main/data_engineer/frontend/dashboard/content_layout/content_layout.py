@@ -291,13 +291,12 @@ def content_layout_register_callbacks(app):
         Input('selected-filters', 'data'),
     )
     def update_tab_content(data_dict,filter_dict):
-        filter1 = filter_dict.get('filter1') if filter_dict else None
+        filter1 = filter_dict.get('filter1') if filter_dict else 'overall'  # or your default
         filter2 = filter_dict.get('filter2') if filter_dict else 'student'  # or your default
+        print(filter_dict)
         print("Filter 1:", filter1)
         print("Filter 2:", filter2)
-        return [
-            dashboardContent(convert_filter_to_df(data_dict), filter1, filter2)
-        ]
+        return dashboardContent(convert_filter_to_df(data_dict), filter1, filter2)
 
     # Callback to toggle filter visibility
     @app.callback(
