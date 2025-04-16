@@ -58,7 +58,10 @@ def convert_filter_to_df(filter_dict):
     csv_path = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
     df = pd.read_csv(csv_path)
 
-    # Rename columns
+    # Check if data loaded properly
+    print(df.head())  # Print first few rows for debugging
+
+    # Rename columns to match filter keys
     column_rename_map = {
         'region': 'Region',
         'division': 'Division',
@@ -75,9 +78,9 @@ def convert_filter_to_df(filter_dict):
         'school_type': 'School Type',
         'modified_coc': 'Modified COC'
     }
-
     df.rename(columns=column_rename_map, inplace=True)
 
+    # Handle if no filters are provided
     if filter_dict is None:
         final_df = df.drop_duplicates(subset='BEIS School ID')
         return final_df
@@ -95,61 +98,45 @@ def convert_filter_to_df(filter_dict):
         if filter_dict.get(level):
             filtered_df = filtered_df[filtered_df[level].isin(filter_dict[level])]
 
+    # Debugging: Show filtered dataframe after hierarchical filtering
+    print(f"Filtered DataFrame after hierarchical filters: \n{filtered_df.head()}")
+
     updated_filter_dict = {
         level: sorted(filtered_df[level].dropna().unique().tolist())
         for level in hierarchy_order
     }
 
-    top_level = hierarchy_order[0]
-    beis_school_ids = []
-    matched_rows_list = []
-
-    for top_value in filter_dict.get(top_level, []):
-        subset_df = df[df[top_level] == top_value]
-
-        for level in hierarchy_order[::-1]:
-            if level in filter_dict and level in df.columns:
-                valid_values = set(filter_dict[level])
-                matched_values = set(subset_df[level].dropna().unique())
-                intersection = valid_values & matched_values
-                if intersection:
-                    matched_rows = subset_df[subset_df[level].isin(intersection)]
-                    beis_school_ids.extend(matched_rows['BEIS School ID'].dropna().tolist())
-                    matched_rows_list.append(matched_rows)
-                    break
-
-    # Combine matched rows
-    if matched_rows_list:
-        final_df = pd.concat(matched_rows_list, ignore_index=True)
-        final_df = final_df.drop_duplicates(subset='BEIS School ID')
-    else:
-        final_df = pd.DataFrame(columns=df.columns)
-
+    # Step 2: Apply direct filters
     for field in direct_filters:
         values = filter_dict.get(field)
         if values:  # Only apply the filter if values exist and are not empty
-            final_df = final_df[final_df[field].isin(values)]
+            filtered_df = filtered_df[filtered_df[field].isin(values)]
 
-    print("\n📊 Matched DataFrame based on filters:")
-    print(final_df)
+    # Debugging: Show final filtered dataframe
+    print(f"Final DataFrame after all filters: \n{filtered_df.head()}")
 
-    # Reverse column names back
+    # Ensure dataframe is not empty
+    if filtered_df.empty:
+        print("No data matches the selected filters.")
+        return pd.DataFrame(columns=df.columns)
+
+    # Return the filtered dataframe with original column names
     reverse_column_map = {v: k for k, v in column_rename_map.items()}
-    final_df.rename(columns=reverse_column_map, inplace=True)
-
-    return final_df
+    filtered_df.rename(columns=reverse_column_map, inplace=True)
+    
+    return filtered_df
 
 
 # Load the dataset once to access filter options
-def dashboardContent(final_df, location, mode):
+def dashboardContent(filtered_df, location, mode):
     return (
-        card_one(final_df, location, mode),
-        card_two(final_df, location, mode),
-        card_three(final_df, location, mode),
-        card_four(final_df, location, mode),
-        card_five(final_df, location, mode),        
-        card_six(final_df, location, mode),
-        card_seven(final_df, location, mode),
-        card_eight(final_df, location, mode)
+        card_one(filtered_df, location, mode),
+        # card_two(final_df, location, mode),
+        # card_three(final_df, location, mode),
+        # card_four(final_df, location, mode),
+        # card_five(final_df, location, mode),        
+        # card_six(final_df, location, mode),
+        # card_seven(final_df, location, mode),
+        # card_eight(final_df, location, mode)
         # add here your cards after importing  
     )
