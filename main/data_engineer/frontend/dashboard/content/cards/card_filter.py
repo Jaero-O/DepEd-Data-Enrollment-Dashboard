@@ -22,7 +22,7 @@ def card_filter():
         dcc.Dropdown(
             id={'type': 'dropdown', 'index': 'filter1'},
             options=filter1_options,
-            value=None,
+            value='overall',
             clearable=False,
             placeholder="Select Location Filter",
             className='filter-dropdown'
