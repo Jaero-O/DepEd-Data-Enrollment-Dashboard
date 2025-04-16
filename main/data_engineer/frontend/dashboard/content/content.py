@@ -143,15 +143,16 @@ def convert_filter_to_df(filter_dict):
 
 
 # Load the dataset once to access filter options
-def dashboardContent(final_df):
-    return [
-        card_one(final_df),
-        card_two(final_df),
-        card_three(final_df),
-        card_four(final_df),
-        card_five(final_df),        
-        card_six(final_df),
-        card_seven(final_df),
-        card_eight(final_df)
+def dashboardContent(final_df, location, mode):
+    return (
+        card_one(final_df, location, mode),
+        card_two(final_df, location, mode),
+        card_three(final_df, location, mode),
+        card_four(final_df, location, mode),
+        card_five(final_df, location, mode),        
+        card_six(final_df, location, mode),
+        card_seven(final_df, location, mode),
+        card_eight(final_df, location, mode)
         # add here your cards after importing  
+    )
     ]

@@ -1,2 +1,2 @@
-def card_seven(df, mode, location):
+def card_seven(df, location, mode):
     return None
