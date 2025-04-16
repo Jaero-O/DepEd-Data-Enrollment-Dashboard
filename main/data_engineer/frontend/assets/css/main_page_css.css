@@ -53,11 +53,11 @@ div.main-page {
 
 div.title-div-navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-content: center;
   width: auto;
   height: 62px;
-  padding: 0.3em;
+  padding: 0.5em;
   padding-left: 0.75em;
   padding-right: 0.75em;
   background-color: var(--web-background-color-two);
@@ -451,7 +451,11 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
   color: var(--web-background-color-two) !important;
   font-size: 0.75em !important;
   border-radius: 0.5em !important;
-  width: 9em !important;
+  width: 10em !important;
+  border: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .dropdown-menu-class {
   color: var(--web-background-color-two) !important;

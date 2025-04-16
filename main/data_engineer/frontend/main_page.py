@@ -10,6 +10,9 @@ import io
 # Import pages
 from main.data_engineer.frontend.dashboard.content_layout.content_layout import content_layout, content_layout_register_callbacks
 
+# Import Cards Callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter_register_callbacks
+
 # Import Flask Server
 from main.data_engineer.backend.main_server import app as server
 
@@ -30,7 +33,7 @@ app.config.suppress_callback_exceptions = True
 # title bar
 title=html.Div([
     html.Img(src='./assets/images/deped_title.png', className='depEd-title'),
-    html.I(className="fa fa-bars")
+    # html.I(className="fa fa-bars")
 ], className='title-div-navbar')
 
 # Navigation Bar 
@@ -92,6 +95,7 @@ app.layout = html.Div([
 ], className='main-page', id="main-container")
 
 content_layout_register_callbacks(app)
+card_filter_register_callbacks(app)
 
 # Callback for changing the theme of the page ------------------------------------------------------------------------------------------------
 
