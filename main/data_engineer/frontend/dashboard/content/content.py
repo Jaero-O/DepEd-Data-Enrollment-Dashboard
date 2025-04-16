@@ -1,8 +1,14 @@
 import pandas as pd
 from dash import html, dcc
-from main.data_engineer.frontend.dashboard.content.cards.card_one import (
-    card_one
-)
+from main.data_engineer.frontend.dashboard.content.cards.card_one import card_one
+from main.data_engineer.frontend.dashboard.content.cards.card_two import card_two
+from main.data_engineer.frontend.dashboard.content.cards.card_three import card_three
+from main.data_engineer.frontend.dashboard.content.cards.card_four import card_four
+from main.data_engineer.frontend.dashboard.content.cards.card_five import card_five
+from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
+from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
+from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
+
 
 # Path to preprocessed file
 cleaned_file = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
@@ -137,6 +143,13 @@ def convert_filter_to_df(filter_dict):
 # Load the dataset once to access filter options
 def dashboardContent(final_df):
     return [
-        card_one(final_df)
+        card_one(final_df),
+        card_two(final_df),
+        card_three(final_df),
+        card_four(final_df),
+        card_five(final_df),        
+        card_six(final_df),
+        card_seven(final_df),
+        card_eight(final_df)
         # add here your cards after importing  
     ]
