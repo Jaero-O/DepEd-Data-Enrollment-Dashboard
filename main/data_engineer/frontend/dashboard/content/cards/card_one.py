@@ -110,7 +110,7 @@ def card_one(df, location, mode):
         )
 
     elif mode == 'school':
-        total_schools = df['BEIS School ID'].nunique()
+        total_schools = df['beis_school_id'].nunique()
 
         return dbc.Card(
             dbc.CardBody([
