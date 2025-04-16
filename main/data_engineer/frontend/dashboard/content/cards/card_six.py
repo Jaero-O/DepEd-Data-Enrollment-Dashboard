@@ -1,8 +1,12 @@
 import pandas as pd
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 from dash import html, dcc
 
-def card_six(df, mode, location):
+def card_six(df, location, mode):
+    # Load backup data if df is empty
+    if df.empty:
+        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+
     # Validate mode input
     if mode not in ['student', 'school']:
         raise ValueError("Mode must be either 'student' or 'school'")
@@ -10,19 +14,28 @@ def card_six(df, mode, location):
     # Define column to aggregate
     value_col = 'total_enrollment' if mode == 'student' else 'total_school'
 
-    # Group by the given location and sum values
-    grouped = df.groupby(location)[value_col].sum().reset_index()
-
-    # Sort and get top 10
-    top10 = grouped.sort_values(by=value_col, ascending=False).head(10)
+    # Handle "Overall" mode (no groupby)
+    if location == 'overall':
+        total = df[value_col].sum()
+        data = {
+            'Location': ['Overall'],
+            value_col: [total]
+        }
+    else:
+        grouped = df.groupby(location)[value_col].sum().reset_index()
+        grouped = grouped.sort_values(by=value_col, ascending=False).head(10)
+        data = {
+            'Location': grouped[location],
+            value_col: grouped[value_col]
+        }
 
     # Create Plotly horizontal bar chart
     fig = go.Figure(go.Bar(
-        x=top10[value_col],
-        y=top10[location],
+        x=data[value_col],
+        y=data['Location'],
         orientation='h',
         marker=dict(
-            color=top10[value_col],
+            color=data[value_col],
             colorscale='Viridis'
         )
     ))
@@ -33,16 +46,16 @@ def card_six(df, mode, location):
             x=0.05,
             font=dict(size=20, color='darkblue')
         ),
-        xaxis=dict(title=''),
-        yaxis=dict(title=''),
+        xaxis_title='',
+        yaxis_title='',
         margin=dict(l=100, r=20, t=60, b=20),
         height=400,
         plot_bgcolor='white',
         paper_bgcolor='white',
-        showlegend=False,
+        showlegend=False
     )
 
-    fig.update_yaxes(autorange="reversed")  # Reverse y-axis for descending bars
+    fig.update_yaxes(autorange="reversed")
 
     return html.Div([
         html.Div([
