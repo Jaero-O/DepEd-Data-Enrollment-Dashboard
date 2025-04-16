@@ -1,2 +1,4 @@
-def card_four(df, mode, location):
-    return None
+from dash import html
+
+def card_four(df, location, mode):
+    return html.Div("hi asdhahsdhahsd")
