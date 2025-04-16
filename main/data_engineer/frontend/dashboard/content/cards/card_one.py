@@ -43,12 +43,14 @@ def create_gender_card():
 
     # Donut chart
     fig = go.Figure(go.Pie(
-        labels=['Male', 'Female'],
-        values=[total_male, total_female],
-        hole=0.6,
-        textinfo='none',
-        marker=dict(colors=['#2a4d69', '#f28cb1']),
-        sort=False
+    labels=['Male', 'Female'],
+    values=[total_male, total_female],
+    hole=0.6,
+    textinfo='none',
+    marker=dict(colors=['#2a4d69', '#f28cb1']),
+    sort=False,
+    direction='clockwise',
+    rotation=180
     ))
 
     fig.update_layout(
