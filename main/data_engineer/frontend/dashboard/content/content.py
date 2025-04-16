@@ -9,7 +9,7 @@ from main.data_engineer.frontend.dashboard.content.graph.stacked_bar_graph impor
 )
 
 # Path to preprocessed file
-cleaned_file = "enrollment_csv_file/preprocessed_data/total_enrollment.csv"
+cleaned_file = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
 
 # Mapping which filter fields are valid for each selection
 filter_map = {
@@ -53,7 +53,7 @@ hierarchy_order = [
 direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified COC']
 
 def convert_filter_to_df(filter_dict):
-    csv_path = "enrollment_csv_file/preprocessed_data/total_enrollment.csv"
+    csv_path = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
     df = pd.read_csv(csv_path)
 
     # Rename columns

@@ -4,7 +4,26 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from main.data_engineer.frontend.dashboard.content.content import convert_filter_to_df
 
-data = pd.read_csv("enrollment_csv_file\\preprocessed_data\cleaned_enrollment_data.csv")
+data = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+
+column_rename_map = {
+    'region': 'Region',
+    'division': 'Division',
+    'district': 'District',
+    'beis_school_id': 'BEIS School ID',
+    'school_name': 'School Name',
+    'street_address': 'Street Address',
+    'province': 'Province',
+    'municipality': 'Municipality',
+    'legislative_district': 'Legislative District',
+    'barangay': 'Barangay',
+    'sector': 'Sector',
+    'school_subclassification': 'School Subclassification',
+    'school_type': 'School Type',
+    'modified_coc': 'Modified COC'
+}
+
+data.rename(columns=column_rename_map, inplace=True)
 
 # Tab labels and options
 labels_1 = ['Region', 'Division', 'District', 'Legislative District']
