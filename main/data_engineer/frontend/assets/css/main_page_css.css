@@ -451,15 +451,8 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
   color: var(--web-background-color-two) !important;
   font-size: 0.75em !important;
   border-radius: 0.5em !important;
+  width: 10em !important;
   border: none;
-  max-width: 200px; /* Adjust as needed */
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .dropdown-menu-class > button {
-  border: none;
-  max-width: 20px; /* Adjust as needed */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

@@ -2,7 +2,7 @@ from dash import Input, Output, State, MATCH, ALL, ctx, html, dcc
 import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
-from main.data_engineer.frontend.dashboard.content.content import convert_filter_to_df
+from main.data_engineer.frontend.dashboard.content.content import dashboardContent, convert_filter_to_df
 
 data = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -302,8 +302,7 @@ def content_layout_register_callbacks(app):
         ]
     )
     def update_tab_content(selected_tab, data_dict):
-        convert_filter_to_df(data_dict)
-        #return None
+        return [dashboardContent(convert_filter_to_df(data_dict))]
 
     # Callback to toggle filter visibility
     @app.callback(
