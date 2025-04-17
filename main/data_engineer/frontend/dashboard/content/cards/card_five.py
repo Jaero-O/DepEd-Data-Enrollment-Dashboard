@@ -1,2 +1,113 @@
-def card_five(df, location, mode):
-    return None
+import pandas as pd
+import dash_bootstrap_components as dbc
+from dash import html, dcc
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import re
+
+def preserve_parentheses_title(text):
+    return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
+
+def card_five(df, location=None, mode='student'):
+    if df.empty:
+        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+
+    if mode == 'school':
+        df = df.groupby(['school_type']).size().reset_index(name='total')
+        card_five_title = 'No. of Schools'
+
+    elif mode == 'student':
+        grade_cols = [col for col in df.columns if '_male' in col or '_female' in col]
+        df = df[['school_type'] + grade_cols]
+        df['total'] = df[grade_cols].sum(axis=1)
+        card_five_title = 'Enrollment'
+
+    # Group and sort
+    grouped = df.groupby('school_type')[['total']].sum().sort_values(by='total', ascending=False)
+    categories = [{"name": idx, "value": row["total"]} for idx, row in grouped.iterrows()]
+
+    # Add some breathing room on the right for the labels
+    x_max = grouped['total'].max() * 1.45
+
+    # Create subplots
+    subplots = make_subplots(
+        rows=len(categories),
+        cols=1,
+        subplot_titles=[preserve_parentheses_title(x["name"]) for x in categories],
+        shared_xaxes=True,
+        vertical_spacing=(0.01 / len(categories)),
+    )
+
+    for k, x in enumerate(categories):
+        subplots.add_trace(go.Bar(
+            orientation='h',
+            y=[x["name"]],
+            x=[x["value"]],
+            text=[f"{x['value']:,}"],
+            textfont=dict(family="Inter", size=14, color="#2a4d69", weight="bold"),
+            textposition='outside',
+            marker=dict(color="#7986cb"),
+            hoverinfo='text',
+        ), row=k + 1, col=1)
+
+    # Update layout
+    for ann in subplots["layout"]["annotations"]:
+        ann["x"] = 0
+        ann["xanchor"] = "left"
+        ann["align"] = "left"
+        ann["font"] = dict(size=12, family="Inter", weight="bold", color='#2a4d69')
+        ann["yshift"] = -13
+
+    layout_updates = {
+        "showlegend": False,
+        "height": max(250, 50 * len(categories)),
+        "margin": dict(t=10, b=0, l=0, r=10),
+        "template": "simple_white",
+        "paper_bgcolor": 'rgba(0,0,0,0)',
+        "plot_bgcolor": 'rgba(0,0,0,0)',
+        "xaxis": {
+            "range": [0, x_max],
+            "showgrid": False,
+            "zeroline": False,
+            "visible": False,
+        },
+        "yaxis": {
+            "showgrid": False,
+            "zeroline": False,
+            "visible": False,
+        },
+        "bargroupgap": 0.40,
+        "font": dict(family="Inter", size=12, color="black"),
+    }
+
+    for i in range(1, len(categories) + 1):
+        layout_updates[f'xaxis{i}'] = dict(visible=False, range=[0, x_max])
+        layout_updates[f'yaxis{i}'] = dict(visible=False)
+
+    subplots.update_layout(**layout_updates)
+
+    return dbc.Card(
+        dbc.CardBody([
+            html.Div(
+                f"{card_five_title} by School Type".upper(),
+                style={"fontWeight": "bold", "fontFamily": "Inter", "fontSize": "16px", "color": "#2a4d69"}
+            ),
+            html.Div([
+                dcc.Graph(figure=subplots),
+            ], style={
+                'marginTop': '10px',
+                'width': '300px',
+                'height': '250px',
+                'overflowY': 'auto',
+                'fontFamily': 'Inter'
+            }),
+        ]),
+        style={
+            'backgroundColor': '#f7f9f7',
+            'borderRadius': '18px',
+            'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
+            'fontFamily': 'Inter',
+            'backgroundColor': '#f7f9f7',
+            'padding': '10px',
+        }
+    )
