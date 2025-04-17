@@ -44,9 +44,26 @@ def card_two(df, location, mode):
             config={'displayModeBar': False},
             figure={
                 'data': [
-                    go.Bar(x=['Male'], y=[male_total], name='Male', marker_color='#2a4d69'),
-                    go.Bar(x=['Female'], y=[female_total], name='Female', marker_color='#f28cb1')
+                    go.Bar(
+                        x=['Male'],
+                        y=[male_total],
+                        name='Male',
+                        marker_color='#2a4d69',
+                        text=[f"{male_total:,}"],
+                        textposition='inside',
+                        insidetextanchor='end'
+                    ),
+                    go.Bar(
+                        x=['Female'],
+                        y=[female_total],
+                        name='Female',
+                        marker_color='#f28cb1',
+                        text=[f"{female_total:,}"],
+                        textposition='inside',
+                        insidetextanchor='end'
+                    )
                 ],
+
                 'layout': go.Layout(
                     barmode='group',
                     height=190,
@@ -94,7 +111,7 @@ def card_two(df, location, mode):
             html.Div(
                 bar_chart,
                 className="bar-chart-container",
-                style={"marginTop": "-120px"}  # Adjust this value to control upward movement
+                style={"marginTop": "-120px"} 
             ),
         ], className='gender-card')
 
