@@ -14,6 +14,8 @@ from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_
 cleaned_file = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
 
 # Mapping which filter fields are valid for each selection
+# Each selection maps to the filters you'd like to apply
+# Mapping which filter fields are valid for each selection
 filter_map = {
     'Region': ["Region"],
     'Division': ["Division"],
@@ -143,13 +145,15 @@ def convert_filter_to_df(filter_dict):
 # Load the dataset once to access filter options
 def dashboardContent(final_df, location, mode):
     return (
-        card_one(final_df, location, mode),
-        card_two(final_df, location, mode),
-        card_three(final_df, location, mode),
-        card_four(final_df, location, mode),
-        card_five(final_df, location, mode),        
-        card_six(final_df, location, mode),
-        card_seven(final_df, location, mode),
-        card_eight(final_df, location, mode)
+        # card_one(final_df, location, mode),
+        # card_two(final_df, location, mode),
+        # card_three(final_df, location, mode),
+        # card_four(final_df, location, mode),
+        card_five(final_df, location, mode)   
+        # card_six(final_df, location, mode),
+        # card_seven(final_df, location, mode),
+        # card_eight(final_df, location, mode)
         # add here your cards after importing  
     )
+
+

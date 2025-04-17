@@ -68,3 +68,4 @@ def card_six(df, location, mode):
             html.Div("Highest/Lowest", className="highlight-label")
         ], className="card-six-inner", style={"width": "100%"}),
     ], className="card-six-container", style={"width": "30em"})
+
