@@ -76,7 +76,7 @@ def card_eight(df, location, mode):
         y=strand_df['Male'],
         name='Male',
         fill='tozeroy',
-        mode='lines+markers',
+        mode='lines',
         line=dict(color='#2a4d69'),
         marker=dict(size=10)
     ))
@@ -86,7 +86,7 @@ def card_eight(df, location, mode):
         y=strand_df['Female'],
         name='Female',
         fill='tonexty',  
-        mode='lines+markers',
+        mode='lines',
         line=dict(color='#f48fb1'),
         marker=dict(size=10)
     ))
@@ -95,14 +95,18 @@ def card_eight(df, location, mode):
         title=dict(
             text="SENIOR HIGH SCHOOL STRAND<br><sup>ENROLLED STUDENTS<sup>",
             x=0.05,
-            font=dict(size=20, color='#2a4d69')
+            font=dict(size=30, weight='bold',color='#2a4d69')
         ),
         margin=dict(l=40, r=20, t=60, b=60),
         height=450,
         plot_bgcolor='white',
         paper_bgcolor='white',
-        legend=dict(orientation='h', x=0.5, xanchor='center', y=-0.2),
-        xaxis=dict(showticklabels=True),  
+        legend=dict( orientation='v', x=0.7, y=0.7, 
+        xanchor='left', 
+                    yanchor='middle', font=dict(size=25)),
+        xaxis=dict(
+            showticklabels=True,
+            tickfont=dict(size=14, weight='bold', color='#2a4d69')), 
         yaxis=dict(showticklabels=False)  
     )
 

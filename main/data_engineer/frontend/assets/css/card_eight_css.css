@@ -1,38 +1,9 @@
-.card-eight-container .dash-graph {
-    height: 100% !important;
-  }
-  
-  .js-plotly-plot .main-svg {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .card-eight-container .legend {
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .card-eight-container .xtick > text {
-    fill: #1a2a3a;
-    font-weight: 1000;
-  }
-  
-  .card-eight-container .plot-container {
+.card-eight-container {
+    display: flex;
+    flex-direction: column;
     background-color: white;
-    border-radius: 15px;
-  }
-  
-  /* Optional hover tweak */
-  .card-eight-container .hoverlayer .hovertext {
-    font-size: 13px;
-    font-weight: 500;
-    background-color: #ffffffcc;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 5px;
-  }
-  
-  /* Title styling */
-  .card-eight-container .svg-container > svg g.cartesianlayer g.subplot > g.title {
-    font-weight: bold;
-    fill: #2a4d69;
-  }
-  
+    width: 100%;
+    box-sizing: border-box;
+}
