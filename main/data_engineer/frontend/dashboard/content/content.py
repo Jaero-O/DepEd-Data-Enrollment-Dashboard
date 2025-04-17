@@ -93,51 +93,33 @@ def convert_filter_to_df(filter_dict):
 
     # Step 1: Hierarchical filtering
     filtered_df = df.copy()
-    for level in hierarchy_order[::-1]:
-        if filter_dict.get(level):
-            filtered_df = filtered_df[filtered_df[level].isin(filter_dict[level])]
+    active_levels = [level for level in hierarchy_order if filter_dict.get(level)]
 
-    updated_filter_dict = {
-        level: sorted(filtered_df[level].dropna().unique().tolist())
-        for level in hierarchy_order
-    }
+    if active_levels:
+        deepest_level = active_levels[-1]
+        filtered_df = filtered_df[filtered_df[deepest_level].isin(filter_dict[deepest_level])]
+        
+        # Filter upwards from the deepest level
+        for level in hierarchy_order:
+            if level == deepest_level:
+                break
+            if filter_dict.get(level):
+                filtered_df = filtered_df[filtered_df[level].isin(filter_dict[level])]
 
-    top_level = hierarchy_order[0]
-    beis_school_ids = []
-    matched_rows_list = []
+    final_df = filtered_df.copy()
 
-    for top_value in filter_dict.get(top_level, []):
-        subset_df = df[df[top_level] == top_value]
-
-        for level in hierarchy_order[::-1]:
-            if level in filter_dict and level in df.columns:
-                valid_values = set(filter_dict[level])
-                matched_values = set(subset_df[level].dropna().unique())
-                intersection = valid_values & matched_values
-                if intersection:
-                    matched_rows = subset_df[subset_df[level].isin(intersection)]
-                    beis_school_ids.extend(matched_rows['BEIS School ID'].dropna().tolist())
-                    matched_rows_list.append(matched_rows)
-                    break
-
-    # Combine matched rows
-    if matched_rows_list:
-        final_df = pd.concat(matched_rows_list, ignore_index=True)
-        final_df = final_df.drop_duplicates(subset='BEIS School ID')
-    else:
-        final_df = pd.DataFrame(columns=df.columns)
-
+    # Step 2: Direct filtering (non-hierarchical fields)
     for field in direct_filters:
         values = filter_dict.get(field)
-        if values:  # Only apply the filter if values exist and are not empty
+        if values:
             final_df = final_df[final_df[field].isin(values)]
+
+    # Step 3: Reverse column names back
+    reverse_column_map = {v: k for k, v in column_rename_map.items()}
+    final_df.rename(columns=reverse_column_map, inplace=True)
 
     print("\n📊 Matched DataFrame based on filters:")
     print(final_df)
-
-    # Reverse column names back
-    reverse_column_map = {v: k for k, v in column_rename_map.items()}
-    final_df.rename(columns=reverse_column_map, inplace=True)
 
     return final_df
 
@@ -145,14 +127,14 @@ def convert_filter_to_df(filter_dict):
 # Load the dataset once to access filter options
 def dashboardContent(final_df, location, mode):
     return (
-        # card_one(final_df, location, mode),
-        # card_two(final_df, location, mode),
-        # card_three(final_df, location, mode),
-        # card_four(final_df, location, mode),
-        card_five(final_df, location, mode)   
-        # card_six(final_df, location, mode),
-        # card_seven(final_df, location, mode),
-        # card_eight(final_df, location, mode)
+        card_one(final_df, mode),
+        card_two(final_df, location, mode),
+        card_three(final_df, mode),
+        card_four(final_df, location, mode),
+        card_five(final_df, location, mode),        
+        card_six(final_df, location, mode),
+        card_seven(final_df, mode),
+        card_eight(final_df, location, mode)
         # add here your cards after importing  
     )
 
