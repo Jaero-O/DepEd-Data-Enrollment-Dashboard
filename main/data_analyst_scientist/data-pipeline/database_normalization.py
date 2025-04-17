@@ -1,4 +1,6 @@
 import pandas as pd
+import sqlite3
+import os
 
 df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -80,14 +82,54 @@ enrollments_df = enrollments_df.dropna(subset=['enrollment_count'])
 enrollments_df = enrollments_df[['beis_school_id', 'grade_level', 'gender', 'enrollment_count']]
 
 # ======
-regions_df.to_csv("enrollment_csv_file/normalized_dataset/regions.csv", index=False)
-divisions_df.to_csv("enrollment_csv_file/normalized_dataset/divisions.csv", index=False)
-district_df.to_csv("enrollment_csv_file/normalized_dataset/districts.csv", index=False)
-legislative_district_df.to_csv("enrollment_csv_file/normalized_dataset/legislative_districts.csv", index=False)
+os.makedirs("enrollment_csv_file/normalized_dataset/norm_csv/", exist_ok=True)
 
-province_df.to_csv("enrollment_csv_file/normalized_dataset/provinces.csv", index=False)
-municipality_df.to_csv("enrollment_csv_file/normalized_dataset/municipalities.csv", index=False)
-barangay_df.to_csv("enrollment_csv_file/normalized_dataset/barangays.csv", index=False)
+regions_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/regions.csv", index=False)
+divisions_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/divisions.csv", index=False)
+district_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/districts.csv", index=False)
+legislative_district_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/legislative_districts.csv", index=False)
 
-schools_df.to_csv("enrollment_csv_file/normalized_dataset/schools.csv", index=False)
-enrollments_df.to_csv("enrollment_csv_file/normalized_dataset/enrollments.csv.gzip", compression="gzip", index=False)
+province_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/provinces.csv", index=False)
+municipality_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/municipalities.csv", index=False)
+barangay_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/barangays.csv", index=False)
+
+schools_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/schools.csv", index=False)
+enrollments_df.to_csv("enrollment_csv_file/normalized_dataset/norm_csv/enrollments.csv.gzip", compression="gzip", index=False)
+
+print("All CSV files have been saved successfully in 'enrollment_csv_file/normalized_dataset/norm_csv/'")
+
+def create_and_load_tables_from_csv(db_name, csv_dir):
+
+    table_files = {
+        "regions": "regions.csv",
+        "divisions": "divisions.csv",
+        "districts": "districts.csv",
+        "legislative_districts": "legislative_districts.csv",
+        "provinces": "provinces.csv",
+        "municipalities": "municipalities.csv",
+        "barangays": "barangays.csv",
+        "schools": "schools.csv",
+        "enrollments": "enrollments.csv.gzip"
+    }
+
+    conn = sqlite3.connect(db_name)
+    print(f"Connected to database: {db_name}")
+
+    try:
+        for table_name, file_name in table_files.items():
+            file_path = os.path.join(csv_dir, file_name)
+            
+            if file_name.endswith(".gzip"):
+                df = pd.read_csv(file_path, compression='gzip')
+            else:
+                df = pd.read_csv(file_path)
+
+            df.to_sql(table_name, conn, if_exists='replace', index=False)
+            print(f"Table '{table_name}' created and loaded from '{file_name}'")
+    except Exception as e:
+        print("Error processing files:", e)
+    finally:
+        conn.close()
+        print("Connection closed.")
+
+create_and_load_tables_from_csv("enrollment_csv_file/normalized_dataset/normalized_data.db", "enrollment_csv_file/normalized_dataset/norm_csv")
