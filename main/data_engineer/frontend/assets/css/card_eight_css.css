@@ -1,0 +1,9 @@
+.card-eight-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 12px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
