@@ -77,46 +77,37 @@ def card_eight(df, location, mode):
         name='Male',
         fill='tozeroy',
         mode='lines+markers',
-        line=dict(color='blue'),
-        marker=dict(size=6)
+        line=dict(color='#2a4d69'),
+        marker=dict(size=10)
     ))
 
     fig.add_trace(go.Scatter(
         x=strand_df['Strand'],
         y=strand_df['Female'],
         name='Female',
-        fill='tonexty',  # Stack on top of Male
+        fill='tonexty',  
         mode='lines+markers',
-        line=dict(color='orange'),
-        marker=dict(size=6)
+        line=dict(color='#f48fb1'),
+        marker=dict(size=10)
     ))
 
     fig.update_layout(
-    title=dict(
-        text="SENIOR HIGH SCHOOL STRAND<br><sup>ENROLLED STUDENTS<sup>",
-        x=0.05,
-        font=dict(size=20, color='darkblue')
-    ),
-    margin=dict(l=40, r=20, t=60, b=60),
-    height=450,
-    plot_bgcolor='white',
-    paper_bgcolor='white',
-    legend=dict(orientation='h', x=0.5, xanchor='center', y=-0.2),
-    
-    # Remove axis numbers
-    xaxis=dict(showticklabels=True),  # Hide x-axis numbers
-    yaxis=dict(showticklabels=False)   # Hide y-axis numbers
-)
-
+        title=dict(
+            text="SENIOR HIGH SCHOOL STRAND<br><sup>ENROLLED STUDENTS<sup>",
+            x=0.05,
+            font=dict(size=20, color='#2a4d69')
+        ),
+        margin=dict(l=40, r=20, t=60, b=60),
+        height=450,
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        legend=dict(orientation='h', x=0.5, xanchor='center', y=-0.2),
+        xaxis=dict(showticklabels=True),  
+        yaxis=dict(showticklabels=False)  
+    )
 
     # Return as dbc.Card
     return dbc.Card(
-        dbc.CardBody([
-            dcc.Graph(figure=fig, config={'displayModeBar': False})
-        ]),
+        dbc.CardBody([dcc.Graph(figure=fig, config={'displayModeBar': False})]),
         className="card-eight-container"
     )
-
-
-
-
