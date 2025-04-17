@@ -56,11 +56,19 @@ def card_five(df, location=None, mode='student'):
         ann["xanchor"] = "left"
         ann["align"] = "left"
         ann["font"] = dict(size=12, family="Inter", weight="bold", color='#2a4d69')
-        ann["yshift"] = -13
+        if len(categories) > 1:
+            ann["yshift"] = -60 * (1/(len(categories)))
+        else:
+            ann["yshift"] = -45
 
+    if len(categories) > 1:
+            width_gap = max(0.65, min(0.9, 1.5 / (len(categories))))
+    else:
+        width_gap = 0.82
+    
     layout_updates = {
         "showlegend": False,
-        "height": max(240, 50 * len(categories)),
+        "height": min(240, 80 + 40 * len(categories)),        
         "margin": dict(t=10, b=0, l=0, r=10),
         "template": "simple_white",
         "paper_bgcolor": 'rgba(0,0,0,0)',
@@ -76,7 +84,7 @@ def card_five(df, location=None, mode='student'):
             "zeroline": False,
             "visible": False,
         },
-        "bargroupgap": 0.65,
+        "bargroupgap": width_gap,
         "font": dict(family="Inter", size=12, color="black"),
     }
 
@@ -97,7 +105,7 @@ def card_five(df, location=None, mode='student'):
             ], style={
                 'marginTop': '10px',
                 'width': '300px',
-                'height': '240px',
+                'height': f'{min(240, 80 + 40 * len(categories))}px',
                 'overflowY': 'auto',
                 'fontFamily': 'Inter'
             }),
