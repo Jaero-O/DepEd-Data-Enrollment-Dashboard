@@ -60,7 +60,7 @@ def card_five(df, location=None, mode='student'):
 
     layout_updates = {
         "showlegend": False,
-        "height": max(250, 50 * len(categories)),
+        "height": max(240, 50 * len(categories)),
         "margin": dict(t=10, b=0, l=0, r=10),
         "template": "simple_white",
         "paper_bgcolor": 'rgba(0,0,0,0)',
@@ -76,7 +76,7 @@ def card_five(df, location=None, mode='student'):
             "zeroline": False,
             "visible": False,
         },
-        "bargroupgap": 0.40,
+        "bargroupgap": 0.65,
         "font": dict(family="Inter", size=12, color="black"),
     }
 
@@ -97,7 +97,7 @@ def card_five(df, location=None, mode='student'):
             ], style={
                 'marginTop': '10px',
                 'width': '300px',
-                'height': '250px',
+                'height': '240px',
                 'overflowY': 'auto',
                 'fontFamily': 'Inter'
             }),
