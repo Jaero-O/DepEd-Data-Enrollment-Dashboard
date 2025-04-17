@@ -13,6 +13,7 @@
     padding-right: 10px;
     box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
     width: 300px;
+    height: 260px;
     box-sizing: content-box;
     align-items: left;
 }
@@ -29,7 +30,6 @@
     color: #2a4d69;
 }
 
-
 .total-count {
     font-size: 32px;
     font-weight: bold;
@@ -37,31 +37,22 @@
     text-align: left;
 }
 
-.gender-percentage {
+.bar-chart-container {
+    margin-left: 130px;
+    margin-top: -120px;
+}
+
+.donut-chart-container {
+    margin-top: 0px;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 15px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.male-percent {
-    color: #1e3a8a;
-}
-
-.female-percent {
-    color: #be123c;
-}
-
-.gender-bar-chart {
-
-    align-items: right;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
 }
 
 .custom-legend {
     margin-top: 50px;
-  }
+}
   
 .legend-item {
     display: flex;
@@ -77,14 +68,6 @@
     margin-right: 6px;
 }
   
-.legend-dot.male {
-    background-color: #2a4d69;
-}
-  
-.legend-dot.female {
-    background-color: #f28cb1;
-}
-  
 .legend-percentage {
     font-weight: bold;
 }
@@ -94,6 +77,10 @@
     font-weight: 600;
 }
   
+.legend-dot.male {
+    background-color: #2a4d69;
+}
+
 .legend-percentage.male {
     color: #2a4d69;
     font-size: 18px;
@@ -102,6 +89,10 @@
 .legend-label.male {
     color: #2a4d69;
     font-size: 12px;
+}
+
+.legend-dot.female {
+    background-color: #f28cb1;
 }
   
 .legend-percentage.female {
@@ -113,7 +104,68 @@
     color: #f28cb1;
     font-size: 12px;
 }
-  
-.bar-chart-container {
-    margin-left: 130px;
+
+.legend-percentage.elementary {
+    color: #6FA8DC; 
+    font-size: 20px;
+}
+
+.legend-label.elementary {
+    color: #6FA8DC; 
+    font-size: 12px;
+    max-width: 100px;
+    word-wrap: break-word;
+}
+
+.legend-percentage.junior-high {
+    color: #F6A5C0;
+    font-size: 20px;
+}
+
+.legend-label.junior-high {
+    color: #F6A5C0;
+    font-size: 12px;
+    max-width: 100px;
+    word-wrap: break-word;
+}
+
+.legend-percentage.senior-high {
+    color: #F9CB9C;
+    font-size: 20px;
+}
+
+.legend-label.senior-high {
+    color: #F9CB9C;
+    font-size: 12px;
+    max-width: 100px;
+    word-wrap: break-word;
+}
+
+.donut-wrapper {
+    position: relative;
+    width: 280px;
+    height: 230px; 
+}
+
+.custom-legend-donut {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.legend-item-donut {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    align-items: center;
+    text-align: center;
+
 }
