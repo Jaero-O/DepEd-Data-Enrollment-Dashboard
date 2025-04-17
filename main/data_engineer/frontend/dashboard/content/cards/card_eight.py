@@ -106,8 +106,12 @@ def card_eight(df, location, mode):
                     yanchor='middle', font=dict(size=25)),
         xaxis=dict(
             showticklabels=True,
-            tickfont=dict(size=14, weight='bold', color='#2a4d69')), 
-        yaxis=dict(showticklabels=False)  
+            tickfont=dict(size=17, weight='bold', color='#2a4d69'),), 
+
+        yaxis=dict(showticklabels=False,
+            showgrid=True,        
+            gridcolor='lightgray',   
+            gridwidth=1)  
     )
 
     # Return as dbc.Card
