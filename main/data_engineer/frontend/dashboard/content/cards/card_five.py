@@ -44,7 +44,7 @@ def card_five(df, location=None, mode='student'):
             y=[x["name"]],
             x=[x["value"]],
             text=[f"{x['value']:,}"],
-            textfont=dict(family="Inter", size=14, color="#2a4d69", weight="bold"),
+            textfont=dict(family="Inter", size=14, color="#081434", weight="bold"),
             textposition='outside',
             marker=dict(color="#7986cb"),
             hoverinfo='text',
