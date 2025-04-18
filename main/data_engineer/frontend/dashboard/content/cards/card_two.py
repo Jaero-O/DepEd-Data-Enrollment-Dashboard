@@ -145,6 +145,8 @@ def card_two(df, location, mode):
                     )],
                     "layout": go.Layout(
                         height=190,
+                        width=190, 
+                        autosize=False,  
                         margin={'l': 0, 'r': 10, 't': 0, 'b': 0},
                         showlegend=False,
                     )
@@ -178,7 +180,6 @@ def card_two(df, location, mode):
                         html.Span(className="legend-dot shs"),
                         html.Span("SENIOR HIGH", className="legend-label shs"),
                     ], className="legend-item")
-
                 ], className="custom-legend-level"),
                 
                 html.Div([
