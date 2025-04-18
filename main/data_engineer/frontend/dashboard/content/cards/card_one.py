@@ -65,8 +65,8 @@ def card_one(df, mode):
             )],
             margin=dict(t=0, b=0, l=0, r=0),
             showlegend=False,
-            height=200,
-            width=200,
+            height=180,
+            width=180,
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)'
         )
@@ -74,50 +74,57 @@ def card_one(df, mode):
         gender_legend = html.Div([
             html.Div([
                 html.Span(style={
-                    'width': '18px', 'height': '18px',
+                    'width': '20px', 'height': '12px',
                     'backgroundColor': '#2a4d69',
-                    'borderRadius': '50%',
+                    'borderRadius': '6px',
                     'display': 'inline-block',
-                    'marginRight': '8px'
+                    'marginRight': '6px'
                 }),
-                html.Span(f"{male_pct}%", style={'fontWeight': 'bold', 'color': '#2a4d69', 'fontSize': '22px'}),
-                html.Span(" MALE", style={'fontWeight': 'bold', 'color': '#2a4d69', 'fontSize': '14px'})
-            ], className='mb-2'),
+                html.Span(f"{male_pct}%", style={'fontWeight': 'bold', 'color': '#2a4d69', 'fontSize': '18px'}),
+                html.Span(" MALE", style={'fontWeight': '500', 'color': '#2a4d69', 'fontSize': '12px'})
+            ], className='mb-1'),
 
             html.Div([
                 html.Span(style={
-                    'width': '18px', 'height': '18px',
+                    'width': '20px', 'height': '12px',
                     'backgroundColor': '#f28cb1',
-                    'borderRadius': '50%',
+                    'borderRadius': '6px',
                     'display': 'inline-block',
-                    'marginRight': '8px'
+                    'marginRight': '6px'
                 }),
-                html.Span(f"{female_pct}%", style={'fontWeight': 'bold', 'color': '#f28cb1', 'fontSize': '22px'}),
-                html.Span(" FEMALE", style={'fontWeight': 'bold', 'color': '#f28cb1', 'fontSize': '14px'})
+                html.Span(f"{female_pct}%", style={'fontWeight': 'bold', 'color': '#f28cb1', 'fontSize': '18px'}),
+                html.Span(" FEMALE", style={'fontWeight': '500', 'color': '#f28cb1', 'fontSize': '12px'})
             ])
-        ])
+        ], style={'marginTop': '8px'})
 
         return dbc.Card(
-            dbc.CardBody([
-                html.Div("TOTAL ENROLLMENT", className="text-uppercase text-muted small fw-bold mb-1"),
-                html.H2(f"{int(total_enrollment):,}", className="fw-bold", style={'color': '#0a1f44'}),
+            dbc.CardBody(
                 html.Div([
-                    html.Div(gender_legend, style={'flex': '1'}),
-                    html.Div(dcc.Graph(figure=fig, config={'displayModeBar': False}), style={'flex': '1'})
-                ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px', 'marginTop': '10px'})
-            ]),
-            className="mb-4 shadow-sm rounded-4 p-3"
+                    html.Div("TOTAL ENROLLMENT", className="gender-title-main"),
+                    html.H2(f"{int(total_enrollment):,}", className="fw-bold mb-3", style={'color': '#0a1f44'}),
+                    html.Div(
+                        dcc.Graph(figure=fig, config={'displayModeBar': False}),
+                        style={'height': '180px', 'width': '180px'}
+                    ),
+                    gender_legend
+                ], style={'display': 'inline-block'}) 
+            ),
+            className="mb-4 p-1",
+            style={'display': 'inline-block', 'borderRadius': '12px', 'border':"none", "boxShadow": "0px 2px 10px rgba(0,0,0,0.1)"} 
         )
 
     elif mode == 'school':
         total_schools = df['beis_school_id'].nunique()
-
         return dbc.Card(
             dbc.CardBody([
-                html.Div("TOTAL SCHOOLS", className="text-uppercase text-muted small fw-bold mb-1"),
+                html.Div("TOTAL SCHOOLS", className="gender-title-main"),
                 html.H2(f"{total_schools:,}", className="fw-bold", style={'color': '#0a1f44'}),
             ]),
-            className="mb-4 shadow-sm rounded-4 p-3"
+            className="mb-4 p-1",
+            style={'display': 'inline-block', 'borderRadius': '12px', "boxShadow": "0px 2px 10px rgba(0,0,0,0.1)"}
         )
 
-    return dbc.Card(dbc.CardBody(html.Div("Mode not supported")), className="mb-4 shadow-sm rounded-4 p-3")
+    return dbc.Card(dbc.CardBody(html.Div("Mode not supported")), className="mb-4 p-1", style={'display': 'inline-block', 'borderRadius': '12px', "boxShadow": "0px 2px 10px rgba(0,0,0,0.1)"})
+
+
+
