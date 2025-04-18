@@ -395,30 +395,35 @@ def content_layout_register_callbacks(app):
                 updated_dict[index] = val if val else None
 
         # Add special logic for School Level → Modified COC (in filter dict only)
+        # Add special logic for School Level → Modified COC (in filter dict only)
         level_vals = selections.get('Modified COC', [])
-        level_all = ['Elementary School', 'Junior High School', 'Senior High School']
-        selected_levels = level_vals if level_vals else level_all
 
-        purely_map = {
-            'Elementary School': 'Purely ES',
-            'Junior High School': 'Purely JHS',
-            'Senior High School': 'Purely SHS',
-        }
+        # Only map if user has selected 1-3 Modified COC levels
+        if level_vals:
+            selected_levels = level_vals
+            purely_map = {
+                'Elementary School': 'Purely ES',
+                'Junior High School': 'Purely JHS',
+                'Senior High School': 'Purely SHS',
+            }
 
-        extra_value = ''
-        if len(selected_levels) == 1:
-            extra_value = purely_map.get(selected_levels[0], '')
-        elif len(selected_levels) == 2:
-            if set(selected_levels) == {'Elementary School', 'Junior High School'}:
-                extra_value = ['Purely ES','Purely JHS','ES and JHS']
-            elif set(selected_levels) == {'Junior High School', 'Senior High School'}:
-                extra_value = ['Purely JHS','Purely SHS','JHS with SHS']
-            elif set(selected_levels) == {'Elementary School', 'Senior High School'}:
-                extra_value = ['Purely ES','Purely SHS']
-        elif len(selected_levels) == 3:
-            extra_value = ['Purely ES','Purely JHS','Purely SHS','ES and JHS','JHS with SHS','All Offering']
+            extra_value = ''
+            if len(selected_levels) == 1:
+                extra_value = purely_map.get(selected_levels[0], '')
+            elif len(selected_levels) == 2:
+                if set(selected_levels) == {'Elementary School', 'Junior High School'}:
+                    extra_value = ['Purely ES','Purely JHS','ES and JHS']
+                elif set(selected_levels) == {'Junior High School', 'Senior High School'}:
+                    extra_value = ['Purely JHS','Purely SHS','JHS with SHS']
+                elif set(selected_levels) == {'Elementary School', 'Senior High School'}:
+                    extra_value = ['Purely ES','Purely SHS']
+            elif len(selected_levels) == 3:
+                extra_value = ['Purely ES','Purely JHS','Purely SHS','ES and JHS','JHS with SHS','All Offering']
 
-        updated_dict['Modified COC'] = extra_value if extra_value else None
+            updated_dict['Modified COC'] = extra_value if extra_value else None
+        else:
+            updated_dict['Modified COC'] = None
+
 
         # Logic: If specific school filters are empty, treat as "All"
         fallback_values = {

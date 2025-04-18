@@ -7,8 +7,8 @@ import os
 from datetime import datetime
 
 def detect_school_year(df, file_path=None):
-    # if df.empty:
-    #     df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+    if df.empty:
+        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
         
     """Detects the school year from the dataset or filename"""
     for col in df.columns:
@@ -27,9 +27,9 @@ def detect_school_year(df, file_path=None):
     end_year = start_year + 1
     return f"<b>A.Y. <br>{start_year}–{end_year}</b>"
 
-def card_one(df, location, mode):
-    # if df.empty:
-    #     df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+def card_one(df, mode):
+    if df.empty:
+        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
     if mode == 'student':
         school_year = detect_school_year(df)
@@ -74,9 +74,9 @@ def card_one(df, location, mode):
         gender_legend = html.Div([
             html.Div([
                 html.Span(style={
-                    'width': '26px', 'height': '13px',
+                    'width': '18px', 'height': '18px',
                     'backgroundColor': '#2a4d69',
-                    'borderRadius': '8px',
+                    'borderRadius': '50%',
                     'display': 'inline-block',
                     'marginRight': '8px'
                 }),
@@ -86,9 +86,9 @@ def card_one(df, location, mode):
 
             html.Div([
                 html.Span(style={
-                    'width': '26px', 'height': '13px',
+                    'width': '18px', 'height': '18px',
                     'backgroundColor': '#f28cb1',
-                    'borderRadius': '8px',
+                    'borderRadius': '50%',
                     'display': 'inline-block',
                     'marginRight': '8px'
                 }),
@@ -121,4 +121,3 @@ def card_one(df, location, mode):
         )
 
     return dbc.Card(dbc.CardBody(html.Div("Mode not supported")), className="mb-4 shadow-sm rounded-4 p-3")
-
