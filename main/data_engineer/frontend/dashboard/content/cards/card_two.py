@@ -120,19 +120,19 @@ def card_two(df, location, mode):
                 "senior_high": shs_count
             }
 
-            labels = ["ES", "JHS", "SHS"]
+            labels = ["Elementary", "Junior High", "Senior High"]
             values = [elem_count, jhs_count, shs_count]
             colors = ['#6FA8DC', '#F6A5C0', '#F9CB9C']
-            pull = [0.2 if level_key == "elementary" else 0,
-                    0.2 if level_key == "junior_high" else 0,
-                    0.2 if level_key == "senior_high" else 0]
+            pull = [0.1 if level_key == "elementary" else 0,
+                    0.1 if level_key == "junior_high" else 0,
+                    0.1 if level_key == "senior_high" else 0]
 
             donut_chart = dcc.Graph(
                 config={'displayModeBar': False},
                 className='donut-chart',
                 style={
-                    "width": "100%",
-                    "height": "200px", 
+                    "width": "190px",
+                    "height": "190px"
                 },
                 figure={
                     "data": [go.Pie(
@@ -142,23 +142,11 @@ def card_two(df, location, mode):
                         marker=dict(colors=colors),
                         pull=pull,
                         textinfo='none',
-                        domain=dict(x=[0, 1], y=[0, 1]),
                     )],
                     "layout": go.Layout(
-                        height=250,
-                        margin={'l': 0, 'r': 0, 't': 0, 'b': 0},
+                        height=190,
+                        margin={'l': 0, 'r': 10, 't': 0, 'b': 0},
                         showlegend=False,
-                        
-                        legend=dict(
-                            orientation="h",              
-                            yanchor="top",            
-                            y=1.15,               
-                            xanchor="center",      
-                            x=0.5,
-                            font=dict(
-                                size=10 
-                            ),
-                        )
                     )
                 }
             )
@@ -176,23 +164,36 @@ def card_two(df, location, mode):
                 html.Div(f"{level_counts[level_key]:,}", className='total-count'),
 
                 html.Div([
-                    html.Div(donut_chart, className="donut-chart-container"),
+                    html.Div([
+                        html.Span(className="legend-dot es"),
+                        html.Span("ELEMENTARY", className="legend-label es"),
+                    ], className="legend-item"),
 
                     html.Div([
-                        html.Div([
-                            html.Div([
-                                html.Span(
-                                    f"{round((level_counts[level_key] / sum(values)) * 100, 1) if sum(values) else 0}%",
-                                    className=f"legend-percentage {level_key.replace('_', '-')}"
-                                ),
-                                html.Span(
-                                    f"{level_name.upper()}",
-                                    className=f"legend-label {level_key.replace('_', '-')}"
-                                ),
-                            ], className="legend-text-wrapper")
-                        ], className="legend-item-donut")
-                    ], className="custom-legend-donut"),
+                        html.Span(className="legend-dot jhs"),
+                        html.Span("JUNIOR HIGH", className="legend-label jhs"),
+                    ], className="legend-item"),
 
+                    html.Div([
+                        html.Span(className="legend-dot shs"),
+                        html.Span("SENIOR HIGH", className="legend-label shs"),
+                    ], className="legend-item")
+
+                ], className="custom-legend-level"),
+                
+                html.Div([
+                    html.Div(donut_chart, className="donut-chart-container"),
+                  
+                    html.Div([
+                        html.Span(
+                            f"{round((level_counts[level_key] / sum(values)) * 100, 1) if sum(values) else 0}%",
+                            className=f"legend-percentage {level_key.replace('_', '-')}"
+                        ),
+                        html.Span(
+                            f"{level_name.upper()}",
+                            className=f"legend-label {level_key.replace('_', '-')}"
+                        ),
+                    ], className="custom-legend-donut"),
                 ], className="donut-wrapper")
 
             ], className='gender-card')
