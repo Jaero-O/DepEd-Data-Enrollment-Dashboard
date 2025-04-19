@@ -63,20 +63,30 @@ def card_seven(df, mode):
     ))
 
     fig.update_layout(
-        title=dict(
-            text="Grade Level Enrollment by Gender",
-            x=0.05,
-            font=dict(size=20, color='darkblue')
-        ),
-        xaxis_title="Grade Level",
-        yaxis_title="Total Enrollment" if mode == 'student' else "Total Schools",
-        margin=dict(l=60, r=20, t=60, b=40),
-        height=400,
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=220,
         plot_bgcolor='white',
         paper_bgcolor='white',
-        legend=dict(orientation="h", y=-0.2, x=0.3)
+        legend=dict(orientation="h", y=-0.2, x=1, xanchor='right'),
+        xaxis=dict(
+            showline=True,
+            zeroline=False,
+            linecolor='black',
+            showgrid=True,
+            gridcolor='lightgray',
+            tickangle=0
+        ),
+        yaxis=dict(
+            showline=True,
+            showgrid=True,
+            zeroline=False,
+            linecolor='black'
+        )
     )
 
     return html.Div([
-        dcc.Graph(figure=fig, config={'displayModeBar': False}),
-    ], className="card-seven-container", style={"width": "50em", "height": "10em"})
+        html.Div([html.Div(f"ENROLLMENT BY GRADE LEVEL", className='card-title-main')], className='card-header-wrapper'),
+        html.Div(
+            dcc.Graph(figure=fig, config={'displayModeBar': False}), className='card-seven-graph'
+        ),
+    ], className="card card-seven")

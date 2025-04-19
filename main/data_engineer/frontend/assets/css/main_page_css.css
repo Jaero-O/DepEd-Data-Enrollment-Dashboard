@@ -281,6 +281,14 @@ div.tab-div {
 div.tab-div div.header-tab {
   display: flex;
   margin-bottom: 1em;
+  justify-content: space-between;
+}
+div.tab-div div.filter-button-div-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  align-items: center;
+  width: auto;
 }
 div.tab-div span.My-Dashboard-title {
   font-size: 1.5em;
@@ -663,14 +671,12 @@ div.tab-div .tabs-dcc {
 
 div.content-page {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   background-color: var(--web-background-color);
   max-width: 100vw;
-  height: 100%;
-  min-height: 33em;
+  height: auto;
+  gap: 1.25em;
   border-radius: 0em 0em 1em 1em;
-  padding: 1em;
   transition: all 0.5s linear;
 }
 

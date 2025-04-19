@@ -8,6 +8,7 @@ from main.data_engineer.frontend.dashboard.content.cards.card_five import card_f
 from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
 from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
+from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter
 
 
 # Path to preprocessed file
@@ -56,11 +57,26 @@ hierarchy_order = [
 # non-hierarchical fields
 direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified COC']
 
+import pandas as pd
+
+# Hierarchical and non-hierarchical filters
+hierarchy_order = [
+    'Region',
+    'Legislative District',
+    'Province',
+    'Division',
+    'District',
+    'Municipality',
+    'Barangay',
+]
+
+direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified COC']
+
 def convert_filter_to_df(filter_dict):
     csv_path = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
     df = pd.read_csv(csv_path)
 
-    # Rename columns
+    # Rename columns to match UI filters
     column_rename_map = {
         'region': 'Region',
         'division': 'Division',
@@ -80,18 +96,18 @@ def convert_filter_to_df(filter_dict):
 
     df.rename(columns=column_rename_map, inplace=True)
 
-    if filter_dict is None:
-        final_df = df.drop_duplicates(subset='BEIS School ID')
-        return final_df
+    # If no filters are passed, return the full set
+    if not filter_dict:
+        return df.drop_duplicates(subset='BEIS School ID')
 
-    # Normalize filter values
+    # Normalize all filter values to lists
     for key, value in filter_dict.items():
         if value is None:
             filter_dict[key] = []
         elif isinstance(value, str):
             filter_dict[key] = [value]
 
-    # Step 1: Hierarchical filtering
+    # Apply hierarchical filters
     filtered_df = df.copy()
     active_levels = [level for level in hierarchy_order if filter_dict.get(level)]
 
@@ -117,25 +133,37 @@ def convert_filter_to_df(filter_dict):
     # Step 3: Reverse column names back
     reverse_column_map = {v: k for k, v in column_rename_map.items()}
     final_df.rename(columns=reverse_column_map, inplace=True)
-
-    print("\n📊 Matched DataFrame based on filters:")
-    print(final_df)
-
     return final_df
 
-
 # Load the dataset once to access filter options
-def dashboardContent(final_df, location, mode):
-    return (
-        card_one(final_df, mode),
-        card_two(final_df, location, mode),
-        card_three(final_df, mode),
-        card_four(final_df, location, mode),
-        card_five(final_df, location, mode),        
-        card_six(final_df, location, mode),
-        card_seven(final_df, mode),
-        card_eight(final_df, location, mode)
+def dashboardContent(final_df, location, mode, order):
+    return [
+        html.Div([
+            html.Div([
+                card_one(final_df, mode),
+                *card_two(final_df, mode)
+            ], className='card-one-two-wrapper'),
+            html.Div([
+                card_three(final_df, mode), 
+                card_five(final_df, mode)
+            ], className='card-three-five-wrapper')
+        ], className='card-one-two-three-five-wrapper'),
+        html.Div([card_four(final_df, mode)], className='card-four-wrapper'),
+        html.Div(
+            [card_six(final_df, location, mode,order)],
+            className='card-six-wrapper'
+        ),
+        html.Div([
+            html.Div(card_seven(final_df, mode),className='card-seven-wrapper'),
+            html.Div(card_eight(final_df, mode),className='card-seven-wrapper'),
+        ], className='card-seven-eight-wrapper'),
+        # card_four(final_df, location, mode),
+        # card_three(final_df, mode),
+        # card_five(final_df, location, mode),        
+        # card_six(final_df, location, mode),
+        # card_seven(final_df, mode),
+        # card_eight(final_df, location, mode)
         # add here your cards after importing  
-    )
+    ]
 
 

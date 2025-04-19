@@ -1,18 +1,13 @@
 import pandas as pd
 import plotly.graph_objects as go
 from dash import html, dcc
-import dash_bootstrap_components as dbc
 
-def card_eight(df, location, mode):
+def card_eight(df, mode):
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
     if mode not in ['student', 'school']:
         raise ValueError("Mode must be either 'student' or 'school'")
-
-    # Filter by location if applicable
-    if location != 'overall' and location in df.columns:
-        df = df[df[location].notna()]
 
     # Define strand mappings
     strand_columns = {
@@ -65,7 +60,6 @@ def card_eight(df, location, mode):
         strand_data['Male'].append(df[male_cols].sum().sum())
         strand_data['Female'].append(df[female_cols].sum().sum())
 
-    # Create DataFrame
     strand_df = pd.DataFrame(strand_data).sort_values(by=['Male', 'Female'], ascending=False)
 
     # Create stacked area chart
@@ -78,44 +72,50 @@ def card_eight(df, location, mode):
         fill='tozeroy',
         mode='lines',
         line=dict(color='#2a4d69'),
-        marker=dict(size=10)
+        marker=dict(size=8)
     ))
 
     fig.add_trace(go.Scatter(
         x=strand_df['Strand'],
         y=strand_df['Female'],
         name='Female',
-        fill='tonexty',  
+        fill='tonexty',
         mode='lines',
         line=dict(color='#f48fb1'),
-        marker=dict(size=10)
+        marker=dict(size=8)
     ))
 
     fig.update_layout(
-        title=dict(
-            text="SENIOR HIGH SCHOOL STRAND<br><sup>ENROLLED STUDENTS<sup>",
-            x=0.05,
-            font=dict(size=30, weight='bold',color='#2a4d69')
-        ),
-        margin=dict(l=40, r=20, t=60, b=60),
-        height=450,
+        margin=dict(l=0, r=0, t=0, b=40),
+        height=220,
         plot_bgcolor='white',
         paper_bgcolor='white',
-        legend=dict( orientation='v', x=0.7, y=0.7, 
-        xanchor='left', 
-                    yanchor='middle', font=dict(size=25)),
+        legend=dict(
+            orientation='h',
+            x=1,
+            y=-0.3,
+            xanchor='right',
+            font=dict(size=12)
+        ),
         xaxis=dict(
             showticklabels=True,
-            tickfont=dict(size=17, weight='bold', color='#2a4d69'),), 
-
-        yaxis=dict(showticklabels=False,
-            showgrid=True,        
-            gridcolor='lightgray',   
-            gridwidth=1)  
+            tickfont=dict(size=12, color='#2a4d69')
+        ),
+        yaxis=dict(
+            showticklabels=True,
+            tickfont=dict(size=12),
+            showgrid=True,
+            gridcolor='lightgray',
+            gridwidth=1,
+            tickformat='~s'  # Compact number format
+        )
     )
 
-    # Return as dbc.Card
-    return dbc.Card(
-        dbc.CardBody([dcc.Graph(figure=fig, config={'displayModeBar': False})]),
-        className="card-eight-container"
-    )
+
+    return html.Div([
+        html.Div([html.Div("ENROLLMENT BY STRAND", className='card-title-main')], className='card-header-wrapper'),
+        html.Div(
+            dcc.Graph(figure=fig, config={'displayModeBar': False}),
+            className='card-seven-graph'
+        ),
+    ], className="card card-seven")
