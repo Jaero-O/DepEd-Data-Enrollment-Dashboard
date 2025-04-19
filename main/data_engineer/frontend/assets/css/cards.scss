@@ -309,22 +309,33 @@ div.card-six-wrapper{
                 font-family: "Inter-Bold";
                 margin-bottom:1em;
             }
+        }
 
-            div.filter-row{
+        div.card-filter-wrapper{
+            display:flex;
+            flex-direction:row;
+            align-items: center;
+            padding: 0.75em;
+            gap: 2em;
+
+            div.filter-wrapper{
                 display:flex;
                 flex-direction:row;
-                gap:1em;
-                margin-left:auto;
+                gap: 10em;    
+            }
 
-                .order-toggle-radio{
-                    display: flex;
-                    align-items: center;
-                    width:1em !important;
-                }
+            .order-toggle-radio{
+                display: flex;
+                flex-direction:row;
+                align-self: center;
+                gap: 0.5em;
+                width:1em !important;
+            }
 
-                .filter-dropdown-location{
-
-                }
+            .filter-dropdown-location{
+                display: flex;
+                flex-direction: row;
+                margin-left: 1em;
             }
         }
     
