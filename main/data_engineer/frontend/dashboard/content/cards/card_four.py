@@ -167,49 +167,48 @@ def card_four(df, location, mode):
         )
 
     return dbc.Card(
-        dbc.CardBody([
-            html.Div(
-                "ENROLLMENT BY SECTOR",
-                className="text-uppercase text-muted small fw-bold mb-1",
-                style={
-                    'fontSize': '19px',
-                    'color': '#2a4d69',
-                    'marginBottom': '-20px'  # <--- THIS is valid
-                }
-            ),
-            html.H2(f"{sector_data[value_col].sum():,}", className="fw-bold", style={
-                'color': '#000000',
-                'fontSize': '40px',
-                'marginBottom': '20px'
-            }),
-            html.Div(sector_lines, style={'marginBottom': '20px'}),
-            html.Div([
-                html.Div(legend_items, style={'flex': '1', 'padding': '20px'}),
-                html.Div(dcc.Graph(
-                    figure=pie_chart,
-                    config={'displayModeBar': False},
-                    style={'height': '100%', 'width': '100%'}
-                ), style={
-                    'flex': '1',
-                    'display': 'flex',
-                    'alignItems': 'center',
-                    'justifyContent': 'center',
-                    'height': 'auto'
-                })
-            ], style={
+    dbc.CardBody([
+        html.Div(
+            "ENROLLMENT BY SECTOR",
+            className="text-uppercase text-muted small fw-bold mb-1",
+            style={
+                'fontSize': '19px',
+                'color': '#2a4d69',
+                'marginBottom': '-20px'
+            }
+        ),
+        html.H2(f"{sector_data[value_col].sum():,}", className="fw-bold", style={
+            'color': '#000000',
+            'fontSize': '40px',
+            'marginBottom': '20px'
+        }),
+        html.Div(sector_lines, style={'marginBottom': '20px'}),
+        html.Div([
+            html.Div(legend_items, style={'flex': '1', 'padding': '20px'}),
+            html.Div(dcc.Graph(
+                figure=pie_chart,
+                config={'displayModeBar': False},
+                style={'height': '100%', 'width': '100%'}
+            ), style={
+                'flex': '1',
                 'display': 'flex',
                 'alignItems': 'center',
-                'gap': '20px',
-                'flexWrap': 'wrap'
+                'justifyContent': 'center',
+                'height': 'auto'
             })
         ], style={
-            'backgroundColor': 'white',
-            'padding': '20px',
-            'borderRadius': '12px'
-        }),
-        className="mb-4 shadow-sm rounded-4 p-3",
-        style={
-            'backgroundColor': '#adcbe3',
-            'padding': '10px'
-        }
-    )
+            'display': 'flex',
+            'alignItems': 'center',
+            'gap': '20px',
+            'flexWrap': 'wrap'
+        })
+    ], style={
+        'backgroundColor': 'white',  # Ensure the container remains white
+        'padding': '20px',
+        'borderRadius': '12px'
+    }),
+    className="mb-4 shadow-sm rounded-4 p-3",
+    style={
+        'padding': '10px'  # Removed the blue background color
+    }
+)

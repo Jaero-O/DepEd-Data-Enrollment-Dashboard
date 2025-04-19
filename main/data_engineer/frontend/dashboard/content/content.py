@@ -8,6 +8,8 @@ from main.data_engineer.frontend.dashboard.content.cards.card_five import card_f
 from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
 from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
+from main.data_engineer.frontend.dashboard.content.cards.card_tabular import card_tabular
+
 
 
 # Path to preprocessed file
@@ -134,7 +136,8 @@ def dashboardContent(final_df, location, mode):
         card_five(final_df, location, mode),        
         card_six(final_df, location, mode),
         card_seven(final_df, mode),
-        card_eight(final_df, location, mode)
+        card_eight(final_df, location, mode),
+        card_tabular(final_df, mode)
         # add here your cards after importing  
     )
 
