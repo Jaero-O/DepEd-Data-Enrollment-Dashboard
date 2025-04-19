@@ -11,7 +11,8 @@ import io
 from main.data_engineer.frontend.dashboard.content_layout.content_layout import content_layout, content_layout_register_callbacks
 
 # Import Cards Callbacks
-from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter_register_callbacks
+# from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six_register_callbacks
 
 # Import Flask Server
 from main.data_engineer.backend.main_server import app as server
@@ -95,8 +96,8 @@ app.layout = html.Div([
 ], className='main-page', id="main-container")
 
 content_layout_register_callbacks(app)
-card_filter_register_callbacks(app)
-
+# card_filter_register_callbacks(app)
+card_six_register_callbacks(app)
 # Callback for changing the theme of the page ------------------------------------------------------------------------------------------------
 
 @app.callback(

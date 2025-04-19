@@ -8,6 +8,7 @@ from main.data_engineer.frontend.dashboard.content.cards.card_five import card_f
 from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
 from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
+from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter
 
 
 # Path to preprocessed file
@@ -117,25 +118,38 @@ def convert_filter_to_df(filter_dict):
     # Step 3: Reverse column names back
     reverse_column_map = {v: k for k, v in column_rename_map.items()}
     final_df.rename(columns=reverse_column_map, inplace=True)
-
-    print("\n📊 Matched DataFrame based on filters:")
-    print(final_df)
-
     return final_df
 
 
 # Load the dataset once to access filter options
-def dashboardContent(final_df, location, mode):
-    return (
-        card_one(final_df, mode),
-        card_two(final_df, location, mode),
-        card_three(final_df, mode),
-        card_four(final_df, location, mode),
-        card_five(final_df, location, mode),        
-        card_six(final_df, location, mode),
-        card_seven(final_df, mode),
-        card_eight(final_df, location, mode)
+def dashboardContent(final_df, location, mode, order):
+    return [
+        html.Div([
+            html.Div([
+                card_one(final_df, mode),
+                *card_two(final_df, mode)
+            ], className='card-one-two-wrapper'),
+            html.Div([
+                card_three(final_df, mode), 
+                card_five(final_df, mode)
+            ], className='card-three-five-wrapper')
+        ], className='card-one-two-three-five-wrapper'),
+        html.Div([card_four(final_df, mode)], className='card-four-wrapper'),
+        html.Div(
+            [card_six(final_df, location, mode,order)],
+            className='card-six-wrapper'
+        ),
+        html.Div([
+            html.Div(card_seven(final_df, mode),className='card-seven-wrapper'),
+            html.Div(card_eight(final_df, mode),className='card-seven-wrapper'),
+        ], className='card-seven-eight-wrapper'),
+        # card_four(final_df, location, mode),
+        # card_three(final_df, mode),
+        # card_five(final_df, location, mode),        
+        # card_six(final_df, location, mode),
+        # card_seven(final_df, mode),
+        # card_eight(final_df, location, mode)
         # add here your cards after importing  
-    )
+    ]
 
 

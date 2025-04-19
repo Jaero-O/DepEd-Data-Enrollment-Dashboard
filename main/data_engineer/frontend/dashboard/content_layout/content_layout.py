@@ -34,19 +34,24 @@ tab_labels = ['Region', 'Division', 'District', 'Province', 'Municipality', 'Leg
 # Layout (content)
 content_layout = html.Div([
     dcc.Store(id='current-filter-dict'),
-    dcc.Store(id='selected-filters', storage_type='session'),
+    dcc.Store(id='selected-filters', data={
+        'location': 'region',
+        'hierarchy_order': 'desc',
+        'mode': 'student'
+    }),
     html.Div([
         html.Span('School Enrollment Dashboard', className='My-Dashboard-title'),
-        html.Button(
-            children=[
-                html.I(className="fa fa-filter"), html.Span('Show Filter', className='hide-filter', id='filter-button-text')
-            ],
-            className='filter-button',
-            id='toggle-button-open',
-            n_clicks=0
-        )
+        html.Div([
+            card_filter('type dropdown'),
+            html.Button(
+                children=[
+                    html.I(className="fa fa-filter"), html.Span('Show Filter', className='hide-filter', id='filter-button-text')
+                ],
+                className='filter-button',
+                id='toggle-button-open',
+                n_clicks=0)
+        ], className='filter-button-div-container'),
     ], className='header-tab'),
-
     html.Div([
         html.Div([
             html.Button(html.I(className='fa fa-times'),id='toggle-button-exit', n_clicks=0,className='exit-filter-menu'),
@@ -271,10 +276,7 @@ content_layout = html.Div([
         ], className='dropdown-search-filtering-div'),
         html.Div(id='filter-table-output', className='filter-table-output')
     ], className='filtering-div', id='filter-container'),
-    html.Div([
-        card_filter(),
-        html.Div(id="tab-dynamic-content")
-    ], id="tab-content", className='content-page active-tab'),
+    html.Div(id="tab-dynamic-content",className='content-page active-tab' ),
     html.Div(id="output-data-upload")
 ], className='tab-div')
 
@@ -291,12 +293,13 @@ def content_layout_register_callbacks(app):
         Input('selected-filters', 'data'),
     )
     def update_tab_content(data_dict,filter_dict):
-        filter1 = filter_dict.get('filter1') if filter_dict else 'overall'  # or your default
-        filter2 = filter_dict.get('filter2') if filter_dict else 'student'  # or your default
+        location = filter_dict.get('location') if filter_dict else 'overall'  # or your default
+        mode = filter_dict.get('mode') if filter_dict else 'student'
+        order = filter_dict.get('hierarchy_order') if filter_dict else 'ascending'  # or your default
         print(filter_dict)
-        print("Filter 1:", filter1)
-        print("Filter 2:", filter2)
-        return dashboardContent(convert_filter_to_df(data_dict), filter1, filter2)
+        print("Filter 1:", location)
+        print("Filter 2:", mode)
+        return dashboardContent(convert_filter_to_df(data_dict), location,mode,order)
 
     # Callback to toggle filter visibility
     @app.callback(
