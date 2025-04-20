@@ -9,6 +9,7 @@ from main.data_engineer.frontend.dashboard.content.cards.card_six import card_si
 from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
 from main.data_engineer.frontend.dashboard.content.cards.card_tabular import card_tabular
+from main.data_engineer.frontend.dashboard.content.cards.card_regional_table import card_regional_table
 
 
 
@@ -137,8 +138,7 @@ def dashboardContent(final_df, location, mode):
         card_six(final_df, location, mode),
         card_seven(final_df, mode),
         card_eight(final_df, location, mode),
-        card_tabular(final_df, mode)
+        card_tabular(final_df, mode),
+        card_regional_table(final_df, mode)
         # add here your cards after importing  
     )
-
-

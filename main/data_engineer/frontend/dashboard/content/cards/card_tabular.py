@@ -103,14 +103,13 @@ def card_tabular(df, mode):
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
-    if mode not in ['student', 'school']:
-        raise ValueError("Mode must be either 'student' or 'school'")
+        if mode not in ['student', 'school']:
+            raise ValueError("Mode must be either 'student' or 'school'")
 
     student_columns = list(COLUMN_LABELS.keys())
     school_columns = [
         'school_name', 'beis_school_id', 'sector', 'school_subclassification', 'school_type',
-        'modified_coc', 'region', 'division', 'district', 'street_address',
-        'province', 'municipality', 'legislative_district', 'barangay'
+        'modified_coc'
     ]
 
     selected_columns = student_columns if mode == 'student' else school_columns
