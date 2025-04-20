@@ -1,6 +1,8 @@
 import pandas as pd
 from dash import html, dash_table
 import dash_bootstrap_components as dbc
+from dash import dcc, Input, Output, callback
+
 
 # Column labels with proper capitalization and translation
 COLUMN_LABELS = {
@@ -66,7 +68,38 @@ COLUMN_LABELS = {
     'g12_arts_female': 'Grade 12 Arts Female',
 }
 
+display_df = None
+
+@callback(
+    Output("student-data-table", "data"),
+    Input("student-search-input", "value"),
+    prevent_initial_call=True
+)
+def update_student_table(search_value):
+    if not search_value:
+        return display_df.to_dict("records")
+    filtered_df = display_df[
+        display_df['school_name'].str.contains(search_value, case=False, na=False) |
+        display_df['beis_school_id'].astype(str).str.contains(search_value, case=False, na=False)
+    ]
+    return filtered_df.to_dict("records")
+
+@callback(
+    Output("school-data-table", "data"),
+    Input("school-search-input", "value"),
+    prevent_initial_call=True
+)
+def update_school_table(search_value):
+    if not search_value:
+        return display_df.to_dict("records")
+    filtered_df = display_df[
+        display_df['school_name'].str.contains(search_value, case=False, na=False) |
+        display_df['beis_school_id'].astype(str).str.contains(search_value, case=False, na=False)
+    ]
+    return filtered_df.to_dict("records")
+
 def card_tabular(df, mode):
+    global display_df
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -92,48 +125,63 @@ def card_tabular(df, mode):
                 style={'fontSize': '18px', 'color': '#2a4d69'}
             ),
             html.Div(
-                dash_table.DataTable(
-                    data=display_df.to_dict("records"),
-                    columns=[
-                        {"name": COLUMN_LABELS.get(col, col.replace("_", " ").title()), "id": col}
-                        for col in display_df.columns
-                    ],
-                    page_size=10,
-                    style_table={
-                        'overflowX': 'auto',
-                        'overflowY': 'auto',
-                        'maxHeight': '500px',
-                        'maxWidth': '100%'
-                    },
-                    style_header={
-                        'backgroundColor': '#d9f2ff',
-                        'fontWeight': 'bold',
-                        'textAlign': 'center',
-                        'color': '#2a4d69',
-                        'fontFamily': '"Segoe UI", sans-serif'
-                    },
-                    style_cell={
-                        'textAlign': 'center',
-                        'padding': '8px',
-                        'minWidth': '100px',
-                        'maxWidth': '300px',
-                        'whiteSpace': 'normal',
-                        'fontFamily': '"Segoe UI", sans-serif'
-                    },
-                    style_data={
-                        'backgroundColor': 'white',
-                        'color': '#4f4f4f',
-                    },
-                    style_data_conditional=[
-                        {
-                            'if': {'row_index': 'odd'},
-                            'backgroundColor': '#f9f9f9'
+                [
+                    dcc.Input(
+                        id=f"{mode}-search-input",
+                        type="text",
+                        placeholder="Search by School Name or School ID...",
+                        style={
+                            'width': '100%',
+                            'height': '30px',
+                            'padding': '10px',
+                            'marginBottom': '10px',
+                            'border': '1px solid #ccc',
+                            'borderRadius': '5px',
+                            'fontFamily': '"Segoe UI", sans-serif'
                         }
-                    ],
-                    filter_action='none',
-                    sort_action='none',
-                    page_action='native'
-                ),
+                    ),
+                    dash_table.DataTable(
+                        id=f"{mode}-data-table",
+                        data=display_df.to_dict("records"),
+                        columns=[
+                            {"name": COLUMN_LABELS.get(col, col.replace("_", " ").title()), "id": col}
+                            for col in display_df.columns
+                        ],
+                        page_size=10,
+                        style_table={
+                            'overflowX': 'auto',
+                            'overflowY': 'auto',
+                            'maxHeight': '500px',
+                            'maxWidth': '100%'
+                        },
+                        style_header={
+                            'backgroundColor': '#d9f2ff',
+                            'fontWeight': 'bold',
+                            'textAlign': 'center',
+                            'color': '#2a4d69',
+                            'fontFamily': '"Segoe UI", sans-serif'
+                        },
+                        style_cell={
+                            'textAlign': 'center',
+                            'padding': '8px',
+                            'minWidth': '100px',
+                            'maxWidth': '300px',
+                            'whiteSpace': 'normal',
+                            'fontFamily': '"Segoe UI", sans-serif'
+                        },
+                        style_data={
+                            'backgroundColor': 'white',
+                            'color': '#4f4f4f',
+                        },
+                        style_data_conditional=[
+                            {
+                                'if': {'row_index': 'odd'},
+                                'backgroundColor': '#f9f9f9'
+                            }
+                        ],
+                        page_action='native'
+                    )
+                ],
                 style={
                     'maxWidth': '1200px',
                     'margin': '0 auto',

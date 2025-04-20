@@ -203,12 +203,12 @@ def card_four(df, location, mode):
             'flexWrap': 'wrap'
         })
     ], style={
-        'backgroundColor': 'white',  # Ensure the container remains white
+        'backgroundColor': 'white', 
         'padding': '20px',
         'borderRadius': '12px'
     }),
     className="mb-4 shadow-sm rounded-4 p-3",
     style={
-        'padding': '10px'  # Removed the blue background color
+        'padding': '10px' 
     }
 )
