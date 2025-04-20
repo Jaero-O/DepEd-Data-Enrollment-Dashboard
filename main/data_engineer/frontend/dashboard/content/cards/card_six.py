@@ -82,7 +82,7 @@ def generate_card_six_figure(df, group_col, order):
         paper_bgcolor='white',
         showlegend=False
     )
-    fig.update_yaxes(autorange="reversed", tickfont=dict(size=11))
+    fig.update_yaxes(autorange="reversed", ticksuffix='  ', tickfont=dict(size=11))
 
     return fig
 
@@ -100,7 +100,7 @@ def card_six(df, location, mode, hierarchy_order):
             html.Div("View:", className="highlight-label"),
             html.Div([order_radio,filter1_dropdown], className="filter-wrapper")
         ], className='card-filter-wrapper'),
-        html.Div([dcc.Graph(id='card-six-graph', figure=fig, config={'displayModeBar': False})], className="card-six-graph")
+        html.Div([dcc.Graph(id='card-six-graph', figure=fig, config={'displayModeBar': False})])
     ], id='card-six-id', className="card card-six")
 
 # --- Callback Registration --- #
