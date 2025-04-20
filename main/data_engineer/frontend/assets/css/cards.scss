@@ -17,9 +17,9 @@
 div.card-one-two-wrapper{
     display:flex;
     flex-direction:row;
-    gap:1em;
-    width:56em;
-    height:14em;
+    gap:2em;
+    width:100%;
+    height:250px;
 
     div.card-one-two{
         display:flex;
@@ -56,7 +56,7 @@ div.card-one-two-wrapper{
             }
             
             div.card-title-sub {
-                font-size: 0.4em;
+                font-size: 0.5em;
                 color: #2a4d69;
                 font-family: "Inter-Medium";
             }
@@ -75,7 +75,7 @@ div.card-one-two-wrapper{
         }
     
         div.total-count {
-            font-size: 1.1em;
+            font-size: 1.25em;
             color: #081434;
             text-align: left;
             font-family: "Inter-Bold";
@@ -134,15 +134,15 @@ div.card-one-two-wrapper{
     }
 }
 
-div.card-three-five-wrapper{
+div.card-three-four-five-wrapper{
     display:flex;
     flex-direction:row;
-    gap:1em;
-    width:56em;
-    height:20em;
+    gap:2em;
+    width:100%;
+    height:435px;
 
     div.card-three{
-        width:70%;
+        width:700px;
         height:100%;
     
         div.card-header-wrapper{
@@ -157,8 +157,107 @@ div.card-three-five-wrapper{
         }
     }
 
+    div.card-four{
+        width: 415px;
+        height:100%;
+        overflow:hidden;
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:column;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+                margin-bottom:1em;
+            }
+        }
+    
+        div.sector-lines-wrapper{
+            margin-top:1em;
+    
+            div.sector-line{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #f0f0f0;
+                padding: 10px;
+                margin-bottom: 5px;
+                border-radius: 8px;
+    
+                span.sector-label{
+                    font-size: 0.75em;
+                    font-family: "Inter-Bold";
+                    color: #0a1f44;
+                    flex: 1;
+                    text-align: left;
+                }
+        
+                span.sector-value{
+                    font-size: 0.75em;
+                    font-family: "Inter-Bold";
+                    color: #0a1f44;
+                    flex: 1;
+                    text-align: right;
+                }
+    
+                div.legend-item{
+                    display:flex;
+                    gap:0.25em;
+                    align-items:center;
+        
+                    span.legend-dot{
+                        border-radius:0.5em;
+                        display: inline-block;
+                        margin-right: 0.5em;
+                        width: 26px;
+                        height: 13px;
+                    }
+            
+                    span.legend-percentage{
+                        font-size:1em;
+                        font-family:"Inter-Bold";
+                        width:6em;
+                    }
+                    span.legend-label{
+                        font-size: 1em;
+                        font-family: "Inter-Bold";
+                        width:7em;
+                        margin:0;
+                    }
+                }         
+            }
+        }
+    
+        div.graph-wrapper-wrapper{
+            // 'display': 'flex',
+            //         'alignItems': 'center',
+            //         'gap': '20px',
+            //         'flexWrap': 'wrap'
+    
+            display:flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    
+        div.graph-wrapper{
+            flex:1;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:auto;
+        }
+    
+        .pie-chart .user-select-none.svg-container{
+            height:250px !important;
+            width:250px !important;
+        }
+    }
+
     div.card-five{
-        width:auto;
+        width:390px;
         height:100%;
     
         div.card-header-wrapper{
@@ -180,12 +279,13 @@ div.card-three-five-wrapper{
         }
     }
 }
-div.card-one-two-three-five-wrapper{
-    width:auto;
+
+div.school-based-wrapper{
+    width:100%;
     height:auto;
     display:flex;
     flex-direction:column;
-    gap:1em;
+    gap:2em;
 }
 
 div.card-four-wrapper{
@@ -347,38 +447,54 @@ div.card-six-wrapper{
     }
 }
 
-// div.card-seven-wrapper{
-//     width:45.5em;
-//     height:19em;
+div.card-seven-wrapper{
+    width:100%;
+    height:20em;
+    display:flex;
+    flex-wrap:wrap;
+    height:auto;
+    gap:1.25em;
 
-//     div.card-seven{
-//         width:100%;
-//         height:100%;
+    div.card-seven{
+        width:100%;
+        height:21.5em;
+
+        &.es {
+            width:50%;
+        }
+
+        &.jhs{
+            width:48%;
+        }
+
+        &.shs{
+            width:100%;
+        }
     
-//         div.card-header-wrapper{
-//             display:flex;
-//             flex-direction:row;
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:row;
     
-//             div.card-title-main {
-//                 font-size: 1em;
-//                 color: #2a4d69;
-//                 font-family: "Inter-Bold";
-//                 margin-bottom:1em;
-//             }
-//         }
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+                margin-bottom:1em;
+            }
+        }
     
-//         div.card-seven-graph{
-//             width:auto;
-//             height:auto;
-//             font-family: "Inter";
-//         }
-//     }
-// }
+        div.card-seven-graph{
+            width:auto;
+            height:auto;
+            font-family: "Inter";
+        }
+    }
+}
 
 div.card-seven-eight-wrapper{
     display:flex;
     flex-direction:column;
-    gap:1em;
+    gap:1.25em;
     width:auto;
     height:auto;
 
@@ -425,4 +541,18 @@ div.card{
 div.card:hover {
     transform: translateY(-3px);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+div.card-group-title{
+    font-size:1.4em;
+    font-family:"Inter-Bold";
+    color:var(--navbar-color-active);
+    display:flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content:flex-start;
+    padding:1em 0em 0em 0em;
+    width:100%;
+    height:100%;
+    transition: all 0.5s linear;
 }

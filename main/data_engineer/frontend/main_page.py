@@ -31,74 +31,132 @@ app.title = "DepEd Learning Management System"
 # app._favicon = ("images\deped_logo.ico")
 app.config.suppress_callback_exceptions = True
 
-# title bar
-title=html.Div([
-    html.Img(src='./assets/images/deped_title.png', className='depEd-title'),
-    # html.I(className="fa fa-bars")
-], className='title-div-navbar')
-
 # Navigation Bar 
-navBar = html.Div([
-    title,
+sidebar = html.Div([
+    html.Img(src='./assets/images/deped_title.png', className='depEd-title'),
     html.Div([
         html.Div([
-            html.Div([html.I(className="fa fa-area-chart hovered"), html.Span('Dashboard', className='nav-bar-li hovered')], className='nav-bar-li-div-hovered'),
-            html.Div([html.I(className="fa fa-home"), html.Span('Home', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-comments"), html.Span('Comments', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-envelope"), html.Span('Messages', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-calendar"), html.Span('Calendar', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-file"), html.Span('Documents', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-window-restore"), html.Span('Archives', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-database"), html.Span('Database', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-cog"), html.Span('Settings', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-user"), html.Span('User', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-cog"), html.Span('Settings', className='nav-bar-li')]),
-            html.Div([html.I(className="fa fa-sign-out log-out"), html.Span('Log Out', className='nav-bar-li log-out')]),
-            
-        ], className='nav-items'),
-        html.Div([
-            # html.Div(dbc.Switch(id="theme-toggle-switch", label=None, value=False, className="toggle-switch-theme"), className="theme-toggle-container"),
-            #  html.Img(src='./assets/images/deped_logo.png', className='depEd-logo'),
-        ], className='header-footer')
-    ], className='nav-bar-div')
-],className='nav-bar-title-div')
+            html.Div([html.I(className="fa fa-area-chart hovered"), html.Span('Dashboard', className='sidebar-li hovered'),html.I(className="fa fa-chevron-down")], className='sidebar-li-div-hovered items-wrapper'),
+            html.Div([
+                html.Button([
+                    html.I(className="fa fa-graduation-cap"),
+                    html.Span("Enrollment Data", className="submenu-link")
+                ],id='enrollment-data', className="submenu-item active"),
+                html.Button([
+                    html.I(className="fa fa-building"),
+                    html.Span("School Data", className="submenu-link")
+                ],id='school-data', className="submenu-item"),
+            ], className="submenu"),
+        ]),
+        html.Div([html.I(className="fa fa-envelope"), html.Span('Messages', className='sidebar-li')], className='items-wrapper'),
+        html.Div([html.I(className="fa fa-calendar"), html.Span('Calendar', className='sidebar-li')], className='items-wrapper'),
+        html.Div([html.I(className="fa fa-file"), html.Span('Legal Documents', className='sidebar-li')], className='items-wrapper'),
+        html.Div([html.I(className="fa fa-database"), html.Span('Server Database', className='sidebar-li')], className='items-wrapper'),
+        html.Div([html.I(className="fa fa-cog"), html.Span('Settings', className='sidebar-li')], className='items-wrapper'),
+    ], className='sidebar-items'),
+    html.Div([
+        html.Img(src='/assets/images/kuruchan.png', className='profile-pic'),
+        html.Div('Richard Villanueva', className='profile-name'),
+        html.Div('richardkimv@deped.edu.ph', className='profile-email'),
+        html.Button('Admin Account', className='profile-role-btn')
+    ], className='profile-card'),
+], className='sidebar-wrapper')
 
 # Header
-header = html.Div([
+navbar = html.Div([
+    html.Div("Enrollment Data", className='navbar-title'),
+    html.Div(id='tabs-wrapper', className='tabs-wrapper'),
     html.Div([
-        html.I(className='fa fa-search'),
-        dcc.Input(type="text", placeholder="Search...", className='search-bar'),
-    ], className='header-search-div'),
-    html.Div([
-        html.I(className='fa fa-envelope'),
-        html.I(className='fa fa-bell'),
-        html.Span('I', className='header-divider'),
-        html.Div([
-            html.I(className='fa fa-user-circle profile-pic'),
-            html.Div([
-                html.Span('Jane Doe', className='username-text'),
-                html.Span('Admin', className='access-level-text')], className='user-info'),
-        ], className='header-profile-div'),
-        html.I(className='fa fa-ellipsis-v')
-    ], className='header-icons-div')
+        html.Button(
+            children=[
+                html.I(className="fa fa-filter"), html.Span('Filter', className='hide-filter', id='filter-button-text')
+            ],
+            className='filter-button',
+            id='toggle-button-open',
+            n_clicks=0)
+    ], className='filter-button-div-container'),
 ], className='header-div')
+
+# html.Div([
+    #     html.I(className='fa fa-search'),
+    #     dcc.Input(type="text", placeholder="Search...", className='search-bar'),
+    # ], className='header-search-div'),
+    # html.Div([
+    #     html.I(className='fa fa-envelope'),
+    #     html.I(className='fa fa-bell'),
+    #     html.Span('I', className='header-divider'),
+    #     html.Div([
+    #         html.I(className='fa fa-user-circle profile-pic'),
+    #         html.Div([
+    #             html.Span('Jane Doe', className='username-text'),
+    #             html.Span('Admin', className='access-level-text')], className='user-info'),
+    #     ], className='header-profile-div'),
+    #     html.I(className='fa fa-ellipsis-v')
+    # ], className='header-icons-div')
 
 # Application Layout Initialization ------------------------------------------------------------------------------------------------
 
 app.layout = html.Div([
     dcc.Store(id="theme-store", data="light"),
+    dcc.Store(id='selected-mode', storage_type='session', data='student'),
     # dcc.Store(id='df-store', data=df.to_dict('records')),
-    navBar,
+    sidebar,
     html.Div([
-        header,
+        navbar,
         content_layout
-    ])
+    ], className='navbar-content-wrapper')
 ], className='main-page', id="main-container")
 
-content_layout_register_callbacks(app)
+@app.callback(
+    Output('tabs-wrapper', 'children'),
+    Input('selected-mode', 'data')
+)
+def render_tabs(mode):
+    if mode == 'student':
+        return dcc.Tabs(
+            children=[
+                dcc.Tab(label='School-based', value='school-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Level-based', value='level-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected')
+            ],
+            id='tabs',
+            value='school-based'
+        )
+    elif mode == 'school':
+        return dcc.Tabs(
+            children=[
+                dcc.Tab(label='School-based', value='school-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected')
+            ],
+            id='tabs',
+            value='school-based'
+        )
+    return None
+
 # card_filter_register_callbacks(app)
-card_six_register_callbacks(app)
+# card_six_register_callbacks(app)
 # Callback for changing the theme of the page ------------------------------------------------------------------------------------------------
+
+@app.callback(
+    Output('selected-mode', 'data'),
+    Output('enrollment-data', 'className'),
+    Output('school-data', 'className'),
+    Input('enrollment-data', 'n_clicks'),
+    Input('school-data', 'n_clicks'),
+    prevent_initial_call=True
+)
+def update_selected_button(enrollment_clicks, school_clicks):
+    triggered_id = ctx.triggered_id
+    default_class = "submenu-item"
+    active_class = "submenu-item active"
+    
+    if triggered_id == 'enrollment-data':
+        return 'student', active_class, default_class
+    elif triggered_id == 'school-data':
+        return 'school', default_class, active_class
+    
+    return dash.no_update
+
 
 @app.callback(
     Output("main-container", "className"),
@@ -178,3 +236,7 @@ def upload_file(contents, filename):
             return html.Div([html.H5(f"Upload failed with status {response.status_code}")])
     except requests.exceptions.RequestException as e:
         return html.Div([html.H5(f"Error occurred: {str(e)}")])
+    
+
+
+content_layout_register_callbacks(app)

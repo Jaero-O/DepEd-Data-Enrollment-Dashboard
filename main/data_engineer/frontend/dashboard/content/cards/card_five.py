@@ -18,7 +18,7 @@ def card_five(df, mode='student'):
 
     elif mode == 'student':
         grade_cols = [col for col in df.columns if '_male' in col or '_female' in col]
-        df = df[['school_type'] + grade_cols].copy()
+        df = df[['school_type'] + grade_cols]
         df['total'] = df[grade_cols].sum(axis=1)
         card_five_title = 'Enrollment'
 

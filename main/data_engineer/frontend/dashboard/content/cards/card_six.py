@@ -57,7 +57,7 @@ def get_total_by_mode(df, mode):
 
 def generate_card_six_figure(df, group_col, order):
     grouped = df.groupby(group_col)['value'].sum().reset_index()
-    grouped = grouped.sort_values(by='value', ascending=(order == 'asc')).tail(10)
+    grouped = grouped.sort_values(by='value', ascending=(order == 'asc')).head(10)
 
     # Truncate long labels but keep full label for hover
     MAX_LABEL_LENGTH = 30
