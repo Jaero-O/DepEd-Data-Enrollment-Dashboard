@@ -271,6 +271,9 @@ div.card-six-wrapper div.card-six div.card-header-wrapper div.filter-row .order-
   align-items: center;
   width: 1em !important;
 }
+div.card-six-wrapper div.card-six div.card-header-wrapper div.filter-row .filter-dropdown-location > button {
+  width: 1em !important;
+}
 div.card-six-wrapper div.card-six div.card-six-graph {
   width: 300px;
   height: auto;

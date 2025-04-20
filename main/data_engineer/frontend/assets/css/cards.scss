@@ -322,7 +322,8 @@ div.card-six-wrapper{
                     width:1em !important;
                 }
 
-                .filter-dropdown-location{
+                .filter-dropdown-location > button {
+                    width: 1em !important;
 
                 }
             }
