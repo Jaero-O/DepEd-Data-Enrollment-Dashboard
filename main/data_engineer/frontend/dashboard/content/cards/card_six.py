@@ -80,8 +80,9 @@ def card_six(df, location, mode):
         paper_bgcolor='white',
         showlegend=False
     )
+    
 
-    fig.update_yaxes(autorange="reversed")
+    fig.update_yaxes(autorange="reversed", ticksuffix = "    ")
 
     return html.Div([
         html.Div([
