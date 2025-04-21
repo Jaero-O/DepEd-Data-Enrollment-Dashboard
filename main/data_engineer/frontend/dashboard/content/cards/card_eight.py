@@ -102,6 +102,7 @@ def card_eight(df, mode):
             tickfont=dict(size=12, color='#2a4d69')
         ),
         yaxis=dict(
+            type='log',
             showticklabels=True,
             tickfont=dict(size=12),
             showgrid=True,

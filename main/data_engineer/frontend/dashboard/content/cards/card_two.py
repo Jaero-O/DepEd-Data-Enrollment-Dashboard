@@ -117,3 +117,6 @@ def card_two(df, mode):
         create_card("Junior High School", "junior_high"),
         create_card("Senior High School", "senior_high")
     ]
+
+def card_two_register_callbacks(app):
+    return None

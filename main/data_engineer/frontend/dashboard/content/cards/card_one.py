@@ -91,3 +91,6 @@ def card_one(df, mode):
         ], className='card card-one-two')
 
     return create_card()
+
+def card_one_register_callbacks(app):
+    return None
