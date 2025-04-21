@@ -150,9 +150,6 @@ def card_three(df, mode):
         bargroupgap=0.1,
         barmode='group',
         autosize=True,
-        
-        # 🚀 Add this line:
-        transition=dict(duration=2000, easing='cubic-in')
     )
 
     return html.Div([
@@ -163,7 +160,7 @@ def card_three(df, mode):
                     className='card-title-main',
                     style={
                         'fontFamily':'Inter',
-                        'fontSize': '20px',
+                        'fontSize': '16px',
                         'fontWeight': '700',
                         'color': '#44647E',
                         'marginBottom': '10px'
