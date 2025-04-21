@@ -1,3 +1,29 @@
-div{
-    width:10em;
+div.card-five {
+  width: 379;
+  height: 427;
+  border-radius: 10px;
+  
+  div.card-header-wrapper {
+    margin-bottom: 1rem;
+
+    div.card-title-main {
+      width: 278;
+      height: 26;
+      top: 472px;
+      left: 1520px;
+      font-family: "Inter";
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 100%;
+      letter-spacing: 0%;
+      color: #44647E;
+    }
+  }
+
+  .card-five-graph {
+    margin-top: 10px;
+    width: 300px;
+    height:auto;
+    font-family:'Intern';
+      }    
 }
