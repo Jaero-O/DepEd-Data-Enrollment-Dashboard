@@ -127,14 +127,7 @@ def card_four(df, mode):
         )
 
     return html.Div([
-        html.Div([html.Div(["ENROLLMENT BY SECTOR"], className="card-title-main")], className='card-header-wrapper'),
-        html.Div(dcc.Graph(
-            figure=pie_chart,
-            config={'displayModeBar': False},
-            className='pie-chart',
-            style={'height': '100%', 'width': '100%'}
-        ), className='graph-wrapper'),
-        html.Div(sector_lines, className='sector-lines-wrapper'),
+        
     ], className='card card-four')
 
 def card_four_register_callbacks(app):

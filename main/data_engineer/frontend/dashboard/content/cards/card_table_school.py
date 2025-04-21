@@ -100,6 +100,7 @@ def update_school_table(search_value):
 
 def card_tabular(df, mode):
     global display_df
+
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -116,35 +117,76 @@ def card_tabular(df, mode):
     display_df = df.loc[:, selected_columns].copy()
     display_df.reset_index(drop=True, inplace=True)
 
-    return dbc.Card(
-        dbc.CardBody([
-            html.Div(
-                f"{mode.upper()} DATA (Tabular Form)",
-                className="tabular-title"
-            ),
+    grouped_columns = []
+
+    for col in display_df.columns:
+        label = COLUMN_LABELS.get(col, col.replace("_", " ").title())
+        if any(gender in label for gender in ["Male", "Female"]):
+            # Try to split at " Male" or " Female"
+            if "Male" in label:
+                group = label.split(" Male")[0]
+                grouped_columns.append({"name": [group, "Male"], "id": col})
+            elif "Female" in label:
+                group = label.split(" Female")[0]
+                grouped_columns.append({"name": [group, "Female"], "id": col})
+        else:
+            # For columns like 'School Name', 'BEIS School ID', etc.
+            grouped_columns.append({"name": ["", label], "id": col})
+
+
+    return html.Div([
+            html.Div([html.Div(f"SCHOOL ENROLLMENT DATA", className='card-title-main')], className='card-header-wrapper'),
+            dcc.Input(
+                    id=f"{mode}-search-input",
+                    type="text",
+                    placeholder="Search by School Name or School ID...",
+                    className="search-input"
+                ),
             html.Div(
                 [
-                    dcc.Input(
-                        id=f"{mode}-search-input",
-                        type="text",
-                        placeholder="Search by School Name or School ID...",
-                        className="search-input"
-                    ),
                     dash_table.DataTable(
                         id=f"{mode}-data-table",
                         data=display_df.to_dict("records"),
-                        columns=[
-                            {"name": COLUMN_LABELS.get(col, col.replace("_", " ").title()), "id": col}
-                            for col in display_df.columns
-                        ],
-                        page_size=10,
-                        style_table={'overflowX': 'auto', 'overflowY': 'auto'},
+                        columns=grouped_columns,  # use the grouped headers
+                        merge_duplicate_headers=True,  # enable nested headers
+                        page_size=7,
                         page_action='native',
-                        className="data-table"
+                        style_table={
+                            'overflowX': 'auto',
+                            'overflowY': 'auto',
+                            'width': '100%',
+                        },
+                        style_header={
+                            'backgroundColor': '#d9f2ff',
+                            'fontWeight': 'bold',
+                            'textAlign': 'center',
+                            'color': '#2a4d69',
+                            'fontFamily': "Inter",
+                            'borderBottom': '1px solid #ccc',
+                        },
+                        style_cell={
+                            'textAlign': 'center',
+                            'padding': '8px',
+                            'minWidth': '100px',
+                            'maxWidth': '300px',
+                            'whiteSpace': 'normal',
+                            'fontFamily': "Inter",
+                            'color': '#4f4f4f',
+                            'backgroundColor': 'white',
+                            'border': 'none'  # Removes cell border (Y-axis lines)
+                        },
+                        style_data={
+                            'border': 'none'  # Removes border for data cells (horizontal lines)
+                        },
+                        style_data_conditional=[
+                            {
+                                'if': {'row_index': 'odd'},
+                                'backgroundColor': '#f9f9f9',
+                                'border': 'none'
+                            }
+                        ]
                     )
                 ],
-                className="tabular-container"
+                className="card-level-table-container"
             )
-        ]),
-        className="tabular-card"
-    )
+        ], className="card card-level-table"),

@@ -53,7 +53,7 @@ content_layout = html.Div([
             dcc.RangeSlider(
                 id='year-range-slider',
                 className='year-slider',
-                min=2010,
+                min=1980,
                 max=2025,
                 step=1,
                 marks={str(year): str(year) for year in range(2000, 2026)},
@@ -270,6 +270,14 @@ content_layout = html.Div([
 
 
 def content_layout_register_callbacks(app):
+
+    @app.callback(
+        Output('stored-year-range', 'data'),
+        Input('year-range-slider', 'value')
+    )
+    def store_year_range(value):
+        print(value)
+        return value
 
     # Callback to update content based on active tab
     @app.callback(

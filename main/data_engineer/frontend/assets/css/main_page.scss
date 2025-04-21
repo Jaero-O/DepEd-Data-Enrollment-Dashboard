@@ -247,7 +247,7 @@ div.sidebar-wrapper{
                 border: none;
                 background-color: #ffffff;
                 gap: 1em;
-                padding: 1em 1em 1em 1.25em;
+                padding: 0.5em 0em 0.5em 1.25em;
                 overflow: hidden; /* Ensures animation stays within bounds */
                 transition: all 0.4s ease;
                 border-left: 3px solid #b8d1ff;
@@ -265,7 +265,7 @@ div.sidebar-wrapper{
             button.submenu-item.active {
                 background-color: none;
                 border-radius: 0em 0.25em 0.25em 0em;
-                margin-right: 1em;
+                margin-right: 0.5em;
                 border-left: 3px solid #0055ff;
             
                 span.submenu-link {
@@ -429,33 +429,39 @@ div.header-div {
     }
   
     .filter-button-div-container {
-      .filter-button {
-        display: flex;
-        align-items: center;
-        background-color: white;
-        border: none;
-        border-radius: 0.5em;
-        padding: 0.5em 2em;
-        color: #006eff;
-        font-size: 1em;
-        font-family:"Inter-Medium";
-        cursor: pointer;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-        transition: all 0.2s ease;
-  
-        i {
-          margin-right: 6px;
+        display:flex;
+        flex-direction:row;
+        width:auto;
+        height:auto;
+        gap: 1em;
+
+        .filter-button {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border: none;
+            border-radius: 0.5em;
+            padding: 0.5em 2em;
+            color: #006eff;
+            font-size: 1em;
+            font-family:"Inter-Medium";
+            cursor: pointer;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+    
+            i {
+                margin-right: 6px;
+            }
+    
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+            }
+    
+            .hide-filter {
+                display: inline-block;
+            }
         }
-  
-        &:hover {
-          transform: translateY(-3px);
-          box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-        }
-  
-        .hide-filter {
-          display: inline-block;
-        }
-      }
     }
   }
   
@@ -1094,27 +1100,201 @@ div.content-page{
     transition: all 0.5s linear;
 }
 
-// body, div.main-page, div.nav-bar-div, div.header-div, div.tab-div {
-//     transition: background-color 3s linear, color 3s linear;
-// }
+.background-drop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease; /* ✅ Smooth transition */
+}
 
-// /* Example for tab-active */
-// div.tab-div .tabs-dcc .tab-selected {
-//     transition: background-color 3s linear, color 3s linear;
-// }
+.background-drop.show {
+    opacity: 1;
+    pointer-events: auto;
+}
 
-// /* Navbar items */
-// div.nav-bar-div .nav-items span.nav-bar-li, 
-// div.nav-bar-div .nav-items I {
-//     transition: color 3s linear;
-// }
+.background-drop.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
 
-// /* Theme switch example */
-// .toggle-switch-theme .form-check-input {
-//     transition: background-color 3s linear;
-// }
 
-// /* When the theme is toggled */
-// body.dark-mode {
-//     transition: background-color 3s linear, color 3s linear;
-// }
+
+
+.upload-wrapper {
+    display:flex;
+    flex-direction:column;
+    background-color:var(--web-background-color-two);
+    width:30em;
+    border-radius:1em;
+    padding:1em;
+    height:auto;
+    position:relative;
+    top:-30em;
+    z-index:1002;
+    gap:1em;
+    opacity:0;
+    transition: opacity 0.4s ease;
+    box-shadow: 0em 0em 3em rgba(222, 222, 222, 0.25), 
+                0em 0em 1em rgba(111, 111, 111, 0.1);
+    &.show{
+        animation: show-upload-wrapper 1.5s ease forwards;
+        opacity:1;
+    }
+
+    &.hidden{
+        pointer-events: none;
+        overflow:hidden;
+        animation: hide-upload-wrapper 1.5s ease forwards;
+        opacity:0;
+    }
+
+    @keyframes show-upload-wrapper {
+        0% {top:-30em;}
+        100% {top:-15em;}
+    }
+
+    @keyframes hide-upload-wrapper {
+        0% {top:-15em;}
+        100% {top:-30em;}
+    }
+
+
+    .header {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color:#007bff;
+        animation: slideDown 0.4s ease-in-out;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .body {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .upload-wrapper,
+        .school-year-dropdown-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+                to {
+                    opacity: 1;
+                }
+            }
+        }
+        .school-year-dropdown{
+            margin:0;
+        }
+
+        .upload-wrapper {
+            .upload-subtext {
+                font-weight: 500;
+                min-width: 120px;
+            }
+
+            #upload-data {
+                flex-grow: 1;
+                transition: border 0.3s ease;
+
+                &:hover {
+                    border-color: #007bff;
+                }
+            }
+        }
+
+        .school-year-dropdown-wrapper {
+            .school-year--dropdown-subtext {
+                font-weight: 500;
+                min-width: 120px;
+            }
+
+            .school-year-dropdown {
+                width: 300px;
+            }
+        }
+    }
+
+    .footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+        gap: 1em;
+        animation: slideUp 0.4s ease-in-out;
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #upload-button {
+            padding: 0.5em 1em 0.5em 1em; 
+            background: linear-gradient(to left, #007bff, #0056d2);
+            color: #fff;
+            border: none;
+            border-radius: 0.5em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+
+            &:hover {
+                background-color: #0056b3;
+                transform: translateY(-2px);
+            }
+
+            &:active {
+                transform: scale(0.97);
+            }
+        }
+
+        #close-upload-wrapper{
+            padding: 0.5em 1em 0.5em 1em; 
+            background: #c8d8ff;
+            color: linear-gradient(to left, #007bff, #0056d2);
+            border: none;
+            border-radius: 0.5em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+
+            &:hover {
+                background-color: #bccbf6;
+                transform: translateY(-2px);
+            }
+
+            &:active {
+                transform: scale(0.97);
+            }
+        }
+    }
+}

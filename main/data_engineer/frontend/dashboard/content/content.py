@@ -181,12 +181,15 @@ def dashboard_content(final_df,location,mode, order,tab):
         return[
             html.Div([
                 html.Div([
-                    card_seven_es(final_df, mode),
-                    card_seven_jhs(final_df, mode),
+                    html.Div([
+                        card_seven_es(final_df, mode),
+                        card_seven_jhs(final_df, mode),
+                    ], className='card-seven-es-jhs-wrapper'),
                     card_seven_shs(final_df, mode)
-                ],className='card-seven-wrapper'),
+                ], className='card-seven-wrapper'),
                 html.Div([
-                ])
+                    *card_tabular(final_df, mode)
+                ], className='card-level-table-wrapper'),
             ], className='level-based-wrapper'),
         ]
     
@@ -198,9 +201,8 @@ def dashboard_content(final_df,location,mode, order,tab):
                     *card_two(final_df, mode)
                 ], className='card-one-two-wrapper'),
                 html.Div([
-                    card_three(final_df, mode),
-                    card_four(final_df,mode),
-                    card_five(final_df, mode)
+                    card_regional_table(final_df, mode),
+                    card_tabular(final_df, mode)
                 ], className='card-three-four-five-wrapper')
             ], className='card-one-two-three-five-wrapper'),
         ]

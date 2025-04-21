@@ -9,6 +9,7 @@ import io
 
 # Import pages
 from main.data_engineer.frontend.dashboard.content_layout.content_layout import content_layout, content_layout_register_callbacks
+from main.data_engineer.frontend.dashboard.upload_modal import upload_modal, upload_modal_register_callbacks
 
 # Import Cards Callbacks
 # from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter_register_callbacks
@@ -84,7 +85,17 @@ navbar = html.Div([
             ],
             className='filter-button',
             id='toggle-button-open',
-            n_clicks=0)
+            n_clicks=0),
+        html.Button(
+            children=[
+                html.I(className="fa fa-upload"), html.Span('Upload Data', className='hide-filter', id='filter-button-text')
+            ],
+            className='filter-button',
+            id='open-upload-wrapper',
+            n_clicks=0),
+        html.Div([
+            upload_modal,
+        ],id="upload-modal-background-drop", className="background-drop")
     ], className='filter-button-div-container'),
 ], className='header-div')
 
@@ -110,6 +121,8 @@ navbar = html.Div([
 app.layout = html.Div([
     dcc.Store(id="theme-store", data="light"),
     dcc.Store(id='selected-mode', storage_type='session', data='student'),
+    dcc.Store(id='stored-file'),
+    dcc.Store(id='stored-year-range'),
     # dcc.Store(id='df-store', data=df.to_dict('records')),
     sidebar,
     html.Div([
@@ -117,6 +130,12 @@ app.layout = html.Div([
         content_layout
     ], className='navbar-content-wrapper')
 ], className='main-page', id="main-container")
+
+
+
+
+
+
 
 @app.callback(
     Output('tabs-wrapper', 'children'),
@@ -168,6 +187,28 @@ def update_selected_button(enrollment_clicks, school_clicks):
     
     return dash.no_update
 
+@app.callback(
+    Output("upload-modal-wrapper", "className"),
+    Output("upload-modal-background-drop","className"),
+    Input("open-upload-wrapper", "n_clicks"),
+    Input("close-upload-wrapper", "n_clicks"),
+    Input("upload-button", "n_clicks"),
+    prevent_initial_call=True
+)
+def toggle_upload_modal(open_clicks, close_clicks, close_clicks2):
+    if open_clicks is None:
+        open_clicks = 0
+    if close_clicks is None:
+        close_clicks = 0
+    if close_clicks2 is None:
+        close_clicks = 0
+
+    if open_clicks > (close_clicks+close_clicks2):
+        return "upload-wrapper show", "background-drop show"
+    else:
+        return "upload-wrapper hidden", "background-drop hidden"
+
+
 
 @app.callback(
     Output("main-container", "className"),
@@ -217,40 +258,41 @@ def allowed_file(filename):
     return any(filename.endswith(ext) for ext in ALLOWED_EXTENSIONS)
 
 
-@app.callback(
-    Output("output-data-upload", "children"),
-    [Input("upload-data", "contents")],
-    [State("upload-data", "filename")]
-)
-def upload_file(contents, filename):
-    if contents is None:
-        return "No file uploaded"
+# @app.callback(
+#     Output("output-data-upload", "children"),
+#     [Input("upload-data", "contents")],
+#     [State("upload-data", "filename")]
+# )
+# def upload_file(contents, filename):
+#     if contents is None:
+#         return "No file uploaded"
     
-    if not allowed_file(filename):
-        return html.Div([html.H5("Invalid file type. Please upload a CSV or Excel file.")])
+#     if not allowed_file(filename):
+#         return html.Div([html.H5("Invalid file type. Please upload a CSV or Excel file.")])
     
-    content_type, content_string = contents.split(',')
-    decoded = base64.b64decode(content_string)
+#     content_type, content_string = contents.split(',')
+#     decoded = base64.b64decode(content_string)
 
-    # if "csv" not in content_type and "excel" not in content_type:
-    #     return html.Div([html.H5("Invalid file format. Only CSV or Excel files are allowed.")])
+#     # if "csv" not in content_type and "excel" not in content_type:
+#     #     return html.Div([html.H5("Invalid file format. Only CSV or Excel files are allowed.")])
     
-    files = {
-        'file': (filename, io.BytesIO(decoded), 'application/octet-stream')
-    }
+#     files = {
+#         'file': (filename, io.BytesIO(decoded), 'application/octet-stream')
+#     }
     
-    try:
-        response = requests.post('http://127.0.0.1:5000/api/upload-file', files=files)
-        if response.status_code == 200:
-            return html.Div([html.H5(response.json().get('message'))])
-        else:
-            return html.Div([html.H5(f"Upload failed with status {response.status_code}")])
-    except requests.exceptions.RequestException as e:
-        return html.Div([html.H5(f"Error occurred: {str(e)}")])
+#     try:
+#         response = requests.post('http://127.0.0.1:5000/api/upload-file', files=files)
+#         if response.status_code == 200:
+#             return html.Div([html.H5(response.json().get('message'))])
+#         else:
+#             return html.Div([html.H5(f"Upload failed with status {response.status_code}")])
+#     except requests.exceptions.RequestException as e:
+#         return html.Div([html.H5(f"Error occurred: {str(e)}")])
     
 
 
 content_layout_register_callbacks(app)
+upload_modal_register_callbacks(app)
 card_one_register_callbacks(app)
 card_two_register_callbacks(app)
 card_three_register_callbacks(app)
