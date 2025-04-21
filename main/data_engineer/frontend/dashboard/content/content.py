@@ -6,13 +6,20 @@ from main.data_engineer.frontend.dashboard.content.cards.card_three import card_
 from main.data_engineer.frontend.dashboard.content.cards.card_four import card_four
 from main.data_engineer.frontend.dashboard.content.cards.card_five import card_five
 from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
-from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
+from main.data_engineer.frontend.dashboard.content.cards.card_seven_es import card_seven_es
+from main.data_engineer.frontend.dashboard.content.cards.card_seven_jhs import card_seven_jhs
+from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import card_seven_shs
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
+from main.data_engineer.frontend.dashboard.content.cards.card_table_school import card_tabular
+from main.data_engineer.frontend.dashboard.content.cards.card_table_geography import card_regional_table
+
 
 
 # Path to preprocessed file
 cleaned_file = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
 
+# Mapping which filter fields are valid for each selection
+# Each selection maps to the filters you'd like to apply
 # Mapping which filter fields are valid for each selection
 filter_map = {
     'Region': ["Region"],
@@ -91,65 +98,112 @@ def convert_filter_to_df(filter_dict):
 
     # Step 1: Hierarchical filtering
     filtered_df = df.copy()
-    for level in hierarchy_order[::-1]:
-        if filter_dict.get(level):
-            filtered_df = filtered_df[filtered_df[level].isin(filter_dict[level])]
+    active_levels = [level for level in hierarchy_order if filter_dict.get(level)]
 
-    updated_filter_dict = {
-        level: sorted(filtered_df[level].dropna().unique().tolist())
-        for level in hierarchy_order
-    }
+    if active_levels:
+        deepest_level = active_levels[-1]
+        filtered_df = filtered_df[filtered_df[deepest_level].isin(filter_dict[deepest_level])]
+        
+        # Filter upwards from the deepest level
+        for level in hierarchy_order:
+            if level == deepest_level:
+                break
+            if filter_dict.get(level):
+                filtered_df = filtered_df[filtered_df[level].isin(filter_dict[level])]
 
-    top_level = hierarchy_order[0]
-    beis_school_ids = []
-    matched_rows_list = []
+    final_df = filtered_df.copy()
 
-    for top_value in filter_dict.get(top_level, []):
-        subset_df = df[df[top_level] == top_value]
-
-        for level in hierarchy_order[::-1]:
-            if level in filter_dict and level in df.columns:
-                valid_values = set(filter_dict[level])
-                matched_values = set(subset_df[level].dropna().unique())
-                intersection = valid_values & matched_values
-                if intersection:
-                    matched_rows = subset_df[subset_df[level].isin(intersection)]
-                    beis_school_ids.extend(matched_rows['BEIS School ID'].dropna().tolist())
-                    matched_rows_list.append(matched_rows)
-                    break
-
-    # Combine matched rows
-    if matched_rows_list:
-        final_df = pd.concat(matched_rows_list, ignore_index=True)
-        final_df = final_df.drop_duplicates(subset='BEIS School ID')
-    else:
-        final_df = pd.DataFrame(columns=df.columns)
-
+    # Step 2: Direct filtering (non-hierarchical fields)
     for field in direct_filters:
         values = filter_dict.get(field)
-        if values:  # Only apply the filter if values exist and are not empty
+        if values:
             final_df = final_df[final_df[field].isin(values)]
 
-    print("\n📊 Matched DataFrame based on filters:")
-    print(final_df)
-
-    # Reverse column names back
+    # Step 3: Reverse column names back
     reverse_column_map = {v: k for k, v in column_rename_map.items()}
     final_df.rename(columns=reverse_column_map, inplace=True)
-
     return final_df
 
 
 # Load the dataset once to access filter options
-def dashboardContent(final_df, location, mode):
-    return (
-        #card_one(final_df, location, mode),
-        #card_two(final_df, location, mode),
-        card_three(final_df, location, mode),
-        #card_four(final_df,    location, mode),
-        #card_five(final_df, location, mode),        
-        #card_six(final_df, location, mode),
-        #card_seven(final_df, location, mode),
-        #card_eight(final_df, location, mode)
+def dashboardContent(final_df, location, mode, order):
+    return [
+        html.Div("School-Based Enrollment", className='card-group-title'),
+        html.Div([
+            html.Div([
+                card_one(final_df, mode),
+                *card_two(final_df, mode)
+            ], className='card-one-two-wrapper'),
+            html.Div([
+                card_three(final_df, mode), 
+                card_five(final_df, mode)
+            ], className='card-three-five-wrapper')
+        ], className='card-one-two-three-five-wrapper'),
+        html.Div([card_four(final_df, mode)], className='card-four-wrapper'),
+        html.Div("Education Level Enrollment", className='card-group-title'),
+        html.Div([
+            card_seven_es(final_df, mode),
+            card_seven_jhs(final_df, mode),
+            card_seven_shs(final_df, mode)
+        ],className='card-seven-wrapper'),
+        html.Div("Geographic-Based Enrollment", className='card-group-title'),
+        html.Div(
+            [card_six(final_df, location, mode,order)],
+            className='card-six-wrapper'
+        ),
+        # card_four(final_df, location, mode),
+        # card_three(final_df, mode),
+        # card_five(final_df, location, mode),        
+        # card_six(final_df, location, mode),
+        # card_seven(final_df, mode),
+        # card_eight(final_df, location, mode)
         # add here your cards after importing  
-    )
+    ]
+
+def dashboard_content(final_df,location,mode, order,tab):
+
+    if tab == 'school-based':
+        return[
+            html.Div([
+                html.Div([
+                    card_one(final_df, mode),
+                    *card_two(final_df, mode)
+                ], className='card-one-two-wrapper'),
+                html.Div([
+                    card_three(final_df, mode),
+                    card_four(final_df,mode),
+                    card_five(final_df, mode)
+                ], className='card-three-four-five-wrapper')
+            ], className='school-based-wrapper'),
+        ]
+    
+    elif tab == 'level-based':
+        return[
+            html.Div([
+                html.Div([
+                    card_seven_es(final_df, mode),
+                    card_seven_jhs(final_df, mode),
+                    card_seven_shs(final_df, mode)
+                ],className='card-seven-wrapper'),
+                html.Div([
+                ])
+            ], className='level-based-wrapper'),
+        ]
+    
+    elif tab == 'geographic-based':
+        return [
+            html.Div([
+                html.Div([
+                    card_one(final_df, mode),
+                    *card_two(final_df, mode)
+                ], className='card-one-two-wrapper'),
+                html.Div([
+                    card_three(final_df, mode),
+                    card_four(final_df,mode),
+                    card_five(final_df, mode)
+                ], className='card-three-four-five-wrapper')
+            ], className='card-one-two-three-five-wrapper'),
+        ]
+
+
+

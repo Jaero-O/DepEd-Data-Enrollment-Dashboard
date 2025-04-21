@@ -1,85 +1,142 @@
 import pandas as pd
 import plotly.express as px
-from dash import dcc
+from dash import dcc, html
+import numpy as np
 
-def card_three(df, location, mode):
-    if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
-
-    # Grade level columns
-    grade_levels = [
-        'k_male', 'k_female', 'g1_male', 'g1_female', 'g2_male', 'g2_female',
-        'g3_male', 'g3_female', 'g4_male', 'g4_female', 'g5_male', 'g5_female',
-        'g6_male', 'g6_female', 'elem_ng_male', 'elem_ng_female',
-        'g7_male', 'g7_female', 'g8_male', 'g8_female', 'g9_male', 'g9_female',
-        'g10_male', 'g10_female', 'jhs_ng_male', 'jhs_ng_female',
-        'g11_acad_-_abm_male', 'g11_acad_-_abm_female', 'g11_acad_-_humss_male',
-        'g11_acad_-_humss_female', 'g11_acad_stem_male', 'g11_acad_stem_female',
-        'g11_acad_gas_male', 'g11_acad_gas_female', 'g11_acad_pbm_male',
-        'g11_acad_pbm_female', 'g11_tvl_male', 'g11_tvl_female',
-        'g11_sports_male', 'g11_sports_female', 'g11_arts_male',
-        'g11_arts_female', 'g12_acad_-_abm_male', 'g12_acad_-_abm_female',
+def card_three(df, mode):
+    enrollment_columns = [
+        'k_male', 'k_female', 'g1_male', 'g1_female', 'g2_male',
+        'g2_female', 'g3_male', 'g3_female', 'g4_male', 'g4_female',
+        'g5_male', 'g5_female', 'g6_male', 'g6_female', 'elem_ng_male',
+        'elem_ng_female', 'g7_male', 'g7_female', 'g8_male', 'g8_female',
+        'g9_male', 'g9_female', 'g10_male', 'g10_female', 'jhs_ng_male',
+        'jhs_ng_female', 'g11_acad_-_abm_male', 'g11_acad_-_abm_female',
+        'g11_acad_-_humss_male', 'g11_acad_-_humss_female',
+        'g11_acad_stem_male', 'g11_acad_stem_female',
+        'g11_acad_gas_male', 'g11_acad_gas_female',
+        'g11_acad_pbm_male', 'g11_acad_pbm_female',
+        'g11_tvl_male', 'g11_tvl_female', 'g11_sports_male',
+        'g11_sports_female', 'g11_arts_male', 'g11_arts_female',
+        'g12_acad_-_abm_male', 'g12_acad_-_abm_female',
         'g12_acad_-_humss_male', 'g12_acad_-_humss_female',
-        'g12_acad_stem_male', 'g12_acad_stem_female', 'g12_acad_gas_male',
-        'g12_acad_gas_female', 'g12_acad_pbm_male', 'g12_acad_pbm_female',
+        'g12_acad_stem_male', 'g12_acad_stem_female',
+        'g12_acad_gas_male', 'g12_acad_gas_female',
+        'g12_acad_pbm_male', 'g12_acad_pbm_female',
         'g12_tvl_male', 'g12_tvl_female', 'g12_sports_male',
         'g12_sports_female', 'g12_arts_male', 'g12_arts_female'
     ]
 
-    if location:
-        # lowercase for consistency with CSV column names
-        location = location.lower()
-        if location in df.columns:
-            df = df[df[location].notna()]
+    existing_columns = [col for col in enrollment_columns if col in df.columns]
+    df['total_enrollment'] = df[existing_columns].sum(axis=1)
+
+    if 'school_subclassification' not in df.columns:
+        return html.Div("❌ Missing 'school_subclassification' column.")
+
+    category_mapping = {
+        'DepED Managed': 'Government-Managed Schools',
+        'DOST Managed': 'Government-Managed Schools',
+        'SUC Managed': 'Government-Managed Schools',
+        'Local International School': 'Private and Non-Government Schools',
+        'LUC': 'Private and Non-Government Schools',
+        'Non-Sectarian ': 'Private and Non-Government Schools',
+        'Sectarian ': 'Private and Non-Government Schools',
+        'Other GA Managed': 'Private and Non-Government Schools',
+        'SCHOOL ABROAD': 'International Schools'
+    }
+
+    label_mapping = {
+        'DepED Managed': 'DepED<br>Managed',
+        'DOST Managed': 'DOST<br>Managed',
+        'SUC Managed': 'SUC<br>Managed',
+        'Local International School': 'Local<br>Intl School',
+        'LUC': 'LUC',
+        'Non-Sectarian ': 'Non-<br>Sectarian',
+        'Sectarian ': 'Sectarian',
+        'Other GA Managed': 'Other GA<br>Managed',
+        'SCHOOL ABROAD': 'School<br>Abroad'
+    }
+
+    df['main_category'] = df['school_subclassification'].map(category_mapping)
 
     if mode == 'student':
-        df['total_enrollment'] = df[grade_levels].sum(axis=1)
-        result_df = df.groupby('school_subclassification', as_index=False)['total_enrollment'].sum()
-
-        fig = px.treemap(
-            result_df,
-            path=['school_subclassification'],
-            values='total_enrollment',
-            title='Total Enrollment by School Subclassification'
-        )
-
+        grouped = df.groupby(['school_subclassification', 'main_category'])['total_enrollment'].sum().reset_index()
+        y_col = 'total_enrollment'
+        title = "Total Enrollment by School Subclassification and Category"
     elif mode == 'school':
-        result_df = df.dropna(subset=['beis_school_id'])
-        result_df = result_df.groupby('school_subclassification')['beis_school_id'].nunique().reset_index()
-        result_df.rename(columns={'beis_school_id': 'total_schools'}, inplace=True)
-
-        fig = px.treemap(
-            result_df,
-            path=['school_subclassification'],
-            values='total_schools',
-            title='Total Schools by School Subclassification'
-        )
-
+        grouped = df.groupby(['school_subclassification', 'main_category'])['beis_school_id'].nunique().reset_index()
+        grouped.rename(columns={'beis_school_id': 'total_schools'}, inplace=True)
+        y_col = 'total_schools'
+        title = "Total Number of Schools by School Subclassification and Category"
     else:
-        return dcc.Markdown("⚠️ Invalid mode. Use `'student'` or `'school'`.")
+        return html.Div("❌ Invalid mode. Use 'student' or 'school'.")
 
-    fig.update_traces(tiling=dict(pad=2),
-    textinfo="label+value",
-    textfont_size=14,
-    marker=dict(line=dict(width=1, color="white")),
-)
+    grouped = grouped.dropna(subset=['school_subclassification', 'main_category'])
+    grouped['school_subclassification_label'] = grouped['school_subclassification'].map(label_mapping)
+
+    grouped = grouped.sort_values(by=y_col, ascending=False)
+
+    color_palette = px.colors.qualitative.Set3
+    unique_subs = grouped['school_subclassification'].unique()
+    color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
+
+    fig = px.bar(
+        grouped,
+        x='school_subclassification_label',
+        y=y_col,
+        color='school_subclassification',
+        color_discrete_map=color_map,
+        text_auto='.3s',
+    )
+
+    max_val = grouped[y_col].max()
+    if pd.isna(max_val) or max_val <= 0:
+        tickvals = []
+        ticktext = []
+    else:
+        max_power = int(np.ceil(np.log10(max_val)))
+        min_power = 2 if max_val >= 100 else 0
+        tickvals = [10**i for i in range(min_power, max_power + 1)]
+        ticktext = [f"{int(v):,}" for v in tickvals]
+
     fig.update_layout(
-        title=dict(
-        text='<b>SCHOOL SUBCLASSIFICATION</b><br>ENROLLMENT',
-        xanchor='left',
-        yanchor='top'
-    ),
-    uniformtext=dict(minsize=10, mode='hide'),
-    margin=dict(t=50, l=25, r=25, b=25),
-    height=400,
-    hoverlabel=dict(
-        namelength=-1,
-        font=dict(
-            size=10 
-        )
-    ),
-    autosize=True
-    
-)
+        xaxis=dict(
+            title=None,
+            tickfont=dict(size=10),
+            tickangle=0,
+        ),
+        yaxis=dict(
+            title=None,
+            type="log",
+            tickfont=dict(size=10),
+            tickvals=tickvals,
+            ticktext=ticktext,
+            gridcolor='#c1d6fe'
+        ),
+        showlegend=False,
+        plot_bgcolor="white",
+        paper_bgcolor='white',
+        margin=dict(t=20, l=20, r=20, b=60),
+        bargap=0,
+        bargroupgap=0.1,
+        barmode='group',
+        autosize=False,
+        width=550,
+        height=260,
 
-    return dcc.Graph(figure=fig)
+        # 🚀 Add this line:
+        transition=dict(duration=500, easing='cubic-in-out')
+    )
+
+
+    return html.Div([
+        html.Div([
+            html.Div([
+                html.Div("ENROLLMENT BY SUBCLASSIFICATION", className='card-title-main'),
+            ], className='card-header-wrapper'),
+        ], className="card-one-two-text"),
+        dcc.Graph(figure=fig, config={'displayModeBar': False})
+    ], className="card card-three")
+
+
+def card_three_register_callbacks(app):
+    return None

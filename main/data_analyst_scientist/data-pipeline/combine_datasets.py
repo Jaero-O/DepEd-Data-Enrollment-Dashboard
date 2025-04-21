@@ -1,17 +1,45 @@
 import os
 import pandas as pd
+import sqlite3
 
-def aggregateDataset(range_school_year = [2023]):
-    base_dir = 'enrollment_csv_file\\cleaned_separate_datasets'
+def load_data(db_name, file):
+    try:
+        connection = sqlite3.connect(db_name)
+        print(f"Connected to database: {db_name}")
+    except sqlite3.Error as e:
+        print("SQLite error:", e)
+        return
+
+    try:
+        df = file
+        df.to_sql("cleaned_enrollment_data", connection, if_exists="replace", index=False)
+        connection.commit()
+        print("Data successfully loaded into database.")
+    except Exception as e:
+        print("Error loading data:", e)
+    finally:
+        connection.close()
+        print("Connection closed.")
+
+def aggregateDataset(range_school_year=[2023]):
+    base_dir = os.path.join('enrollment_csv_file', 'cleaned_separate_datasets')
 
     files = [f for f in os.listdir(base_dir) if os.path.isfile(os.path.join(base_dir, f)) and f.endswith('.csv')]
 
     database = {}
-
     for file in files:
         file_path = os.path.join(base_dir, file)
-        df_name = int(os.path.splitext(file)[0])
-        database[df_name] = pd.read_csv(file_path)
+        try:
+            df_name = int(os.path.splitext(file)[0])
+            database[df_name] = pd.read_csv(file_path)
+        except ValueError:
+            print(f"Skipping file with unexpected name format: {file}")
+
+    available_years = set(database.keys())
+    missing_years = set(range_school_year) - available_years
+
+    if missing_years:
+        raise ValueError(f"Missing CSV files for school years: {missing_years}")
 
     merged_df = pd.concat([database[key] for key in range_school_year], ignore_index=True)
 
@@ -43,8 +71,14 @@ def aggregateDataset(range_school_year = [2023]):
 
     aggregated_df = merged_df.groupby('beis_school_id', as_index=False).agg(agg_dict)
 
-    aggregated_df.to_csv('enrollment_csv_file/preprocessed_data/merged_aggregated_output.csv', index=False)
-    # temporary csv file (sa cleaned_enrollment_data.csv na dapat toh)
+    output_path = os.path.join('enrollment_csv_file', 'preprocessed_data')
+    os.makedirs(output_path, exist_ok=True)
 
-aggregateDataset()
-# sample use of function
+    output_file = os.path.join(output_path, 'cleaned_enrollment_data.csv')
+    aggregated_df.to_csv(output_file, index=False)
+    print(f"Aggregated file saved to: {output_file}")
+
+    load_data('enrollment_csv_file\\preprocessed_data\\cleaned_enrollment_data.db', aggregated_df)
+    return aggregated_df 
+
+aggregated_df = aggregateDataset()

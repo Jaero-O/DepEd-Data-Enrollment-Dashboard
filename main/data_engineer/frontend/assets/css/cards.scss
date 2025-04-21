@@ -1,0 +1,686 @@
+@font-face {
+    font-family: "Inter"; 
+    src: url('/assets/Inter Variable/Single axis/Inter.ttf');
+}
+
+@font-face {
+    font-family: "Inter-Medium"; 
+    src: url('/assets/Inter Desktop/Inter-Medium.otf');
+}
+
+@font-face {
+    font-family: "Inter-Bold"; 
+    src: url('/assets/Inter Desktop/Inter-Bold.otf');
+}
+
+
+div.card-one-two-wrapper{
+    display:flex;
+    flex-direction:row;
+    gap:1.5em;
+    width:100%;
+    height:260px;
+
+    div.card-one-two{
+        display:flex;
+        flex-direction:row;
+        padding:2em 1em 2em 1em;
+        width:100%;
+        height:100%;
+        border-radius: 1em;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border: none;
+        outline: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+        .card-one-two:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+        }
+    
+        div.card-one-two-text{
+            display:flex;
+            flex-direction:column;
+            gap:1em;
+        }
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:column;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+            }
+            
+            div.card-title-sub {
+                font-size: 0.5em;
+                color: #2a4d69;
+                font-family: "Inter-Medium";
+            }
+    
+            div.bar-chart-container {
+                width:100%;
+                height:100%;
+                margin:0;
+                display:flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: flex-end;
+                margin-top:auto;
+    
+            }
+        }
+    
+        div.total-count {
+            font-size: 1.25em;
+            color: #081434;
+            text-align: left;
+            font-family: "Inter-Bold";
+        }
+    
+        div.card-one-two-legend{
+            div.legend-item{
+                display: flex;
+                align-items: center;
+                margin-bottom: 4px;
+                gap:0.25em !important;
+    
+                .legend-dot {
+                    display: inline-block;
+                    width: 20px;
+                    height: 12px;
+                    border-radius: 6px;
+    
+                    &.male{
+                        background-color: #2a4d69;
+                    }
+        
+                    &.female {
+                        background-color: #f28cb1;
+                    }
+                }
+    
+                span.legend-percentage {
+                    font-size:0.75em !important;
+                    font-family: "Inter-Bold";
+    
+                    &.male{
+                        color: #2a4d69;
+                    }
+        
+                    &.female {
+                        color: #f28cb1;
+                    }
+                }
+    
+                span.legend-label {
+                    font-size: 0.5em;
+                    font-family: "Inter-Medium";
+                    margin:0;
+    
+                    &.male{
+                        color: #2a4d69;
+                    }
+        
+                    &.female {
+                        color: #f28cb1;
+                    }
+                }  
+            }
+        }
+    }
+}
+
+div.card-three-four-five-wrapper{
+    display:flex;
+    flex-direction:row;
+    gap:1.5em;
+    width:100%;
+    height:440px;
+
+    div.card-three{
+        width:700px;
+        height:100%;
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:column;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+            }
+        }
+    }
+
+    div.card-four{
+        width: 415px;
+        height:100%;
+        overflow:hidden;
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:column;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+                margin-bottom:1em;
+            }
+        }
+    
+        div.sector-lines-wrapper{
+            margin-top:1em;
+    
+            div.sector-line{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #f0f0f0;
+                padding: 10px;
+                margin-bottom: 5px;
+                border-radius: 8px;
+    
+                span.sector-label{
+                    font-size: 0.75em;
+                    font-family: "Inter-Bold";
+                    color: #0a1f44;
+                    flex: 1;
+                    text-align: left;
+                }
+        
+                span.sector-value{
+                    font-size: 0.75em;
+                    font-family: "Inter-Bold";
+                    color: #0a1f44;
+                    flex: 1;
+                    text-align: right;
+                }
+    
+                div.legend-item{
+                    display:flex;
+                    gap:0.25em;
+                    align-items:center;
+        
+                    span.legend-dot{
+                        border-radius:0.5em;
+                        display: inline-block;
+                        margin-right: 0.5em;
+                        width: 26px;
+                        height: 13px;
+                    }
+            
+                    span.legend-percentage{
+                        font-size:1em;
+                        font-family:"Inter-Bold";
+                        width:6em;
+                    }
+                    span.legend-label{
+                        font-size: 1em;
+                        font-family: "Inter-Bold";
+                        width:7em;
+                        margin:0;
+                    }
+                }         
+            }
+        }
+    
+        div.graph-wrapper-wrapper{
+            // 'display': 'flex',
+            //         'alignItems': 'center',
+            //         'gap': '20px',
+            //         'flexWrap': 'wrap'
+    
+            display:flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    
+        div.graph-wrapper{
+            flex:1;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:auto;
+        }
+    
+        .pie-chart .user-select-none.svg-container{
+            height:250px !important;
+            width:250px !important;
+        }
+    }
+
+    div.card-five{
+        width:405px;
+        height:100%;
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:column;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+            }
+        }
+    
+        div.card-five-graph{
+            margin-top:10px;
+            width:300px;
+            height:auto;
+            font-family: "Inter";
+        }
+    }
+}
+
+div.school-based-wrapper{
+    width:100%;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    gap:1.5em;
+}
+
+div.card-four-wrapper{
+    width:19.5em;
+    height:35em;
+
+    div.card-four{
+        width:100%;
+        height:100%;
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:column;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+                margin-bottom:1em;
+            }
+        }
+    
+        div.sector-lines-wrapper{
+            margin-top:1em;
+    
+            div.sector-line{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #f0f0f0;
+                padding: 10px;
+                margin-bottom: 5px;
+                border-radius: 8px;
+    
+                span.sector-label{
+                    font-size: 0.75em;
+                    font-family: "Inter-Bold";
+                    color: #0a1f44;
+                    flex: 1;
+                    text-align: left;
+                }
+        
+                span.sector-value{
+                    font-size: 0.75em;
+                    font-family: "Inter-Bold";
+                    color: #0a1f44;
+                    flex: 1;
+                    text-align: right;
+                }
+    
+                div.legend-item{
+                    display:flex;
+                    gap:0.25em;
+                    align-items:center;
+        
+                    span.legend-dot{
+                        border-radius:0.5em;
+                        display: inline-block;
+                        margin-right: 0.5em;
+                        width: 26px;
+                        height: 13px;
+                    }
+            
+                    span.legend-percentage{
+                        font-size:1em;
+                        font-family:"Inter-Bold";
+                        width:6em;
+                    }
+                    span.legend-label{
+                        font-size: 1em;
+                        font-family: "Inter-Bold";
+                        width:7em;
+                        margin:0;
+                    }
+                }         
+            }
+        }
+    
+        div.graph-wrapper-wrapper{
+            // 'display': 'flex',
+            //         'alignItems': 'center',
+            //         'gap': '20px',
+            //         'flexWrap': 'wrap'
+    
+            display:flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    
+        div.graph-wrapper{
+            flex:1;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:auto;
+        }
+    
+        .pie-chart .user-select-none.svg-container{
+            height:250px !important;
+            width:250px !important;
+        }
+    }
+}
+
+div.card-six-wrapper{
+    width:30em;
+    height:40em;
+
+    div.card-six{
+        width:100%;
+        height:100%;
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:row;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+                margin-bottom:1em;
+            }
+        }
+
+        div.card-filter-wrapper{
+            display:flex;
+            flex-direction:row;
+            align-items: center;
+            padding: 0.75em;
+            gap: 2em;
+
+            div.filter-wrapper{
+                display:flex;
+                flex-direction:row;
+                gap: 10em;    
+            }
+
+            .order-toggle-radio{
+                display: flex;
+                flex-direction:row;
+                align-self: center;
+                gap: 0.5em;
+                width:1em !important;
+            }
+
+            .filter-dropdown-location{
+                display: flex;
+                flex-direction: row;
+                margin-left: 1em;
+            }
+        }
+    
+        div.card-six-graph{
+            width:300px;
+            height:auto;
+            font-family: "Inter";
+        }
+    }
+}
+
+div.card-seven-wrapper{
+    width:100%;
+    height:20em;
+    display:flex;
+    flex-wrap:wrap;
+    height:auto;
+    gap:1.25em;
+
+    div.card-seven{
+        width:100%;
+        height:21.5em;
+
+        &.es {
+            width:50%;
+        }
+
+        &.jhs{
+            width:48%;
+        }
+
+        &.shs{
+            width:100%;
+        }
+    
+        div.card-header-wrapper{
+            display:flex;
+            flex-direction:row;
+    
+            div.card-title-main {
+                font-size: 1em;
+                color: #2a4d69;
+                font-family: "Inter-Bold";
+                margin-bottom:1em;
+            }
+        }
+    
+        div.card-seven-graph{
+            width:auto;
+            height:auto;
+            font-family: "Inter";
+        }
+    }
+}
+
+div.card-seven-eight-wrapper{
+    display:flex;
+    flex-direction:column;
+    gap:1.25em;
+    width:auto;
+    height:auto;
+
+    div.card-seven-wrapper{
+        width:45.5em;
+        height:19.5em;
+    
+        div.card-seven{
+            width:100%;
+            height:100%;
+        
+            div.card-header-wrapper{
+                display:flex;
+                flex-direction:row;
+        
+                div.card-title-main {
+                    font-size: 1em;
+                    color: #2a4d69;
+                    font-family: "Inter-Bold";
+                    margin-bottom:1em;
+                }
+            }
+        
+            div.card-seven-graph{
+                width:auto;
+                height:auto;
+                font-family: "Inter";
+            }
+        }
+    }
+}
+
+
+div.card{
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    border-radius:1em;
+    background-color: #ffffff;
+    border: none;
+    outline: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding:2em 1em 2em 1em;
+}
+
+div.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+div.card-group-title{
+    font-size:1.4em;
+    font-family:"Inter-Bold";
+    color:var(--navbar-color-active);
+    display:flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content:flex-start;
+    padding:1em 0em 0em 0em;
+    width:100%;
+    height:100%;
+    transition: all 0.5s linear;
+}
+
+div.card-table-container {
+    background-color: white;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  
+    div.card-title {
+      text-transform: uppercase;
+      color: #2a4d69;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 1rem;
+      font-family: "Segoe UI", sans-serif;
+    }
+  
+    div.table-wrapper {
+      background-color: white;
+  
+      input.search-input {
+        width: 100%;
+        height: 30px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: "Segoe UI", sans-serif;
+      }
+  
+      .dash-table-container {
+        max-height: 500px;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+      }
+  
+      .dash-header {
+        background-color: #d9f2ff;
+        font-weight: bold;
+        text-align: center;
+        color: #2a4d69;
+        font-family: "Segoe UI", sans-serif;
+      }
+  
+      .dash-cell {
+        text-align: center;
+        padding: 8px;
+        min-width: 100px;
+        max-width: 300px;
+        white-space: normal;
+        font-family: "Segoe UI", sans-serif;
+      }
+  
+      .dash-data {
+        background-color: white;
+        color: #4f4f4f;
+      }
+    }
+}
+
+.tabular-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  
+    .card-header {
+      font-size: 18px;
+      color: #2a4d69;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+  
+    .search-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+  
+      input[type="text"] {
+        width: 100%;
+        height: 30px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-family: "Segoe UI", sans-serif;
+      }
+    }
+  
+    .dash-table-container {
+      overflow-x: auto;
+      overflow-y: auto;
+      max-height: 500px;
+      max-width: 100%;
+  
+      .dash-table {
+        width: 100%;
+  
+        .dash-header {
+          background-color: #d9f2ff;
+          font-weight: bold;
+          text-align: center;
+          color: #2a4d69;
+          font-family: "Segoe UI", sans-serif;
+        }
+  
+        .dash-cell {
+          text-align: center;
+          padding: 8px;
+          min-width: 100px;
+          max-width: 300px;
+          white-space: normal;
+          font-family: "Segoe UI", sans-serif;
+          color: #4f4f4f;
+          background-color: white;
+  
+          &.row-odd {
+            background-color: #f9f9f9;
+          }
+        }
+      }
+    }
+}
+  
+  

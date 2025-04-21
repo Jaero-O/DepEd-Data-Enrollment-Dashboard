@@ -40,7 +40,7 @@
   src: url("/assets/Inter Desktop/Inter-Bold.otf");
 }
 body {
-  background-color: var(--web-background-color-two);
+  background-color: var(--web-background-color);
   transition: all 0.5s linear;
 }
 
@@ -48,10 +48,21 @@ div.main-page {
   display: flex;
   background-color: var(--web-background-color-two);
   border-radius: 0em 0em 0em 0em;
+  width: 100vw;
+  height: 100vh;
   transition: all 0.5s linear;
 }
+div.main-page div.navbar-content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--web-background-color);
+  padding: 2em 3em 2em 3em;
+  gap: 3em;
+}
 
-div.title-div-navbar {
+div.title-div-sidebar {
   display: flex;
   justify-content: left;
   align-content: center;
@@ -64,11 +75,11 @@ div.title-div-navbar {
   border-bottom: 0.15em solid var(--border-nav-header);
   transition: all 0.5s linear;
 }
-div.title-div-navbar img.depEd-title {
+div.title-div-sidebar img.depEd-title {
   width: 90px;
   height: 45px;
 }
-div.title-div-navbar .fa-bars {
+div.title-div-sidebar .fa-bars {
   font-size: 1.25em;
   color: var(--navbar-color-active);
   transition: all 0.5s linear;
@@ -76,101 +87,205 @@ div.title-div-navbar .fa-bars {
   margin-bottom: auto;
 }
 
-div.nav-bar-title-div {
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: 0;
-  height: 97.5vh;
-  z-index: 1001;
-  border-right: 0.15em solid var(--border-nav-header);
-}
-
-div.nav-bar-div {
+div.sidebar-wrapper {
   background-color: var(--web-background-color-two);
-  width: 14em;
-  height: auto;
+  width: 18em;
+  height: 100%;
   padding-left: 1em;
   padding-right: 1em;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
+  gap: 2em;
   transition: all 0.5s linear;
 }
-div.nav-bar-div img.depEd-logo {
-  width: 75px;
-  height: auto;
-  padding-bottom: 1em;
+div.sidebar-wrapper div.sidebar-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
 }
-div.nav-bar-div div.header-footer {
+div.sidebar-wrapper div.sidebar-header img.depEd-title {
+  width: 140px;
+  height: 70px;
+}
+div.sidebar-wrapper div.sidebar-header img.depEd-logo {
+  width: 100px;
+  height: 70px;
+}
+div.sidebar-wrapper div.header-footer {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.25em;
 }
-div.nav-bar-div span.title-page-text {
+div.sidebar-wrapper span.title-page-text {
   color: var(--navbar-color-active);
   text-align: center;
   font-size: 1.2em;
   font-family: "Inter-Bold";
   transition: all 0.5s linear;
 }
-div.nav-bar-div span.all-rights-served {
-  font-size: 10px;
-  color: var(--all-rights-served);
-}
-div.nav-bar-div div.nav-items {
+div.sidebar-wrapper div.sidebar-items {
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 220px;
-  gap: 1.35em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  padding-top: 2.5em;
+  width: 100%;
+  gap: 1.75em;
+  margin-bottom: 3em;
 }
-div.nav-bar-div div.nav-items .fa {
-  width: 12px;
+div.sidebar-wrapper div.sidebar-items .fa {
+  width: 1px;
 }
-div.nav-bar-div div.nav-items span.nav-bar-li {
-  font-family: "Inter";
+div.sidebar-wrapper div.sidebar-items span.sidebar-li {
+  font-family: "Inter-Medium";
 }
-div.nav-bar-div div.nav-items span.nav-bar-li.hovered {
+div.sidebar-wrapper div.sidebar-items span.sidebar-li.hovered {
   font-family: "Inter-Bold";
 }
-div.nav-bar-div div.nav-items span.nav-bar-li.hovered, div.nav-bar-div div.nav-items I.hovered {
+div.sidebar-wrapper div.sidebar-items span.sidebar-li.hovered, div.sidebar-wrapper div.sidebar-items I.hovered {
   color: var(--web-background-color-two);
-  font-size: 0.9em;
+  font-size: 1em;
   transition: all 0.5s linear;
 }
-div.nav-bar-div div.nav-items span.nav-bar-li, div.nav-bar-div div.nav-items I {
+div.sidebar-wrapper div.sidebar-items span.sidebar-li, div.sidebar-wrapper div.sidebar-items I {
   color: var(--navbar-color-inactive);
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  font-size: 0.9em;
+  font-size: 1em;
   transition: all 0.5s linear;
 }
-div.nav-bar-div div.nav-items div {
-  display: flex;
-  align-content: center;
-  justify-content: start;
-  padding-left: 1em;
-  gap: 1.25em;
-}
-div.nav-bar-div div.nav-items div.nav-bar-li-div-hovered {
-  background-color: var(--navbar-color-active);
+div.sidebar-wrapper div.sidebar-items div.sidebar-li-div-hovered {
+  background-color: #0055FF;
   border-radius: 0.5em;
-  padding: 0.5em;
-  padding-left: 1em;
+  padding: 0.75em 0.75em 0.75em 0em;
   width: 100%;
   transition: all 0.5s linear;
 }
-div.nav-bar-div .theme-toggle-container {
+div.sidebar-wrapper div.sidebar-items div.sidebar-li-div-hovered .fa-chevron-down {
+  color: #ffffff;
+  margin-left: 1.25em;
+}
+div.sidebar-wrapper div.sidebar-items div.items-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  gap: 2em;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1.25em;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu {
+  margin-left: 1.5em;
+  margin-top: 0.25em;
+  display: Flex;
+  flex-direction: column;
+  padding: 0.5em 0em 0.5em 0em;
+  /* Animate highlight from left to right */
+  /* Ensure content appears above the animated background */
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item {
+  position: relative; /* Needed for ::before */
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: none;
+  background-color: #ffffff;
+  gap: 1em;
+  padding: 1em 1em 1em 1.25em;
+  overflow: hidden; /* Ensures animation stays within bounds */
+  transition: all 0.4s ease;
+  border-left: 3px solid #b8d1ff;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item span.submenu-link {
+  text-decoration: none;
+  color: #5e88d6;
+  font-family: "Inter";
+  font-size: 12px;
+  padding-left: 8px;
+  transition: all 0.4s ease;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active {
+  background-color: none;
+  border-radius: 0em 0.25em 0.25em 0em;
+  margin-right: 1em;
+  border-left: 3px solid #0055ff;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active span.submenu-link {
+  font-family: "Inter-Medium";
+  font-size: 14px;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background-color: #d8e6fb; /* subtle highlight color */
+  z-index: 0;
+  animation: slideHighlight 1s forwards;
+  border-radius: 0em 0.25em 0.25em 0em;
+}
+@keyframes slideHighlight {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active > * {
+  position: relative;
+  z-index: 1;
+  color: #0055ff !important;
+}
+div.sidebar-wrapper div.profile-card {
+  background: #f2f2f3;
+  border-radius: 0.75em;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  max-width: 230px;
+  margin: 0 auto;
+}
+div.sidebar-wrapper div.profile-card img.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 2px solid #175382;
+}
+div.sidebar-wrapper div.profile-card div.profile-name {
+  font-size: 1em;
+  color: #175382;
+  margin-bottom: 4px;
+  font-family: "Inter-Medium";
+}
+div.sidebar-wrapper div.profile-card div.profile-email {
+  font-size: 0.75em;
+  color: #175382;
+  margin-bottom: 12px;
+  font-family: "Inter";
+}
+div.sidebar-wrapper div.profile-card button.profile-role-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.75em;
+  font-family: "Inter-Medium";
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+div.sidebar-wrapper div.profile-card button.profile-role-btn:hover {
+  background-color: #0051cc;
 }
 
 .toggle-switch-theme .form-check-input {
@@ -194,93 +309,88 @@ div.nav-bar-div .theme-toggle-container {
 div.header-div {
   display: flex;
   justify-content: space-between;
-  align-content: center;
-  width: 81em;
-  padding: 0.75em;
-  padding-left: 2em;
-  padding-right: 2em;
-  background-color: var(--web-background-color-two);
-  border-bottom: 0.15em solid var(--border-nav-header);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: all 0.5s linear;
-}
-div.header-div span, div.header-div I {
-  color: var(--navbar-color-active);
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  font-size: 1.2em;
-  transition: all 0.5s linear;
-}
-div.header-div I.profile-pic {
-  font-size: 1.6em !important;
-}
-div.header-div span {
-  font-family: "Inter";
-  font-size: 1em;
-}
-div.header-div div.header-search-div {
-  display: flex;
-  width: 100em;
-}
-div.header-div div.header-search-div .search-bar {
-  width: 65%;
-  height: 80%;
-  padding: 0.5em;
-  padding-left: 1em;
-  background-color: var(--web-background-color);
-  border-radius: 5em; /* Rounded corners */
-  outline: none;
-  border: none;
-  font-size: 0.85em;
-  margin: auto;
-  margin-left: 1em;
-  transition: all 0.5s linear;
-}
-div.header-div div.header-icons-div {
-  display: flex;
-  justify-content: end;
-  gap: 2em;
   align-items: center;
-  width: 60%;
+  background-color: #f2f6fa;
+  width: 100%;
+  padding-top: 1em;
 }
-div.header-div div.header-icons-div span.header-divider {
-  font-family: "Inter";
-  font-size: 1.5em;
-}
-div.header-div div.header-icons-div div.header-profile-div {
-  display: flex;
-  gap: 0.5em;
-}
-div.header-div div.header-icons-div div.header-profile-div div.user-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0em;
-}
-div.header-div div.header-icons-div div.header-profile-div div.user-info span.username-text {
-  color: var(--navbar-color-active);
-  font-size: 0.75em;
+div.header-div div.navbar-title {
+  font-size: 2em;
   font-family: "Inter-Bold";
+  color: #175382;
 }
-div.header-div div.header-icons-div div.header-profile-div div.user-info span.access-level-text {
-  color: var(--navbar-color-inactive);
-  font-size: 0.75em;
-  font-family: "Inter";
+div.header-div .tab-container {
+  gap: 1em;
+}
+div.header-div div.tabs-wrapper {
+  display: flex;
+}
+div.header-div div.tabs-wrapper .enrollment-tab {
+  background-color: #dbe5ec;
+  color: #2c3e50;
+  font-family: "Inter-Medium";
+  font-size: 1em;
+  border-radius: 2em;
+  padding: 0.75em 1em;
+  margin: 0;
+  width: 14em;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+div.header-div div.tabs-wrapper .enrollment-tab:hover {
+  background-color: #cbdce7;
+}
+div.header-div div.tabs-wrapper .enrollment-tab--selected {
+  background: linear-gradient(to left, #007bff, #0056d2);
+  color: #fff;
+  transition: all 1s ease;
+}
+div.header-div .filter-button-div-container .filter-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em 2em;
+  color: #006eff;
+  font-size: 1em;
+  font-family: "Inter-Medium";
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+div.header-div .filter-button-div-container .filter-button i {
+  margin-right: 6px;
+}
+div.header-div .filter-button-div-container .filter-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+div.header-div .filter-button-div-container .filter-button .hide-filter {
+  display: inline-block;
 }
 
 div.tab-div {
   display: flex;
   flex-direction: column;
   outline: none;
-  padding: 2em;
+  border: none;
+  width: 100%;
+  height: 100%;
   background-color: var(--web-background-color);
 }
 div.tab-div div.header-tab {
   display: flex;
   margin-bottom: 1em;
+  justify-content: space-between;
+}
+div.tab-div div.filter-button-div-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  align-items: center;
+  width: auto;
 }
 div.tab-div span.My-Dashboard-title {
   font-size: 1.5em;
@@ -663,14 +773,12 @@ div.tab-div .tabs-dcc {
 
 div.content-page {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   background-color: var(--web-background-color);
   max-width: 100vw;
-  height: 100%;
-  min-height: 33em;
+  height: auto;
+  gap: 1.25em;
   border-radius: 0em 0em 1em 1em;
-  padding: 1em;
   transition: all 0.5s linear;
 }
 
