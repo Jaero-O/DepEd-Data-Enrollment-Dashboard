@@ -13,6 +13,8 @@ from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_
 from main.data_engineer.frontend.dashboard.content.cards.card_table_school import card_tabular
 from main.data_engineer.frontend.dashboard.content.cards.card_table_geography import card_regional_table
 
+from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
+
 
 
 # Path to preprocessed file
@@ -61,8 +63,20 @@ hierarchy_order = [
 # non-hierarchical fields
 direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified COC']
 
-def convert_filter_to_df(filter_dict):
-    csv_path = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
+
+
+
+def convert_filter_to_df(filter_dict, selected_year, year_list):
+
+    if selected_year == 'All School Years':
+        aggregateDataset(year_list)
+        csv = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv'
+    else:
+        csv = 'enrollment_csv_file/cleaned_separate_datasets/' + selected_year + '.csv'
+
+    print(csv)
+
+    csv_path = csv
     df = pd.read_csv(csv_path)
 
     # Rename columns

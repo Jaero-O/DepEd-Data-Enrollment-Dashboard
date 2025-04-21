@@ -2,10 +2,10 @@ import dash
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 from dash import Input, Output, State, MATCH, ALL, ctx
-import requests
-import pandas as pd
-import base64
-import io
+from pathlib import Path
+import os
+import hashlib
+
 
 # Import pages
 from main.data_engineer.frontend.dashboard.content_layout.content_layout import content_layout, content_layout_register_callbacks
@@ -89,16 +89,23 @@ navbar = html.Div([
         )
     ],id='tabs-wrapper', className='tabs-wrapper'),
     html.Div([
+        dbc.Select(
+            id='school-year-dropdown-select',
+            value='All School Years',
+            options=[
+                {'label': 'All School Years', 'value': 'All School Years'}
+            ],
+        ),
         html.Button(
             children=[
-                html.I(className="fa fa-filter"), html.Span('Filter', className='hide-filter', id='filter-button-text')
+                html.I(className="fa fa-filter"), html.Span('Filter', className='hide-filter')
             ],
             className='filter-button',
             id='toggle-button-open',
             n_clicks=0),
         html.Button(
             children=[
-                html.I(className="fa fa-upload"), html.Span('Upload Data', className='hide-filter', id='filter-button-text')
+                html.I(className="fa fa-upload"), html.Span('Upload Data', className='hide-filter')
             ],
             className='filter-button',
             id='open-upload-wrapper',
@@ -133,6 +140,12 @@ app.layout = html.Div([
     dcc.Store(id='selected-mode', storage_type='session', data='student'),
     dcc.Store(id='stored-file'),
     dcc.Store(id='stored-year-range'),
+    dcc.Store(id='current-files', storage_type='session'),
+    dcc.Store(id='current-years', storage_type='session'),
+    dcc.Store(id='folder-hash', data=''),
+
+
+    dcc.Interval(id='file-check', interval=3000, n_intervals=0),
     # dcc.Store(id='df-store', data=df.to_dict('records')),
     sidebar,
     html.Div([
@@ -197,6 +210,45 @@ def update_selected_button(enrollment_clicks, school_clicks):
     
     return dash.no_update
 
+# Dropdown callback for picking school year options
+@app.callback(
+    Output('school-year-dropdown-select', 'options'),
+    [Input('year-range', 'value'),           # year_range is the selected range [start, end]
+    Input('current-years', 'data')]        # current_years is the full list of years from dcc.Store
+)
+def populate_school_year_dropdown(year_range, current_years):
+    print('current-years', current_years)
+    if not year_range or not current_years:
+        return []
+
+    # Filter current_years to only include those within the selected range
+    filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
+    filtered_years = sorted(set(y for y in filtered_years if isinstance(y, int)), reverse=True)
+
+    # Build school year strings like "2015-2016"
+    school_years = [f"{year}-{year + 1}" for year in filtered_years]
+
+    # Construct dropdown options
+    options = [{'label': 'All School Years', 'value': 'All School Years'}]
+    options += [{'label': sy, 'value': sy} for sy in school_years]
+
+    print('options:', options)
+
+    return options
+
+# @app.callback(
+#     Output('some-output-id', 'children'),
+#     Input('school-year-dropdown', 'value')
+# )
+# def use_selected_school_year(selected_value):
+#     if selected_value == 'All School Years':
+#         return "Showing all years"
+
+#     # Extract the starting year as an integer
+#     start_year = int(selected_value.split('-')[0])
+#     return f"You selected the school year starting in {start_year}"
+
+
 @app.callback(
     Output("upload-modal-wrapper", "className"),
     Output("upload-modal-background-drop","className"),
@@ -217,6 +269,39 @@ def toggle_upload_modal(open_clicks, close_clicks, close_clicks2):
         return "upload-wrapper show", "background-drop show"
     else:
         return "upload-wrapper hidden", "background-drop hidden"
+
+
+@app.callback(
+    [Output('current-files', 'data'),
+     Output('current-years', 'data'),
+     Output('folder-hash', 'data')],
+    [Input('file-check', 'n_intervals'),
+     Input('folder-hash', 'data')]  # Input to detect changes in folder
+)
+def update_file_list(n, last_folder_hash):
+    folder_path = Path('enrollment_database')
+    filenames = [f.name for f in folder_path.iterdir() if f.is_file() and f.suffix == '.csv']
+    
+    # Calculate hash of the current folder contents (to detect changes)
+    current_hash = hashlib.md5(''.join(filenames).encode('utf-8')).hexdigest()
+
+    # If the folder hash is the same as the last stored hash, don't update
+    if current_hash == last_folder_hash:
+        return dash.no_update  # No change, return no_update
+    
+    # If the folder contents have changed, process the filenames
+    years = []
+    for f in filenames:
+        name = f.replace('.csv', '')
+        if name.isdigit():
+            years.append(int(name))
+
+    print(years)
+    print(filenames)
+    # Return new file list, years, and the updated folder hash
+    return filenames, years, current_hash
+
+
 
 
 

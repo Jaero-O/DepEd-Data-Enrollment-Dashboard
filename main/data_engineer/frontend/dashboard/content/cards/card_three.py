@@ -107,16 +107,17 @@ def card_three(df, mode):
         ),
     )
 
-
     max_val = grouped[y_col].max()
     if pd.isna(max_val) or max_val <= 0:
         tickvals = []
         ticktext = []
+        y_range = None
     else:
-        max_power = int(np.ceil(np.log10(max_val)))
+        max_power = int(np.ceil(np.log10(max_val)))  # power of 10
         min_power = 2 if max_val >= 100 else 0
         tickvals = [10**i for i in range(min_power, max_power + 1)]
         ticktext = [f"{int(v):,}" for v in tickvals]
+        y_range = [min_power, max_power + 1]  # +1 for extra padding
 
     fig.update_layout(
         xaxis=dict(
@@ -140,19 +141,17 @@ def card_three(df, mode):
             ),
             tickvals=tickvals,
             ticktext=ticktext,
-            gridcolor='#F1E1CE'
+            gridcolor='#F1E1CE',
+            range=[0,max_power + 1]
         ),
         showlegend=False,
         plot_bgcolor="#FFF9F1",
         paper_bgcolor='white',
-        margin=dict(t=10, l=80, r=0, b=20),
+        margin=dict(t=0, l=80, r=0, b=20),
         bargap=0,
         bargroupgap=0.1,
         barmode='group',
         autosize=True,
-        
-        # 🚀 Add this line:
-        transition=dict(duration=2000, easing='cubic-in')
     )
 
     return html.Div([
