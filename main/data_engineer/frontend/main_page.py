@@ -77,7 +77,17 @@ sidebar = html.Div([
 # Header
 navbar = html.Div([
     html.Div("Enrollment Data", className='navbar-title'),
-    html.Div(id='tabs-wrapper', className='tabs-wrapper'),
+    html.Div([
+        dcc.Tabs(
+            children=[
+                dcc.Tab(label='School-based', value='school-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Level-based', value='level-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected')
+            ],
+            id='tabs',
+            value='school-based'
+        )
+    ],id='tabs-wrapper', className='tabs-wrapper'),
     html.Div([
         html.Button(
             children=[

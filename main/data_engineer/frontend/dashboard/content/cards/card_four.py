@@ -57,10 +57,10 @@ def card_four(df, mode):
 
     # Define distinct colors for each sector
     color_map = {
-        'Public': '#fbcc84',
-        'Private': '#9575cd',
-        'SUCs / LUCs': '#4db6ac',
-        'PSO': '#447cab'
+        'Public': '#008eff',
+        'Private': '#21d7e4',
+        'SUCs / LUCs': '#ffc20b',
+        'PSO': '#ff4343'
     }
 
     # Prepare colors list for pie chart
@@ -79,25 +79,18 @@ def card_four(df, mode):
         ]
     )
     pie_chart.update_layout(
-        margin=dict(t=5, b=20, l=20, r=20),
+        margin=dict(t=0, b=0, l=0, r=0),
         showlegend=False,
-        autosize=True  # Added width to ensure proportional scaling
-    )
-
-    # Update the dcc.Graph container to allow the pie chart to expand
-    dcc.Graph(
-        figure=pie_chart,
-        config={'displayModeBar': False}
+        autosize=True,
+        height=None
     )
 
     # Create legend items in the same order
     legend_items = []
-    total_value = sector_data[value_col].sum()
     for _, row in sector_data.iterrows():
         sector_label = row['sector_display']
         total = row[value_col]
-        percentage = (total / total_value) * 100
-        color = color_map.get(sector_label, '#7f7f7f')
+        color = color_map.get(sector_label)
 
         legend_items.append(
             html.Div([
@@ -105,19 +98,16 @@ def card_four(df, mode):
                     className='legend-dot',
                     style={'backgroundColor': color}
                 ),
-                html.Span(f"{percentage:.1f}%", className='legend-percentage', style={'color': color}),
-                html.Span(sector_label.upper(), className='legend-label', style={'color': color})
+                html.Span(sector_label.upper(), className='legend-label')
             ], className='legend-item')
         )
 
     # Create text lines showing total count per sector
     sector_lines = []
-    background_colors = ['#f9f9f9']  # Alternating background colors
     for i, row in enumerate(sector_data.iterrows()):
         _, row_data = row
         sector_label = row_data['sector_display']
         total = row_data[value_col]
-        background_color = background_colors[i % len(background_colors)]  # Alternate colors
 
         sector_lines.append(
             html.Div([
@@ -127,7 +117,14 @@ def card_four(df, mode):
         )
 
     return html.Div([
-        
+        html.Div([html.Div(["Enrollment by Sector"], className="card-title-main")], className='card-header-wrapper'),
+        html.Div(dcc.Graph(
+            figure=pie_chart,
+            config={'displayModeBar': False, 'responsive': True},
+            className='pie-chart',
+            style={'width': '100%', 'height': '100%'}
+        ), className='graph-wrapper', style={'height': '400px', 'width': '100%'}),
+        html.Div(sector_lines, className='sector-lines-wrapper'),
     ], className='card card-four')
 
 def card_four_register_callbacks(app):
