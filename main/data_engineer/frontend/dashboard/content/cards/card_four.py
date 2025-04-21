@@ -136,3 +136,6 @@ def card_four(df, mode):
         ), className='graph-wrapper'),
         html.Div(sector_lines, className='sector-lines-wrapper'),
     ], className='card card-four')
+
+def card_four_register_callbacks(app):
+    return None

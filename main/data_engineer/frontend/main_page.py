@@ -13,6 +13,14 @@ from main.data_engineer.frontend.dashboard.content_layout.content_layout import 
 # Import Cards Callbacks
 # from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter_register_callbacks
 from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_one import card_one_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_two import card_two_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_three import card_three_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_four import card_four_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_five import card_five_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_seven_es import card_seven_es_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_seven_jhs import card_seven_jhs_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import card_seven_shs_register_callbacks
 
 # Import Flask Server
 from main.data_engineer.backend.main_server import app as server
@@ -33,7 +41,10 @@ app.config.suppress_callback_exceptions = True
 
 # Navigation Bar 
 sidebar = html.Div([
-    html.Img(src='./assets/images/deped_title.png', className='depEd-title'),
+    html.Div([
+        # html.Img(src='./assets/images/deped_logo.png', className='depEd-logo'),
+        html.Img(src='./assets/images/deped_title.png', className='depEd-title'),
+    ], className='sidebar-header'),
     html.Div([
         html.Div([
             html.Div([html.I(className="fa fa-area-chart hovered"), html.Span('Dashboard', className='sidebar-li hovered'),html.I(className="fa fa-chevron-down")], className='sidebar-li-div-hovered items-wrapper'),
@@ -240,3 +251,12 @@ def upload_file(contents, filename):
 
 
 content_layout_register_callbacks(app)
+card_one_register_callbacks(app)
+card_two_register_callbacks(app)
+card_three_register_callbacks(app)
+card_four_register_callbacks(app)
+card_five_register_callbacks(app)
+# card_six_register_callbacks(app)
+card_seven_es_register_callbacks(app)
+card_seven_jhs_register_callbacks(app)
+card_seven_shs_register_callbacks(app)

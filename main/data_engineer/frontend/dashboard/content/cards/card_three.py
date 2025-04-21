@@ -122,7 +122,11 @@ def card_three(df, mode):
         autosize=False,
         width=550,
         height=260,
+
+        # 🚀 Add this line:
+        transition=dict(duration=500, easing='cubic-in-out')
     )
+
 
     return html.Div([
         html.Div([
@@ -132,3 +136,7 @@ def card_three(df, mode):
         ], className="card-one-two-text"),
         dcc.Graph(figure=fig, config={'displayModeBar': False})
     ], className="card card-three")
+
+
+def card_three_register_callbacks(app):
+    return None

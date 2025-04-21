@@ -106,3 +106,6 @@ def card_seven_jhs(df, mode):
             # html.Div(dcc.Graph(figure=create_area_chart(strand_labels, strand_m, strand_f, "Senior High Strands"), config={'displayModeBar': False}), style={'flex': 1}),
         ], style={'display': 'flex'}),
     ], className="card card-seven jhs")
+
+def card_seven_jhs_register_callbacks(app):
+    return None

@@ -132,16 +132,30 @@ div.sidebar-wrapper{
     align-items: center;
     justify-content: flex-start;
     flex-direction:column;
-    gap:3em;
+    gap:2em;
     // box-shadow: 0em 0em 3em rgba(222, 222, 222, 0.25), 
     //             0em 0em 1em rgba(111, 111, 111, 0.1);
     transition: all 0.5s linear;
     
-  
-    img.depEd-title{
-        width:140px;
-        height:70px;
+
+    div.sidebar-header{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
         margin-top:2em;
+        margin-bottom:0.5em;
+
+        img.depEd-title{
+            width:140px;
+            height:70px;
+            // margin-left:-10px;
+        }
+    
+        img.depEd-logo{
+            width:100px;
+            height:70px;
+        }
+
     }
 
     div.header-footer{
@@ -218,45 +232,77 @@ div.sidebar-wrapper{
         }
 
         div.submenu {
-            margin-left: 1.75em;
-            border-left: 2px solid #e0e0e0;
-            margin-top: 16px;
+            margin-left: 1.5em;
+            // border-left: 2px solid #b8d1ff;
+            margin-top:0.25em;
             display:Flex;
             flex-direction:column;
-            gap:1em;
+            padding: 0.5em 0em 0.5em 0em;
           
             button.submenu-item {
+                position: relative; /* Needed for ::before */
                 display: flex;
                 align-items: center;
-                outline:none;
-                border:none;
-                background-color:#ffffff;
-                gap:1em;
-                padding-left:1em;
-          
+                outline: none;
+                border: none;
+                background-color: #ffffff;
+                gap: 1em;
+                padding: 1em 1em 1em 1.25em;
+                overflow: hidden; /* Ensures animation stays within bounds */
+                transition: all 0.4s ease;
+                border-left: 3px solid #b8d1ff;
+            
                 span.submenu-link {
                     text-decoration: none;
                     color: #5e88d6;
-                    font-family:"Inter";
-                    font-size: 14px;
+                    font-family: "Inter";
+                    font-size: 12px;
                     padding-left: 8px;
+                    transition: all 0.4s ease
                 }
             }
-
+            
+            button.submenu-item.active {
+                background-color: none;
+                border-radius: 0em 0.25em 0.25em 0em;
+                margin-right: 1em;
+                border-left: 3px solid #0055ff;
+            
+                span.submenu-link {
+                    font-family: "Inter-Medium";
+                    font-size:14px;
+                }
+            }
+            
+            /* Animate highlight from left to right */
+            button.submenu-item.active::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 0%;
+                background-color: #d8e6fb; /* subtle highlight color */
+                z-index: 0;
+                animation: slideHighlight 1s forwards;
+                border-radius: 0em 0.25em 0.25em 0em;
+            }
+            
+            @keyframes slideHighlight {
+                from {
+                    width: 0%;
+                }
+                to {
+                    width: 100%;
+                }
+            }
+            
+            /* Ensure content appears above the animated background */
             button.submenu-item.active > * {
+                position: relative;
+                z-index: 1;
                 color: #0055ff !important;
-            }
-
-            button.submenu-item.active{
-                background-color:#f0f4fc;
-                border-radius:0em 0.25em 0.25em 0em;
-                margin-right:1em;
-                padding: 0.25em 0em 0.25em 1em;
-
-                span.submenu-link{
-                    font-family:"Inter-Medium";
-                }
-            }
+            }            
         }
     }
 
@@ -266,7 +312,7 @@ div.sidebar-wrapper{
     // }
 
     div.profile-card {
-        background: linear-gradient(to right, #007bff, #0056d2);
+        background: #f2f2f3;
         border-radius: 0.75em;
         padding: 20px;
         text-align: center;
@@ -280,12 +326,12 @@ div.sidebar-wrapper{
           border-radius: 50%;
           object-fit: cover;
           margin-bottom: 15px;
-          border: 2px solid #ffffff;
+          border: 2px solid #175382;
         }
       
         div.profile-name {
           font-size: 1em;
-          color: #ffffff;
+          color: #175382;
           margin-bottom: 4px;
           font-family:"Inter-Medium";
 
@@ -293,18 +339,19 @@ div.sidebar-wrapper{
       
         div.profile-email {
           font-size: 0.75em;
-          color: #ffffff;
+          color: #175382;
           margin-bottom: 12px;
           font-family:"Inter"
         }
       
         button.profile-role-btn {
-            background-color: #0053b2;
+            background-color:#007bff;
             color: white;
             border: none;
             border-radius: 8px;
             padding: 8px 16px;
             font-size: 0.75em;
+            font-family:"Inter-Medium";
             box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
             cursor: pointer;
             transition: background-color 0.2s ease;

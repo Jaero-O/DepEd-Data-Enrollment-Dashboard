@@ -10,8 +10,8 @@ from main.data_engineer.frontend.dashboard.content.cards.card_seven_es import ca
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_jhs import card_seven_jhs
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import card_seven_shs
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
-from main.data_engineer.frontend.dashboard.content.cards.card_tabular import card_tabular
-from main.data_engineer.frontend.dashboard.content.cards.card_regional_table import card_regional_table
+from main.data_engineer.frontend.dashboard.content.cards.card_table_school import card_tabular
+from main.data_engineer.frontend.dashboard.content.cards.card_table_geography import card_regional_table
 
 
 

@@ -106,3 +106,5 @@ def card_five(df, mode='student'):
             className='card-five-graph'),
         ], className='card card-five')
 
+def card_five_register_callbacks(app):
+    return None
