@@ -21,116 +21,116 @@ div.card-one-two-wrapper{
     width:100%;
     height:260px;
 
-    div.card-one-two{
-        display:flex;
-        flex-direction:row;
-        width:100%;
-        height:100%;
-        border-radius: 1em;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-        background-color: #ffffff;
-        border: none;
-        outline: none;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    // div.card-one-two{
+    //     display:flex;
+    //     flex-direction:row;
+    //     width:100%;
+    //     height:100%;
+    //     border-radius: 1em;
+    //     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    //     background-color: #ffffff;
+    //     border: none;
+    //     outline: none;
+    //     transition: transform 0.3s ease, box-shadow 0.3s ease;
     
-        .card-one-two:hover {
-            transform: translateY(-5px);
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-        }
+    //     // .card-one-two:hover {
+    //     //     transform: translateY(-5px);
+    //     //     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    //     // }
     
-        div.card-one-two-text{
-            display:flex;
-            flex-direction:column;
-            gap:1em;
-        }
+    //     div.card-one-two-text{
+    //         display:flex;
+    //         flex-direction:column;
+    //         gap:1em;
+    //     }
     
-        div.card-header-wrapper{
-            display:flex;
-            flex-direction:column;
+    //     div.card-header-wrapper{
+    //         display:flex;
+    //         flex-direction:column;
     
-            div.card-title-main {
-                font-size: 1em;
-                color: #2a4d69;
-                font-family: "Inter-Bold";
-            }
+    //         div.card-title-main {
+    //             font-size: 1em;
+    //             color: #2a4d69;
+    //             font-family: "Inter-Bold";
+    //         }
             
-            div.card-title-sub {
-                font-size: 0.5em;
-                color: #2a4d69;
-                font-family: "Inter-Medium";
-            }
+    //         div.card-title-sub {
+    //             font-size: 0.5em;
+    //             color: #2a4d69;
+    //             font-family: "Inter-Medium";
+    //         }
     
-            div.bar-chart-container {
-                width:100%;
-                height:100%;
-                margin:0;
-                display:flex;
-                flex-direction: column;
-                justify-content: flex-end;
-                align-items: flex-end;
-                margin-top:auto;
+    //         div.bar-chart-container {
+    //             width:100%;
+    //             height:100%;
+    //             margin:0;
+    //             display:flex;
+    //             flex-direction: column;
+    //             justify-content: flex-end;
+    //             align-items: flex-end;
+    //             margin-top:auto;
     
-            }
-        }
+    //         }
+    //     }
     
-        div.total-count {
-            font-size: 1.25em;
-            color: #081434;
-            text-align: left;
-            font-family: "Inter-Bold";
-        }
+    //     div.total-count {
+    //         font-size: 1.25em;
+    //         color: #081434;
+    //         text-align: left;
+    //         font-family: "Inter-Bold";
+    //     }
     
-        div.card-one-two-legend{
-            div.legend-item{
-                display: flex;
-                align-items: center;
-                margin-bottom: 4px;
-                gap:0.25em !important;
+    //     div.card-one-two-legend{
+    //         div.legend-item{
+    //             display: flex;
+    //             align-items: center;
+    //             margin-bottom: 4px;
+    //             gap:0.25em !important;
     
-                .legend-dot {
-                    display: inline-block;
-                    width: 20px;
-                    height: 12px;
-                    border-radius: 6px;
+    //             .legend-dot {
+    //                 display: inline-block;
+    //                 width: 20px;
+    //                 height: 12px;
+    //                 border-radius: 6px;
     
-                    &.male{
-                        background-color: #2a4d69;
-                    }
+    //                 &.male{
+    //                     background-color: #2a4d69;
+    //                 }
         
-                    &.female {
-                        background-color: #f28cb1;
-                    }
-                }
+    //                 &.female {
+    //                     background-color: #f28cb1;
+    //                 }
+    //             }
     
-                span.legend-percentage {
-                    font-size:0.75em !important;
-                    font-family: "Inter-Bold";
+    //             span.legend-percentage {
+    //                 font-size:0.75em !important;
+    //                 font-family: "Inter-Bold";
     
-                    &.male{
-                        color: #2a4d69;
-                    }
+    //                 &.male{
+    //                     color: #2a4d69;
+    //                 }
         
-                    &.female {
-                        color: #f28cb1;
-                    }
-                }
+    //                 &.female {
+    //                     color: #f28cb1;
+    //                 }
+    //             }
     
-                span.legend-label {
-                    font-size: 0.5em;
-                    font-family: "Inter-Medium";
-                    margin:0;
+    //             span.legend-label {
+    //                 font-size: 0.5em;
+    //                 font-family: "Inter-Medium";
+    //                 margin:0;
     
-                    &.male{
-                        color: #2a4d69;
-                    }
+    //                 &.male{
+    //                     color: #2a4d69;
+    //                 }
         
-                    &.female {
-                        color: #f28cb1;
-                    }
-                }  
-            }
-        }
-    }
+    //                 &.female {
+    //                     color: #f28cb1;
+    //                 }
+    //             }  
+    //         }
+    //     }
+    // }
 }
 
 div.card-three-four-five-wrapper{

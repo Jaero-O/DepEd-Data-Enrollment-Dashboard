@@ -38,59 +38,63 @@ def card_one(df, mode):
         male_total, female_total, male_pct, female_pct = compute_totals_all_levels(df)
 
         bar_chart = dcc.Graph(
-            className='gender-bar-chart',
+            className='card-one-gender-bar-chart',
             config={'displayModeBar': False},
             figure={
                 'data': [
-                    go.Bar(x=['Enrollment'], y=[male_total], name='Male', marker_color='#2a4d69'),
-                    go.Bar(x=['Enrollment'], y=[female_total], name='Female', marker_color='#f28cb1')
+                    go.Bar(x=['Male'], y=[male_total], name='Male', marker_color='#0080FF', hovertemplate='Male: %{y}<extra></extra>'),
+                    go.Bar(x=['Female'], y=[female_total], name='Female', marker_color='#FF5C85', hovertemplate='Female: %{y}<extra></extra>')
                 ],
                 'layout': go.Layout(
                     barmode='group',
+                    barcornerradius=7,
                     height=120,
-                    width=60,
-                    bargap=0.1,
+                    width=150,
+                    bargap=0.1, 
                     margin={'l': 0, 'r': 0, 't': 0, 'b': 5},
                     showlegend=False,
+                    plot_bgcolor='rgba(0,0,0,0)',  
+                    paper_bgcolor='rgba(0,0,0,0)', 
                     xaxis=dict(showline=False, showgrid=False, zeroline=False, showticklabels=False),
                     yaxis=dict(showline=False, showgrid=False, zeroline=False, showticklabels=False)
                 )
             }
         )
 
+
         return html.Div([
             html.Div([
-                html.Div([
-                    html.Div("TOTAL ENROLLMENT", className='card-title-main'),
-                ], className='card-header-wrapper'),
-                html.Div([
-                    html.Div(f"{male_total + female_total:,}", className='total-count'),
-                    html.Div("STUDENTS", className='card-title-sub')
-                ], className='card-header-wrapper'),
+                html.Div("Total Enrollment", className='card-one-title-main'),
+                html.Div(f"{male_total + female_total:,}", className='card-one-total-count'),
+                html.Div("students", className='card-one-title-sub')
+            ], className='card-one-header-wrapper'),
 
+            html.Div([
                 html.Div([
                     html.Div([
-                        html.Span(className="legend-dot male"),
-                        html.Span(f"{male_pct}%", className="legend-percentage male"),
-                        html.Span(" MALE", className="legend-label male"),
-                    ], className="legend-item"),
+                        html.Div([
+                            html.Span(className="card-one-legend-dot male"),
+                            html.Span("MALE", className="card-one-legend-label male")
+                        ], className="card-one-legend-header"),
+                        html.Span(f"{male_pct}%", className="card-one-legend-percentage male"),
+                        html.Div(className="card-one-legend-divider") 
+                    ], className="card-one-legend-item"),
 
                     html.Div([
-                        html.Span(className="legend-dot female"),
-                        html.Span(f"{female_pct}%", className="legend-percentage female"),
-                        html.Span(" FEMALE", className="legend-label female"),
-                    ], className="legend-item")
-                ], className="card-one-two-legend"),
-            ], className="card-one-two-text"),
+                        html.Div([
+                            html.Span(className="card-one-legend-dot female"),
+                            html.Span("FEMALE", className="card-one-legend-label female")
+                        ], className="card-one-legend-header"),
+                        html.Span(f"{female_pct}%", className="card-one-legend-percentage female")
+                    ], className="card-one-legend-item")
+                ], className="card-one-legend"),
 
-            html.Div(
-                bar_chart,
-                className="bar-chart-container",
-                style={"marginTop": "auto"}
-            ),
-        ], className='card card-one-two')
+                html.Div(bar_chart, className="card-one-bar-chart-container")
+            ], className="card-one-bottom-section")
+        ], className='card card-one')
 
     return create_card()
+
 
 def card_one_register_callbacks(app):
     return None
