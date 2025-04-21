@@ -20,7 +20,6 @@ div.card-one-two-wrapper {
 div.card-one-two-wrapper div.card-one-two {
   display: flex;
   flex-direction: row;
-  padding: 2em 1em 2em 1em;
   width: 100%;
   height: 100%;
   border-radius: 1em;
@@ -446,7 +445,7 @@ div.card {
   border: none;
   outline: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  padding: 2em 1em 2em 1em;
+  padding: 1.5em !important;
 }
 
 div.card:hover {
