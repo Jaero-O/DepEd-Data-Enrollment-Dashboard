@@ -44,6 +44,18 @@ def card_three(df, mode):
         'SCHOOL ABROAD': 'International Schools'
     }
 
+    label_mapping = {
+        'DepED Managed': 'DepED<br>Managed',
+        'DOST Managed': 'DOST<br>Managed',
+        'SUC Managed': 'SUC<br>Managed',
+        'Local International School': 'Local<br>Intl School',
+        'LUC': 'LUC',
+        'Non-Sectarian ': 'Non-<br>Sectarian',
+        'Sectarian ': 'Sectarian',
+        'Other GA Managed': 'Other GA<br>Managed',
+        'SCHOOL ABROAD': 'School<br>Abroad'
+    }
+
     df['main_category'] = df['school_subclassification'].map(category_mapping)
 
     if mode == 'student':
@@ -59,61 +71,72 @@ def card_three(df, mode):
         return html.Div("❌ Invalid mode. Use 'student' or 'school'.")
 
     grouped = grouped.dropna(subset=['school_subclassification', 'main_category'])
+    grouped['school_subclassification_label'] = grouped['school_subclassification'].map(label_mapping)
 
-    # Sort values descending
     grouped = grouped.sort_values(by=y_col, ascending=False)
 
-    # Create color map
     color_palette = px.colors.qualitative.Set3
     unique_subs = grouped['school_subclassification'].unique()
     color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
 
-    # Create the plot
     fig = px.bar(
         grouped,
-        x='school_subclassification',
+        x='school_subclassification_label',
         y=y_col,
         color='school_subclassification',
         color_discrete_map=color_map,
         text_auto='.3s',
-        title=title
     )
 
-
-    # Determine tick values based on max
     max_val = grouped[y_col].max()
-    max_power = int(np.ceil(np.log10(max_val)))
-    min_power = 2 if max_val >= 100 else 0  # start from 10^2 if max is at least 100
+    if pd.isna(max_val) or max_val <= 0:
+        tickvals = []
+        ticktext = []
+    else:
+        max_power = int(np.ceil(np.log10(max_val)))
+        min_power = 2 if max_val >= 100 else 0
+        tickvals = [10**i for i in range(min_power, max_power + 1)]
+        ticktext = [f"{int(v):,}" for v in tickvals]
 
-    tickvals = [10**i for i in range(min_power, max_power + 1)]
-    ticktext = [f"{int(v):,}" for v in tickvals]
-
-    # Log scale and layout tweaks
     fig.update_layout(
         xaxis=dict(
-            visible=False,
-            showticklabels=False,
-            showgrid=False,
-            zeroline=False
+            title=None,
+            tickfont=dict(size=10),
+            tickangle=0,
         ),
-        xaxis_title="School Subclassification",
         yaxis=dict(
-            title="Count (Log Scale)" if mode == 'school' else "Total Enrollment (Log Scale)",
+            title=None,
             type="log",
+            tickfont=dict(size=10),
             tickvals=tickvals,
-            ticktext=ticktext
+            ticktext=ticktext,
+            gridcolor='#c1d6fe'
         ),
-        margin=dict(t=60, l=40, r=40, b=100),
-        legend_title="Main Category",
+        showlegend=False,
+        plot_bgcolor="white",
+        paper_bgcolor='white',
+        margin=dict(t=20, l=20, r=20, b=60),
         bargap=0,
         bargroupgap=0.1,
         barmode='group',
         autosize=False,
-        height=400,
-        width=800,
+        width=550,
+        height=260,
+
+        # 🚀 Add this line:
+        transition=dict(duration=500, easing='cubic-in-out')
     )
 
+
     return html.Div([
-        html.H4("Card 3: Grouped Vertical Bar Graph (Log Scale)", style={"marginBottom": "15px"}),
-        dcc.Graph(figure=fig)
-    ])
+        html.Div([
+            html.Div([
+                html.Div("ENROLLMENT BY SUBCLASSIFICATION", className='card-title-main'),
+            ], className='card-header-wrapper'),
+        ], className="card-one-two-text"),
+        dcc.Graph(figure=fig, config={'displayModeBar': False})
+    ], className="card card-three")
+
+
+def card_three_register_callbacks(app):
+    return None

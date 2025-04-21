@@ -2,7 +2,7 @@ import pandas as pd
 from dash import html, dcc
 import plotly.graph_objs as go
 
-def card_two(df, location, mode):
+def card_two(df, mode):
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -45,80 +45,78 @@ def card_two(df, location, mode):
             figure={
                 'data': [
                     go.Bar(
-                        x=['Male'],
+                        x=['Enrollment'],
                         y=[male_total],
                         name='Male',
                         marker_color='#2a4d69',
-                        text=[f"{male_total:,}"],
-                        textposition='inside',
-                        insidetextanchor='end'
                     ),
                     go.Bar(
-                        x=['Female'],
+                        x=['Enrollment'],
                         y=[female_total],
                         name='Female',
                         marker_color='#f28cb1',
-                        text=[f"{female_total:,}"],
-                        textposition='inside',
-                        insidetextanchor='end'
                     )
                 ],
-
                 'layout': go.Layout(
-                    barmode='group',
-                    height=190,
+                    barmode='group',  # Changed from 'group' to 'stack'
+                    height=120,
+                    width=60,
                     bargap=0.1,
                     margin={'l': 0, 'r': 0, 't': 0, 'b': 5},
                     showlegend=False,
                     xaxis=dict(
-                        showline=True,    # Hide x-axis line
-                        showgrid=False,    # Hide gridlines
-                        zeroline=False,    # Hide zero line
-                        showticklabels=False  # Hide x-axis labels
+                        showline=False,
+                        showgrid=False,
+                        zeroline=False,
+                        showticklabels=False
                     ),
                     yaxis=dict(
-                        showline=False,    # Hide y-axis line
-                        showgrid=False,    # Hide gridlines
-                        zeroline=False,    # Hide zero line
-                        showticklabels=False  # Hide y-axis labels
+                        showline=False,
+                        showgrid=False,
+                        zeroline=False,
+                        showticklabels=False
                     )
                 )
             }
         )
 
 
+
         return html.Div([
             html.Div([
-                html.Div(level_name.upper(), className='gender-title-main'),
-                html.Div("ENROLLED STUDENTS", className='gender-title-sub')
-            ], className='gender-title-wrapper'),
-
-            html.Div(f"{male_total + female_total:,}", className='total-count'),
-            html.Div([
                 html.Div([
-                    html.Span(className="legend-dot male"),
-                    html.Span(f"{male_pct}%", className="legend-percentage male"),
-                    html.Span(" MALE", className="legend-label male"),
-                ], className="legend-item"),
-
+                    html.Div(level_name.upper(), className='card-title-main'),
+                ], className='card-header-wrapper'),
                 html.Div([
-                    html.Span(className="legend-dot female"),
-                    html.Span(f"{female_pct}%", className="legend-percentage female"),
-                    html.Span(" FEMALE", className="legend-label female"),
-                ], className="legend-item")
-            ], className="custom-legend"),
+                    html.Div(f"{male_total + female_total:,}", className='total-count'),
+                    html.Div("STUDENTS", className='card-title-sub')
+                ], className='card-header-wrapper'),
+                html.Div([
+                    html.Div([
+                        html.Span(className="legend-dot male"),
+                        html.Span(f"{male_pct}%", className="legend-percentage male"),
+                        html.Span(" MALE", className="legend-label male"),
+                    ], className="legend-item"),
 
+                    html.Div([
+                        html.Span(className="legend-dot female"),
+                        html.Span(f"{female_pct}%", className="legend-percentage female"),
+                        html.Span(" FEMALE", className="legend-label female"),
+                    ], className="legend-item")
+                ], className="card-one-two-legend"),
+            ],className="card-one-two-text"),
             html.Div(
                 bar_chart,
                 className="bar-chart-container",
-                style={"marginTop": "-120px"} 
+                style={"marginTop": "auto"}
             ),
-        ], className='gender-card')
+        ], className='card card-one-two')
 
-    return html.Div([
-        html.Div([
-            create_card("Elementary School", "elementary"),
-            create_card("Junior High School", "junior_high"),
-            create_card("Senior High School", "senior_high")
-        ], className='card-two-container')
-    ])
+    return [
+        create_card("Elementary School", "elementary"),
+        create_card("Junior High School", "junior_high"),
+        create_card("Senior High School", "senior_high")
+    ]
+
+def card_two_register_callbacks(app):
+    return None

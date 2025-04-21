@@ -8,7 +8,7 @@ import re
 def preserve_parentheses_title(text):
     return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
 
-def card_five(df, location=None, mode='student'):
+def card_five(df, mode='student'):
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -68,7 +68,7 @@ def card_five(df, location=None, mode='student'):
     
     layout_updates = {
         "showlegend": False,
-        "height": min(240, 80 + 40 * len(categories)),        
+        "height": min(240, 60 + 40 * len(categories)),        
         "margin": dict(t=10, b=0, l=0, r=10),
         "template": "simple_white",
         "paper_bgcolor": 'rgba(0,0,0,0)',
@@ -94,28 +94,17 @@ def card_five(df, location=None, mode='student'):
 
     subplots.update_layout(**layout_updates)
 
-    return dbc.Card(
-        dbc.CardBody([
-            html.Div(
-                f"{card_five_title} by School Type".upper(),
-                style={"fontWeight": "bold", "fontFamily": "Inter", "fontSize": "16px", "color": "#2a4d69"}
-            ),
+    return html.Div([
             html.Div([
-                dcc.Graph(figure=subplots),
-            ], style={
-                'marginTop': '10px',
-                'width': '300px',
-                'height': f'{min(240, 80 + 40 * len(categories))}px',
-                'overflowY': 'auto',
-                'fontFamily': 'Inter'
-            }),
-        ]),
-        style={
-            'backgroundColor': '#f7f9f7',
-            'borderRadius': '18px',
-            'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-            'fontFamily': 'Inter',
-            'backgroundColor': '#f7f9f7',
-            'padding': '10px',
-        }
-    )
+                html.Div(
+                f"Enrollment by School Type".upper(),
+                className='card-title-main'),
+            ],className='card-header-wrapper'),
+            html.Div([
+                dcc.Graph(figure=subplots, config={'displayModeBar': False}),
+            ], 
+            className='card-five-graph'),
+        ], className='card card-five')
+
+def card_five_register_callbacks(app):
+    return None

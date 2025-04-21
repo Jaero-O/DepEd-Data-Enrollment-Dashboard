@@ -1,123 +1,96 @@
 import pandas as pd
-import dash_bootstrap_components as dbc
 from dash import html, dcc
-import plotly.graph_objects as go
-import re
-import os
-from datetime import datetime
-
-def detect_school_year(df, file_path=None):
-    if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
-        
-    """Detects the school year from the dataset or filename"""
-    for col in df.columns:
-        if 'year' in col.lower() or 'sy' in col.lower():
-            first_val = str(df[col].dropna().unique()[0])
-            return f"<b>A.Y. <br>{first_val}</b>"
-
-    if file_path:
-        filename = os.path.basename(file_path)
-        match = re.search(r'(\d{4})[_\-](\d{4})', filename)
-        if match:
-            return f"<b>A.Y. <br>{match.group(1)}–{match.group(2)}</b>"
-
-    today = datetime.today()
-    start_year = today.year if today.month >= 6 else today.year - 1
-    end_year = start_year + 1
-    return f"<b>A.Y. <br>{start_year}–{end_year}</b>"
+import plotly.graph_objs as go
 
 def card_one(df, mode):
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
-    if mode == 'student':
-        school_year = detect_school_year(df)
+    def compute_totals_all_levels(df):
+        all_columns = [
+            'k_male','k_female','g1_male','g1_female','g2_male','g2_female','g3_male','g3_female',
+            'g4_male','g4_female','g5_male','g5_female','g6_male','g6_female','elem_ng_male','elem_ng_female',
+            'g7_male','g7_female','g8_male','g8_female','g9_male','g9_female','g10_male','g10_female',
+            'jhs_ng_male','jhs_ng_female',
+            'g11_acad_-_abm_male','g11_acad_-_abm_female','g11_acad_-_humss_male','g11_acad_-_humss_female',
+            'g11_acad_stem_male','g11_acad_stem_female','g11_acad_gas_male','g11_acad_gas_female',
+            'g11_acad_pbm_male','g11_acad_pbm_female','g11_tvl_male','g11_tvl_female',
+            'g11_sports_male','g11_sports_female','g11_arts_male','g11_arts_female',
+            'g12_acad_-_abm_male','g12_acad_-_abm_female','g12_acad_-_humss_male','g12_acad_-_humss_female',
+            'g12_acad_stem_male','g12_acad_stem_female','g12_acad_gas_male','g12_acad_gas_female',
+            'g12_acad_pbm_male','g12_acad_pbm_female','g12_tvl_male','g12_tvl_female',
+            'g12_sports_male','g12_sports_female','g12_arts_male','g12_arts_female'
+        ]
 
-        male_columns = [col for col in df.columns if col.lower().endswith('_male')]
-        female_columns = [col for col in df.columns if col.lower().endswith('_female')]
+        male_cols = [col for col in all_columns if col.endswith('_male')]
+        female_cols = [col for col in all_columns if col.endswith('_female')]
 
-        total_male = df[male_columns].sum().sum()
-        total_female = df[female_columns].sum().sum()
-        total_enrollment = total_male + total_female
+        total_male = df[male_cols].sum().sum()
+        total_female = df[female_cols].sum().sum()
+        total = total_male + total_female
 
-        male_pct = round((total_male / total_enrollment) * 100, 1) if total_enrollment > 0 else 0
-        female_pct = round((total_female / total_enrollment) * 100, 1) if total_enrollment > 0 else 0
+        male_percentage = round((total_male / total) * 100, 1) if total else 0
+        female_percentage = round((total_female / total) * 100, 1) if total else 0
 
-        fig = go.Figure(go.Pie(
-            labels=['Male', 'Female'],
-            values=[total_male, total_female],
-            hole=0.6,
-            textinfo='none',
-            marker=dict(colors=['#2a4d69', '#f28cb1']),
-            sort=False,
-            direction='clockwise',
-            rotation=180
-        ))
+        return total_male, total_female, male_percentage, female_percentage
 
-        fig.update_layout(
-            annotations=[dict(
-                text=school_year,
-                x=0.5, y=0.5,
-                font_size=14,
-                showarrow=False,
-                align='center'
-            )],
-            margin=dict(t=0, b=0, l=0, r=0),
-            showlegend=False,
-            height=200,
-            width=200,
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)'
+    def create_card():
+        male_total, female_total, male_pct, female_pct = compute_totals_all_levels(df)
+
+        bar_chart = dcc.Graph(
+            className='gender-bar-chart',
+            config={'displayModeBar': False},
+            figure={
+                'data': [
+                    go.Bar(x=['Enrollment'], y=[male_total], name='Male', marker_color='#2a4d69'),
+                    go.Bar(x=['Enrollment'], y=[female_total], name='Female', marker_color='#f28cb1')
+                ],
+                'layout': go.Layout(
+                    barmode='group',
+                    height=120,
+                    width=60,
+                    bargap=0.1,
+                    margin={'l': 0, 'r': 0, 't': 0, 'b': 5},
+                    showlegend=False,
+                    xaxis=dict(showline=False, showgrid=False, zeroline=False, showticklabels=False),
+                    yaxis=dict(showline=False, showgrid=False, zeroline=False, showticklabels=False)
+                )
+            }
         )
 
-        gender_legend = html.Div([
+        return html.Div([
             html.Div([
-                html.Span(style={
-                    'width': '18px', 'height': '18px',
-                    'backgroundColor': '#2a4d69',
-                    'borderRadius': '50%',
-                    'display': 'inline-block',
-                    'marginRight': '8px'
-                }),
-                html.Span(f"{male_pct}%", style={'fontWeight': 'bold', 'color': '#2a4d69', 'fontSize': '22px'}),
-                html.Span(" MALE", style={'fontWeight': 'bold', 'color': '#2a4d69', 'fontSize': '14px'})
-            ], className='mb-2'),
-
-            html.Div([
-                html.Span(style={
-                    'width': '18px', 'height': '18px',
-                    'backgroundColor': '#f28cb1',
-                    'borderRadius': '50%',
-                    'display': 'inline-block',
-                    'marginRight': '8px'
-                }),
-                html.Span(f"{female_pct}%", style={'fontWeight': 'bold', 'color': '#f28cb1', 'fontSize': '22px'}),
-                html.Span(" FEMALE", style={'fontWeight': 'bold', 'color': '#f28cb1', 'fontSize': '14px'})
-            ])
-        ])
-
-        return dbc.Card(
-            dbc.CardBody([
-                html.Div("TOTAL ENROLLMENT", className="text-uppercase text-muted small fw-bold mb-1"),
-                html.H2(f"{int(total_enrollment):,}", className="fw-bold", style={'color': '#0a1f44'}),
                 html.Div([
-                    html.Div(gender_legend, style={'flex': '1'}),
-                    html.Div(dcc.Graph(figure=fig, config={'displayModeBar': False}), style={'flex': '1'})
-                ], style={'display': 'flex', 'alignItems': 'center', 'gap': '10px', 'marginTop': '10px'})
-            ]),
-            className="mb-4 shadow-sm rounded-4 p-3"
-        )
+                    html.Div("TOTAL ENROLLMENT", className='card-title-main'),
+                ], className='card-header-wrapper'),
+                html.Div([
+                    html.Div(f"{male_total + female_total:,}", className='total-count'),
+                    html.Div("STUDENTS", className='card-title-sub')
+                ], className='card-header-wrapper'),
 
-    elif mode == 'school':
-        total_schools = df['beis_school_id'].nunique()
+                html.Div([
+                    html.Div([
+                        html.Span(className="legend-dot male"),
+                        html.Span(f"{male_pct}%", className="legend-percentage male"),
+                        html.Span(" MALE", className="legend-label male"),
+                    ], className="legend-item"),
 
-        return dbc.Card(
-            dbc.CardBody([
-                html.Div("TOTAL SCHOOLS", className="text-uppercase text-muted small fw-bold mb-1"),
-                html.H2(f"{total_schools:,}", className="fw-bold", style={'color': '#0a1f44'}),
-            ]),
-            className="mb-4 shadow-sm rounded-4 p-3"
-        )
+                    html.Div([
+                        html.Span(className="legend-dot female"),
+                        html.Span(f"{female_pct}%", className="legend-percentage female"),
+                        html.Span(" FEMALE", className="legend-label female"),
+                    ], className="legend-item")
+                ], className="card-one-two-legend"),
+            ], className="card-one-two-text"),
 
-    return dbc.Card(dbc.CardBody(html.Div("Mode not supported")), className="mb-4 shadow-sm rounded-4 p-3")
+            html.Div(
+                bar_chart,
+                className="bar-chart-container",
+                style={"marginTop": "auto"}
+            ),
+        ], className='card card-one-two')
+
+    return create_card()
+
+def card_one_register_callbacks(app):
+    return None

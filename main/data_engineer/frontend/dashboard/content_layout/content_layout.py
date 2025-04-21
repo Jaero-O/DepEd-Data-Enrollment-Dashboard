@@ -2,8 +2,7 @@ from dash import Input, Output, State, MATCH, ALL, ctx, html, dcc
 import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
-from main.data_engineer.frontend.dashboard.content.content import dashboardContent, convert_filter_to_df
-from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter
+from main.data_engineer.frontend.dashboard.content.content import dashboard_content, convert_filter_to_df
 
 data = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -34,19 +33,10 @@ tab_labels = ['Region', 'Division', 'District', 'Province', 'Municipality', 'Leg
 # Layout (content)
 content_layout = html.Div([
     dcc.Store(id='current-filter-dict'),
-    dcc.Store(id='selected-filters', storage_type='session'),
-    html.Div([
-        html.Span('School Enrollment Dashboard', className='My-Dashboard-title'),
-        html.Button(
-            children=[
-                html.I(className="fa fa-filter"), html.Span('Show Filter', className='hide-filter', id='filter-button-text')
-            ],
-            className='filter-button',
-            id='toggle-button-open',
-            n_clicks=0
-        )
-    ], className='header-tab'),
-
+    dcc.Store(id='selected-filters', data={
+        'location': 'region',
+        'hierarchy_order': 'desc'
+    }),
     html.Div([
         html.Div([
             html.Button(html.I(className='fa fa-times'),id='toggle-button-exit', n_clicks=0,className='exit-filter-menu'),
@@ -271,10 +261,7 @@ content_layout = html.Div([
         ], className='dropdown-search-filtering-div'),
         html.Div(id='filter-table-output', className='filter-table-output')
     ], className='filtering-div', id='filter-container'),
-    html.Div([
-        card_filter(),
-        html.Div(id="tab-dynamic-content")
-    ], id="tab-content", className='content-page active-tab'),
+    html.Div(id="tab-dynamic-content",className='content-page active-tab' ),
     html.Div(id="output-data-upload")
 ], className='tab-div')
 
@@ -289,14 +276,17 @@ def content_layout_register_callbacks(app):
         Output("tab-dynamic-content", "children"),
         Input('current-filter-dict', 'data'),
         Input('selected-filters', 'data'),
+        Input('selected-mode', 'data'),
+        Input('tabs','value'),
+        prevent_initial_call=True
     )
-    def update_tab_content(data_dict,filter_dict):
-        filter1 = filter_dict.get('filter1') if filter_dict else 'overall'  # or your default
-        filter2 = filter_dict.get('filter2') if filter_dict else 'student'  # or your default
+    def update_tab_content(data_dict,filter_dict,mode,tab):
+        location = filter_dict.get('location') if filter_dict else 'overall'  # or your default
+        order = filter_dict.get('hierarchy_order') if filter_dict else 'ascending'  # or your default
         print(filter_dict)
-        print("Filter 1:", filter1)
-        print("Filter 2:", filter2)
-        return dashboardContent(convert_filter_to_df(data_dict), filter1, filter2)
+        print("Filter 1:", location)
+        df = convert_filter_to_df(data_dict)
+        return dashboard_content(df, location,mode,order,tab)
 
     # Callback to toggle filter visibility
     @app.callback(
