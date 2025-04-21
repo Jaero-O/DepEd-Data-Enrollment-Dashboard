@@ -82,13 +82,7 @@ def card_four(df, mode):
         margin=dict(t=0, b=0, l=0, r=0),
         showlegend=False,
         autosize=True,
-        height=400
-    )
-
-    # Update the dcc.Graph container to allow the pie chart to expand
-    dcc.Graph(
-        figure=pie_chart,
-        config={'displayModeBar': False}
+        height=None
     )
 
     # Create legend items in the same order
@@ -126,9 +120,10 @@ def card_four(df, mode):
         html.Div([html.Div(["Enrollment by Sector"], className="card-title-main")], className='card-header-wrapper'),
         html.Div(dcc.Graph(
             figure=pie_chart,
-            config={'displayModeBar': False},
+            config={'displayModeBar': False, 'responsive': True},
             className='pie-chart',
-        ), className='graph-wrapper'),
+            style={'width': '100%', 'height': '100%'}
+        ), className='graph-wrapper', style={'height': '400px', 'width': '100%'}),
         html.Div(sector_lines, className='sector-lines-wrapper'),
     ], className='card card-four')
 
