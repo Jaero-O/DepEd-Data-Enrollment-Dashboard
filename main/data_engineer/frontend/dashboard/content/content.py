@@ -10,9 +10,6 @@ from main.data_engineer.frontend.dashboard.content.cards.card_seven_es import ca
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_jhs import card_seven_jhs
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import card_seven_shs
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
-<<<<<<< HEAD
-from main.data_engineer.frontend.dashboard.content.cards.card_choropleth import card_choropleth
-=======
 from main.data_engineer.frontend.dashboard.content.cards.card_table_school import card_tabular
 from main.data_engineer.frontend.dashboard.content.cards.card_table_geography import card_regional_table
 
@@ -143,19 +140,6 @@ def convert_filter_to_df(filter_dict, selected_year, year_list):
 
 
 # Load the dataset once to access filter options
-<<<<<<< HEAD
-def dashboardContent(final_df, location, mode):
-    return (
-        # card_one(final_df, mode),
-        # card_two(final_df, location, mode),
-        # card_three(final_df, mode),
-        # card_four(final_df, location, mode),
-        # card_five(final_df, location, mode),        
-        card_six(final_df, location, mode),
-        # card_seven(final_df, mode),
-        # card_eight(final_df, location, mode),
-        card_choropleth(final_df, location, mode),
-=======
 def dashboardContent(final_df, location, mode, order):
     return [
         html.Div("School-Based Enrollment", className='card-group-title'),
@@ -187,7 +171,6 @@ def dashboardContent(final_df, location, mode, order):
         # card_six(final_df, location, mode),
         # card_seven(final_df, mode),
         # card_eight(final_df, location, mode)
->>>>>>> 5921ef1ee72448b73647af88544ec68cfb97dc85
         # add here your cards after importing  
     ]
 
