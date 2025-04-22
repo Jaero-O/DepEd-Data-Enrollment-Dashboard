@@ -32,7 +32,7 @@ div.card-one div.card-one-header-wrapper div.card-one-title-main {
 div.card-one div.card-one-header-wrapper div.card-one-total-count {
   font-size: 3em;
   color: #175382;
-  font-weight: 700;
+  font-weight: 800;
   margin-top: -10px;
 }
 div.card-one div.card-one-header-wrapper div.card-one-title-sub {
@@ -89,7 +89,6 @@ div.card-one div.card-one-bottom-section div.card-one-legend div.card-one-legend
 div.card-one div.card-one-bottom-section div.card-one-legend div.card-one-legend-item span.card-one-legend-percentage {
   font-size: 24px;
   font-weight: 700;
-  font-style: italic;
   margin-top: -5px;
 }
 div.card-one div.card-one-bottom-section div.card-one-legend div.card-one-legend-item span.card-one-legend-percentage.male {
