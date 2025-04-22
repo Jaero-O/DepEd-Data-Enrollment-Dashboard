@@ -54,52 +54,52 @@ div.card-two div.header-legend-wrapper div.legend-wrapper {
   justify-content: start;
   margin-top: 30px;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-item {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-item {
   display: flex;
   align-items: center;
   gap: 0.4rem;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-item span.legend-oblong {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-item span.legend-oblong {
   width: 33px;
   height: 12px;
   border-radius: 36px;
   display: inline-block;
   margin-right: 5px;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-item span.legend-oblong.male {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-item span.legend-oblong.male {
   background-color: #0080FF;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-item span.legend-oblong.female {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-item span.legend-oblong.female {
   background-color: #FF5C85;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-item span.legend-label {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-item span.legend-label {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 14px;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-item span.legend-label.male {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-item span.legend-label.male {
   color: #175382;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-item span.legend-label.female {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-item span.legend-label.female {
   color: #175382;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper span.legend-percentage {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper span.legend-percentage {
   font-size: 24px;
   font-weight: 700;
   margin-top: -5px;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper span.legend-percentage.male {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper span.legend-percentage.male {
   color: #0080FF;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper span.legend-percentage.female {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper span.legend-percentage.female {
   color: #FF5C85;
 }
-div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-gender-wrapper div.legend-line {
+div.card-two div.header-legend-wrapper div.legend-wrapper div.legend-all-wrapper div.legend-line {
   width: 133px;
   height: 1px;
   background-color: #F2DCC0;
@@ -110,6 +110,103 @@ div.card-two div.header-legend-wrapper div.bar-chart-container {
   border-radius: 1.5rem;
   flex-shrink: 0;
   margin-left: 10px;
+}
+div.card-two div.header-legend-wrapper-donut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: -40px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: start;
+  margin-top: 20px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut {
+  width: 33px;
+  height: 12px;
+  border-radius: 36px;
+  margin-right: 5px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.purely-es {
+  background-color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.es--jhs {
+  background-color: #F6A5C0;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.all-offering {
+  background-color: #F9CB9C;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.purely-jhs {
+  background-color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.jhs--shs {
+  background-color: #F6A5C0;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.purely-shs {
+  background-color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.purely-es {
+  color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.es--jhs {
+  color: #F6A5C0;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.all-offering {
+  color: #F9CB9C;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.purely-jhs {
+  color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.jhs--shs {
+  color: #F6A5C0;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.purely-shs {
+  color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: -5px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.purely-es {
+  color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.es--jhs {
+  color: #F6A5C0;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.all-offering {
+  color: #F9CB9C;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.purely-jhs {
+  color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.jhs--shs {
+  color: #F6A5C0;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.purely-shs {
+  color: #6FA8DC;
+}
+div.card-two div.header-legend-wrapper-donut div.card-two-donut-chart-container {
+  display: flex;
+  align-items: flex-end;
+  height: auto;
+  flex-shrink: 0;
+  margin-left: 10px;
+  margin-bottom: -35px;
 }
 
 /*# sourceMappingURL=card_two.css.map */

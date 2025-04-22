@@ -59,7 +59,7 @@ div.card-two{
             justify-content: start;
             margin-top: 30px;
 
-            div.legend-gender-wrapper {
+            div.legend-all-wrapper {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
@@ -120,14 +120,85 @@ div.card-two{
                     background-color: #F2DCC0;
                     margin-bottom: 8px;
                 }
-            }
-        }       
+            }                    
+        }
 
         div.bar-chart-container {
             height: auto;
             border-radius: 1.5rem;
             flex-shrink: 0;
             margin-left: 10px;
+        }
+    }
+
+    div.header-legend-wrapper-donut {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        margin-top: -40px;
+
+        div.legend-wrapper-donut {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: start;
+            margin-top: 20px;
+
+            div.legend-item-donut{
+                display: flex;
+                align-items: center;
+                gap: 0.4rem;
+
+                span.legend-oblong-donut {
+                    width: 33px;
+                    height: 12px;
+                    border-radius: 36px;
+                    margin-right: 5px;
+
+                    &.purely-es { background-color: #6FA8DC; }
+                    &.es--jhs { background-color: #F6A5C0; }
+                    &.all-offering { background-color: #F9CB9C; }
+                    &.purely-jhs { background-color: #6FA8DC; }
+                    &.jhs--shs { background-color: #F6A5C0; }
+                    &.purely-shs { background-color: #6FA8DC; }
+                }
+    
+                span.legend-label-donut {
+                    text-transform: uppercase;
+                    font-weight: 600;
+                    font-size: 14px;
+
+                    &.purely-es { color: #6FA8DC; }
+                    &.es--jhs { color: #F6A5C0; }
+                    &.all-offering { color: #F9CB9C; }
+                    &.purely-jhs { color: #6FA8DC; }
+                    &.jhs--shs { color: #F6A5C0; }
+                    &.purely-shs { color: #6FA8DC; }
+                }
+            }
+
+            span.legend-percentage-donut {
+                font-size: 16px;
+                font-weight: 700;
+                margin-top: -5px;
+
+                &.purely-es { color: #6FA8DC; }
+                &.es--jhs { color: #F6A5C0; }
+                &.all-offering { color: #F9CB9C; }
+                &.purely-jhs { color: #6FA8DC; }
+                &.jhs--shs { color: #F6A5C0; }
+                &.purely-shs { color: #6FA8DC; }
+            }                               
+        }
+
+        div.card-two-donut-chart-container {
+            display: flex;
+            align-items: flex-end;
+            height: auto;
+            flex-shrink: 0;
+            margin-left: 10px;
+            margin-bottom: -35px;
         }
     }
 }
