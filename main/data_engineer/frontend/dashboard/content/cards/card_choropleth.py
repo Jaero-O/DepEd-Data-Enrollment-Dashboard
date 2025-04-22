@@ -167,14 +167,3 @@ def card_choropleth(df, mode='student', level='region'):
         }
     )
 
-# Dash app
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
-app.layout = html.Div([
-    card_choropleth(df, mode='school', level='region'),
-    card_choropleth(df, mode='student', level='region'),
-    card_choropleth(df, mode='school', level='province'),
-    card_choropleth(df, mode='student', level='province'),
-], style={"display": "flex", "flexWrap": "wrap", "gap": "20px", "justifyContent": "center", 'background': '#ffffff'})
-
-if __name__ == '__main__':
-    app.run(debug=True)
