@@ -51,13 +51,13 @@ content_layout = html.Div([
         html.Span("School Year Range", className='lower-title outside'),
         html.Div([
             dcc.RangeSlider(
-                id='year-range-slider',
+                id='year-range',
                 className='year-slider',
-                min=2010,
-                max=2025,
+                min=0,
+                max=0,
                 step=1,
-                marks={str(year): str(year) for year in range(2000, 2026)},
-                value=[2000, 2025],
+                marks={},
+                value=[0,0],
                 tooltip={"placement": "bottom", "always_visible": True}
             ),
         ], className='slider-filtering-div'),
@@ -271,6 +271,35 @@ content_layout = html.Div([
 
 def content_layout_register_callbacks(app):
 
+    @app.callback(
+        Output('stored-year-range', 'data'),
+        Input('year-range', 'value')
+    )
+    def store_year_range(value):
+        print(value)
+        return value
+    
+    @app.callback(
+        [Output('year-range', 'min'),
+        Output('year-range', 'max'),
+        Output('year-range', 'marks'),
+        Output('year-range', 'value', allow_duplicate=True)],
+        Input('current-years', 'data'),
+        prevent_initial_call='initial_duplicate'  # Input is the data in the store
+    )
+    def update_range(years):
+        # Setting min and max values based on the years list
+        min_year = min(years)
+        max_year = max(years)
+
+        # Creating marks for the years
+        marks = {year: str(year) for year in years}
+
+        # Setting the initial range to span from min to max year
+        initial_range = [min_year, max_year]
+
+        return min_year, max_year, marks, initial_range
+
     # Callback to update content based on active tab
     @app.callback(
         Output("tab-dynamic-content", "children"),
@@ -278,14 +307,22 @@ def content_layout_register_callbacks(app):
         Input('selected-filters', 'data'),
         Input('selected-mode', 'data'),
         Input('tabs','value'),
+        Input('school-year-dropdown-select', 'value'),
+        Input('year-range', 'value'),
+        Input('current-years', 'data'),
         prevent_initial_call=True
     )
-    def update_tab_content(data_dict,filter_dict,mode,tab):
+    def update_tab_content(data_dict,filter_dict,mode,tab,school_year,year_range,current_years):
         location = filter_dict.get('location') if filter_dict else 'overall'  # or your default
-        order = filter_dict.get('hierarchy_order') if filter_dict else 'ascending'  # or your default
+        order = filter_dict.get('hierarchy_order') if filter_dict else 'ascending'
+
+        print('School Year:', school_year)
+        selected_year = school_year if school_year == 'All School Years' else school_year.split('-')[0]
+        filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
+    
         print(filter_dict)
         print("Filter 1:", location)
-        df = convert_filter_to_df(data_dict)
+        df = convert_filter_to_df(data_dict, selected_year, filtered_years)
         return dashboard_content(df, location,mode,order,tab)
 
     # Callback to toggle filter visibility
@@ -441,6 +478,7 @@ def content_layout_register_callbacks(app):
         [
             Output({'type': 'chk', 'index': ALL}, 'value'),
             Output({'type': 'search', 'index': ALL}, 'value'),
+            Output('year-range', 'value', allow_duplicate=True)
         ],
         [
             Input('reset-button', 'n_clicks'),
@@ -449,16 +487,21 @@ def content_layout_register_callbacks(app):
         [
             State({'type': 'chk', 'index': ALL}, 'id'),
             State({'type': 'search', 'index': ALL}, 'id'),
+            State('current-years', 'data')
         ],
-        prevent_initial_call=True
+        prevent_initial_call='initial_duplicate'
     )
-    def reset_checklist_or_all(reset_click, delete_clicks, chk_ids, search_ids):
+    def reset_checklist_or_all(reset_click, delete_clicks, chk_ids, search_ids,range_list):
         triggered = ctx.triggered_id
+        min_year = min(range_list)
+        max_year = max(range_list)
+        initial_range = [min_year, max_year]
 
         if triggered == 'reset-button':
             return (
                 [[] for _ in chk_ids],   # Reset all checklists
-                ['' for _ in search_ids] # Reset all search inputs
+                ['' for _ in search_ids],
+                initial_range  # Reset all search inputs
             )
 
         elif isinstance(triggered, dict) and triggered.get('type') == 'delete':
@@ -477,9 +520,9 @@ def content_layout_register_callbacks(app):
                 else:
                     reset_search.append(dash.no_update)
 
-            return reset_chk, reset_search
+            return reset_chk, reset_search, dash.no_update
 
-        return [dash.no_update] * len(chk_ids), [dash.no_update] * len(search_ids)
+        return [dash.no_update] * len(chk_ids), [dash.no_update] * len(search_ids), dash.no_update
 
 
     

@@ -75,67 +75,110 @@ def card_three(df, mode):
 
     grouped = grouped.sort_values(by=y_col, ascending=False)
 
-    color_palette = px.colors.qualitative.Set3
+    color_palette = [
+        '#FFD06C',
+        '#3377FF',
+        '#53CC5B',
+        '#D176F2',
+        '#3CC1FF',
+        '#FF828B',
+        '#FFA486'
+    ]
     unique_subs = grouped['school_subclassification'].unique()
     color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
 
     fig = px.bar(
-        grouped,
-        x='school_subclassification_label',
-        y=y_col,
-        color='school_subclassification',
-        color_discrete_map=color_map,
-        text_auto='.3s',
+    grouped,
+    x='school_subclassification_label',
+    y=y_col,
+    color='school_subclassification',
+    color_discrete_map=color_map,
+    text_auto='.3s',
+    )
+
+    fig.update_traces(
+        textposition='outside',  
+        cliponaxis=False,  
+        textfont=dict(
+            family="Inter",
+            size=15,
+            weight="bold", 
+            color="#44647E"
+        ),
     )
 
     max_val = grouped[y_col].max()
     if pd.isna(max_val) or max_val <= 0:
         tickvals = []
         ticktext = []
+        y_range = None
     else:
-        max_power = int(np.ceil(np.log10(max_val)))
+        max_power = int(np.ceil(np.log10(max_val)))  # power of 10
         min_power = 2 if max_val >= 100 else 0
         tickvals = [10**i for i in range(min_power, max_power + 1)]
         ticktext = [f"{int(v):,}" for v in tickvals]
+        y_range = [min_power, max_power + 1]  # +1 for extra padding
 
     fig.update_layout(
         xaxis=dict(
             title=None,
-            tickfont=dict(size=10),
+            tickfont=dict(
+                family="Inter",
+                size=12,  
+                color="#616C7E", 
+                weight=600
+            ),
             tickangle=0,
         ),
         yaxis=dict(
             title=None,
             type="log",
-            tickfont=dict(size=10),
+            tickfont=dict(
+                family="Inter",
+                size=12,  
+                color="#616C7E", 
+                weight=600
+            ),
             tickvals=tickvals,
             ticktext=ticktext,
-            gridcolor='#c1d6fe'
+            gridcolor='#F1E1CE',
+            range=[0,max_power + 1]
         ),
         showlegend=False,
-        plot_bgcolor="white",
+        plot_bgcolor="#FFF9F1",
         paper_bgcolor='white',
-        margin=dict(t=20, l=20, r=20, b=60),
+        margin=dict(t=0, l=80, r=0, b=20),
         bargap=0,
         bargroupgap=0.1,
         barmode='group',
-        autosize=False,
-        width=550,
-        height=260,
-
-        # 🚀 Add this line:
-        transition=dict(duration=500, easing='cubic-in-out')
+        autosize=True,
     )
-
 
     return html.Div([
         html.Div([
             html.Div([
-                html.Div("ENROLLMENT BY SUBCLASSIFICATION", className='card-title-main'),
+                html.Div(
+                    "Enrollment by Classification",
+                    className='card-title-main',
+                    style={
+                        'fontFamily':'Inter',
+                        'fontSize': '20px',
+                        'fontWeight': '700',
+                        'color': '#44647E',
+                        'marginBottom': '10px'
+                    }
+                ),
             ], className='card-header-wrapper'),
         ], className="card-one-two-text"),
-        dcc.Graph(figure=fig, config={'displayModeBar': False})
+        dcc.Graph(
+            figure=fig,
+            config={'displayModeBar': False,},
+            className='card-three-graph',
+            style={'width': '100%', 'height': '100%'}
+        )
+
     ], className="card card-three")
+
 
 
 def card_three_register_callbacks(app):
