@@ -124,3 +124,4 @@ def card_two(df, mode):
 
 def card_two_register_callbacks(app):
     return None
+
