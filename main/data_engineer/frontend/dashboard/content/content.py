@@ -61,11 +61,26 @@ hierarchy_order = [
 # non-hierarchical fields
 direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified COC']
 
+import pandas as pd
+
+# Hierarchical and non-hierarchical filters
+hierarchy_order = [
+    'Region',
+    'Legislative District',
+    'Province',
+    'Division',
+    'District',
+    'Municipality',
+    'Barangay',
+]
+
+direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified COC']
+
 def convert_filter_to_df(filter_dict):
     csv_path = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
     df = pd.read_csv(csv_path)
 
-    # Rename columns
+    # Rename columns to match UI filters
     column_rename_map = {
         'region': 'Region',
         'division': 'Division',
@@ -85,18 +100,18 @@ def convert_filter_to_df(filter_dict):
 
     df.rename(columns=column_rename_map, inplace=True)
 
-    if filter_dict is None:
-        final_df = df.drop_duplicates(subset='BEIS School ID')
-        return final_df
+    # If no filters are passed, return the full set
+    if not filter_dict:
+        return df.drop_duplicates(subset='BEIS School ID')
 
-    # Normalize filter values
+    # Normalize all filter values to lists
     for key, value in filter_dict.items():
         if value is None:
             filter_dict[key] = []
         elif isinstance(value, str):
             filter_dict[key] = [value]
 
-    # Step 1: Hierarchical filtering
+    # Apply hierarchical filters
     filtered_df = df.copy()
     active_levels = [level for level in hierarchy_order if filter_dict.get(level)]
 
@@ -123,7 +138,6 @@ def convert_filter_to_df(filter_dict):
     reverse_column_map = {v: k for k, v in column_rename_map.items()}
     final_df.rename(columns=reverse_column_map, inplace=True)
     return final_df
-
 
 # Load the dataset once to access filter options
 def dashboardContent(final_df, location, mode, order):
