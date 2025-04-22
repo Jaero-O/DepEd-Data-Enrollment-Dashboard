@@ -113,13 +113,14 @@ def card_choropleth(df, mode='student', level='region'):
         locations="geo_name",
         color="total",
         color_continuous_scale=[
-            "#E6F4FF", "#D9EEFF", "#CCE8FF", "#BFE3FF", "#B3DDFF", "#A6D7FF", "#99D2FF",
-            "#8CCCFF", "#80C7FF", "#73C1FF", "#66BBFF", "#59B6FF", "#4DB0FF", "#40AAFF",
-            "#33A5FF", "#269FFF", "#1999FF", "#0D94FF", "#0087F2", "#0080E6", "#0079D9",
-            "#0072CC", "#006BBF", "#0063B3", "#005CA6", "#005599", "#004E8C", "#004780",
-            "#004073", "#003966", "#003259", "#002B4D", "#002440", "#001C33", "#001526",
-            "#000E19"
+            "#000E19", "#001526", "#001C33", "#002440", "#002B4D", "#003259", "#003966",
+            "#004073", "#004780", "#004E8C", "#005599", "#005CA6", "#0063B3", "#006BBF",
+            "#0072CC", "#0079D9", "#0080E6", "#0087F2", "#0D94FF", "#1999FF", "#269FFF",
+            "#33A5FF", "#40AAFF", "#4DB0FF", "#59B6FF", "#66BBFF", "#73C1FF", "#80C7FF",
+            "#8CCCFF", "#99D2FF", "#A6D7FF", "#B3DDFF", "#BFE3FF", "#CCE8FF", "#D9EEFF",
+            "#E6F4FF"
         ]
+
     )
 
     fig.update_traces(marker_line_color="black", marker_line_width=0)
@@ -129,13 +130,13 @@ def card_choropleth(df, mode='student', level='region'):
         center={"lat": 12.8797, "lon": 121.7740},
         lonaxis=dict(range=[115, 128]),
         lataxis=dict(range=[4, 21]),
-        bgcolor='#d8fcfc'
+        bgcolor='rgba(0,0,0,0)'
     )
 
     fig.update_layout(
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
-        paper_bgcolor='#d8fcfc',
-        plot_bgcolor='#d8fcfc',
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
         font=dict(family="Inter", size=12, color="black"),
         coloraxis_colorbar=dict(
             orientation='h', yanchor='bottom', y=-0.1, xanchor='center',
@@ -156,9 +157,13 @@ def card_choropleth(df, mode='student', level='region'):
             }),
         ]),
         style={
-            'backgroundColor': '#d8fcfc', 'borderRadius': '18px',
-            'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)', 'fontFamily': 'Inter',
-            'padding': '5px', 'width': '500px', 'height': '700px'
+            'background': 'linear-gradient(135deg, #9EFFF7, #ffffff)',  # updated line
+            'borderRadius': '18px',
+            'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
+            'fontFamily': 'Inter',
+            'padding': '5px',
+            'width': '500px',
+            'height': '700px'
         }
     )
 
@@ -169,7 +174,7 @@ app.layout = html.Div([
     card_choropleth(df, mode='student', level='region'),
     card_choropleth(df, mode='school', level='province'),
     card_choropleth(df, mode='student', level='province'),
-], style={"display": "flex", "flexWrap": "wrap", "gap": "20px", "justifyContent": "center"})
+], style={"display": "flex", "flexWrap": "wrap", "gap": "20px", "justifyContent": "center", 'background': '#ffffff'})
 
 if __name__ == '__main__':
     app.run(debug=True)
