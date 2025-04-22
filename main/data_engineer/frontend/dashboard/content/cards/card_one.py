@@ -34,7 +34,7 @@ def card_one(df, mode):
 
         return total_male, total_female, male_percentage, female_percentage
 
-    def create_card():
+    def create_student_card():
         male_total, female_total, male_pct, female_pct = compute_totals_all_levels(df)
 
         bar_chart = dcc.Graph(
@@ -50,17 +50,16 @@ def card_one(df, mode):
                     barcornerradius=7,
                     height=120,
                     width=150,
-                    bargap=0.1, 
+                    bargap=0.1,
                     margin={'l': 0, 'r': 0, 't': 0, 'b': 5},
                     showlegend=False,
-                    plot_bgcolor='rgba(0,0,0,0)',  
-                    paper_bgcolor='rgba(0,0,0,0)', 
+                    plot_bgcolor='rgba(0,0,0,0)',
+                    paper_bgcolor='rgba(0,0,0,0)',
                     xaxis=dict(showline=False, showgrid=False, zeroline=False, showticklabels=False),
                     yaxis=dict(showline=False, showgrid=False, zeroline=False, showticklabels=False)
                 )
             }
         )
-
 
         return html.Div([
             html.Div([
@@ -74,16 +73,16 @@ def card_one(df, mode):
                     html.Div([
                         html.Div([
                             html.Span(className="card-one-legend-dot male"),
-                            html.Span("MALE", className="card-one-legend-label male")
+                            html.Span("MALE", className="card-one-legend-label")
                         ], className="card-one-legend-header"),
                         html.Span(f"{male_pct}%", className="card-one-legend-percentage male"),
-                        html.Div(className="card-one-legend-divider") 
+                        html.Div(className="card-one-legend-divider")
                     ], className="card-one-legend-item"),
 
                     html.Div([
                         html.Div([
                             html.Span(className="card-one-legend-dot female"),
-                            html.Span("FEMALE", className="card-one-legend-label female")
+                            html.Span("FEMALE", className="card-one-legend-label")
                         ], className="card-one-legend-header"),
                         html.Span(f"{female_pct}%", className="card-one-legend-percentage female")
                     ], className="card-one-legend-item")
@@ -93,8 +92,100 @@ def card_one(df, mode):
             ], className="card-one-bottom-section")
         ], className='card card-one')
 
-    return create_card()
+    def create_school_card():
+        # Convert modified_coc to lowercase and drop missing ones
+        df_valid = df[df['modified_coc'].notna()].copy()
+        df_valid['modified_coc'] = df_valid['modified_coc'].str.lower()
 
+        # Initialize counts
+        elementary_ids = set()
+        jhs_ids = set()
+        shs_ids = set()
+
+        for _, row in df_valid.iterrows():
+            coc = row['modified_coc']
+            school_id = row['beis_school_id']
+
+            if 'all' in coc or 'complete' in coc:
+                elementary_ids.add(school_id)
+                jhs_ids.add(school_id)
+                shs_ids.add(school_id)
+            else:
+                if 'es' in coc or 'elementary' in coc:
+                    elementary_ids.add(school_id)
+                if 'jhs' in coc or 'junior' in coc:
+                    jhs_ids.add(school_id)
+                if 'shs' in coc or 'senior' in coc:
+                    shs_ids.add(school_id)
+
+        # Count per level
+        level_counts = pd.DataFrame({
+            'Level': ['ELEMENTARY', 'JHS', 'SHS'],
+            'Count': [len(elementary_ids), len(jhs_ids), len(shs_ids)]
+        })
+        level_colors = ['#008EFF', '#FF6873', '#FF9D00']
+
+        # Donut chart
+        donut_chart = dcc.Graph(
+            className='card-one-donut-chart',
+            config={'displayModeBar': False},
+            figure=go.Figure(
+                data=[go.Pie(
+                    labels=level_counts['Level'],
+                    values=level_counts['Count'],
+                    hole=0.6,
+                    marker=dict(colors=level_colors),
+                    hovertemplate='%{percent}<extra></extra>',
+                    textinfo='none'
+                )],
+                layout=go.Layout(
+                    height=200,
+                    margin=dict(l=0, r=0, t=0, b=0),
+                    showlegend=False,
+                    paper_bgcolor='rgba(0,0,0,0)',
+                    plot_bgcolor='rgba(0,0,0,0)'
+                )
+            )
+        )
+
+        return html.Div([
+            html.Div([
+                html.Div("Total Number of Schools", className='card-one-title-main'),
+                html.Div(f"{df['beis_school_id'].nunique():,}", className='card-one-total-count'),
+                html.Div("schools", className='card-one-title-sub')
+            ], className='card-one-header-wrapper'),
+
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            html.Span(className="card-one-legend-dot", style={'backgroundColor': level_colors[0]}),
+                            html.Span("ELEMENTARY", className="card-one-legend-label")
+                        ], className="card-one-legend-header"),
+                    ], className="card-one-legend-item"),
+
+                    html.Div([
+                        html.Div([
+                            html.Span(className="card-one-legend-dot", style={'backgroundColor': level_colors[1]}),
+                            html.Span("JHS", className="card-one-legend-label")
+                        ], className="card-one-legend-header"),
+                    ], className="card-one-legend-item"),
+
+                    html.Div([
+                        html.Div([
+                            html.Span(className="card-one-legend-dot", style={'backgroundColor': level_colors[2]}),
+                            html.Span("SHS", className="card-one-legend-label")
+                        ], className="card-one-legend-header")
+                    ], className="card-one-legend-item")
+                ], className="card-one-legend"),
+
+                html.Div(donut_chart, className="card-one-donut-chart-container")
+            ], className="card-one-donut-bottom-section")
+        ], className='card card-one')
+
+
+
+    return create_student_card() if mode == "student" else create_school_card()
 
 def card_one_register_callbacks(app):
     return None

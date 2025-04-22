@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 0px;
 }
 .card-one .card-one-header-wrapper .card-one-title-main {
   font-size: 16px;
@@ -37,6 +38,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   margin-top: 20px;
 }
 .card-one .card-one-bottom-section .card-one-legend {
@@ -70,11 +72,6 @@
 .card-one .card-one-bottom-section .card-one-legend .card-one-legend-item .card-one-legend-header .card-one-legend-label {
   text-transform: uppercase;
   font-weight: 500;
-}
-.card-one .card-one-bottom-section .card-one-legend .card-one-legend-item .card-one-legend-header .card-one-legend-label.male {
-  color: #175382;
-}
-.card-one .card-one-bottom-section .card-one-legend .card-one-legend-item .card-one-legend-header .card-one-legend-label.female {
   color: #175382;
 }
 .card-one .card-one-bottom-section .card-one-legend .card-one-legend-item .card-one-legend-percentage {
@@ -96,9 +93,50 @@
 }
 .card-one .card-one-bottom-section .card-one-bar-chart-container {
   height: auto;
-  border-radius: 1.5rem;
   flex-shrink: 0;
   margin-left: 10px;
+}
+.card-one .card-one-donut-bottom-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: -50px;
+}
+.card-one .card-one-donut-bottom-section .card-one-legend {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: start;
+}
+.card-one .card-one-donut-bottom-section .card-one-legend .card-one-legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.card-one .card-one-donut-bottom-section .card-one-legend .card-one-legend-item .card-one-legend-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.card-one .card-one-donut-bottom-section .card-one-legend .card-one-legend-item .card-one-legend-header .card-one-legend-dot {
+  width: 30px;
+  height: 12px;
+  border-radius: 6px;
+  display: inline-block;
+}
+.card-one .card-one-donut-bottom-section .card-one-legend .card-one-legend-item .card-one-legend-header .card-one-legend-label {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #175382;
+}
+.card-one .card-one-donut-bottom-section .card-one-donut-chart-container {
+  display: flex;
+  align-items: flex-end;
+  height: auto;
+  flex-shrink: 0;
+  margin-left: 10px;
+  margin-bottom: -20px;
 }
 
 /*# sourceMappingURL=card_one.css.map */
