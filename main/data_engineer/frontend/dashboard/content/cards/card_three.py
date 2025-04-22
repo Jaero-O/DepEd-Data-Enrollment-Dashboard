@@ -27,7 +27,7 @@ def card_three(df, mode):
     ]
 
     existing_columns = [col for col in enrollment_columns if col in df.columns]
-    df['total_enrollment'] = df[existing_columns].sum(axis=1)
+    df['total_enrollment'] = np.floor(df[existing_columns].sum(axis=1))
 
     if 'school_subclassification' not in df.columns:
         return html.Div("❌ Missing 'school_subclassification' column.")
@@ -59,12 +59,13 @@ def card_three(df, mode):
     df['main_category'] = df['school_subclassification'].map(category_mapping)
 
     if mode == 'student':
-        grouped = df.groupby(['school_subclassification', 'main_category'])['total_enrollment'].sum().reset_index()
+        grouped = df.groupby(['school_subclassification', 'main_category'])['total_enrollment'].sum().apply(np.floor).reset_index()
         y_col = 'total_enrollment'
         title = "Total Enrollment by School Subclassification and Category"
     elif mode == 'school':
         grouped = df.groupby(['school_subclassification', 'main_category'])['beis_school_id'].nunique().reset_index()
         grouped.rename(columns={'beis_school_id': 'total_schools'}, inplace=True)
+        grouped['total_schools'] = np.floor(grouped['total_schools'])
         y_col = 'total_schools'
         title = "Total Number of Schools by School Subclassification and Category"
     else:
@@ -88,25 +89,24 @@ def card_three(df, mode):
     color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
 
     fig = px.bar(
-    grouped,
-    x='school_subclassification_label',
-    y=y_col,
-    color='school_subclassification',
-    color_discrete_map=color_map,
-    text_auto='.3s',
+        grouped,
+        x='school_subclassification_label',
+        y=y_col,
+        color='school_subclassification',
+        color_discrete_map=color_map,
+        text=[f"{int(v):,}" for v in grouped[y_col]],
     )
 
     fig.update_traces(
-        textposition='outside',  
-        cliponaxis=False,  
+        textposition='outside',
+        cliponaxis=False,
         textfont=dict(
             family="Inter",
-            size=15,
+            size=12,
             weight="bold", 
             color="#44647E"
-        ),
+        )
     )
-
 
     max_val = grouped[y_col].max()
     if pd.isna(max_val) or max_val <= 0:
@@ -115,32 +115,22 @@ def card_three(df, mode):
     else:
         max_power = int(np.ceil(np.log10(max_val)))
         min_power = 2 if max_val >= 100 else 0
-        tickvals = [10**i for i in range(min_power, max_power + 1)]
+        tickvals = [10 ** i for i in range(min_power, max_power + 1)]
         ticktext = [f"{int(v):,}" for v in tickvals]
 
     fig.update_layout(
         xaxis=dict(
             title=None,
-            tickfont=dict(
-                family="Inter",
-                size=12,  
-                color="#616C7E", 
-                weight=600
-            ),
+            tickfont=dict(family="Inter", size=12, color="#616C7E"),
             tickangle=0,
         ),
         yaxis=dict(
             title=None,
             type="log",
-            tickfont=dict(
-                family="Inter",
-                size=12,  
-                color="#616C7E", 
-                weight=600
-            ),
             tickvals=tickvals,
             ticktext=ticktext,
-            gridcolor='#F1E1CE'
+            tickfont=dict(family="Inter", size=12, color="#616C7E"),
+            gridcolor='#F1E1CE',
         ),
         showlegend=False,
         plot_bgcolor="#FFF9F1",
@@ -159,7 +149,7 @@ def card_three(df, mode):
                     "Enrollment by Classification",
                     className='card-title-main',
                     style={
-                        'fontFamily':'Inter',
+                        'fontFamily': 'Inter',
                         'fontSize': '16px',
                         'fontWeight': '700',
                         'color': '#44647E',
@@ -170,14 +160,11 @@ def card_three(df, mode):
         ], className="card-one-two-text"),
         dcc.Graph(
             figure=fig,
-            config={'displayModeBar': False,},
+            config={'displayModeBar': False},
             className='card-three-graph',
             style={'width': '100%', 'height': '100%'}
         )
-
     ], className="card card-three")
-
-
 
 def card_three_register_callbacks(app):
     return None
