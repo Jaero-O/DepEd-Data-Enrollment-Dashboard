@@ -88,18 +88,26 @@ def card_three(df, mode):
     unique_subs = grouped['school_subclassification'].unique()
     color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
 
+    # Format numbers as full strings with commas
+    grouped['formatted_value'] = grouped[y_col].apply(lambda x: f"{int(x):,}")
+
     fig = px.bar(
         grouped,
         x='school_subclassification_label',
         y=y_col,
         color='school_subclassification',
         color_discrete_map=color_map,
-        text=[f"{int(v):,}" for v in grouped[y_col]],
+        text=grouped['formatted_value'],
+        custom_data=['school_subclassification', 'formatted_value']
     )
 
     fig.update_traces(
         textposition='outside',
         cliponaxis=False,
+        hovertemplate=(
+            "School Subclassification = %{customdata[0]}<br>" +
+            "Total Enrollment = %{customdata[1]}<extra></extra>"
+        ),
         textfont=dict(
             family="Inter",
             size=12,
@@ -107,6 +115,7 @@ def card_three(df, mode):
             color="#44647E"
         )
     )
+
 
     max_val = grouped[y_col].max()
     if pd.isna(max_val) or max_val <= 0:
