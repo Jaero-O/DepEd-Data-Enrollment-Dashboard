@@ -67,7 +67,7 @@ def aggregateDataset(range_school_year=[2023]):
     ]
 
     agg_dict = {col: 'last' for col in columns_to_last}
-    agg_dict.update({col: 'sum' for col in columns_to_sum})
+    agg_dict.update({col: 'mean' for col in columns_to_sum})
 
     aggregated_df = merged_df.groupby('beis_school_id', as_index=False).agg(agg_dict)
 

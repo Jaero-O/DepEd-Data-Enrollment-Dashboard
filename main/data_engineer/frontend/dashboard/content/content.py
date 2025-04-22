@@ -1,3 +1,4 @@
+import sqlite3
 import pandas as pd
 from dash import html, dcc
 from main.data_engineer.frontend.dashboard.content.cards.card_one import card_one
@@ -5,8 +6,8 @@ from main.data_engineer.frontend.dashboard.content.cards.card_two import card_tw
 from main.data_engineer.frontend.dashboard.content.cards.card_three import card_three
 from main.data_engineer.frontend.dashboard.content.cards.card_four import card_four
 from main.data_engineer.frontend.dashboard.content.cards.card_five import card_five
-from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
-from main.data_engineer.frontend.dashboard.content.cards.card_seven_es import card_seven_es
+from main.data_engineer.frontend.dashboard.content.cards.card_six_ni_lei import card_six
+from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_jhs import card_seven_jhs
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import card_seven_shs
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
@@ -68,15 +69,17 @@ direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified
 
 def convert_filter_to_df(filter_dict, selected_year, year_list):
 
-    if selected_year == 'All School Years':
-        aggregateDataset(year_list)
-        csv = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv'
-    else:
-        csv = 'enrollment_csv_file/cleaned_separate_datasets/' + selected_year + '.csv'
+    db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
 
-    print(csv)
+    # if selected_year == 'All School Years':
+    #     aggregateDataset(year_list, db_path)
+    #     conn = sqlite3.connect(db_path)
+    #     df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+    #     conn.close()
 
-    csv_path = csv
+    # else:
+        # csv_path = 'enrollment_csv_file/cleaned_separate_datasets/' + selected_year + '.csv'
+    csv_path = 'enrollment_csv_file/cleaned_separate_datasets/2023.csv'
     df = pd.read_csv(csv_path)
 
     # Rename columns
@@ -142,29 +145,29 @@ def convert_filter_to_df(filter_dict, selected_year, year_list):
 # Load the dataset once to access filter options
 def dashboardContent(final_df, location, mode, order):
     return [
-        html.Div("School-Based Enrollment", className='card-group-title'),
-        html.Div([
-            html.Div([
-                card_one(final_df, mode),
-                *card_two(final_df, mode)
-            ], className='card-one-two-wrapper'),
-            html.Div([
-                card_three(final_df, mode), 
-                card_five(final_df, mode)
-            ], className='card-three-five-wrapper')
-        ], className='card-one-two-three-five-wrapper'),
-        html.Div([card_four(final_df, mode)], className='card-four-wrapper'),
-        html.Div("Education Level Enrollment", className='card-group-title'),
-        html.Div([
-            card_seven_es(final_df, mode),
-            card_seven_jhs(final_df, mode),
-            card_seven_shs(final_df, mode)
-        ],className='card-seven-wrapper'),
-        html.Div("Geographic-Based Enrollment", className='card-group-title'),
-        html.Div(
-            [card_six(final_df, location, mode,order)],
-            className='card-six-wrapper'
-        ),
+        # html.Div("School-Based Enrollment", className='card-group-title'),
+        # html.Div([
+        #     html.Div([
+        #         card_one(final_df, mode),
+        #         *card_two(final_df, mode)
+        #     ], className='card-one-two-wrapper'),
+        #     html.Div([
+        #         card_three(final_df, mode), 
+        #         card_five(final_df, mode)
+        #     ], className='card-three-five-wrapper')
+        # ], className='card-one-two-three-five-wrapper'),
+        # html.Div([card_four(final_df, mode)], className='card-four-wrapper'),
+        # html.Div("Education Level Enrollment", className='card-group-title'),
+        # html.Div([
+        #     card_seven_es(final_df, mode),
+        #     card_seven_jhs(final_df, mode),
+        #     card_seven_shs(final_df, mode)
+        # ],className='card-seven-wrapper'),
+        # html.Div("Geographic-Based Enrollment", className='card-group-title'),
+        # html.Div(
+        #     [card_six(final_df, location, mode,order)],
+        #     className='card-six-wrapper'
+        # ),
         # card_four(final_df, location, mode),
         # card_three(final_df, mode),
         # card_five(final_df, location, mode),        
@@ -174,8 +177,8 @@ def dashboardContent(final_df, location, mode, order):
         # add here your cards after importing  
     ]
 
-def dashboard_content(final_df,location,mode, order,tab):
-
+def dashboard_content(final_df, previous_year_df, location, mode, tab):
+    # return None
     if tab == 'school-based':
         return[
             html.Div([
@@ -196,14 +199,23 @@ def dashboard_content(final_df,location,mode, order,tab):
             html.Div([
                 html.Div([
                     html.Div([
-                        card_seven_es(final_df, mode),
-                        card_seven_jhs(final_df, mode),
-                    ], className='card-seven-es-jhs-wrapper'),
-                    card_seven_shs(final_df, mode)
-                ], className='card-seven-wrapper'),
+                        *card_tabular(final_df, mode)
+                    ], className='card-level-table-wrapper'),
+                    html.Div([
+                        card_eight(final_df, previous_year_df)
+                    ], className='card-eight-wrapper'),
+                ], className='card-eight-card-table-wrapper'),
                 html.Div([
-                    *card_tabular(final_df, mode)
-                ], className='card-level-table-wrapper'),
+                    # html.Div([
+                    #     card_seven_es(final_df, mode),
+                    #     card_seven_jhs(final_df, mode),
+                    # ], className='card-seven-es-jhs-wrapper'),
+                    card_seven(final_df, mode, 'ES'),
+                    card_seven(final_df, mode, 'JHS'),
+                    card_seven(final_df, mode, 'SHS-Academic'),
+                    card_seven(final_df, mode, 'SHS-Non-Academic'),
+                ], className='card-seven-wrapper'),
+                
             ], className='level-based-wrapper'),
         ]
     
@@ -211,12 +223,12 @@ def dashboard_content(final_df,location,mode, order,tab):
         return [
             html.Div([
                 html.Div([
-                    card_one(final_df, mode),
-                    *card_two(final_df, mode)
-                ], className='card-one-two-wrapper'),
+                    html.Div(card_six(final_df,location,mode,'desc'), className='card-six-wrapper'),
+                    html.Div(card_six(final_df,location,mode,'asc'), className='card-six-wrapper'),
+                ], className='card-six-outside-wrapper'),
                 html.Div([
-                    card_regional_table(final_df, mode),
-                    card_tabular(final_df, mode)
+                    # card_regional_table(final_df, mode),
+                    # card_tabular(final_df, mode)
                 ], className='card-three-four-five-wrapper')
             ], className='card-one-two-three-five-wrapper'),
         ]
