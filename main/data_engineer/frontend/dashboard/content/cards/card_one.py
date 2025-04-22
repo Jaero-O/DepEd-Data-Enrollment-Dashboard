@@ -42,8 +42,8 @@ def card_one(df, mode):
             config={'displayModeBar': False},
             figure={
                 'data': [
-                    go.Bar(x=['Male'], y=[male_total], name='Male', marker_color='#0080FF', hovertemplate='Male: %{y}<extra></extra>'),
-                    go.Bar(x=['Female'], y=[female_total], name='Female', marker_color='#FF5C85', hovertemplate='Female: %{y}<extra></extra>')
+                    go.Bar(x=['Male'], y=[male_total], name='Male', marker_color='#0080FF', hovertemplate='Male: %{y:,}<extra></extra>'),
+                    go.Bar(x=['Female'], y=[female_total], name='Female', marker_color='#FF5C85', hovertemplate='Female: %{y:,}<extra></extra>')
                 ],
                 'layout': go.Layout(
                     barmode='group',
@@ -93,11 +93,9 @@ def card_one(df, mode):
         ], className='card card-one')
 
     def create_school_card():
-        # Convert modified_coc to lowercase and drop missing ones
         df_valid = df[df['modified_coc'].notna()].copy()
         df_valid['modified_coc'] = df_valid['modified_coc'].str.lower()
 
-        # Initialize counts
         elementary_ids = set()
         jhs_ids = set()
         shs_ids = set()
@@ -118,14 +116,12 @@ def card_one(df, mode):
                 if 'shs' in coc or 'senior' in coc:
                     shs_ids.add(school_id)
 
-        # Count per level
         level_counts = pd.DataFrame({
             'Level': ['ELEMENTARY', 'JHS', 'SHS'],
             'Count': [len(elementary_ids), len(jhs_ids), len(shs_ids)]
         })
         level_colors = ['#008EFF', '#FF6873', '#FF9D00']
 
-        # Donut chart
         donut_chart = dcc.Graph(
             className='card-one-donut-chart',
             config={'displayModeBar': False},
