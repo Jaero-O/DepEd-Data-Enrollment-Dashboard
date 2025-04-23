@@ -45,8 +45,8 @@ def card_five(df, mode='student'):
             x=[x["value"]],
             text=[f"{x['value']:,}"],
             textfont=dict(family="Inter", size=14, color="#081434", weight="bold"),
-            textposition='outside',
-            marker=dict(color="#7986cb"),
+            textposition='outside',  
+            marker=dict(color="#21D7E4"),
             hoverinfo='text',
         ), row=k + 1, col=1)
 
@@ -68,7 +68,7 @@ def card_five(df, mode='student'):
     
     layout_updates = {
         "showlegend": False,
-        "height": min(240, 60 + 40 * len(categories)),        
+        "height": min(430, 70 +  80* len(categories)),     
         "margin": dict(t=10, b=0, l=0, r=10),
         "template": "simple_white",
         "paper_bgcolor": 'rgba(0,0,0,0)',
