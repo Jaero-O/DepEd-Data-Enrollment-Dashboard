@@ -5,7 +5,7 @@ from main.data_engineer.frontend.dashboard.content.cards.card_two import card_tw
 from main.data_engineer.frontend.dashboard.content.cards.card_three import card_three
 from main.data_engineer.frontend.dashboard.content.cards.card_four import card_four
 from main.data_engineer.frontend.dashboard.content.cards.card_five import card_five
-from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
+# from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_es import card_seven_es
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_jhs import card_seven_jhs
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import card_seven_shs
@@ -162,7 +162,7 @@ def dashboardContent(final_df, location, mode, order):
         ],className='card-seven-wrapper'),
         html.Div("Geographic-Based Enrollment", className='card-group-title'),
         html.Div(
-            [card_six(final_df, location, mode,order)],
+           # [card_six(final_df, location, mode,order)],
             className='card-six-wrapper'
         ),
         # card_four(final_df, location, mode),

@@ -39,18 +39,32 @@ def card_five(df, mode='student'):
     )
 
     for k, x in enumerate(categories):
+        # Background gray bar
+        subplots.add_trace(go.Bar(
+            orientation='h',
+            y=[x["name"]],
+            x=[x_max],  # full length background bar
+            marker=dict(color="#e6e6e6"),  # light gray
+            hoverinfo='skip',
+        ), row=k + 1, col=1)
+
         subplots.add_trace(go.Bar(
             orientation='h',
             y=[x["name"]],
             x=[x["value"]],
-            text=[f"{x['value']:,}"],
-            textfont=dict(family="Inter", size=14, color="#081434", weight="bold"),
-            textposition='outside',  
             marker=dict(color="#21D7E4"),
             hoverinfo='text',
+            showlegend=False
         ), row=k + 1, col=1)
 
+        buffer = x_max * 0.02  # 2% of full width, adjust if needed
+       
+
+
+
+
     # Update layout
+    print("Subplots:", subplots)
     for ann in subplots["layout"]["annotations"]:
         ann["x"] = 0
         ann["xanchor"] = "left"
@@ -62,11 +76,12 @@ def card_five(df, mode='student'):
             ann["yshift"] = -45
 
     if len(categories) > 1:
-            width_gap = max(0.65, min(0.9, 1.5 / (len(categories))))
+            width_gap = max(0.35, min(0.9, 1.5 / (len(categories))))
     else:
         width_gap = 0.82
     
     layout_updates = {
+        "barmode": "overlay",
         "showlegend": False,
         "height": min(430, 70 +  80* len(categories)),     
         "margin": dict(t=10, b=0, l=0, r=10),
