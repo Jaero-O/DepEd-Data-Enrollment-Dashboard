@@ -116,97 +116,200 @@ div.card-two div.header-legend-wrapper-donut {
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  margin-top: -40px;
+  margin-top: -30px;
 }
 div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: start;
-  margin-top: 20px;
+  justify-content: center;
+  gap: 0.1rem;
+  border: 1px solid #F2DCC0;
+  border-radius: 5px;
+  padding: 5px 10px 5px 15px;
+  width: 150px;
+  height: 140px;
 }
 div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
+  margin-bottom: 4px;
 }
 div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut {
-  width: 33px;
-  height: 12px;
+  width: 25px;
   border-radius: 36px;
   margin-right: 5px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.purely-es {
-  background-color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.elementary-purely-es {
+  background-color: #0063B3;
+  height: 13px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.es--jhs {
-  background-color: #F6A5C0;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.elementary-es--jhs {
+  background-color: #008EFF;
+  height: 7px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.all-offering {
-  background-color: #F9CB9C;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.elementary-all-offering {
+  background-color: #59B6FF;
+  height: 7px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.purely-jhs {
-  background-color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.junior_high-purely-jhs {
+  background-color: #8C393F;
+  height: 13px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.jhs--shs {
-  background-color: #F6A5C0;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.junior_high-es--jhs {
+  background-color: #BF4E56;
+  height: 7px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.purely-shs {
-  background-color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.junior_high-jhs--shs {
+  background-color: #FF6873;
+  height: 7px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut {
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.junior_high-all-offering {
+  background-color: #FF959D;
+  height: 7px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.senior_high-purely-shs {
+  background-color: #CC7E00;
+  height: 13px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.senior_high-jhs--shs {
+  background-color: #FF9D00;
+  height: 7px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-oblong-donut.senior_high-all-offering {
+  background-color: #FFD38C;
+  height: 7px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut {
+  font-weight: 700;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.elementary-purely-es {
+  color: #0063B3;
+  font-size: 26px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.elementary-es--jhs {
+  color: #008EFF;
+  font-size: 16px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.elementary-all-offering {
+  color: #59B6FF;
+  font-size: 16px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.junior_high-purely-jhs {
+  color: #8C393F;
+  font-size: 26px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.junior_high-es--jhs {
+  color: #BF4E56;
+  font-size: 16px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.junior_high-jhs--shs {
+  color: #FF6873;
+  font-size: 16px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.junior_high-all-offering {
+  color: #FF959D;
+  font-size: 16px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.senior_high-purely-shs {
+  color: #CC7E00;
+  font-size: 26px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.senior_high-jhs--shs {
+  color: #FF9D00;
+  font-size: 16px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-percentage-donut.senior_high-all-offering {
+  color: #FFD38C;
+  font-size: 16px;
+}
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut {
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 14px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.purely-es {
-  color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.elementary-purely-es {
+  color: #0063B3;
+  font-size: 12px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.es--jhs {
-  color: #F6A5C0;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.elementary-es--jhs {
+  color: #008EFF;
+  font-size: 8px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.all-offering {
-  color: #F9CB9C;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.elementary-all-offering {
+  color: #59B6FF;
+  font-size: 8px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.purely-jhs {
-  color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.junior_high-purely-jhs {
+  color: #8C393F;
+  font-size: 12px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.jhs--shs {
-  color: #F6A5C0;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.junior_high-es--jhs {
+  color: #BF4E56;
+  font-size: 8px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut span.legend-label-donut.purely-shs {
-  color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.junior_high-jhs--shs {
+  color: #FF6873;
+  font-size: 8px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut {
-  font-size: 16px;
-  font-weight: 700;
-  margin-top: -5px;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.junior_high-all-offering {
+  color: #FF959D;
+  font-size: 8px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.purely-es {
-  color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.senior_high-purely-shs {
+  color: #CC7E00;
+  font-size: 12px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.es--jhs {
-  color: #F6A5C0;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.senior_high-jhs--shs {
+  color: #FF9D00;
+  font-size: 8px;
 }
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.all-offering {
-  color: #F9CB9C;
-}
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.purely-jhs {
-  color: #6FA8DC;
-}
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.jhs--shs {
-  color: #F6A5C0;
-}
-div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut span.legend-percentage-donut.purely-shs {
-  color: #6FA8DC;
+div.card-two div.header-legend-wrapper-donut div.legend-wrapper-donut div.legend-item-donut div.percent-label span.legend-label-donut.senior_high-all-offering {
+  color: #FFD38C;
+  font-size: 8px;
 }
 div.card-two div.header-legend-wrapper-donut div.card-two-donut-chart-container {
   display: flex;
   align-items: flex-end;
   height: auto;
   flex-shrink: 0;
-  margin-left: 10px;
-  margin-bottom: -35px;
+  margin-left: 20px;
+  margin-bottom: -25px;
+}
+div.card-two div.header-wrapper-donut {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+div.card-two div.header-wrapper-donut div.card-title-main-donut {
+  font-size: 16px;
+  color: #C18D4E;
+  font-weight: 700;
+  margin-top: -1px;
+  text-align: right;
+  line-height: 1.2;
+  margin-left: auto;
+}
+div.card-two div.header-wrapper-donut div.card-title-sub-donut {
+  font-size: 16px;
+  color: #175382;
+  font-weight: 700;
+  font-style: italic;
+  margin-top: -14px;
+}
+div.card-two div.header-wrapper-donut div.total-count-level-donut {
+  font-size: 48px;
+  color: #175382;
+  font-weight: 700;
+  margin-top: -18px;
+  flex-grow: 1;
 }
 
 /*# sourceMappingURL=card_two.css.map */

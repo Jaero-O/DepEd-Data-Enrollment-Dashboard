@@ -160,18 +160,20 @@ def card_two(df, mode):
         if level_key == "elementary":
             values = [mode_counts["purely_es"], mode_counts["es_jhs"], mode_counts["all_levels"]]
             labels = ["Purely ES", "ES and JHS", "All Offering"]
-            title = "Total Elementary Schools"
+            title = "Total\nElementary\nSchools"
+            colors = ['#0063B3', '#008EFF', '#59B6FF']
         elif level_key == "junior_high":
             values = [mode_counts["purely_jhs"], mode_counts["es_jhs"], mode_counts["jhs_shs"], mode_counts["all_levels"]]
             labels = ["Purely JHS", "ES and JHS", "JHS and SHS", "All Offering"]
-            title = "Total Junior High Schools"
+            title = "Total\nJunior High\nSchools"
+            colors = ['#8C393F', '#BF4E56', '#FF6873', '#FF959D']
         else:
             values = [mode_counts["purely_shs"], mode_counts["jhs_shs"], mode_counts["all_levels"]]
             labels = ["Purely SHS", "JHS and SHS", "All Offering"]
-            title = "Total Senior High Schools"
-
-        total = sum(values)
-        colors = ['#6FA8DC', '#F6A5C0', '#F9CB9C', '#FFD966'] 
+            title = "Total\nSenior High\nSchools"
+            colors = ['#CC7E00', '#FF9D00', '#FFD38C']
+        
+        total = sum(values)       
 
         donut_chart = dcc.Graph(
             config={'displayModeBar': False},
@@ -194,18 +196,22 @@ def card_two(df, mode):
         )
 
         return html.Div([
-            html.Div([
-                html.Div(title, className='card-title-main'),
-                html.Div(f"{sum(values):,}", className='total-count-level'),
-                html.Div("schools", className='card-title-sub')
-            ], className='header-wrapper'),
+            html.Div([              
+                html.Div([
+                    html.Div(f"{sum(values):,}", className='total-count-level-donut'),
+                    html.Div("schools", className='card-title-sub-donut')
+                ]),   
+                html.Div(dcc.Markdown(title.replace("\n", "<br>"), dangerously_allow_html=True), className='card-title-main-donut')               
+            ], className='header-wrapper-donut'),
 
             html.Div([
                 html.Div([
                     html.Div([
-                        html.Span(className=f"legend-oblong-donut {label.lower().replace('and', '').replace(' ', '-')}"),
-                        html.Span(f"{round((value / total) * 100, 1) if total else 0}%", className=f"legend-percentage-donut {label.lower().replace('and', '').replace(' ', '-')}"),
-                        html.Span(label.upper(), className=f"legend-label-donut {label.lower().replace('and', '').replace(' ', '-')}")
+                        html.Span(className=f"legend-oblong-donut {level_key}-{label.lower().replace('and', '').replace(' ', '-')}"),
+                        html.Div([
+                            html.Span(f"{round((value / total) * 100, 1) if total else 0}%", className=f"legend-percentage-donut {level_key}-{label.lower().replace('and', '').replace(' ', '-')}"),
+                            html.Span(label.upper(), className=f"legend-label-donut {level_key}-{label.lower().replace('and', '').replace(' ', '-')}")
+                        ], className="percent-label")                        
                     ], className="legend-item-donut")
                     for label, value in zip(labels, values)
                 ], className="legend-wrapper-donut"),
