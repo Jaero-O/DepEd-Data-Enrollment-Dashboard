@@ -82,9 +82,17 @@ def generate_card_six_figure(df, group_col, order):
         paper_bgcolor='white',
         showlegend=False
     )
-    
+    fig.update_yaxes(autorange="reversed", tickfont=dict(size=11))
 
-    fig.update_yaxes(autorange="reversed", ticksuffix = "    ")
+    return fig
+
+
+# --- Card Layout --- #
+
+def card_six(df, location, mode, hierarchy_order):
+    df = get_total_by_mode(df, mode)
+    group_col = location
+    fig = generate_card_six_figure(df, group_col, hierarchy_order)
 
     return html.Div([
         html.Div([html.Div(f"ENROLLMENT BY {group_col.upper()}", className='card-title-main')], className='card-header-wrapper'),

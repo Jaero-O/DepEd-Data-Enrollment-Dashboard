@@ -71,15 +71,16 @@ def convert_filter_to_df(filter_dict, selected_year, year_list):
 
     db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
 
-    if selected_year == 'All School Years':
-        aggregateDataset(year_list, db_path)
-        conn = sqlite3.connect(db_path)
-        df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
-        conn.close()
+    # if selected_year == 'All School Years':
+    #     aggregateDataset(year_list, db_path)
+    #     conn = sqlite3.connect(db_path)
+    #     df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+    #     conn.close()
 
-    else:
-        csv_path = 'enrollment_csv_file/cleaned_separate_datasets/' + selected_year + '.csv'
-        df = pd.read_csv(csv_path)
+    # else:
+        # csv_path = 'enrollment_csv_file/cleaned_separate_datasets/' + selected_year + '.csv'
+    csv_path = 'enrollment_csv_file/cleaned_separate_datasets/2023.csv'
+    df = pd.read_csv(csv_path)
 
     # Rename columns
     column_rename_map = {
