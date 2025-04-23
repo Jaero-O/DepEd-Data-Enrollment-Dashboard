@@ -159,7 +159,7 @@ def card_three(df, mode):
                     className='card-title-main',
                     style={
                         'fontFamily': 'Inter',
-                        'fontSize': '16px',
+                        'fontSize': '1em',
                         'fontWeight': '700',
                         'color': '#44647E',
                         'marginBottom': '10px'
