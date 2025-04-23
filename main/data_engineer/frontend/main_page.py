@@ -12,8 +12,7 @@ from main.data_engineer.frontend.dashboard.content_layout.content_layout import 
 from main.data_engineer.frontend.dashboard.upload_modal import upload_modal, upload_modal_register_callbacks
 
 # Import Cards Callbacks
-# from main.data_engineer.frontend.dashboard.content.cards.card_filter import card_filter_register_callbacks
-from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six_register_callbacks
+from main.data_engineer.frontend.dashboard.content.cards.card_six_ni_lei import filter_location_dropdown
 from main.data_engineer.frontend.dashboard.content.cards.card_one import card_one_register_callbacks
 from main.data_engineer.frontend.dashboard.content.cards.card_two import card_two_register_callbacks
 from main.data_engineer.frontend.dashboard.content.cards.card_three import card_three_register_callbacks
@@ -70,52 +69,61 @@ sidebar = html.Div([
         html.Img(src='/assets/images/kuruchan.png', className='profile-pic'),
         html.Div('Richard Villanueva', className='profile-name'),
         html.Div('richardkimv@deped.edu.ph', className='profile-email'),
-        html.Button('Admin Account', className='profile-role-btn')
+        html.Div('ADMIN', className='profile-email admin'),
+        html.Button(
+            children=[
+                html.I(className="fa fa-upload"), html.Span('Upload Data', className='hide-filter')
+            ],
+            className='profile-role-btn',
+            id='open-upload-wrapper',
+            n_clicks=0),
     ], className='profile-card'),
 ], className='sidebar-wrapper')
 
 # Header
-navbar = html.Div([
-    html.Div("Enrollment Data", className='navbar-title'),
+navbar1 = html.Div([
+    html.Div("Enrollment Yearly Snapshot",id='dashboard-main-title', className='navbar-title'),
     html.Div([
-        dcc.Tabs(
-            children=[
-                dcc.Tab(label='School-based', value='school-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
-                dcc.Tab(label='Level-based', value='level-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
-                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected')
-            ],
-            id='tabs',
-            value='school-based'
-        )
-    ],id='tabs-wrapper', className='tabs-wrapper'),
-    html.Div([
+        html.Div(id='filter-location-dropdown-id', children=[filter_location_dropdown]),
         dbc.Select(
             id='school-year-dropdown-select',
             value='All School Years',
             options=[
                 {'label': 'All School Years', 'value': 'All School Years'}
             ],
+            className='school-year-dropdown-select',
         ),
-        html.Button(
-            children=[
-                html.I(className="fa fa-filter"), html.Span('Filter', className='hide-filter')
-            ],
-            className='filter-button',
-            id='toggle-button-open',
-            n_clicks=0),
-        html.Button(
-            children=[
-                html.I(className="fa fa-upload"), html.Span('Upload Data', className='hide-filter')
-            ],
-            className='filter-button',
-            id='open-upload-wrapper',
-            n_clicks=0),
         html.Div([
             upload_modal,
         ],id="upload-modal-background-drop", className="background-drop")
     ], className='filter-button-div-container'),
 ], className='header-div')
 
+navbar2 = html.Div([
+    html.Div([
+        dcc.Tabs(
+            children=[
+                dcc.Tab(label='School-based', value='school-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Level-based', value='level-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Yearly Analysis', value='yearly_analysis', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label=None, value=None, style={'display':'None'}, className='enrollment-tab', selected_className='enrollment-tab--selected')
+            ],
+            id='tabs',
+            value='school-based'
+        )
+    ],id='tabs-wrapper', className='tabs-wrapper'),
+    html.Div([
+        html.Button(
+            children=[
+                html.I(className="fa fa-filter"), html.Span('Filter', className='hide-filter')
+            ],
+            className='filter-button',
+            id='toggle-button-open',
+            n_clicks=0
+        ),
+    ], className='filter-button-div-container'),
+],className='header-div')
 # html.Div([
     #     html.I(className='fa fa-search'),
     #     dcc.Input(type="text", placeholder="Search...", className='search-bar'),
@@ -149,7 +157,8 @@ app.layout = html.Div([
     # dcc.Store(id='df-store', data=df.to_dict('records')),
     sidebar,
     html.Div([
-        navbar,
+        navbar1,
+        navbar2,
         content_layout
     ], className='navbar-content-wrapper')
 ], className='main-page', id="main-container")
@@ -162,6 +171,7 @@ app.layout = html.Div([
 
 @app.callback(
     Output('tabs-wrapper', 'children'),
+    Output('dashboard-main-title', 'children'),
     Input('selected-mode', 'data')
 )
 def render_tabs(mode):
@@ -170,11 +180,13 @@ def render_tabs(mode):
             children=[
                 dcc.Tab(label='School-based', value='school-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
                 dcc.Tab(label='Level-based', value='level-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
-                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected')
+                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label='Yearly Analysis', value='yearly_analysis', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label=None, value=None, style={'display':'None'}, className='enrollment-tab', selected_className='enrollment-tab--selected')
             ],
             id='tabs',
             value='school-based'
-        )
+        ), "Enrollment Yearly Snapshot"
     elif mode == 'school':
         return dcc.Tabs(
             children=[
@@ -183,7 +195,7 @@ def render_tabs(mode):
             ],
             id='tabs',
             value='school-based'
-        )
+        ), "School Data"
     return None
 
 # card_filter_register_callbacks(app)
@@ -251,7 +263,7 @@ def populate_school_year_dropdown(year_range, current_years):
 
 @app.callback(
     Output("upload-modal-wrapper", "className"),
-    Output("upload-modal-background-drop","className"),
+    Output("upload-modal-background-drop","className", allow_duplicate=True),
     Input("open-upload-wrapper", "n_clicks"),
     Input("close-upload-wrapper", "n_clicks"),
     Input("upload-button", "n_clicks"),

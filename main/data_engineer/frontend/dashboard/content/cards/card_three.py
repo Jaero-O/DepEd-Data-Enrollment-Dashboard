@@ -172,7 +172,7 @@ def card_three(df, mode):
         ], className="card-one-two-text"),
         dcc.Graph(
             figure=fig,
-            config={'displayModeBar': False,},
+            config={'displayModeBar': False},
             className='card-three-graph',
             style={'width': '100%', 'height': '100%'}
         )

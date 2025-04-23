@@ -1,3 +1,56 @@
+div.card-six-outside-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 1.5em;
+}
 
+div.card-six-wrapper {
+  width: 30em;
+  height: 24em;
+}
+div.card-six-wrapper div.card-six {
+  width: 100%;
+  height: 100%;
+}
+div.card-six-wrapper div.card-six div.card-header-wrapper {
+  display: flex;
+  flex-direction: column; /* stack title and subtitle vertically */
+  align-items: flex-start; /* align to the left */
+}
+div.card-six-wrapper div.card-six div.card-header-wrapper div.card-title-main {
+  font-size: 1.2em; /* slightly larger */
+  color: #2a4d69;
+  font-family: "Inter-Bold";
+  margin-bottom: 0.3em; /* space below title */
+}
+div.card-six-wrapper div.card-six div.card-header-wrapper div.card-subtitle {
+  font-size: 0.9em; /* increase subtitle font size */
+  color: #2a4d69;
+  font-family: "Inter-Bold";
+  margin-bottom: 1em;
+}
+div.card-six-wrapper div.card-six div.card-filter-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75em;
+  gap: 2em;
+}
+div.card-six-wrapper div.card-six div.card-filter-wrapper div.filter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+div.card-six-wrapper div.card-six div.card-filter-wrapper .filter-dropdown-location {
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+}
+div.card-six-wrapper div.card-six div.card-six-graph-wrapper {
+  width: 100%;
+  height: 100%;
+}
 
 /*# sourceMappingURL=card_six.css.map */

@@ -369,37 +369,22 @@ div.card-six-wrapper div.card-six div.card-six-graph {
 }
 
 div.level-based-wrapper {
-  width: 100%;
+  width: 1570px;
   height: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: 1.5em;
-}
-div.level-based-wrapper div.card-seven-wrapper {
-  width: 60%;
   display: flex;
   flex-direction: column;
   gap: 1.5em;
 }
-div.level-based-wrapper div.card-seven-wrapper div.card-seven-es-jhs-wrapper {
+div.level-based-wrapper div.card-seven-wrapper {
+  width: 100%;
   display: flex;
   flex-direction: row;
   gap: 1.5em;
+  height: 100%;
 }
 div.level-based-wrapper div.card-seven-wrapper div.card-seven {
-  width: 100%;
-  height: 21.5em;
-}
-div.level-based-wrapper div.card-seven-wrapper div.card-seven.es {
-  width: 460px;
-  height: 360px;
-}
-div.level-based-wrapper div.card-seven-wrapper div.card-seven.jhs {
-  width: 460px;
-  height: 360px;
-}
-div.level-based-wrapper div.card-seven-wrapper div.card-seven.shs {
-  width: 100%;
+  width: 90%;
+  height: 95%;
 }
 div.level-based-wrapper div.card-seven-wrapper div.card-seven div.card-header-wrapper {
   display: flex;
@@ -416,14 +401,22 @@ div.level-based-wrapper div.card-seven-wrapper div.card-seven div.card-seven-gra
   height: auto;
   font-family: "Inter";
 }
+div.level-based-wrapper div.card-eight-card-table-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5em;
+}
 div.level-based-wrapper div.card-level-table-wrapper {
-  width: 600px;
-  height: 720px;
+  width: 48.5em;
+  height: 380px;
 }
 div.level-based-wrapper div.card-level-table-wrapper div.card-level-table {
   width: 100%;
   height: 100%;
   display: flex;
+  overflow-y: hidden;
 }
 div.level-based-wrapper div.card-level-table-wrapper div.card-level-table div.card-header-wrapper {
   display: flex;
@@ -452,7 +445,29 @@ div.level-based-wrapper div.card-level-table-wrapper div.card-level-table input.
 div.level-based-wrapper div.card-level-table-wrapper div.card-level-table div.card-level-table-container {
   background-color: white;
   padding-top: 1em;
-  overflow: auto;
+  overflow-y: hidden;
+}
+div.level-based-wrapper div.card-eight-wrapper {
+  width: 48em;
+  height: 380px;
+}
+div.level-based-wrapper div.card-eight-wrapper div.card-eight {
+  width: 100%;
+  height: 100%;
+}
+div.level-based-wrapper div.card-eight-wrapper div.card-eight div.card-header-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+div.level-based-wrapper div.card-eight-wrapper div.card-eight div.card-header-wrapper div.card-title-main {
+  font-size: 1em;
+  color: #2a4d69;
+  font-family: "Inter-Bold";
+  margin-bottom: 1em;
+}
+div.level-based-wrapper div.card-eight-wrapper div.card-eight div.card-eight-graph-wrapper {
+  width: 100%;
+  height: 100%;
 }
 
 div.card-seven-eight-wrapper {

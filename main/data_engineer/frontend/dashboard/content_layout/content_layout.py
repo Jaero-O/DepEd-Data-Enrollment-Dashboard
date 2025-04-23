@@ -3,6 +3,7 @@ import dash
 import dash_bootstrap_components as dbc
 import pandas as pd
 from main.data_engineer.frontend.dashboard.content.content import dashboard_content, convert_filter_to_df
+from main.data_engineer.frontend.dashboard.content.cards.card_six_ni_lei import filter_location_dropdown
 
 data = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -38,6 +39,26 @@ content_layout = html.Div([
         'hierarchy_order': 'desc'
     }),
     html.Div([
+        html.Span("School Year Range", className='range-slider-title'),
+        html.Div([
+             dcc.RangeSlider(
+                id='year-range',
+                min=0,
+                max=0,
+                step=1,
+                value=[0,0],
+                vertical=True,
+                className='year-range-slider-true',
+                tooltip={"placement": "bottom", "always_visible": True}
+            ),
+            # Right side: year divs
+            html.Div(
+                id='year-list',
+                className='year-list'
+            )
+        ], className='slider-container'),
+    ],id='slider-filtering-div-id', className='slider-filtering-div'),
+    html.Div([
         html.Div([
             html.Button(html.I(className='fa fa-times'),id='toggle-button-exit', n_clicks=0,className='exit-filter-menu'),
             html.Span('Filtering Menu', className='filter-menu-title'),
@@ -48,20 +69,6 @@ content_layout = html.Div([
                 className='reset-button'
             )
         ], className='header-filter-menu'),
-        html.Span("School Year Range", className='lower-title outside'),
-        html.Div([
-            dcc.RangeSlider(
-                id='year-range',
-                className='year-slider',
-                min=0,
-                max=0,
-                step=1,
-                marks={},
-                value=[0,0],
-                tooltip={"placement": "bottom", "always_visible": True}
-            ),
-        ], className='slider-filtering-div'),
-        
         html.Div([
             html.Div([
                 html.Span('Educational Divisions', className='lower-title'),
@@ -303,8 +310,9 @@ def content_layout_register_callbacks(app):
     # Callback to update content based on active tab
     @app.callback(
         Output("tab-dynamic-content", "children"),
+        Output('filter-location-dropdown-id', 'children'),
         Input('current-filter-dict', 'data'),
-        Input('selected-filters', 'data'),
+        Input('location-filter', 'value'),
         Input('selected-mode', 'data'),
         Input('tabs','value'),
         Input('school-year-dropdown-select', 'value'),
@@ -312,31 +320,49 @@ def content_layout_register_callbacks(app):
         Input('current-years', 'data'),
         prevent_initial_call=True
     )
-    def update_tab_content(data_dict,filter_dict,mode,tab,school_year,year_range,current_years):
-        location = filter_dict.get('location') if filter_dict else 'overall'  # or your default
-        order = filter_dict.get('hierarchy_order') if filter_dict else 'ascending'
+    def update_tab_content(data_dict,location,mode,tab,school_year,year_range,current_years):
 
         print('School Year:', school_year)
         selected_year = school_year if school_year == 'All School Years' else school_year.split('-')[0]
         filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
+        try:
+            selected_year_int = int(selected_year)
+            selected_index = filtered_years.index(selected_year_int)
+            previous_year = filtered_years[selected_index - 1] if selected_index > 0 else selected_year
+
+        except (ValueError, IndexError):
+            previous_year = selected_year
     
-        print(filter_dict)
-        print("Filter 1:", location)
-        df = convert_filter_to_df(data_dict, selected_year, filtered_years)
-        return dashboard_content(df, location,mode,order,tab)
+        print("LOCATION FILTER:", location)
+        location = location or 'region'
+        current_year_df = convert_filter_to_df(data_dict, selected_year, filtered_years)
+
+        if previous_year == selected_year:
+            previous_year_df = current_year_df
+        else:
+            previous_year_df = convert_filter_to_df(data_dict, previous_year, filtered_years)
+
+        if tab == 'geographic-based':
+            button = filter_location_dropdown
+        else:
+            button = None
+
+        return dashboard_content(current_year_df,previous_year_df, location,mode,tab), button
 
     # Callback to toggle filter visibility
     @app.callback(
         Output('filter-container', 'className'),
+        Output('slider-filtering-div-id', 'className'),
+        Output("upload-modal-background-drop","className", allow_duplicate=True),
         [Input('toggle-button-open', 'n_clicks'),
         Input('toggle-button-exit','n_clicks')],
         prevent_initial_call=True
     )
     def toggle_filters(n_clicks,n_clicks_exit):
         if n_clicks <= n_clicks_exit:
-            return 'filtering-div close'
+            return 'filtering-div close', 'slider-filtering-div close', "background-drop hidden"
         else:
-            return 'filtering-div open'
+            return 'filtering-div open', 'slider-filtering-div open', "background-drop show"
         
     # Callback to update checklist options based on selected values and search input
     @app.callback(
@@ -523,9 +549,66 @@ def content_layout_register_callbacks(app):
             return reset_chk, reset_search, dash.no_update
 
         return [dash.no_update] * len(chk_ids), [dash.no_update] * len(search_ids), dash.no_update
-
-
     
+
+    @app.callback(
+        Output('year-list', 'children'),
+        Input('year-range', 'value'),
+        State('current-years', 'data')
+    )
+    def update_year_list(selected_range, years_data):
+        # Check if the selected values are in the current-years list
+        selected_start = selected_range[0]
+        selected_end = selected_range[1]
+
+        # If the selected value is not in the years_data list, adjust to the nearest year
+        if selected_start not in years_data:
+            selected_start = min(years_data, key=lambda x: abs(x - selected_start))
+        if selected_end not in years_data:
+            selected_end = min(years_data, key=lambda x: abs(x - selected_end))
+
+        children = []
+        for year in reversed(years_data):  # Show top-down
+            is_selected = selected_start <= year <= selected_end
+            children.append(
+                html.Div(
+                    str(year),
+                    className=f'year-label {"active" if is_selected else ""}',
+                    id={'type': 'year-div', 'index': year},
+                    n_clicks=0
+                )
+            )
+        return children
+    
+    # @app.callback(
+    #     Output('year-range', 'value'),
+    #     Input({'type': 'year-div', 'index': dash.ALL}, 'n_clicks'),
+    #     State({'type': 'year-div', 'index': dash.ALL}, 'id'),
+    #     State('year-range', 'value'),
+    #     State('current-years', 'data')  # Assuming this is your year list
+    # )
+    # def update_slider_on_year_click(n_clicks, ids, current_range, current_years):
+    #     triggered = ctx.triggered_id
+    #     if not triggered:
+    #         return current_range
+
+    #     clicked_year = triggered['index']
+    #     if clicked_year not in current_years:
+    #         return current_range
+
+    #     min_val, max_val = current_range
+
+    #     # Adjusting based on click location
+    #     if clicked_year < min_val:
+    #         return [clicked_year, max_val]
+    #     elif clicked_year > max_val:
+    #         return [min_val, clicked_year]
+    #     else:
+    #         # Snap to closest edge
+    #         if abs(clicked_year - min_val) <= abs(clicked_year - max_val):
+    #             return [clicked_year, max_val]
+    #         else:
+    #             return [min_val, clicked_year]
     # # Callback to update the filter table output
     # @app.callback(
     #     Output('filter-table-output', 'children'),

@@ -135,7 +135,7 @@ def card_tabular(df, mode):
 
 
     return html.Div([
-            html.Div([html.Div(f"SCHOOL ENROLLMENT DATA", className='card-title-main')], className='card-header-wrapper'),
+            # html.Div([html.Div(f"SCHOOL ENROLLMENT DATA", className='card-title-main')], className='card-header-wrapper'),
             dcc.Input(
                     id=f"{mode}-search-input",
                     type="text",
@@ -149,7 +149,7 @@ def card_tabular(df, mode):
                         data=display_df.to_dict("records"),
                         columns=grouped_columns,  # use the grouped headers
                         merge_duplicate_headers=True,  # enable nested headers
-                        page_size=7,
+                        page_size=4,
                         page_action='native',
                         style_table={
                             'overflowX': 'auto',
@@ -161,16 +161,18 @@ def card_tabular(df, mode):
                             'fontWeight': 'bold',
                             'textAlign': 'center',
                             'color': '#2a4d69',
+                            'fontSize': '12px',
                             'fontFamily': "Inter",
                             'borderBottom': '1px solid #ccc',
                         },
                         style_cell={
                             'textAlign': 'center',
-                            'padding': '8px',
-                            'minWidth': '100px',
+                            'padding': '4px',
+                            'minWidth': '60px',
                             'maxWidth': '300px',
                             'whiteSpace': 'normal',
-                            'fontFamily': "Inter",
+                            'fontFamily': "Inter-Medium",
+                            'fontSize': '10px',
                             'color': '#4f4f4f',
                             'backgroundColor': 'white',
                             'border': 'none'  # Removes cell border (Y-axis lines)

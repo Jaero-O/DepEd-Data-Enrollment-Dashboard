@@ -74,4 +74,4 @@ def aggregateDataset(range_school_year=[2023], db_path='enrollment_csv_file\prep
     return aggregated_df
 
 # Example call
-aggregateDataset(range_school_year=[2015, 2023])
+# aggregateDataset(range_school_year=[2015, 2023])

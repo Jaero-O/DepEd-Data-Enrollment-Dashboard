@@ -2,121 +2,106 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash import html, dcc
 
-def card_eight(df, mode):
-    if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
-
-    if mode not in ['student', 'school']:
-        raise ValueError("Mode must be either 'student' or 'school'")
-
-    # Define strand mappings
-    strand_columns = {
-        'ABM': {
-            'male': ['g11_acad_-_abm_male', 'g12_acad_-_abm_male'],
-            'female': ['g11_acad_-_abm_female', 'g12_acad_-_abm_female']
-        },
-        'HUMSS': {
-            'male': ['g11_acad_-_humss_male', 'g12_acad_-_humss_male'],
-            'female': ['g11_acad_-_humss_female', 'g12_acad_-_humss_female']
-        },
-        'STEM': {
-            'male': ['g11_acad_stem_male', 'g12_acad_stem_male'],
-            'female': ['g11_acad_stem_female', 'g12_acad_stem_female']
-        },
-        'GAS': {
-            'male': ['g11_acad_gas_male', 'g12_acad_gas_male'],
-            'female': ['g11_acad_gas_female', 'g12_acad_gas_female']
-        },
-        'PBM': {
-            'male': ['g11_acad_pbm_male', 'g12_acad_pbm_male'],
-            'female': ['g11_acad_pbm_female', 'g12_acad_pbm_female']
-        },
-        'TVL': {
-            'male': ['g11_tvl_male', 'g12_tvl_male'],
-            'female': ['g11_tvl_female', 'g12_tvl_female']
-        },
-        'Sports': {
-            'male': ['g11_sports_male', 'g12_sports_male'],
-            'female': ['g11_sports_female', 'g12_sports_female']
-        },
-        'Arts': {
-            'male': ['g11_arts_male', 'g12_arts_male'],
-            'female': ['g11_arts_female', 'g12_arts_female']
-        }
+def card_eight(current_year_df, previous_year_df):
+    levels = {
+        'Kindergarten': ['k_male', 'k_female'],
+        'Grade 1': ['g1_male', 'g1_female'],
+        'Grade 2': ['g2_male', 'g2_female'],
+        'Grade 3': ['g3_male', 'g3_female'],
+        'Grade 4': ['g4_male', 'g4_female'],
+        'Grade 5': ['g5_male', 'g5_female'],
+        'Grade 6': ['g6_male', 'g6_female'],
+        'Elem NG': ['elem_ng_male', 'elem_ng_female'],
+        'Grade 7': ['g7_male', 'g7_female'],
+        'Grade 8': ['g8_male', 'g8_female'],
+        'Grade 9': ['g9_male', 'g9_female'],
+        'Grade 10': ['g10_male', 'g10_female'],
+        'JHS NG': ['jhs_ng_male', 'jhs_ng_female'],
+        'G11 ABM': ['g11_acad_-_abm_male', 'g11_acad_-_abm_female'],
+        'G11 HUMSS': ['g11_acad_-_humss_male', 'g11_acad_-_humss_female'],
+        'G11 STEM': ['g11_acad_stem_male', 'g11_acad_stem_female'],
+        'G11 GAS': ['g11_acad_gas_male', 'g11_acad_gas_female'],
+        'G11 PBM': ['g11_acad_pbm_male', 'g11_acad_pbm_female'],
+        'G11 TVL': ['g11_tvl_male', 'g11_tvl_female'],
+        'G11 Sports': ['g11_sports_male', 'g11_sports_female'],
+        'G11 Arts': ['g11_arts_male', 'g11_arts_female'],
+        'G12 ABM': ['g12_acad_-_abm_male', 'g12_acad_-_abm_female'],
+        'G12 HUMSS': ['g12_acad_-_humss_male', 'g12_acad_-_humss_female'],
+        'G12 STEM': ['g12_acad_stem_male', 'g12_acad_stem_female'],
+        'G12 GAS': ['g12_acad_gas_male', 'g12_acad_gas_female'],
+        'G12 PBM': ['g12_acad_pbm_male', 'g12_acad_pbm_female'],
+        'G12 TVL': ['g12_tvl_male', 'g12_tvl_female'],
+        'G12 Sports': ['g12_sports_male', 'g12_sports_female'],
+        'G12 Arts': ['g12_arts_male', 'g12_arts_female']
     }
 
-    # Aggregate male and female totals per strand
-    strand_data = {
-        'Strand': [],
-        'Male': [],
-        'Female': []
-    }
+    current_totals = []
+    previous_totals = []
+    level_names = []
 
-    for strand, genders in strand_columns.items():
-        male_cols = [col for col in genders['male'] if col in df.columns]
-        female_cols = [col for col in genders['female'] if col in df.columns]
+    for level, cols in levels.items():
+        current_total = current_year_df[cols].sum().sum()
+        previous_total = previous_year_df[cols].sum().sum()
+        current_totals.append(current_total)
+        previous_totals.append(previous_total)
+        level_names.append(level)
 
-        strand_data['Strand'].append(strand)
-        strand_data['Male'].append(df[male_cols].sum().sum())
-        strand_data['Female'].append(df[female_cols].sum().sum())
-
-    strand_df = pd.DataFrame(strand_data).sort_values(by=['Male', 'Female'], ascending=False)
-
-    # Create stacked area chart
     fig = go.Figure()
 
+    # Add conditional lines based on increase or decrease
+    # Add conditional lines based on increase or decrease
+    for i, level in enumerate(level_names):
+        color = 'green' if current_totals[i] > previous_totals[i] else 'red' if current_totals[i] < previous_totals[i] else 'gray'
+        fig.add_trace(go.Scatter(
+            x=[level, level],
+            y=[previous_totals[i], current_totals[i]],
+            mode='lines',
+            line=dict(color=color, width=2),
+            showlegend=False
+        ))
+
+    # Add previous year markers (red)
     fig.add_trace(go.Scatter(
-        x=strand_df['Strand'],
-        y=strand_df['Male'],
-        name='Male',
-        fill='tozeroy',
-        mode='lines',
-        line=dict(color='#2a4d69'),
-        marker=dict(size=8)
+        x=level_names,
+        y=previous_totals,
+        mode='markers',
+        name='Previous Year',
+        marker=dict(color='red', size=10),
     ))
 
+    # Add current year markers (blue)
     fig.add_trace(go.Scatter(
-        x=strand_df['Strand'],
-        y=strand_df['Female'],
-        name='Female',
-        fill='tonexty',
-        mode='lines',
-        line=dict(color='#f48fb1'),
-        marker=dict(size=8)
+        x=level_names,
+        y=current_totals,
+        mode='markers',
+        name='Current Year',
+        marker=dict(color='blue', size=10),
     ))
+
 
     fig.update_layout(
-        margin=dict(l=0, r=0, t=0, b=40),
-        height=220,
-        plot_bgcolor='white',
-        paper_bgcolor='white',
+        margin=dict(l=0, r=0, t=0, b=0),
+        autosize=True,
         legend=dict(
             orientation='h',
-            x=1,
-            y=-0.3,
+            yanchor='bottom',
+            y=1.05,
             xanchor='right',
-            font=dict(size=12)
-        ),
-        xaxis=dict(
-            showticklabels=True,
-            tickfont=dict(size=12, color='#2a4d69')
-        ),
-        yaxis=dict(
-            type='log',
-            showticklabels=True,
-            tickfont=dict(size=12),
-            showgrid=True,
-            gridcolor='lightgray',
-            gridwidth=1,
-            tickformat='~s'  # Compact number format
+            x=1
         )
     )
 
-
     return html.Div([
-        html.Div([html.Div("ENROLLMENT BY STRAND", className='card-title-main')], className='card-header-wrapper'),
-        html.Div(
-            dcc.Graph(figure=fig, config={'displayModeBar': False}),
-            className='card-seven-graph'
-        ),
-    ], className="card card-seven")
+        html.Div([
+            html.Div(
+                f"Enrollment Comparison Per Level (Current vs Previous Year)".upper(),
+            className='card-title-main'),
+        ],className='card-header-wrapper'),
+        html.Div([
+            dcc.Graph(
+                figure=fig, 
+                config={'displayModeBar': False},
+                style={'width': '100%', 'height': '100%'}, 
+            ),
+        ], className='card-eight-graph-wrapper'),
+    ], className='card card-eight')
