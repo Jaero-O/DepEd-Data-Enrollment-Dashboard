@@ -6,9 +6,45 @@ from plotly.subplots import make_subplots
 import re
 
 def preserve_parentheses_title(text):
-    return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
+    text = text.lower()  # Normalize first
+
+    def smart_title_case(s):
+        if not s.strip():
+            return ''
+        exceptions = {'or', 'and', 'of', 'the', 'in', 'on', 'by', 'to', 'with'}
+        words = s.split()
+        result = [words[0].capitalize()]
+        for word in words[1:]:
+            if word.lower() in exceptions:
+                result.append(word.lower())
+            else:
+                result.append(word.capitalize())
+        return ' '.join(result)
+
+    def sentence_case(s):
+        if not s.strip():
+            return ''
+        return s[0].lower() + s[1:].lower()
+
+    parts = re.split(r'(\(.*?\))', text)
+    processed_parts = []
+    for part in parts:
+        if part.startswith('(') and part.endswith(')'):
+            inner = part[1:-1]
+            processed_parts.append(f'({inner})'.lower())
+        else:
+            titled = smart_title_case(part)
+            # Apply slash rule only when `titled` is assigned
+            titled = re.sub(r'/\s*([a-z])', lambda m: '/' + m.group(1).upper(), titled)
+            processed_parts.append(titled)
+    return ''.join(processed_parts)
+
+
+
 
 def card_five(df, mode='student'):
+    print(preserve_parentheses_title("Mobile School(S)/center(S)"))
+
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -27,7 +63,7 @@ def card_five(df, mode='student'):
     categories = [{"name": idx, "value": row["total"]} for idx, row in grouped.iterrows()]
 
     # Add some breathing room on the right for the labels
-    x_max = grouped['total'].max() * 1.25
+    x_max = grouped['total'].max() * 1.20
 
     # Create subplots
     subplots = make_subplots(
@@ -67,16 +103,16 @@ def card_five(df, mode='student'):
         ann["x"] = 0
         ann["xanchor"] = "left"
         ann["align"] = "left"
-        ann["font"] = dict(size=14, family="Inter", weight="bold", color='#2a4d69')
+        ann["font"] = dict(size=14, family="Inter", weight=600, color='#2a4d69')
         if len(categories) > 1:
-            ann["yshift"] = -85 * (1/(len(categories)))
+            ann["yshift"] = -65 * (1/(len(categories)))
         else:
-            ann["yshift"] = -35
+            ann["yshift"] = -45
 
     if len(categories) > 1:
-            width_gap = max(0.40, min(0.9, 1.5 / (len(categories))))
+            width_gap = max(0.40, min(0.9, 1.1 / (len(categories))))
     else:
-        width_gap = 0.55
+        width_gap = 0.65
     
     layout_updates = {
         "barmode": "overlay",
