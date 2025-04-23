@@ -27,7 +27,7 @@ def card_three(df, mode):
     ]
 
     existing_columns = [col for col in enrollment_columns if col in df.columns]
-    df['total_enrollment'] = df[existing_columns].sum(axis=1)
+    df['total_enrollment'] = np.floor(df[existing_columns].sum(axis=1))
 
     if 'school_subclassification' not in df.columns:
         return html.Div("❌ Missing 'school_subclassification' column.")
@@ -59,12 +59,13 @@ def card_three(df, mode):
     df['main_category'] = df['school_subclassification'].map(category_mapping)
 
     if mode == 'student':
-        grouped = df.groupby(['school_subclassification', 'main_category'])['total_enrollment'].sum().reset_index()
+        grouped = df.groupby(['school_subclassification', 'main_category'])['total_enrollment'].sum().apply(np.floor).reset_index()
         y_col = 'total_enrollment'
         title = "Total Enrollment by School Subclassification and Category"
     elif mode == 'school':
         grouped = df.groupby(['school_subclassification', 'main_category'])['beis_school_id'].nunique().reset_index()
         grouped.rename(columns={'beis_school_id': 'total_schools'}, inplace=True)
+        grouped['total_schools'] = np.floor(grouped['total_schools'])
         y_col = 'total_schools'
         title = "Total Number of Schools by School Subclassification and Category"
     else:
@@ -79,14 +80,33 @@ def card_three(df, mode):
     unique_subs = grouped['school_subclassification'].unique()
     color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
 
+    grouped['formatted_value'] = grouped[y_col].apply(lambda x: f"{int(x):,}")
+
     fig = px.bar(
         grouped,
         x='school_subclassification_label',
         y=y_col,
         color='school_subclassification',
         color_discrete_map=color_map,
-        text_auto='.3s',
+        text=grouped['formatted_value'],
+        custom_data=['school_subclassification', 'formatted_value']
     )
+
+    fig.update_traces(
+        textposition='outside',
+        cliponaxis=False,
+        hovertemplate=(
+            "School Subclassification = %{customdata[0]}<br>" +
+            "Total Enrollment = %{customdata[1]}<extra></extra>"
+        ),
+        textfont=dict(
+            family="Inter",
+            size=12,
+            weight="bold", 
+            color="#44647E"
+        )
+    )
+
 
     max_val = grouped[y_col].max()
     if pd.isna(max_val) or max_val <= 0:
@@ -95,22 +115,22 @@ def card_three(df, mode):
     else:
         max_power = int(np.ceil(np.log10(max_val)))
         min_power = 2 if max_val >= 100 else 0
-        tickvals = [10**i for i in range(min_power, max_power + 1)]
+        tickvals = [10 ** i for i in range(min_power, max_power + 1)]
         ticktext = [f"{int(v):,}" for v in tickvals]
 
     fig.update_layout(
         xaxis=dict(
             title=None,
-            tickfont=dict(size=10),
+            tickfont=dict(family="Inter", size=12, color="#616C7E"),
             tickangle=0,
         ),
         yaxis=dict(
             title=None,
             type="log",
-            tickfont=dict(size=10),
             tickvals=tickvals,
             ticktext=ticktext,
-            gridcolor='#c1d6fe'
+            tickfont=dict(family="Inter", size=12, color="#616C7E"),
+            gridcolor='#F1E1CE',
         ),
         showlegend=False,
         plot_bgcolor="white",
@@ -119,24 +139,34 @@ def card_three(df, mode):
         bargap=0,
         bargroupgap=0.1,
         barmode='group',
-        autosize=False,
-        width=550,
-        height=260,
-
-        # 🚀 Add this line:
-        transition=dict(duration=500, easing='cubic-in-out')
+        barcornerradius=10,
+        autosize=True,
     )
 
 
     return html.Div([
         html.Div([
             html.Div([
-                html.Div("ENROLLMENT BY SUBCLASSIFICATION", className='card-title-main'),
+                html.Div(
+                    "Enrollment by Classification",
+                    className='card-title-main',
+                    style={
+                        'fontFamily': 'Inter',
+                        'fontSize': '1em',
+                        'fontWeight': '700',
+                        'color': '#44647E',
+                        'marginBottom': '10px'
+                    }
+                ),
             ], className='card-header-wrapper'),
         ], className="card-one-two-text"),
-        dcc.Graph(figure=fig, config={'displayModeBar': False})
+        dcc.Graph(
+            figure=fig,
+            config={'displayModeBar': False},
+            className='card-three-graph',
+            style={'width': '100%', 'height': '100%'}
+        )
     ], className="card card-three")
-
 
 def card_three_register_callbacks(app):
     return None
