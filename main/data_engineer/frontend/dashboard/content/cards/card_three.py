@@ -88,7 +88,6 @@ def card_three(df, mode):
     unique_subs = grouped['school_subclassification'].unique()
     color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
 
-    # Format numbers as full strings with commas
     grouped['formatted_value'] = grouped[y_col].apply(lambda x: f"{int(x):,}")
 
     fig = px.bar(
@@ -148,6 +147,7 @@ def card_three(df, mode):
         bargap=0,
         bargroupgap=0.1,
         barmode='group',
+        barcornerradius=10,
         autosize=True,
     )
 
