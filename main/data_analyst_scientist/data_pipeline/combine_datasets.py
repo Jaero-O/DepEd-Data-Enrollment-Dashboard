@@ -68,17 +68,25 @@ def aggregateDataset(range_school_year=[2023]):
 
     agg_dict = {col: 'last' for col in columns_to_last}
     agg_dict.update({col: 'mean' for col in columns_to_sum})
-
+    agg_dict['school_year'] = 'last'
+    print(f"school years in aggregate: {range_school_year}")
     aggregated_df = merged_df.groupby('beis_school_id', as_index=False).agg(agg_dict)
 
-    output_path = os.path.join('enrollment_csv_file', 'preprocessed_data')
-    os.makedirs(output_path, exist_ok=True)
+    # Save main aggregated data
+    aggregated_df.to_sql('aggregated_enrollment', conn, if_exists='replace', index=False)
+    print("Aggregated data saved to 'aggregated_enrollment' in cleaned_enrollment_data.db")
 
-    output_file = os.path.join(output_path, 'cleaned_enrollment_data.csv')
-    aggregated_df.to_csv(output_file, index=False)
-    print(f"Aggregated file saved to: {output_file}")
+    # Save table metadata
+    metadata_df = pd.DataFrame(metadata_rows)
+    metadata_df.to_sql('table_metadata', conn, if_exists='replace', index=False)
+    print("Table metadata saved to 'table_metadata'")
 
-    load_data('enrollment_csv_file\\preprocessed_data\\cleaned_enrollment_data.db', aggregated_df)
-    return aggregated_df 
+    # Save total enrollment summary
+    enrollment_summary_df = pd.DataFrame(enrollment_summary)
+    enrollment_summary_df.to_sql('total_enrollment_by_year', conn, if_exists='replace', index=False)
+    print("Total enrollment summary saved to 'total_enrollment_by_year'")
+
+    conn.close()
+    return None
 
 aggregated_df = aggregateDataset()

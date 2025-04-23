@@ -209,10 +209,14 @@ div.card-three-four-five-wrapper div.card-four .pie-chart .user-select-none.svg-
 div.card-three-four-five-wrapper div.card-five {
   width: 405px;
   height: 100%;
+  padding: 10px;
 }
 div.card-three-four-five-wrapper div.card-five div.card-header-wrapper {
   display: flex;
   flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
 }
 div.card-three-four-five-wrapper div.card-five div.card-header-wrapper div.card-title-main {
   font-size: 1em;
@@ -220,8 +224,10 @@ div.card-three-four-five-wrapper div.card-five div.card-header-wrapper div.card-
   font-family: "Inter-Bold";
 }
 div.card-three-four-five-wrapper div.card-five div.card-five-graph {
-  margin-top: 10px;
-  width: 300px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  width: 100%;
   height: auto;
   font-family: "Inter";
 }
