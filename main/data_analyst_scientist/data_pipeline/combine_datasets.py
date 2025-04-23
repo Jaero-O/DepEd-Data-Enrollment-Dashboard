@@ -53,7 +53,7 @@ def aggregateDataset(range_school_year=[2023], db_path='enrollment_csv_file\prep
     agg_dict = {col: 'last' for col in columns_to_last}
     agg_dict.update({col: 'mean' for col in columns_to_sum})
     agg_dict['school_year'] = 'last'
-
+    print(f"school years in aggregate: {range_school_year}")
     aggregated_df = merged_df.groupby('beis_school_id', as_index=False).agg(agg_dict)
 
     # Save main aggregated data
@@ -71,7 +71,7 @@ def aggregateDataset(range_school_year=[2023], db_path='enrollment_csv_file\prep
     print("Total enrollment summary saved to 'total_enrollment_by_year'")
 
     conn.close()
-    return aggregated_df
+    return None
 
 # Example call
 # aggregateDataset(range_school_year=[2015, 2023])

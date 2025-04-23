@@ -256,10 +256,14 @@ div.card-three-four-five-wrapper{
     div.card-five{
         width:405px;
         height:100%;
+        padding:10px;
     
         div.card-header-wrapper{
             display:flex;
             flex-direction:column;
+            padding-left:10px;
+            padding-right:10px;
+            padding-top:10px;
     
             div.card-title-main {
                 font-size: 1em;
@@ -270,8 +274,10 @@ div.card-three-four-five-wrapper{
         }
     
         div.card-five-graph{
-            margin-top:10px;
-            width:400px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            width:100%;
             height:auto;
             font-family: "Inter";
         }
