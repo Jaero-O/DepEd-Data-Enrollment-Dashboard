@@ -10,12 +10,6 @@
 .card.card-three .card-header-wrapper {
   padding: 10px;
 }
-.card.card-three .card-header-wrapper .card-title-main {
-  font-size: 20px;
-  font-weight: 700;
-  color: #44647E;
-  margin: 0;
-}
 .card.card-three .dcc-graph-container,
 .card.card-three .card-three-graph {
   background-color: white;
