@@ -140,6 +140,7 @@ def card_three(df, mode):
             ticktext=ticktext,
             tickfont=dict(family="Inter", size=12, color="#616C7E"),
             gridcolor='#F1E1CE',
+            range=y_range
         ),
         showlegend=False,
         plot_bgcolor="#FFF9F1",
