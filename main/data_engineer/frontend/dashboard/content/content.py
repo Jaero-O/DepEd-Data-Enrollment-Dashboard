@@ -67,22 +67,8 @@ direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified
 
 
 
-def convert_filter_to_df(filter_dict, selected_year, year_list):
+def convert_filter_to_df(filter_dict, df):
 
-    db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
-
-    # if selected_year == 'All School Years':
-    #     aggregateDataset(year_list, db_path)
-    #     conn = sqlite3.connect(db_path)
-    #     df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
-    #     conn.close()
-
-    # else:
-        # csv_path = 'enrollment_csv_file/cleaned_separate_datasets/' + selected_year + '.csv'
-    csv_path = 'enrollment_csv_file/cleaned_separate_datasets/2023.csv'
-    df = pd.read_csv(csv_path)
-
-    # Rename columns
     column_rename_map = {
         'region': 'Region',
         'division': 'Division',
@@ -101,6 +87,7 @@ def convert_filter_to_df(filter_dict, selected_year, year_list):
     }
 
     df.rename(columns=column_rename_map, inplace=True)
+    print(df.columns)
 
     if filter_dict is None:
         final_df = df.drop_duplicates(subset='BEIS School ID')

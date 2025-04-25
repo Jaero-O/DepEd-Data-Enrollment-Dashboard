@@ -87,9 +87,9 @@ navbar1 = html.Div([
         html.Div(id='filter-location-dropdown-id', children=[filter_location_dropdown]),
         dbc.Select(
             id='school-year-dropdown-select',
-            value='All School Years',
+            value='2023-2024',
             options=[
-                {'label': 'All School Years', 'value': 'All School Years'}
+                {'label': '2023-2024', 'value': '2023-2024'}
             ],
             className='school-year-dropdown-select',
         ),
@@ -141,9 +141,7 @@ navbar2 = html.Div([
     #     html.I(className='fa fa-ellipsis-v')
     # ], className='header-icons-div')
 
-# Application Layout Initialization ------------------------------------------------------------------------------------------------
-
-app.layout = html.Div([
+app_temporary_storage=[
     dcc.Store(id="theme-store", data="light"),
     dcc.Store(id='selected-mode', storage_type='session', data='student'),
     dcc.Store(id='stored-file'),
@@ -151,8 +149,15 @@ app.layout = html.Div([
     dcc.Store(id='current-files', storage_type='session'),
     dcc.Store(id='current-years', storage_type='session'),
     dcc.Store(id='folder-hash', data=''),
+    dcc.Store(id='aggregated-years-df'),
+    dcc.Store(id='current-year-df'),
+    dcc.Store(id='previous-year-df'),
+]
 
+# Application Layout Initialization ------------------------------------------------------------------------------------------------
 
+app.layout = html.Div([
+    *app_temporary_storage,
     dcc.Interval(id='file-check', interval=3000, n_intervals=0),
     # dcc.Store(id='df-store', data=df.to_dict('records')),
     sidebar,
@@ -226,10 +231,9 @@ def update_selected_button(enrollment_clicks, school_clicks):
 @app.callback(
     Output('school-year-dropdown-select', 'options'),
     [Input('year-range', 'value'),           # year_range is the selected range [start, end]
-    Input('current-years', 'data')]        # current_years is the full list of years from dcc.Store
+    State('current-years', 'data')]        # current_years is the full list of years from dcc.Store
 )
 def populate_school_year_dropdown(year_range, current_years):
-    print('current-years', current_years)
     if not year_range or not current_years:
         return []
 
@@ -241,10 +245,8 @@ def populate_school_year_dropdown(year_range, current_years):
     school_years = [f"{year}-{year + 1}" for year in filtered_years]
 
     # Construct dropdown options
-    options = [{'label': 'All School Years', 'value': 'All School Years'}]
+    options = []
     options += [{'label': sy, 'value': sy} for sy in school_years]
-
-    print('options:', options)
 
     return options
 
@@ -288,7 +290,7 @@ def toggle_upload_modal(open_clicks, close_clicks, close_clicks2):
      Output('current-years', 'data'),
      Output('folder-hash', 'data')],
     [Input('file-check', 'n_intervals'),
-     Input('folder-hash', 'data')]  # Input to detect changes in folder
+     State('folder-hash', 'data')]  # Input to detect changes in folder
 )
 def update_file_list(n, last_folder_hash):
     folder_path = Path('enrollment_database')
@@ -307,9 +309,7 @@ def update_file_list(n, last_folder_hash):
         name = f.replace('.csv', '')
         if name.isdigit():
             years.append(int(name))
-
-    print(years)
-    print(filenames)
+    
     # Return new file list, years, and the updated folder hash
     return filenames, years, current_hash
 

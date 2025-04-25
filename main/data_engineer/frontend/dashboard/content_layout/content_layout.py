@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from main.data_engineer.frontend.dashboard.content.content import dashboard_content, convert_filter_to_df
 from main.data_engineer.frontend.dashboard.content.cards.card_six_ni_lei import filter_location_dropdown
+from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
 
 data = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
@@ -46,7 +47,7 @@ content_layout = html.Div([
                 min=0,
                 max=0,
                 step=1,
-                value=[0,0],
+                value=[1980, 2025],
                 vertical=True,
                 className='year-range-slider-true',
                 tooltip={"placement": "bottom", "always_visible": True}
@@ -277,14 +278,6 @@ content_layout = html.Div([
 
 
 def content_layout_register_callbacks(app):
-
-    @app.callback(
-        Output('stored-year-range', 'data'),
-        Input('year-range', 'value')
-    )
-    def store_year_range(value):
-        print(value)
-        return value
     
     @app.callback(
         [Output('year-range', 'min'),
@@ -306,6 +299,70 @@ def content_layout_register_callbacks(app):
         initial_range = [min_year, max_year]
 
         return min_year, max_year, marks, initial_range
+    
+    #dcc.Store: aggregated-years-df, 'current-year-df', 'previous-year-df'
+
+
+    @app.callback(
+        Output('aggregated-years-df', 'data'),
+        Input('year-range', 'value'),
+        State('current-years', 'data'),
+        prevent_initial_call=True
+    )
+    def aggregated_years(year_range, current_years):
+        ctx = dash.callback_context
+
+        # Optimization: cache previous value
+        if hasattr(aggregated_years, '_prev_range'):
+            if aggregated_years._prev_range == year_range:
+                raise dash.exceptions.PreventUpdate
+
+        aggregated_years._prev_range = year_range
+
+        print("Triggered by:", ctx.triggered)
+        filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
+        aggregated_df = aggregateDataset(filtered_years).to_dict('records')
+        return aggregated_df
+    
+    @app.callback(
+        Output('current-year-df', 'data'),
+        Output('previous-year-df', 'data'),
+        Input('school-year-dropdown-select', 'value'),
+        State('current-years', 'data'),
+        State('year-range', 'value'),
+        Input('aggregated-years-df', 'data'),
+    )
+    def current_and_previous_year_df(school_year, current_years, year_range, aggregated_years_df):
+        ctx = dash.callback_context
+        if ctx.triggered:
+            prop_id = ctx.triggered[0]['prop_id']
+            print("Function 2 triggered by:", prop_id) 
+        selected_year = school_year if school_year == 'All School Years' else school_year.split('-')[0]
+
+        filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
+
+        try:
+            selected_year_int = int(selected_year)
+            selected_index = filtered_years.index(selected_year_int)
+            previous_year = filtered_years[selected_index - 1] if selected_index > 0 else selected_year_int
+        except (ValueError, IndexError):
+            previous_year = selected_year
+
+        if selected_year == 'All School Years':
+            return aggregated_years_df, aggregated_years_df
+        else:
+            # Load current year
+            current_csv_path = f'enrollment_csv_file/cleaned_separate_datasets/{selected_year}.csv'
+            current_df = pd.read_csv(current_csv_path)
+
+            # Load previous year
+            try:
+                prev_csv_path = f'enrollment_csv_file/cleaned_separate_datasets/{previous_year}.csv'
+                prev_df = pd.read_csv(prev_csv_path)
+            except FileNotFoundError:
+                prev_df = current_df.copy()  # fallback to current year data if missing
+
+            return current_df.to_dict('records'), prev_df.to_dict('records')
 
     # Callback to update content based on active tab
     @app.callback(
@@ -314,40 +371,47 @@ def content_layout_register_callbacks(app):
         Input('current-filter-dict', 'data'),
         Input('location-filter', 'value'),
         Input('selected-mode', 'data'),
-        Input('tabs','value'),
-        Input('school-year-dropdown-select', 'value'),
-        Input('year-range', 'value'),
-        Input('current-years', 'data'),
+        Input('tabs', 'value'),
+        Input('current-year-df', 'data'),
+        State('previous-year-df', 'data'),
         prevent_initial_call=True
     )
-    def update_tab_content(data_dict,location,mode,tab,school_year,year_range,current_years):
-
-        print('School Year:', school_year)
-        selected_year = school_year if school_year == 'All School Years' else school_year.split('-')[0]
-        filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
-        try:
-            selected_year_int = int(selected_year)
-            selected_index = filtered_years.index(selected_year_int)
-            previous_year = filtered_years[selected_index - 1] if selected_index > 0 else selected_year
-
-        except (ValueError, IndexError):
-            previous_year = selected_year
+    def update_tab_content(filter_dict, location, mode, tab, current_year_df_dict, previous_year_df_dict):
+        # Check if the DataFrames are empty
+        ctx = dash.callback_context
+        if ctx.triggered:
+            prop_id = ctx.triggered[0]['prop_id']
+            print("Function 3 triggered by:", prop_id) 
     
-        print("LOCATION FILTER:", location)
         location = location or 'region'
-        current_year_df = convert_filter_to_df(data_dict, selected_year, filtered_years)
 
-        if previous_year == selected_year:
-            previous_year_df = current_year_df
-        else:
-            previous_year_df = convert_filter_to_df(data_dict, previous_year, filtered_years)
+        # Convert dict back to DataFrame
+        current_year_df = pd.DataFrame(current_year_df_dict)
+        previous_year_df = pd.DataFrame(previous_year_df_dict)
 
-        if tab == 'geographic-based':
-            button = filter_location_dropdown
-        else:
-            button = None
+        cleaned_current_year_df = convert_filter_to_df(filter_dict, current_year_df)
+        cleaned_previous_year_df = convert_filter_to_df(filter_dict, previous_year_df)
 
-        return dashboard_content(current_year_df,previous_year_df, location,mode,tab), button
+        # Reverse column renaming for consistency
+        reverse_column_map = {v: k for k, v in column_rename_map.items()}
+        cleaned_current_year_df = cleaned_current_year_df.rename(columns=reverse_column_map)
+        cleaned_previous_year_df = cleaned_previous_year_df.rename(columns=reverse_column_map)
+
+        # Conditional UI component
+        button = filter_location_dropdown if tab == 'geographic-based' else None
+
+        # Generate content
+        content = dashboard_content(cleaned_current_year_df, cleaned_previous_year_df, location, mode, tab)
+
+        return content, button
+
+
+        # # Generate content
+        # content = dashboard_content(cleaned_current_year_df, cleaned_previous_year_df, location, mode, tab)
+        # print(cleaned_current_year_df.columns)
+        # print(cleaned_current_year_df)
+
+        # return content, button
 
     # Callback to toggle filter visibility
     @app.callback(
@@ -369,7 +433,7 @@ def content_layout_register_callbacks(app):
         [
             Output({'type': 'chk', 'index': ALL}, 'options'),
             Output({'type': 'dropdown-label', 'index': ALL}, 'label'),
-            Output('current-filter-dict', 'data', allow_duplicate=True)
+            Output('current-filter-dict', 'data')
         ],
         Input({'type': 'chk', 'index': ALL}, 'value'),
         Input({'type': 'search', 'index': ALL}, 'value'),
@@ -377,7 +441,6 @@ def content_layout_register_callbacks(app):
         State({'type': 'chk', 'index': ALL}, 'options'),
         State({'type': 'chk', 'index': ALL}, 'id'),
         State('current-filter-dict', 'data'),
-        prevent_initial_call='initial_duplicate'
     )
     def unified_checklist_callback(all_values, all_searches, all_clicks, all_options, all_ids, current_filter_dict):
         df = data.copy()
@@ -429,7 +492,6 @@ def content_layout_register_callbacks(app):
 
             new_options.append(options)
 
-
         # Dropdown label logic
         labels = []
         for val in all_values:
@@ -442,16 +504,15 @@ def content_layout_register_callbacks(app):
 
         # Updating current_filter_dict
         updated_dict = current_filter_dict.copy() if current_filter_dict else {}
+
         for item, val in zip(all_ids, all_values):
             index = item['index']
             if index != 'Modified COC':  # don't update directly for 'Modified COC'
                 updated_dict[index] = val if val else None
 
-        # Add special logic for School Level → Modified COC (in filter dict only)
-        # Add special logic for School Level → Modified COC (in filter dict only)
+        # Special logic for 'Modified COC'
         level_vals = selections.get('Modified COC', [])
 
-        # Only map if user has selected 1-3 Modified COC levels
         if level_vals:
             selected_levels = level_vals
             purely_map = {
@@ -465,18 +526,17 @@ def content_layout_register_callbacks(app):
                 extra_value = purely_map.get(selected_levels[0], '')
             elif len(selected_levels) == 2:
                 if set(selected_levels) == {'Elementary School', 'Junior High School'}:
-                    extra_value = ['Purely ES','Purely JHS','ES and JHS']
+                    extra_value = ['Purely ES', 'Purely JHS', 'ES and JHS']
                 elif set(selected_levels) == {'Junior High School', 'Senior High School'}:
-                    extra_value = ['Purely JHS','Purely SHS','JHS with SHS']
+                    extra_value = ['Purely JHS', 'Purely SHS', 'JHS with SHS']
                 elif set(selected_levels) == {'Elementary School', 'Senior High School'}:
-                    extra_value = ['Purely ES','Purely SHS']
+                    extra_value = ['Purely ES', 'Purely SHS']
             elif len(selected_levels) == 3:
-                extra_value = ['Purely ES','Purely JHS','Purely SHS','ES and JHS','JHS with SHS','All Offering']
+                extra_value = ['Purely ES', 'Purely JHS', 'Purely SHS', 'ES and JHS', 'JHS with SHS', 'All Offering']
 
             updated_dict['Modified COC'] = extra_value if extra_value else None
         else:
             updated_dict['Modified COC'] = None
-
 
         # Logic: If specific school filters are empty, treat as "All"
         fallback_values = {
@@ -489,13 +549,8 @@ def content_layout_register_callbacks(app):
         for key, all_vals in fallback_values.items():
             updated_dict[key] = updated_dict.get(key) or all_vals
 
-        print("Updated Filter Dictionary:", updated_dict)
-        print("Selected Values:", new_options)
-        print("Selected Labels:", labels)
-        print("Selected Values:", selections)
-
-
         return new_options, labels, updated_dict
+
 
 
 
@@ -515,7 +570,7 @@ def content_layout_register_callbacks(app):
             State({'type': 'search', 'index': ALL}, 'id'),
             State('current-years', 'data')
         ],
-        prevent_initial_call='initial_duplicate'
+        prevent_initial_call=True
     )
     def reset_checklist_or_all(reset_click, delete_clicks, chk_ids, search_ids,range_list):
         triggered = ctx.triggered_id
@@ -554,7 +609,8 @@ def content_layout_register_callbacks(app):
     @app.callback(
         Output('year-list', 'children'),
         Input('year-range', 'value'),
-        State('current-years', 'data')
+        State('current-years', 'data'),
+        prevent_initial_call = True
     )
     def update_year_list(selected_range, years_data):
         # Check if the selected values are in the current-years list

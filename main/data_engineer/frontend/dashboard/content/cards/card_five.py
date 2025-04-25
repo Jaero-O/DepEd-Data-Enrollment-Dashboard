@@ -98,7 +98,6 @@ def card_five(df, mode='student'):
         buffer = x_max * 0.02  # 2% of full width, adjust if needed
 
     # Update layout
-    print("Subplots:", subplots)
     for ann in subplots["layout"]["annotations"]:
         ann["x"] = 0
         ann["xanchor"] = "left"
