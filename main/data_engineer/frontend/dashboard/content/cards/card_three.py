@@ -27,7 +27,7 @@ def card_three(df, mode):
     ]
 
     existing_columns = [col for col in enrollment_columns if col in df.columns]
-    df['total_enrollment'] = df[existing_columns].sum(axis=1)
+    df['total_enrollment'] = np.floor(df[existing_columns].sum(axis=1))
 
     if 'school_subclassification' not in df.columns:
         return html.Div("❌ Missing 'school_subclassification' column.")
@@ -44,76 +44,134 @@ def card_three(df, mode):
         'SCHOOL ABROAD': 'International Schools'
     }
 
+    label_mapping = {
+        'DepED Managed': 'DepED<br>Managed',
+        'DOST Managed': 'DOST<br>Managed',
+        'SUC Managed': 'SUC<br>Managed',
+        'Local International School': 'Local<br>Intl School',
+        'LUC': 'LUC',
+        'Non-Sectarian ': 'Non-<br>Sectarian',
+        'Sectarian ': 'Sectarian',
+        'Other GA Managed': 'Other GA<br>Managed',
+        'SCHOOL ABROAD': 'School<br>Abroad'
+    }
+
     df['main_category'] = df['school_subclassification'].map(category_mapping)
 
     if mode == 'student':
-        grouped = df.groupby(['school_subclassification', 'main_category'])['total_enrollment'].sum().reset_index()
+        grouped = df.groupby(['school_subclassification', 'main_category'])['total_enrollment'].sum().apply(np.floor).reset_index()
         y_col = 'total_enrollment'
         title = "Total Enrollment by School Subclassification and Category"
     elif mode == 'school':
         grouped = df.groupby(['school_subclassification', 'main_category'])['beis_school_id'].nunique().reset_index()
         grouped.rename(columns={'beis_school_id': 'total_schools'}, inplace=True)
+        grouped['total_schools'] = np.floor(grouped['total_schools'])
         y_col = 'total_schools'
         title = "Total Number of Schools by School Subclassification and Category"
     else:
         return html.Div("❌ Invalid mode. Use 'student' or 'school'.")
 
     grouped = grouped.dropna(subset=['school_subclassification', 'main_category'])
+    grouped['school_subclassification_label'] = grouped['school_subclassification'].map(label_mapping)
 
-    # Sort values descending
     grouped = grouped.sort_values(by=y_col, ascending=False)
 
-    # Create color map
-    color_palette = px.colors.qualitative.Set3
+    color_palette = [
+        '#FFD06C',
+        '#3377FF',
+        '#53CC5B',
+        '#D176F2',
+        '#3CC1FF',
+        '#FF828B',
+        '#FFA486'
+    ]
     unique_subs = grouped['school_subclassification'].unique()
     color_map = {sub: color_palette[i % len(color_palette)] for i, sub in enumerate(unique_subs)}
 
-    # Create the plot
+    grouped['formatted_value'] = grouped[y_col].apply(lambda x: f"{int(x):,}")
+
     fig = px.bar(
         grouped,
-        x='school_subclassification',
+        x='school_subclassification_label',
         y=y_col,
         color='school_subclassification',
         color_discrete_map=color_map,
-        text_auto='.3s',
-        title=title
+        text=grouped['formatted_value'],
+        custom_data=['school_subclassification', 'formatted_value']
     )
 
+    fig.update_traces(
+        textposition='outside',
+        cliponaxis=False,
+        hovertemplate=(
+            "School Subclassification = %{customdata[0]}<br>" +
+            "Total Enrollment = %{customdata[1]}<extra></extra>"
+        ),
+        textfont=dict(
+            family="Inter",
+            size=12,
+            weight="bold", 
+            color="#44647E"
+        )
+    )
 
-    # Determine tick values based on max
     max_val = grouped[y_col].max()
-    max_power = int(np.ceil(np.log10(max_val)))
-    min_power = 2 if max_val >= 100 else 0  # start from 10^2 if max is at least 100
+    nonzero_min_val = grouped[y_col][grouped[y_col] > 0].min()
 
-    tickvals = [10**i for i in range(min_power, max_power + 1)]
-    ticktext = [f"{int(v):,}" for v in tickvals]
+    if pd.isna(max_val) or max_val <= 0 or pd.isna(nonzero_min_val) or nonzero_min_val <= 0:
+        tickvals = []
+        ticktext = []
+        y_range = None
+    else:
+        max_power = int(np.ceil(np.log10(max_val)))
+        min_power = int(np.floor(np.log10(nonzero_min_val)))
+        tickvals = [10 ** i for i in range(min_power, max_power + 1)]
+        ticktext = [f"{int(v):,}" for v in tickvals]
+        y_range = [min_power, max_power + 1]
 
-    # Log scale and layout tweaks
+
     fig.update_layout(
         xaxis=dict(
-            visible=False,
-            showticklabels=False,
-            showgrid=False,
-            zeroline=False
+            title=None,
+            tickfont=dict(family="Inter", size=12, color="#616C7E"),
+            tickangle=0,
         ),
-        xaxis_title="School Subclassification",
         yaxis=dict(
-            title="Count (Log Scale)" if mode == 'school' else "Total Enrollment (Log Scale)",
+            title=None,
             type="log",
             tickvals=tickvals,
-            ticktext=ticktext
+            ticktext=ticktext,
+            tickfont=dict(family="Inter", size=12, color="#616C7E"),
+            gridcolor='#F1E1CE',
+            range=y_range
         ),
-        margin=dict(t=60, l=40, r=40, b=100),
-        legend_title="Main Category",
+        showlegend=False,
+        plot_bgcolor="#FFF9F1",
+        paper_bgcolor='white',
+        margin=dict(t=0, l=80, r=0, b=20),
         bargap=0,
         bargroupgap=0.1,
         barmode='group',
-        autosize=False,
-        height=400,
-        width=800,
+        barcornerradius=10,
+        autosize=True,
     )
 
     return html.Div([
-        html.H4("Card 3: Grouped Vertical Bar Graph (Log Scale)", style={"marginBottom": "15px"}),
-        dcc.Graph(figure=fig)
-    ])
+        html.Div([
+            html.Div([
+                html.Div(
+                    "Enrollment by Subclassification",
+                    className='card-title-main',
+                ),
+            ], className='card-header-wrapper'),
+        ], className="card-one-two-text"),
+        dcc.Graph(
+            figure=fig,
+            config={'displayModeBar': False},
+            className='card-three-graph',
+            style={'width': '100%', 'height': '100%'}
+        )
+    ], className="card card-three")
+
+def card_three_register_callbacks(app):
+    return None

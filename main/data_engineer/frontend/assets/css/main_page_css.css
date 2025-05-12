@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --web-background-color: #f0f4fc;
   --web-background-color-two: #ffffff;
@@ -40,7 +41,7 @@
   src: url("/assets/Inter Desktop/Inter-Bold.otf");
 }
 body {
-  background-color: var(--web-background-color-two);
+  background-color: var(--web-background-color);
   transition: all 0.5s linear;
 }
 
@@ -48,10 +49,21 @@ div.main-page {
   display: flex;
   background-color: var(--web-background-color-two);
   border-radius: 0em 0em 0em 0em;
+  width: 100vw;
+  height: 100vh;
   transition: all 0.5s linear;
 }
+div.main-page div.navbar-content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--web-background-color);
+  padding: 2em 3em 2em 3em;
+  gap: 1em;
+}
 
-div.title-div-navbar {
+div.title-div-sidebar {
   display: flex;
   justify-content: left;
   align-content: center;
@@ -64,11 +76,11 @@ div.title-div-navbar {
   border-bottom: 0.15em solid var(--border-nav-header);
   transition: all 0.5s linear;
 }
-div.title-div-navbar img.depEd-title {
+div.title-div-sidebar img.depEd-title {
   width: 90px;
   height: 45px;
 }
-div.title-div-navbar .fa-bars {
+div.title-div-sidebar .fa-bars {
   font-size: 1.25em;
   color: var(--navbar-color-active);
   transition: all 0.5s linear;
@@ -76,101 +88,215 @@ div.title-div-navbar .fa-bars {
   margin-bottom: auto;
 }
 
-div.nav-bar-title-div {
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: 0;
-  height: 97.5vh;
-  z-index: 1001;
-  border-right: 0.15em solid var(--border-nav-header);
-}
-
-div.nav-bar-div {
+div.sidebar-wrapper {
   background-color: var(--web-background-color-two);
-  width: 14em;
-  height: auto;
+  width: 18em;
+  height: 100%;
   padding-left: 1em;
   padding-right: 1em;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
+  gap: 2em;
   transition: all 0.5s linear;
 }
-div.nav-bar-div img.depEd-logo {
-  width: 75px;
-  height: auto;
-  padding-bottom: 1em;
+div.sidebar-wrapper div.sidebar-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
 }
-div.nav-bar-div div.header-footer {
+div.sidebar-wrapper div.sidebar-header img.depEd-title {
+  width: 140px;
+  height: 70px;
+}
+div.sidebar-wrapper div.sidebar-header img.depEd-logo {
+  width: 100px;
+  height: 70px;
+}
+div.sidebar-wrapper div.header-footer {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.25em;
 }
-div.nav-bar-div span.title-page-text {
+div.sidebar-wrapper span.title-page-text {
   color: var(--navbar-color-active);
   text-align: center;
   font-size: 1.2em;
   font-family: "Inter-Bold";
   transition: all 0.5s linear;
 }
-div.nav-bar-div span.all-rights-served {
-  font-size: 10px;
-  color: var(--all-rights-served);
-}
-div.nav-bar-div div.nav-items {
+div.sidebar-wrapper div.sidebar-items {
   display: flex;
   flex-direction: column;
   height: auto;
-  width: 220px;
-  gap: 1.35em;
-  padding-left: 0.75em;
-  padding-right: 0.75em;
-  padding-top: 2.5em;
+  width: 100%;
+  gap: 1.5em;
+  margin-bottom: 3em;
 }
-div.nav-bar-div div.nav-items .fa {
-  width: 12px;
+div.sidebar-wrapper div.sidebar-items .fa {
+  width: 1px;
 }
-div.nav-bar-div div.nav-items span.nav-bar-li {
-  font-family: "Inter";
+div.sidebar-wrapper div.sidebar-items span.sidebar-li {
+  font-family: "Inter-Medium";
 }
-div.nav-bar-div div.nav-items span.nav-bar-li.hovered {
+div.sidebar-wrapper div.sidebar-items span.sidebar-li.hovered {
   font-family: "Inter-Bold";
 }
-div.nav-bar-div div.nav-items span.nav-bar-li.hovered, div.nav-bar-div div.nav-items I.hovered {
+div.sidebar-wrapper div.sidebar-items span.sidebar-li.hovered, div.sidebar-wrapper div.sidebar-items I.hovered {
   color: var(--web-background-color-two);
-  font-size: 0.9em;
+  font-size: 1em;
   transition: all 0.5s linear;
 }
-div.nav-bar-div div.nav-items span.nav-bar-li, div.nav-bar-div div.nav-items I {
+div.sidebar-wrapper div.sidebar-items span.sidebar-li, div.sidebar-wrapper div.sidebar-items I {
   color: var(--navbar-color-inactive);
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  font-size: 0.9em;
+  font-size: 1em;
   transition: all 0.5s linear;
 }
-div.nav-bar-div div.nav-items div {
-  display: flex;
-  align-content: center;
-  justify-content: start;
-  padding-left: 1em;
-  gap: 1.25em;
-}
-div.nav-bar-div div.nav-items div.nav-bar-li-div-hovered {
-  background-color: var(--navbar-color-active);
+div.sidebar-wrapper div.sidebar-items div.sidebar-li-div-hovered {
+  background-color: #008EFF;
   border-radius: 0.5em;
-  padding: 0.5em;
-  padding-left: 1em;
+  padding: 0.75em 0.75em 0.75em 0em;
   width: 100%;
   transition: all 0.5s linear;
 }
-div.nav-bar-div .theme-toggle-container {
+div.sidebar-wrapper div.sidebar-items div.sidebar-li-div-hovered .fa-chevron-down {
+  color: #ffffff;
+  padding-left: 1em;
+}
+div.sidebar-wrapper div.sidebar-items div.items-wrapper {
   display: flex;
+  flex-direction: row;
+  gap: 2em;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 1.25em;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu {
+  margin-left: 1.25em;
+  margin-top: 0.25em;
+  display: Flex;
+  flex-direction: column;
+  padding: 0.5em 0em 0.5em 0em;
+  /* Animate highlight from left to right */
+  /* Ensure content appears above the animated background */
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item {
+  position: relative; /* Needed for ::before */
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: none;
+  background-color: #ffffff;
+  gap: 1em;
+  padding: 0.6em 0em 0.6em 1.25em;
+  overflow: hidden; /* Ensures animation stays within bounds */
+  transition: all 0.4s ease;
+  border-left: 4px solid #b8d1ff;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item span.submenu-link {
+  text-decoration: none;
+  color: #006ABF;
+  font-family: "Inter";
+  font-size: 12px;
+  padding-left: 8px;
+  transition: all 0.4s ease;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active {
+  background-color: none;
+  border-radius: 0em 0.25em 0.25em 0em;
+  margin-right: 0.5em;
+  border-left: 4px solid #008EFF;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active span.submenu-link {
+  font-family: "Inter-Medium";
+  font-size: 14px;
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background-color: #ECF2FF; /* subtle highlight color */
+  z-index: 0;
+  animation: slideHighlight 1s forwards;
+  border-radius: 0em 0.25em 0.25em 0em;
+}
+@keyframes slideHighlight {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+div.sidebar-wrapper div.sidebar-items div.submenu button.submenu-item.active > * {
+  position: relative;
+  z-index: 1;
+  color: #008EFF !important;
+}
+div.sidebar-wrapper div.profile-card {
+  background: #f2f2f3;
+  border-radius: 0.75em;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  max-width: 230px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+div.sidebar-wrapper div.profile-card img.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 2px solid #175382;
+}
+div.sidebar-wrapper div.profile-card div.profile-name {
+  font-size: 1em;
+  color: #175382;
+  font-family: "Inter-Medium";
+}
+div.sidebar-wrapper div.profile-card div.profile-email {
+  font-size: 0.75em;
+  color: #175382;
+  margin-bottom: 0.4em;
+  font-family: "Inter";
+}
+div.sidebar-wrapper div.profile-card div.profile-email.admin {
+  font-family: "Inter-Bold";
+  margin-bottom: 1em;
+}
+div.sidebar-wrapper div.profile-card button.profile-role-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.75em;
+  font-family: "Inter-Medium";
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+div.sidebar-wrapper div.profile-card button.profile-role-btn:hover {
+  background-color: #0051cc;
 }
 
 .toggle-switch-theme .form-check-input {
@@ -194,93 +320,125 @@ div.nav-bar-div .theme-toggle-container {
 div.header-div {
   display: flex;
   justify-content: space-between;
-  align-content: center;
-  width: 81em;
-  padding: 0.75em;
-  padding-left: 2em;
-  padding-right: 2em;
-  background-color: var(--web-background-color-two);
-  border-bottom: 0.15em solid var(--border-nav-header);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: all 0.5s linear;
-}
-div.header-div span, div.header-div I {
-  color: var(--navbar-color-active);
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  font-size: 1.2em;
-  transition: all 0.5s linear;
-}
-div.header-div I.profile-pic {
-  font-size: 1.6em !important;
-}
-div.header-div span {
-  font-family: "Inter";
-  font-size: 1em;
-}
-div.header-div div.header-search-div {
-  display: flex;
-  width: 100em;
-}
-div.header-div div.header-search-div .search-bar {
-  width: 65%;
-  height: 80%;
-  padding: 0.5em;
-  padding-left: 1em;
-  background-color: var(--web-background-color);
-  border-radius: 5em; /* Rounded corners */
-  outline: none;
-  border: none;
-  font-size: 0.85em;
-  margin: auto;
-  margin-left: 1em;
-  transition: all 0.5s linear;
-}
-div.header-div div.header-icons-div {
-  display: flex;
-  justify-content: end;
-  gap: 2em;
   align-items: center;
-  width: 60%;
+  background-color: #f2f6fa;
+  width: 100%;
+  margin-bottom: 0.5em;
 }
-div.header-div div.header-icons-div span.header-divider {
-  font-family: "Inter";
-  font-size: 1.5em;
-}
-div.header-div div.header-icons-div div.header-profile-div {
-  display: flex;
-  gap: 0.5em;
-}
-div.header-div div.header-icons-div div.header-profile-div div.user-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0em;
-}
-div.header-div div.header-icons-div div.header-profile-div div.user-info span.username-text {
-  color: var(--navbar-color-active);
-  font-size: 0.75em;
+div.header-div div.navbar-title {
+  font-size: 2em;
   font-family: "Inter-Bold";
+  color: #175382;
 }
-div.header-div div.header-icons-div div.header-profile-div div.user-info span.access-level-text {
-  color: var(--navbar-color-inactive);
-  font-size: 0.75em;
-  font-family: "Inter";
+div.header-div .tab-container {
+  gap: 1.25em;
+}
+div.header-div div.tabs-wrapper {
+  display: flex;
+}
+div.header-div div.tabs-wrapper .enrollment-tab {
+  background-color: #f0f4fc;
+  color: #616C7E;
+  font-family: "Inter-Bold";
+  font-size: 1em;
+  padding: 0.5em 1em;
+  margin: 0;
+  width: 13em !important;
+  width: auto;
+  border: none;
+  outline: none;
+  border-bottom: 0.35em solid #D1DDE6;
+  transition: all 0.2s ease;
+}
+div.header-div div.tabs-wrapper .enrollment-tab:hover {
+  background-color: #E4E7ED;
+  border-radius: 0.5em 0.5em 0em 0em;
+}
+div.header-div div.tabs-wrapper .enrollment-tab--selected {
+  background: #f0f4fc;
+  color: #0157FF;
+  border-bottom: 0.35em solid #0157FF;
+  transition: all 1s ease;
+}
+div.header-div .filter-button-div-container {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+  gap: 1em;
+}
+div.header-div .filter-button-div-container .filter-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em 2em;
+  color: #0055FF;
+  font-size: 1em;
+  font-family: "Inter-Medium";
+  cursor: pointer;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+div.header-div .filter-button-div-container .filter-button i {
+  margin-right: 6px;
+}
+div.header-div .filter-button-div-container .filter-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+div.header-div .filter-button-div-container .filter-button .hide-filter {
+  display: inline-block;
+}
+div.header-div .filter-button-div-container .school-year-dropdown-select {
+  background-color: #175382 !important; /* Bootstrap primary blue */
+  color: #fff !important;
+  border: none !important;
+  width: auto !important;
+  text-align: center !important;
+  padding: 0.4em 2em 0.4em 2em !important;
+  border-radius: 0.5em !important;
+  font-size: 1em !important;
+  font-family: "Inter-Medium" !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  appearance: none; /* hide default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='%23ffffff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L5 6L10 0H0Z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 10px 6px;
+  padding-right: 2rem; /* space for the arrow */
+  text-align: center;
+  text-align-last: center;
+}
+div.header-div .filter-button-div-container .school-year-dropdown-select option {
+  text-align: left;
 }
 
 div.tab-div {
   display: flex;
   flex-direction: column;
   outline: none;
-  padding: 2em;
+  border: none;
+  width: 100%;
+  height: 100%;
   background-color: var(--web-background-color);
 }
 div.tab-div div.header-tab {
   display: flex;
   margin-bottom: 1em;
+  justify-content: space-between;
+}
+div.tab-div div.filter-button-div-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  align-items: center;
+  width: auto;
 }
 div.tab-div span.My-Dashboard-title {
   font-size: 1.5em;
@@ -316,20 +474,161 @@ div.tab-div .filter-button * {
 div.tab-div .filter-button span {
   font-family: "Inter-Bold";
 }
+div.tab-div div.slider-filtering-div {
+  padding: 1em;
+  width: 15em;
+  height: 100vh;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: -15em;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  margin: 0em;
+  gap: 1em;
+  transition: all 0.5s linear;
+  /* Track between handles (active selection) */
+  /* Inactive track (rail) */
+  /* Slider handles with animation */
+  /* Tooltip Styling */
+  /* Custom Tick Marks */
+}
+div.tab-div div.slider-filtering-div.open {
+  animation: show-slider 1.5s ease forwards;
+}
+div.tab-div div.slider-filtering-div.close {
+  pointer-events: none;
+  overflow: hidden;
+  animation: hide-slider 1.5s ease forwards;
+}
+@keyframes show-slider {
+  0% {
+    left: -15em;
+  }
+  100% {
+    left: 0em;
+  }
+}
+@keyframes hide-slider {
+  0% {
+    left: 0em;
+  }
+  100% {
+    left: -15em;
+  }
+}
+div.tab-div div.slider-filtering-div span.range-slider-title {
+  text-align: center;
+  font-size: 1.25em;
+  font-family: "Inter-Bold";
+  color: #575C64;
+  padding: 0.5em;
+}
+div.tab-div div.slider-filtering-div div.slider-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+div.tab-div div.slider-filtering-div div.slider-container .year-range-slider-true {
+  height: 100% !important;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 !important;
+  padding-bottom: 2em !important;
+  background-color: #dadfea;
+  border-radius: 1em;
+}
+div.tab-div div.slider-filtering-div div.slider-container div.year-list {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 100%;
+  justify-content: space-between;
+  border-radius: 1em;
+}
+div.tab-div div.slider-filtering-div div.slider-container div.year-label {
+  font-size: 1em;
+  padding: 0.5em 0.25em;
+  background-color: #dadfea;
+  color: #8593af;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+div.tab-div div.slider-filtering-div div.slider-container .year-label.active {
+  background-color: #175382;
+  color: white;
+  font-weight: bold;
+}
+div.tab-div div.slider-filtering-div .rc-slider-vertical .rc-slider-track {
+  background-color: #175382;
+  width: 6px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+div.tab-div div.slider-filtering-div .rc-slider-vertical .rc-slider-rail {
+  background-color: #d0e3ff;
+  width: 6px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+div.tab-div div.slider-filtering-div .rc-slider-handle {
+  background-color: white;
+  border: 2px solid #175382;
+  height: 18px;
+  width: 18px;
+  margin-left: -6px !important;
+  margin-top: -9px;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+div.tab-div div.slider-filtering-div .rc-slider-handle:hover {
+  transform: scale(1.1);
+  border-color: #175382;
+}
+div.tab-div div.slider-filtering-div .rc-slider-tooltip-inner {
+  background-color: #175382;
+  color: white;
+  font-weight: 500;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+div.tab-div div.slider-filtering-div .rc-slider-tooltip-placement-right .rc-slider-tooltip-arrow {
+  border-right-color: #175382;
+}
+div.tab-div div.slider-filtering-div .rc-slider-mark {
+  color: #999;
+  font-size: 12px;
+}
+div.tab-div div.slider-filtering-div .rc-slider-mark-text {
+  color: #444;
+  font-family: "Inter-Medium";
+  margin-left: 0.75em;
+  transition: color 0.3s ease;
+}
+div.tab-div div.slider-filtering-div .rc-slider-mark-text:hover {
+  color: #007bff;
+  cursor: pointer;
+}
 div.tab-div div.filtering-div {
   display: flex;
   flex-direction: column;
   background-color: var(--web-background-color-two);
-  width: 43em;
-  border-radius: 1em;
+  width: 32em;
+  gap: 2em;
   padding: 1em;
+  padding-top: 1.5em;
   height: 100vh;
   position: fixed;
   top: 0;
-  right: -800px;
-  z-index: 1002;
-  gap: 1em;
-  box-shadow: 0em 0em 3em rgba(222, 222, 222, 0.25), 0em 0em 1em rgba(111, 111, 111, 0.1);
+  right: -32em;
+  z-index: 1050;
 }
 div.tab-div div.filtering-div.open {
   animation: show-content 1.5s ease forwards;
@@ -341,7 +640,7 @@ div.tab-div div.filtering-div.close {
 }
 @keyframes show-content {
   0% {
-    right: -800px;
+    right: -32em;
     margin-top: 0em;
     overflow: hidden;
   }
@@ -356,32 +655,16 @@ div.tab-div div.filtering-div.close {
     right: 0px;
   }
   100% {
-    right: -800px;
+    right: -32em;
   }
 }
-div.tab-div div.filtering-div span.filter-menu-title {
-  width: 100%;
-  font-family: "Inter-Bold";
-  font-size: 1em;
-  border-radius: 0.5em;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--navbar-color-active);
-}
-div.tab-div div.filtering-div span.filter-menu-title .units {
-  font-family: "Inter-Medium";
-  font-size: 0.75em;
-  color: var(--navbar-color-inactive);
-}
 div.tab-div div.filtering-div span.lower-title {
-  text-align: left;
-  font-size: 1em;
+  text-align: center;
+  font-size: 1.25em;
   font-family: "Inter-Bold";
   padding-bottom: 0.5em;
   padding-left: 0.25em;
-  color: var(--navbar-color-active);
+  color: #575C64;
 }
 div.tab-div div.filtering-div span.lower-title.outside {
   padding-left: 1em;
@@ -391,10 +674,6 @@ div.tab-div div.filtering-div span.lower-title.table {
   font-size: 1em;
   margin: 0;
   padding: 0;
-}
-div.tab-div div.filtering-div div.slider-filtering-div {
-  padding-left: 1em;
-  padding-right: 1em;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div, div.tab-div div.filtering-div div.slider-filtering-div {
   display: flex;
@@ -431,26 +710,29 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 {
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div12 {
   display: flex;
+  flex-wrap: wrap;
   width: auto;
   gap: 1em;
-  padding-bottom: 1em;
+  padding-bottom: 3em;
   border-radius: 0.5em;
   transition: all 0.5s linear;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 {
   display: flex;
+  flex: 0 1 calc(50% - 0.5rem);
   flex-direction: column;
   align-items: center;
   width: 150px;
   gap: 0.25em;
   overflow: visible;
   padding: 0.25em;
+  padding-left: 1.5em;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .dropdown-menu-button {
-  background-color: var(--navbar-color-active) !important;
+  background-color: #175382 !important;
   color: var(--web-background-color-two) !important;
-  font-size: 0.75em !important;
-  border-radius: 0.5em !important;
+  font-size: 1em !important;
+  border-radius: 0.25em !important;
   width: 10em !important;
   border: none;
   overflow: hidden;
@@ -475,7 +757,7 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
   margin: 0;
   width: 90%;
   color: var(--web-background-color-two) !important;
-  background-color: var(--navbar-color-active);
+  background-color: #175382;
   border-bottom: 0.15em solid var(--navbar-color-inactive) !important;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .search-input::placeholder {
@@ -498,7 +780,7 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
   text-align: center;
   border: none;
   outline: none;
-  background-color: var(--navbar-color-active);
+  background-color: #175382;
   border-top: 0.15em solid var(--navbar-color-inactive) !important;
 }
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 .load-more-button .fa-arrow-down {
@@ -510,8 +792,7 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
 div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering-div2 div.dropdown-filtering-div3 {
   display: flex;
   gap: 0.25em;
-  width: 10em;
-  padding-left: 0.6em;
+  width: 100%;
   align-items: center;
   justify-content: left;
 }
@@ -525,9 +806,9 @@ div.tab-div div.filtering-div div.dropdown-filtering-div1 div.dropdown-filtering
   transition: all 0.5s linear;
 }
 div.tab-div div.filtering-div span.label-text {
-  color: var(--navbar-color-active);
-  font-family: "Inter-Medium";
-  font-size: 0.75em;
+  color: #175382;
+  font-family: "Inter-Bold";
+  font-size: 1em;
   text-align: left;
   width: 100%;
 }
@@ -541,31 +822,49 @@ div.tab-div div.filtering-div div.search-filtering-div {
   border-radius: 0.5em;
   transition: all 0.5s linear;
 }
+div.tab-div div.filtering-div span.filter-menu-title {
+  width: 100%;
+  font-family: "Inter-Bold";
+  font-size: 1.75em;
+  border-radius: 0.5em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navbar-color-active);
+}
+div.tab-div div.filtering-div span.filter-menu-title .units {
+  font-family: "Inter-Medium";
+  font-size: 0.75em;
+  color: var(--navbar-color-inactive);
+}
 div.tab-div div.filtering-div div.header-filter-menu {
   display: flex;
   align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 div.tab-div div.filtering-div div.header-filter-menu button.exit-filter-menu {
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: 1.25em;
+  font-size: 1.5em;
   color: var(--navbar-color-inactive);
   cursor: pointer;
 }
 div.tab-div div.filtering-div div.header-filter-menu button.reset-button {
   display: flex;
   justify-content: center;
-  align-items: center;
   border-radius: 0.5em;
   border: none;
   outline: none;
   gap: 0.5em;
   background-color: var(--header-icons);
   color: var(--web-background-color-two);
-  height: 75%;
+  height: auto;
   padding: 0.5em;
-  font-size: 0.75em;
+  font-size: 1em;
+  cursor: pointer;
 }
 div.tab-div div.filtering-div .filter-table-output {
   max-height: 260px;
@@ -663,15 +962,187 @@ div.tab-div .tabs-dcc {
 
 div.content-page {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   background-color: var(--web-background-color);
   max-width: 100vw;
-  height: 100%;
-  min-height: 33em;
+  height: auto;
+  gap: 1.25em;
   border-radius: 0em 0em 1em 1em;
-  padding: 1em;
   transition: all 0.5s linear;
+}
+
+.background-drop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease; /* ✅ Smooth transition */
+}
+
+.background-drop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.background-drop.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--web-background-color-two);
+  width: 30em;
+  border-radius: 1em;
+  padding: 1em;
+  height: auto;
+  position: relative;
+  top: -30em;
+  z-index: 1002;
+  gap: 1em;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  box-shadow: 0em 0em 3em rgba(222, 222, 222, 0.25), 0em 0em 1em rgba(111, 111, 111, 0.1);
+}
+.upload-wrapper.show {
+  animation: show-upload-wrapper 0.75s ease forwards;
+  opacity: 1;
+}
+.upload-wrapper.hidden {
+  pointer-events: none;
+  overflow: hidden;
+  animation: hide-upload-wrapper 0.75s ease forwards;
+  opacity: 0;
+}
+@keyframes show-upload-wrapper {
+  0% {
+    top: -30em;
+  }
+  100% {
+    top: -15em;
+  }
+}
+@keyframes hide-upload-wrapper {
+  0% {
+    top: -15em;
+  }
+  100% {
+    top: -30em;
+  }
+}
+.upload-wrapper .header {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff;
+  animation: slideDown 0.4s ease-in-out;
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.upload-wrapper .body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.upload-wrapper .body .upload-wrapper,
+.upload-wrapper .body .school-year-dropdown-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.upload-wrapper .body .upload-wrapper .upload-subtext {
+  font-weight: 500;
+  min-width: 120px;
+}
+.upload-wrapper .body .upload-wrapper #upload-data {
+  flex-grow: 1;
+  transition: border 0.3s ease;
+}
+.upload-wrapper .body .upload-wrapper #upload-data:hover {
+  border-color: #007bff;
+}
+.upload-wrapper .body .school-year-dropdown-wrapper .school-year--dropdown-subtext {
+  font-weight: 500;
+  min-width: 120px;
+}
+.upload-wrapper .body .school-year-dropdown-wrapper .school-year-dropdown {
+  width: 300px;
+}
+.upload-wrapper .footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 1em;
+  animation: slideUp 0.4s ease-in-out;
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.upload-wrapper .footer #upload-button {
+  padding: 0.5em 1em 0.5em 1em;
+  background: linear-gradient(to left, #0055FF, #2F9EFF);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.upload-wrapper .footer #upload-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+.upload-wrapper .footer #upload-button:active {
+  transform: scale(0.97);
+}
+.upload-wrapper .footer #close-upload-wrapper {
+  padding: 0.5em 1em 0.5em 1em;
+  background: #c8d8ff;
+  color: linear-gradient(to left, #007bff, #0056d2);
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.upload-wrapper .footer #close-upload-wrapper:hover {
+  background-color: #bccbf6;
+  transform: translateY(-2px);
+}
+.upload-wrapper .footer #close-upload-wrapper:active {
+  transform: scale(0.97);
 }
 
 /*# sourceMappingURL=main_page_css.css.map */

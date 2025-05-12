@@ -1,10 +1,8 @@
 import pandas as pd
 import plotly.graph_objects as go
 from dash import html, dcc
-import dash_bootstrap_components as dbc
 
-def card_four(df, location, mode):
-
+def card_four(df, mode):
     # Load backup data if df is empty
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
@@ -32,8 +30,8 @@ def card_four(df, location, mode):
         value_col = 'total_school'
         title_suffix = "SCHOOLS"
 
-    # Handle "overall" mode
-    filtered_df = df.copy() if location == 'overall' else df[df[location].notna()]
+    # Remove the location filter logic, use the whole dataset directly
+    filtered_df = df.copy()
 
     # Group strictly by sector column and apply display mapping
     if 'sector' in filtered_df.columns:
@@ -59,10 +57,10 @@ def card_four(df, location, mode):
 
     # Define distinct colors for each sector
     color_map = {
-        'Public': '#fbcc84',
-        'Private': '#9575cd',
-        'SUCs / LUCs': '#4db6ac',
-        'PSO': '#447cab'
+        'Public': '#008eff',
+        'Private': '#21d7e4',
+        'SUCs / LUCs': '#ffc20b',
+        'PSO': '#ff4343'
     }
 
     # Prepare colors list for pie chart
@@ -76,140 +74,58 @@ def card_four(df, location, mode):
                 values=sector_data[value_col],
                 textinfo='none',
                 marker=dict(colors=pie_colors),
+                hole=.3
             )
         ]
     )
     pie_chart.update_layout(
-    margin=dict(t=5, b=20, l=20, r=20),
-    showlegend=False,
-    height=250,  # Increased height of the pie chart
-    width=250,   # Added width to ensure proportional scaling
-)
-
-    # Update the dcc.Graph container to allow the pie chart to expand
-    dcc.Graph(
-        figure=pie_chart,
-        config={'displayModeBar': False},
-        style={
-            'height': '300px',  # Match the height of the pie chart
-            'width': '300px',   # Match the width of the pie chart
-            'maxWidth': '100%', # Ensure responsiveness   
-        }
+        margin=dict(t=0, b=0, l=0, r=0),
+        showlegend=False,
+        autosize=True,
+        height=None
     )
 
     # Create legend items in the same order
     legend_items = []
-    total_value = sector_data[value_col].sum()
     for _, row in sector_data.iterrows():
         sector_label = row['sector_display']
         total = row[value_col]
-        percentage = (total / total_value) * 100
-        color = color_map.get(sector_label, '#7f7f7f')
+        color = color_map.get(sector_label)
 
         legend_items.append(
             html.Div([
-                html.Span(style={
-                    'width': '26px',
-                    'height': '13px',
-                    'backgroundColor': color,
-                    'borderRadius': '8px',
-                    'display': 'inline-block',
-                    'marginRight': '8px'
-                }),
-                html.Span(f"{percentage:.1f}%", style={
-                    'fontWeight': 'bold',
-                    'color': color,  # Updated to match legend color
-                    'fontSize': '18px',
-                    'marginRight': '5px'
-                }),
-                html.Span(sector_label.upper(), style={
-                    'fontWeight': 'bold',
-                    'color': color,  # Updated to match legend color
-                    'fontSize': '14px'
-                })
-            ], className='mb-2')
+                html.Span(
+                    className='legend-dot',
+                    style={'backgroundColor': color}
+                ),
+                html.Span(sector_label.upper(), className='legend-label')
+            ], className='legend-item')
         )
 
     # Create text lines showing total count per sector
     sector_lines = []
-    background_colors = ['#f9f9f9']  # Alternating background colors
     for i, row in enumerate(sector_data.iterrows()):
         _, row_data = row
         sector_label = row_data['sector_display']
         total = row_data[value_col]
-        background_color = background_colors[i % len(background_colors)]  # Alternate colors
 
         sector_lines.append(
             html.Div([
-                html.Span(sector_label, style={
-                    'fontSize': '15px',
-                    'fontWeight': 'bold',
-                    'color': '#0a1f44',
-                    'flex': '1',
-                    'textAlign': 'left'
-                }),
-                html.Span(f"{int(total):,}", style={
-                    'fontSize': '15px',
-                    'fontWeight': 'bold',
-                    'color': '#0a1f44',
-                    'flex': '1',
-                    'textAlign': 'right'
-                })
-            ], style={
-                'display': 'flex',
-                'justifyContent': 'space-between',
-                'alignItems': 'center',
-                'backgroundColor': background_color,
-                'padding': '10px',
-                'marginBottom': '5px',
-                'borderRadius': '8px'
-            })
+                html.Span(legend_items[i], className='sector-label'),
+                html.Span(f"{int(total):,}", className='sector-value')
+            ], className='sector-line')
         )
 
-    return dbc.Card(
-        dbc.CardBody([
-            html.Div(
-                "ENROLLMENT BY SECTOR",
-                className="text-uppercase text-muted small fw-bold mb-1",
-                style={
-                    'fontSize': '19px',
-                    'color': '#2a4d69',
-                    'marginBottom': '-20px'  # <--- THIS is valid
-                }
-            ),
-            html.H2(f"{sector_data[value_col].sum():,}", className="fw-bold", style={
-                'color': '#000000',
-                'fontSize': '40px',
-                'marginBottom': '20px'
-            }),
-            html.Div(sector_lines, style={'marginBottom': '20px'}),
-            html.Div([
-                html.Div(legend_items, style={'flex': '1', 'padding': '20px'}),
-                html.Div(dcc.Graph(
-                    figure=pie_chart,
-                    config={'displayModeBar': False},
-                    style={'height': '100%', 'width': '100%'}
-                ), style={
-                    'flex': '1',
-                    'display': 'flex',
-                    'alignItems': 'center',
-                    'justifyContent': 'center',
-                    'height': 'auto'
-                })
-            ], style={
-                'display': 'flex',
-                'alignItems': 'center',
-                'gap': '20px',
-                'flexWrap': 'wrap'
-            })
-        ], style={
-            'backgroundColor': 'white',
-            'padding': '20px',
-            'borderRadius': '12px'
-        }),
-        className="mb-4 shadow-sm rounded-4 p-3",
-        style={
-            'backgroundColor': '#adcbe3',
-            'padding': '10px'
-        }
-    )
+    return html.Div([
+        html.Div([html.Div(["Enrollment by Sector"], className="card-title-main")], className='card-header-wrapper'),
+        html.Div(dcc.Graph(
+            figure=pie_chart,
+            config={'displayModeBar': False, 'responsive': True},
+            className='pie-chart',
+            style={'width': '100%', 'height': '100%'}
+        ), className='graph-wrapper', style={'height': '400px', 'width': '100%'}),
+        html.Div(sector_lines, className='sector-lines-wrapper'),
+    ], className='card card-four')
+
+def card_four_register_callbacks(app):
+    return None

@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify, current_app
 import os
 import pandas as pd
 from main.data_engineer.backend.sql_models.models import db, UploadedFile
+from main.data_analyst_scientist.data_pipeline.cleaned_data import clean_data
 
 # Define the blueprint
 api_bp = Blueprint("api_bp", __name__)
@@ -38,6 +39,8 @@ def upload_file():
             uploaded = UploadedFile(filename=file.filename, file_size=file_size, columns=column_names)
             db.session.add(uploaded)
             db.session.commit()
+            clean_data()
+
         except Exception as e:
             db.session.rollback()  # Rollback if the database insertion fails
             current_app.logger.error(f"Database error: {str(e)}")  # Log the error for debugging

@@ -1,0 +1,94 @@
+.card-four {
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.card-four .card-header-wrapper {
+  margin-bottom: 0px;
+}
+.card-four .card-header-wrapper .card-title-main {
+  font-family: "Inter Bold", sans-serif;
+  font-size: 18px;
+  color: #2d3436;
+  letter-spacing: -0.2px;
+}
+.card-four .graph-wrapper {
+  flex: 1;
+  position: relative;
+  min-height: 200px;
+}
+.card-four .sector-lines-wrapper {
+  margin-top: 20px;
+}
+.card-four .sector-lines-wrapper .sector-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #dee5eb;
+}
+.card-four .sector-lines-wrapper .sector-line:last-child {
+  border-bottom: none;
+}
+.card-four .sector-lines-wrapper .sector-line .sector-label {
+  font-family: "Inter Medium", sans-serif;
+  font-size: 13px;
+  color: #616c7e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.card-four .sector-lines-wrapper .sector-line .sector-value {
+  font-family: "Inter Bold", sans-serif;
+  font-size: 13px;
+  color: #175382;
+}
+.card-four .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+}
+.card-four .legend-item .legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.card-four .legend-item .legend-dot.public {
+  background-color: #008eff;
+}
+.card-four .legend-item .legend-dot.private {
+  background-color: #21d7e4;
+}
+.card-four .legend-item .legend-dot.sucs-lucs {
+  background-color: #ffc20b;
+}
+.card-four .legend-item .legend-dot.pso {
+  background-color: #ff4343;
+}
+.card-four .legend-item .legend-label {
+  font-family: "Inter Medium", sans-serif;
+  font-size: 12px;
+  color: #636e72;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .card-four .sector-lines-wrapper .sector-line {
+    padding: 6px 0;
+  }
+  .card-four .sector-lines-wrapper .sector-line .sector-label,
+  .card-four .sector-lines-wrapper .sector-line .sector-value {
+    font-size: 13px;
+  }
+  .card-four .card-title-main {
+    font-size: 17px;
+  }
+}
+
+/*# sourceMappingURL=card_four.css.map */
