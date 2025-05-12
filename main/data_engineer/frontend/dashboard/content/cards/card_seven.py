@@ -49,21 +49,53 @@ def card_seven(df, mode, level):
     def create_area_chart(x_labels, male_data, female_data, title):
         fig = go.Figure()
 
+        for i in range(len(x_labels) - 1):
+            x_pair = [x_labels[i], x_labels[i+1], x_labels[i+1], x_labels[i]]
+            male_y = [male_data[i], male_data[i+1], female_data[i+1], female_data[i]]
+            female_y = [female_data[i], female_data[i+1], male_data[i+1], male_data[i]]
+
+            if male_data[i] > female_data[i]:
+                fig.add_trace(go.Scatter(
+                    x=x_pair,
+                    y=male_y,
+                    fill='toself',
+                    fillcolor='rgba(0, 0, 255, 0.2)',
+                    line=dict(color='rgba(0,0,0,0)'),
+                    hoverinfo="skip",
+                    showlegend=False
+                ))
+            elif female_data[i] > male_data[i]:
+                fig.add_trace(go.Scatter(
+                    x=x_pair,
+                    y=female_y,
+                    fill='toself',
+                    fillcolor='rgba(255, 20, 147, 0.2)',
+                    line=dict(color='rgba(0,0,0,0)'),
+                    hoverinfo="skip",
+                    showlegend=False
+                ))
+
         fig.add_trace(go.Scatter(
             x=x_labels, y=male_data, name='Male',
-            fill='tozeroy', mode='lines+markers',
-            line=dict(color='blue', shape='spline'),
-            marker=dict(size=6)
-        ))
-        fig.add_trace(go.Scatter(
-            x=x_labels, y=female_data, name='Female',
-            fill='tozeroy', mode='lines+markers',
-            line=dict(color='deeppink', shape='spline'),
+            mode='lines+markers',
+            line=dict(color='#008eff', shape='spline'),
             marker=dict(size=6)
         ))
 
+        fig.add_trace(go.Scatter(
+            x=x_labels, y=female_data, name='Female',
+            mode='lines+markers',
+            line=dict(color='#ff5c85', shape='spline'),
+            marker=dict(size=6)
+        ))
+
+        # Compute y-axis range
+        all_vals = [val for val in male_data + female_data if val > 0]
+        y_min = min(all_vals)
+        y_max = max(all_vals)
+        y_padding = (y_max - y_min) * 0.05 if y_max > y_min else 1
+
         fig.update_layout(
-            yaxis_type='log',
             height=250,
             margin=dict(l=0, r=0, t=0, b=0),
             plot_bgcolor='white',
@@ -77,8 +109,9 @@ def card_seven(df, mode, level):
             yaxis=dict(
                 showline=True,
                 linecolor='black',
-                tickvals=[1, 10, 100, 1000, 10000, 100000, 1000000],
-                ticktext=['1', '10', '100', '1k', '10k', '100k', '1M']
+                range=[y_min - y_padding, y_max + y_padding],
+                tickformat=',',
+                ticks='outside'
             ),
             legend=dict(
                 orientation="h",
@@ -89,6 +122,8 @@ def card_seven(df, mode, level):
         )
 
         return fig
+
+
 
     # Conditional rendering based on `level`
     graph_component = None
@@ -107,9 +142,22 @@ def card_seven(df, mode, level):
     else:
         graph_component = html.Div("Invalid level specified.", style={'color': 'red'})
 
+    # Dynamic title based on level
+    level_titles = {
+        'ES': 'Elementary Level',
+        'JHS': 'Junior High School',
+        'SHS-Academic': 'Senior High (Academic)',
+        'SHS-Non-Academic': 'Senior High (Non-Academic)'
+    }
+    main_title = level_titles.get(level, 'Unknown Level')
+
     return html.Div([
         html.Div([
-            html.Div("ENROLLMENT DISTRIBUTION", className='card-title-main'),
+            html.Div([
+                html.Div(main_title, className='card-title-main'),
+                html.Div("Enrollment Distribution", className='card-subtitle-small')
+            ])
         ], className='card-header-wrapper'),
         html.Div(graph_component, style={'flex': 1}),
     ], className="card card-seven")
+

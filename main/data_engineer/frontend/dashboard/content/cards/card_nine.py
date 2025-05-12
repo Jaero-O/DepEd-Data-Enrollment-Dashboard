@@ -144,25 +144,14 @@ def card_choropleth(df, mode='student', level='region'):
         )
     )
 
-    return dbc.Card(
-        dbc.CardBody([
-            html.Div(f"{card_choropleth_title}", style={
-                "fontWeight": "bold", "fontFamily": "Inter", "fontSize": "16px", "color": "#2a4d69"
-            }),
+    return html.Div([
+            html.Div([
+                html.Div(
+                    card_choropleth_title,  # or "Enrollment by Classification" if fixed title
+                    className='card-title-main',
+                ),
+            ], className='card-header-wrapper'),
             html.Div([
                 dcc.Graph(figure=fig, config={"displayModeBar": False}, style={"width": "100%", "height": "100%"})
-            ], style={
-                'marginTop': '0px', 'width': '100%', 'height': '95%',
-                'overflow': 'hidden', 'fontFamily': 'Inter'
-            }),
-        ]),
-        style={
-            'background': 'linear-gradient(135deg, #9EFFF7, #ffffff)',  # updated line
-            'borderRadius': '18px',
-            'boxShadow': '0 4px 8px rgba(0, 0, 0, 0.1)',
-            'fontFamily': 'Inter',
-            'padding': '5px',
-            'width': '500px',
-            'height': '700px'
-        }
-    )
+            ], className='card-nine-graph'),
+        ], className='card card-nine')

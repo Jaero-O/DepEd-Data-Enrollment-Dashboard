@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from dash import html, dcc
 
-def card_eight(current_year_df, previous_year_df):
+def card_eight(current_year_df, previous_year_df,current_sy, previous_sy):
     levels = {
         'Kindergarten': ['k_male', 'k_female'],
         'Grade 1': ['g1_male', 'g1_female'],
@@ -48,10 +48,8 @@ def card_eight(current_year_df, previous_year_df):
 
     fig = go.Figure()
 
-    # Add conditional lines based on increase or decrease
-    # Add conditional lines based on increase or decrease
     for i, level in enumerate(level_names):
-        color = 'green' if current_totals[i] > previous_totals[i] else 'red' if current_totals[i] < previous_totals[i] else 'gray'
+        color = '#2E8B57' if current_totals[i] > previous_totals[i] else '#B22222' if current_totals[i] < previous_totals[i] else '#808080'
         fig.add_trace(go.Scatter(
             x=[level, level],
             y=[previous_totals[i], current_totals[i]],
@@ -60,32 +58,44 @@ def card_eight(current_year_df, previous_year_df):
             showlegend=False
         ))
 
-    # Add previous year markers (red)
     fig.add_trace(go.Scatter(
         x=level_names,
         y=previous_totals,
         mode='markers',
         name='Previous Year',
-        marker=dict(color='red', size=10),
+        marker=dict(color='#084C53', size=8, symbol='circle'),
     ))
 
-    # Add current year markers (blue)
     fig.add_trace(go.Scatter(
         x=level_names,
         y=current_totals,
         mode='markers',
         name='Current Year',
-        marker=dict(color='blue', size=10),
+        marker=dict(color='#29C8E4', size=8, symbol='circle'),
     ))
 
-
     fig.update_layout(
-        margin=dict(l=0, r=0, t=0, b=0),
+        margin=dict(l=20, r=20, t=30, b=20),
         autosize=True,
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        font=dict(family='Segoe UI, sans-serif', size=12, color='#333'),
+        xaxis=dict(
+            tickangle=-50,
+            showgrid=False,
+            showline=True,
+            linewidth=1,
+            linecolor='#ccc'
+        ),
+        yaxis=dict(
+            showgrid=True,
+            gridcolor='#f0f0f0',
+            zeroline=False
+        ),
         legend=dict(
             orientation='h',
             yanchor='bottom',
-            y=1.05,
+            y=1,
             xanchor='right',
             x=1
         )
@@ -93,15 +103,17 @@ def card_eight(current_year_df, previous_year_df):
 
     return html.Div([
         html.Div([
-            html.Div(
-                f"Enrollment Comparison Per Level (Current vs Previous Year)".upper(),
-            className='card-title-main'),
-        ],className='card-header-wrapper'),
+            html.Div([
+                html.Div(f"S.Y. {current_sy} vs S.Y. {previous_sy}", className='card-title-main'),
+                html.Div("Enrollment Comparison", className='card-subtitle'),
+        ], className='card-header-wrapper'),
+
+        ], className='card-header-wrapper'),
         html.Div([
             dcc.Graph(
-                figure=fig, 
+                figure=fig,
                 config={'displayModeBar': False},
-                style={'width': '100%', 'height': '100%'}, 
+                style={'width': '100%', 'height': '100%', },
             ),
         ], className='card-eight-graph-wrapper'),
     ], className='card card-eight')

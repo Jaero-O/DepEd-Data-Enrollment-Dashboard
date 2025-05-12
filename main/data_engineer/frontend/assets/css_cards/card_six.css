@@ -7,8 +7,8 @@ div.card-six-outside-wrapper {
 }
 
 div.card-six-wrapper {
-  width: 30em;
-  height: 24em;
+  width: 32em;
+  height: 100%;
 }
 div.card-six-wrapper div.card-six {
   width: 100%;
@@ -20,16 +20,16 @@ div.card-six-wrapper div.card-six div.card-header-wrapper {
   align-items: flex-start; /* align to the left */
 }
 div.card-six-wrapper div.card-six div.card-header-wrapper div.card-title-main {
-  font-size: 1.2em; /* slightly larger */
+  font-size: 1.25em; /* slightly larger */
   color: #2a4d69;
   font-family: "Inter-Bold";
-  margin-bottom: 0.3em; /* space below title */
+  margin-bottom: 0.2em;
 }
 div.card-six-wrapper div.card-six div.card-header-wrapper div.card-subtitle {
   font-size: 0.9em; /* increase subtitle font size */
-  color: #2a4d69;
+  color: gray;
   font-family: "Inter-Bold";
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 div.card-six-wrapper div.card-six div.card-filter-wrapper {
   display: flex;

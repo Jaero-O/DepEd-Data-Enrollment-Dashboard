@@ -3,7 +3,6 @@ from dash import html, dash_table
 import dash_bootstrap_components as dbc
 from dash import dcc, Input, Output, callback
 
-
 # Column labels with proper capitalization and translation
 COLUMN_LABELS = {
     'school_name': 'School Name',
@@ -22,8 +21,8 @@ COLUMN_LABELS = {
     'g5_female': 'Grade 5 Female',
     'g6_male': 'Grade 6 Male',
     'g6_female': 'Grade 6 Female',
-    'elem_ng_male': 'Elementary Male',
-    'elem_ng_female': 'Elementary Female',
+    'elem_ng_male': 'Elementary NG Male',
+    'elem_ng_female': 'Elementary NG Female',
     'g7_male': 'Grade 7 Male',
     'g7_female': 'Grade 7 Female',
     'g8_male': 'Grade 8 Male',
@@ -32,8 +31,8 @@ COLUMN_LABELS = {
     'g9_female': 'Grade 9 Female',
     'g10_male': 'Grade 10 Male',
     'g10_female': 'Grade 10 Female',
-    'jhs_ng_male': 'Junior High Male',
-    'jhs_ng_female': 'Junior High Female',
+    'jhs_ng_male': 'Junior High NG Male',
+    'jhs_ng_female': 'Junior High NG Female',
     'g11_acad_-_abm_male': 'Grade 11 ABM Male',
     'g11_acad_-_abm_female': 'Grade 11 ABM Female',
     'g11_acad_-_humss_male': 'Grade 11 HUMSS Male',
@@ -84,6 +83,7 @@ def update_student_table(search_value):
     ]
     return filtered_df.to_dict("records")
 
+
 @callback(
     Output("school-data-table", "data"),
     Input("school-search-input", "value"),
@@ -98,97 +98,121 @@ def update_school_table(search_value):
     ]
     return filtered_df.to_dict("records")
 
-def card_tabular(df, mode):
-    global display_df
 
+def card_tabular(df, mode):
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
-        if mode not in ['student', 'school']:
-            raise ValueError("Mode must be either 'student' or 'school'")
+    if mode != 'student':
+        raise ValueError("This view is only for student-level data summarization")
 
-    student_columns = list(COLUMN_LABELS.keys())
-    school_columns = [
-        'school_name', 'beis_school_id', 'sector', 'school_subclassification', 'school_type',
-        'modified_coc'
-    ]
+    def summarize_level(level_cols, ng_cols, labels_map):
+        data = []
+        total = df[level_cols + ng_cols].sum().sum()
 
-    selected_columns = student_columns if mode == 'student' else school_columns
-    display_df = df.loc[:, selected_columns].copy()
-    display_df.reset_index(drop=True, inplace=True)
+        # Define the correct order of levels
+        correct_order = ['k', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 
+                        'g7', 'g8', 'g9', 'g10', 'g11', 'g12']
 
-    grouped_columns = []
+        # Build unique group list based on the correct order
+        groups = []
+        seen = set()
+        for grade in correct_order:
+            for col in level_cols:
+                if col.startswith(grade + '_'):
+                    base = col.rsplit('_', 1)[0]
+                    if base not in seen:
+                        seen.add(base)
+                        groups.append(base)
 
-    for col in display_df.columns:
-        label = COLUMN_LABELS.get(col, col.replace("_", " ").title())
-        if any(gender in label for gender in ["Male", "Female"]):
-            # Try to split at " Male" or " Female"
-            if "Male" in label:
-                group = label.split(" Male")[0]
-                grouped_columns.append({"name": [group, "Male"], "id": col})
-            elif "Female" in label:
-                group = label.split(" Female")[0]
-                grouped_columns.append({"name": [group, "Female"], "id": col})
-        else:
-            # For columns like 'School Name', 'BEIS School ID', etc.
-            grouped_columns.append({"name": ["", label], "id": col})
+        for group in groups:
+            male = f"{group}_male"
+            female = f"{group}_female"
+            if male in df and female in df:
+                subtotal = df[[male, female]].sum().sum()
+                percentage = (subtotal / total * 100) if total > 0 else 0
+                label = labels_map.get(male, group.replace('_', ' ').title()).rsplit(' ', 1)[0]
+                data.append({
+                    "Grade / Strand": label,
+                    "Total Enrollment": int(subtotal),
+                    "% of Total": f"{percentage:.2f}%"
+                })
+
+        # Add NG total
+        ng_total = df[ng_cols].sum().sum()
+        if ng_total > 0:
+            label = labels_map.get(ng_cols[0], "NG Group").rsplit(' ', 2)[0]
+            percentage = (ng_total / total * 100) if total > 0 else 0
+            data.append({
+                "Grade / Strand": f"{label} NG",
+                "Total Enrollment": int(ng_total),
+                "% of Total": f"{percentage:.2f}%"
+            })
+
+        return pd.DataFrame(data)
 
 
-    return html.Div([
-            # html.Div([html.Div(f"SCHOOL ENROLLMENT DATA", className='card-title-main')], className='card-header-wrapper'),
-            dcc.Input(
-                    id=f"{mode}-search-input",
-                    type="text",
-                    placeholder="Search by School Name or School ID...",
-                    className="search-input"
-                ),
-            html.Div(
-                [
-                    dash_table.DataTable(
-                        id=f"{mode}-data-table",
-                        data=display_df.to_dict("records"),
-                        columns=grouped_columns,  # use the grouped headers
-                        merge_duplicate_headers=True,  # enable nested headers
-                        page_size=4,
-                        page_action='native',
-                        style_table={
-                            'overflowX': 'auto',
-                            'overflowY': 'auto',
-                            'width': '100%',
-                        },
-                        style_header={
-                            'backgroundColor': '#d9f2ff',
-                            'fontWeight': 'bold',
-                            'textAlign': 'center',
-                            'color': '#2a4d69',
-                            'fontSize': '12px',
-                            'fontFamily': "Inter",
-                            'borderBottom': '1px solid #ccc',
-                        },
-                        style_cell={
-                            'textAlign': 'center',
-                            'padding': '4px',
-                            'minWidth': '60px',
-                            'maxWidth': '300px',
-                            'whiteSpace': 'normal',
-                            'fontFamily': "Inter-Medium",
-                            'fontSize': '10px',
-                            'color': '#4f4f4f',
-                            'backgroundColor': 'white',
-                            'border': 'none'  # Removes cell border (Y-axis lines)
-                        },
-                        style_data={
-                            'border': 'none'  # Removes border for data cells (horizontal lines)
-                        },
-                        style_data_conditional=[
-                            {
-                                'if': {'row_index': 'odd'},
-                                'backgroundColor': '#f9f9f9',
-                                'border': 'none'
-                            }
-                        ]
-                    )
+    def create_table(title, data):
+        return html.Div([
+            html.Div([html.Div(title, className='card-title-main')], className='card-header-wrapper'),
+            dash_table.DataTable(
+                data=data.to_dict("records"),
+                columns=[
+                    {"name": "Grade / Strand", "id": "Grade / Strand"},
+                    {"name": "Total Enrollment", "id": "Total Enrollment"},
+                    {"name": "% of Total", "id": "% of Total"}
                 ],
-                className="card-level-table-container"
+                style_table={'overflowX': 'auto', 'width': '100%'},
+                style_header={
+                    'backgroundColor': '#d9f2ff',
+                    'fontWeight': 'bold',
+                    'textAlign': 'center',
+                    'color': '#2a4d69',
+                    'fontSize': '12px',
+                    'fontFamily': "Inter",
+                    'borderBottom': '1px solid #ccc',
+                },
+                style_cell={
+                    'textAlign': 'center',
+                    'padding': '6px',
+                    'fontFamily': "Inter-Medium",
+                    'fontSize': '11px',
+                    'color': '#4f4f4f',
+                    'backgroundColor': 'white',
+                    'border': 'none'
+                },
+                style_data_conditional=[{
+                    'if': {'row_index': 'odd'},
+                    'backgroundColor': '#f9f9f9',
+                    'border': 'none'
+                }]
             )
-        ], className="card card-level-table"),
+        ], className="card card-level-table", style={"marginBottom": "30px"})
+
+    # Define columns
+    elementary_cols = [col for col in COLUMN_LABELS if col.startswith(('k_', 'g1_', 'g2_', 'g3_', 'g4_', 'g5_', 'g6_'))]
+    elementary_ng_cols = ['elem_ng_male', 'elem_ng_female']
+
+    jhs_cols = [col for col in COLUMN_LABELS if col.startswith(('g7_', 'g8_', 'g9_', 'g10_'))]
+    jhs_ng_cols = ['jhs_ng_male', 'jhs_ng_female']
+
+    g11_cols = [col for col in COLUMN_LABELS if col.startswith('g11_')]
+    g12_cols = [col for col in COLUMN_LABELS if col.startswith('g12_')]
+
+    # Generate summarized data
+    elementary_df = summarize_level(elementary_cols, elementary_ng_cols, COLUMN_LABELS)
+    jhs_df = summarize_level(jhs_cols, jhs_ng_cols, COLUMN_LABELS)
+    g11_df = summarize_level(g11_cols, [], COLUMN_LABELS)
+    g12_df = summarize_level(g12_cols, [], COLUMN_LABELS)
+
+    # Return tables
+    return html.Div([
+        create_table("Elementary Level Enrollment", elementary_df),
+        create_table("Junior High School Enrollment", jhs_df),
+        create_table("Grade 11 Senior High School Enrollment", g11_df),
+        create_table("Grade 12 Senior High School Enrollment", g12_df)
+    ], style={
+        "maxHeight": "360px",
+        "overflowY": "auto",
+        "paddingRight": "8px"
+    })

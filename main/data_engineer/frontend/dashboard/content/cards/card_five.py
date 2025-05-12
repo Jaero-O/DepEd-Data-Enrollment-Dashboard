@@ -43,8 +43,6 @@ def preserve_parentheses_title(text):
 
 
 def card_five(df, mode='student'):
-    print(preserve_parentheses_title("Mobile School(S)/center(S)"))
-
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 

@@ -1,0 +1,23 @@
+div.card-nine {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #9EFFF7, #ffffff);
+}
+div.card-nine div.card-header-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+div.card-nine div.card-header-wrapper div.card-title-main {
+  font-size: 1em;
+  font-family: "Inter-Bold";
+  color: #2a4d69;
+  margin-bottom: 0.3em;
+}
+div.card-nine div.card-nine-graph {
+  display: flex;
+  width: 100%;
+  height: 95%;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=card_nine.css.map */

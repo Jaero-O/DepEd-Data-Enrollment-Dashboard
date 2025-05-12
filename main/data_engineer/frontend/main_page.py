@@ -5,7 +5,9 @@ from dash import Input, Output, State, MATCH, ALL, ctx
 from pathlib import Path
 import os
 import hashlib
+from dash import DiskcacheManager
 
+from main.data_engineer.frontend.cache_file import cache
 
 # Import pages
 from main.data_engineer.frontend.dashboard.content_layout.content_layout import content_layout, content_layout_register_callbacks
@@ -26,12 +28,15 @@ from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import c
 from main.data_engineer.backend.main_server import app as server
 
 
+callback_manager = DiskcacheManager(cache)
+
 # Initialize the Dash app
 app = dash.Dash(
     __name__,
     server=server,
     external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME],
-    suppress_callback_exceptions=True
+    suppress_callback_exceptions=True,
+    background_callback_manager=callback_manager
 )
 
 # website favicon and title
@@ -143,7 +148,7 @@ navbar2 = html.Div([
 
 app_temporary_storage=[
     dcc.Store(id="theme-store", data="light"),
-    dcc.Store(id='selected-mode', storage_type='session', data='student'),
+    dcc.Store(id='selected-mode', data='student'),
     dcc.Store(id='stored-file'),
     dcc.Store(id='stored-year-range'),
     dcc.Store(id='current-files', storage_type='session'),
@@ -152,6 +157,8 @@ app_temporary_storage=[
     dcc.Store(id='aggregated-years-df'),
     dcc.Store(id='current-year-df'),
     dcc.Store(id='previous-year-df'),
+    dcc.Store(id='sy-labels', data=None),
+    dcc.Store(id='latest-tab-change-id', data=0)
 ]
 
 # Application Layout Initialization ------------------------------------------------------------------------------------------------
@@ -180,6 +187,10 @@ app.layout = html.Div([
     Input('selected-mode', 'data')
 )
 def render_tabs(mode):
+    ctx = dash.callback_context
+    if ctx.triggered:
+        prop_id = ctx.triggered[0]['prop_id']
+        print("render_tabs triggered by:", prop_id) 
     if mode == 'student':
         return dcc.Tabs(
             children=[
@@ -196,12 +207,12 @@ def render_tabs(mode):
         return dcc.Tabs(
             children=[
                 dcc.Tab(label='School-based', value='school-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
-                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected')
+                dcc.Tab(label='Geographic-based', value='geographic-based', className='enrollment-tab', selected_className='enrollment-tab--selected'),
+                dcc.Tab(label=None, value=None, style={'display':'None'}, className='enrollment-tab', selected_className='enrollment-tab--selected')
             ],
             id='tabs',
             value='school-based'
         ), "School Data"
-    return None
 
 # card_filter_register_callbacks(app)
 # card_six_register_callbacks(app)
@@ -272,6 +283,10 @@ def populate_school_year_dropdown(year_range, current_years):
     prevent_initial_call=True
 )
 def toggle_upload_modal(open_clicks, close_clicks, close_clicks2):
+    ctx = dash.callback_context
+    if ctx.triggered:
+        prop_id = ctx.triggered[0]['prop_id']
+        print("toggle_upload_modal triggered by:", prop_id) 
     if open_clicks is None:
         open_clicks = 0
     if close_clicks is None:
@@ -290,7 +305,8 @@ def toggle_upload_modal(open_clicks, close_clicks, close_clicks2):
      Output('current-years', 'data'),
      Output('folder-hash', 'data')],
     [Input('file-check', 'n_intervals'),
-     State('folder-hash', 'data')]  # Input to detect changes in folder
+     State('folder-hash', 'data')],
+    prevent_initial_callback=True  # Input to detect changes in folder
 )
 def update_file_list(n, last_folder_hash):
     folder_path = Path('enrollment_database')
@@ -303,6 +319,10 @@ def update_file_list(n, last_folder_hash):
     if current_hash == last_folder_hash:
         return dash.no_update  # No change, return no_update
     
+    ctx = dash.callback_context
+    if ctx.triggered:
+        prop_id = ctx.triggered[0]['prop_id']
+        print("update_file_list triggered by:", prop_id) 
     # If the folder contents have changed, process the filenames
     years = []
     for f in filenames:

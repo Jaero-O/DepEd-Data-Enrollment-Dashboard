@@ -1,0 +1,375 @@
+div.card-two{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    flex:1;
+    border-radius: 1em;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #FFF0DC, #FFFFFF);
+    border: none;
+    outline: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Inter';
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+        
+    .card-two:hover {
+            transform: translateY(-5px);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    div.header-wrapper{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        div.card-title-main {
+            font-size: 1em;
+            color: #C18D4E;
+            font-weight: 700;
+            margin-top: -10px;
+        }
+
+        div.card-title-sub {
+            font-size: 1em;
+            color: #175382;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: -10px;
+            margin-bottom: -10px;
+        }
+
+        div.total-count-level {
+            font-size: 3em;
+            color: #175382;
+            font-weight: 700;
+            margin-top: -10px;
+        }
+    }
+
+    div.header-legend-wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div.legend-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: start;
+            margin-top: 30px;
+
+            div.legend-all-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+
+                div.legend-item{
+                    display: flex;
+                    align-items: center;
+                    gap: 0.4rem;
+    
+                    span.legend-oblong {
+                        width: 33px;
+                        height: 12px;
+                        border-radius: 36px;
+                        display: inline-block;
+                        margin-right: 5px;
+    
+                        &.male {
+                            background-color: #0080FF;
+                        }
+    
+                        &.female {
+                            background-color: #FF5C85;
+                        }
+                    }
+        
+                    span.legend-label {
+                        text-transform: uppercase;
+                        font-weight: 600;
+                        font-size: 14px;
+    
+                        &.male {
+                            color: #175382;
+                        }
+    
+                        &.female {
+                            color: #175382;
+                        }
+                    }
+                }
+
+                span.legend-percentage {
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin-top: -5px;
+
+                    &.male {
+                        color: #0080FF;
+                    }
+
+                    &.female {
+                        color: #FF5C85;
+                    }
+                }
+
+                div.legend-line {
+                    width: 133px;
+                    height: 1px;
+                    background-color: #F2DCC0;
+                    margin-bottom: 8px;
+                }
+            }                    
+        }
+
+        div.bar-chart-container {
+            height: auto;
+            border-radius: 1.5rem;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+    }
+
+    div.header-legend-wrapper-donut {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        margin-top: -30px;
+
+
+        div.legend-wrapper-donut {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            gap: 0.1rem;
+            border: 1px solid #F2DCC0;
+            border-radius: 5px;
+            padding: 5px 10px 5px 15px;
+            width: 150px;
+            height: 140px;
+
+            div.legend-item-donut{
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+                margin-bottom: 4px;
+
+                span.legend-oblong-donut {
+                    width: 25px;
+                    border-radius: 36px;
+                    margin-right: 5px;
+
+                    &.elementary-purely-es { 
+                        background-color: #0063B3;
+                        height: 13px;
+                    }
+                    &.elementary-es--jhs { 
+                        background-color: #008EFF;
+                        height: 7px; 
+                    }
+
+                    &.elementary-all-offering { 
+                        background-color: #59B6FF;
+                        height: 7px; 
+                    }
+
+                    &.junior_high-purely-jhs { 
+                        background-color: #8C393F; 
+                        height: 13px;
+                    }
+
+                    &.junior_high-es--jhs {
+                        background-color: #BF4E56;
+                        height: 7px; 
+                    }
+
+                    &.junior_high-jhs--shs { 
+                        background-color: #FF6873; 
+                        height: 7px;
+                    }
+
+                    &.junior_high-all-offering { 
+                        background-color: #FF959D;
+                        height: 7px; 
+                    }
+
+                    &.senior_high-purely-shs { 
+                        background-color: #CC7E00; 
+                        height: 13px;
+                    }
+
+                    &.senior_high-jhs--shs { 
+                        background-color: #FF9D00; 
+                        height: 7px;
+                    }
+
+                    &.senior_high-all-offering { 
+                        background-color: #FFD38C;
+                        height: 7px; 
+                    }
+                }
+
+                div.percent-label {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    line-height: 1;
+                    
+                    span.legend-percentage-donut {
+                        font-weight: 700;
+
+                        &.elementary-purely-es { 
+                            color: #0063B3; 
+                            font-size: 26px;
+                        }
+                        &.elementary-es--jhs { 
+                            color: #008EFF; 
+                            font-size: 16px; 
+                        }
+    
+                        &.elementary-all-offering { 
+                            color: #59B6FF; 
+                            font-size: 16px;
+                        }
+    
+                        &.junior_high-purely-jhs { 
+                            color: #8C393F; 
+                            font-size: 26px;
+                        }
+    
+                        &.junior_high-es--jhs {
+                            color: #BF4E56; 
+                            font-size: 16px;  
+                        }
+    
+                        &.junior_high-jhs--shs { 
+                            color: #FF6873; 
+                            font-size: 16px;
+                        }
+    
+                        &.junior_high-all-offering { 
+                            color: #FF959D;
+                            font-size: 16px;
+                        }
+    
+                        &.senior_high-purely-shs { 
+                            color: #CC7E00; 
+                            font-size: 26px;
+                        }
+    
+                        &.senior_high-jhs--shs { 
+                            color: #FF9D00; 
+                            font-size: 16px;
+                        }
+    
+                        &.senior_high-all-offering { 
+                            color: #FFD38C;
+                            font-size: 16px;
+                        }
+                    }
+
+                    span.legend-label-donut {
+                        text-transform: uppercase;
+                        font-weight: 600;
+    
+                        &.elementary-purely-es { 
+                            color: #0063B3; 
+                            font-size: 12px;
+                        }
+                        &.elementary-es--jhs { 
+                            color: #008EFF; 
+                            font-size: 8px;
+                        }
+    
+                        &.elementary-all-offering { 
+                            color: #59B6FF; 
+                            font-size: 8px;
+                        }
+    
+                        &.junior_high-purely-jhs { 
+                            color: #8C393F; 
+                            font-size: 12px;
+                        }
+    
+                        &.junior_high-es--jhs {
+                            color: #BF4E56; 
+                            font-size: 8px;
+                        }
+    
+                        &.junior_high-jhs--shs { 
+                            color: #FF6873; 
+                            font-size: 8px;
+                        }
+    
+                        &.junior_high-all-offering { 
+                            color: #FF959D;
+                            font-size: 8px;
+                        }
+    
+                        &.senior_high-purely-shs { 
+                            color: #CC7E00; 
+                            font-size: 12px;
+                        }
+    
+                        &.senior_high-jhs--shs { 
+                            color: #FF9D00; 
+                            font-size: 8px;
+                        }
+    
+                        &.senior_high-all-offering { 
+                            color: #FFD38C;
+                            font-size: 8px;
+                        }
+                    }
+                }                  
+            }                               
+        }
+
+        div.card-two-donut-chart-container {
+            display: flex;
+            align-items: flex-end;
+            height: auto;
+            width: auto;
+            flex-shrink: 0;
+            margin-left: 20px;
+            margin-bottom: -25px;
+        }
+    }
+
+    div.header-wrapper-donut{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100%;
+
+        div.card-title-main-donut {
+            font-size: 16px;
+            color: #C18D4E;
+            font-weight: 700;
+            margin-top: -1px;
+            text-align: right;
+            line-height: 1.2;
+            margin-left: auto;
+        }
+
+        div.card-title-sub-donut {
+            font-size: 16px;
+            color: #175382;
+            font-weight: 700;
+            font-style: italic;
+            margin-top: -14px;
+        }
+
+        div.total-count-level-donut {
+            font-size: 48px;
+            color: #175382;
+            font-weight: 700;
+            margin-top: -18px;
+            flex-grow: 1;
+        }
+    }
+}
+

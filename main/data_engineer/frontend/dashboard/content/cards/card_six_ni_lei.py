@@ -56,9 +56,10 @@ def get_total_by_mode(df, mode):
 
 def generate_card_six_figure(df, group_col, order):
     grouped = df.groupby(group_col)['value'].sum().reset_index()
-    grouped = grouped.sort_values(by='value', ascending=(order == 'asc')).head(5)
+    
+    # 🔽 Change from Top 5 to Top 10 here
+    grouped = grouped.sort_values(by='value', ascending=(order == 'asc')).head(10)
 
-    # Truncate long labels but keep full label for hover
     MAX_LABEL_LENGTH = 30
     grouped['short_label'] = grouped[group_col].apply(
         lambda x: x if len(x) <= MAX_LABEL_LENGTH else x[:MAX_LABEL_LENGTH] + '...'
@@ -66,15 +67,18 @@ def generate_card_six_figure(df, group_col, order):
     grouped['hover_label'] = grouped[group_col]
 
     max_value = grouped['value'].max()
+
+    # 🔽 Update color list to handle 10 bars instead of 5
     colors = (
-    ['#3DE3F9', '#29C8E4', '#24B6D4', '#1CA0BC', '#168797']  # for 'desc'
-    if order == 'desc' 
-    else ['#B56900', '#D38200', '#F29C00', '#FFB600', '#FFC857']  # for 'asc'
-)
+        ['#3DE3F9', '#29C8E4', '#24B6D4', '#1CA0BC', '#168797',
+        '#11737B', '#0C5F67', '#084C53', '#063C42', '#042D32']
+        if order == 'desc'
+        else ['#994C00', '#B85C00', '#D66B00', '#F27A00', '#FF8C1A',
+            '#FFA245', '#FFB866', '#FFCD80', '#FFD999', '#FFE5B3']
+    )
 
     fig = go.Figure()
 
-    # Gray background bars (max value bar)
     fig.add_trace(go.Bar(
         x=[max_value] * len(grouped),
         y=grouped['short_label'],
@@ -84,12 +88,11 @@ def generate_card_six_figure(df, group_col, order):
         showlegend=False
     ))
 
-    # Foreground gradient-colored bars
     fig.add_trace(go.Bar(
         x=grouped['value'],
         y=grouped['short_label'],
         orientation='h',
-        marker=dict(color=colors),
+        marker=dict(color=colors[:len(grouped)]),  # Just in case <10
         hovertext=grouped['hover_label'],
         hoverinfo='text+x',
         showlegend=False
@@ -101,7 +104,9 @@ def generate_card_six_figure(df, group_col, order):
         plot_bgcolor='white',
         paper_bgcolor='white',
         barmode='overlay',
+        bargap=0.3  # Small gap to reduce space between bars but keep them visible
     )
+    fig.update_traces(marker=dict(line=dict(width=0.2, color='white')))
     fig.update_yaxes(autorange="reversed", ticksuffix='  ', tickfont=dict(size=11))
 
     return fig
@@ -115,11 +120,11 @@ def card_six(df, location, mode, hierarchy_order):
 
     return html.Div([
         html.Div([
-            html.Div(f"Enrollment by {group_col.upper()}", className='card-title-main'),
             html.Div(
-                "Top 5 Highest Enrollment" if hierarchy_order == 'desc' else "Top 5 Lowest Enrollment",
-                className='card-subtitle'
-            )
+                f"Top 10 Highest Enrollment" if hierarchy_order == 'desc' else f"Top 10 Lowest Enrollment",
+                className='card-title-main'
+            ),
+            html.Div(f"by {group_col.replace("_", " ").capitalize()}", className='card-subtitle'),
         ], className='card-header-wrapper'),
         # html.Div([
         #     html.Div([filter1_dropdown], className="filter-wrapper")

@@ -13,7 +13,8 @@ from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import c
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
 from main.data_engineer.frontend.dashboard.content.cards.card_table_school import card_tabular
 from main.data_engineer.frontend.dashboard.content.cards.card_table_geography import card_regional_table
-
+from main.data_engineer.frontend.dashboard.content.cards.card_nine import card_choropleth
+from main.data_engineer.frontend.dashboard.content.cards.card_ten import card_ten
 from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
 
 
@@ -87,7 +88,6 @@ def convert_filter_to_df(filter_dict, df):
     }
 
     df.rename(columns=column_rename_map, inplace=True)
-    print(df.columns)
 
     if filter_dict is None:
         final_df = df.drop_duplicates(subset='BEIS School ID')
@@ -164,8 +164,15 @@ def dashboardContent(final_df, location, mode, order):
         # add here your cards after importing  
     ]
 
-def dashboard_content(final_df, previous_year_df, location, mode, tab):
+def dashboard_content(final_df, previous_year_df, location, mode, tab, current_sy, previous_sy):
     # return None
+    print("=== dashboard_content inputs ===")
+    print("Location:", location)
+    print("Mode:", mode)
+    print("Tab:", tab)
+    print("Current SY:", current_sy)
+    print("Previous SY:", previous_sy)
+    print("================================")
     if tab == 'school-based':
         return[
             html.Div([
@@ -186,10 +193,10 @@ def dashboard_content(final_df, previous_year_df, location, mode, tab):
             html.Div([
                 html.Div([
                     html.Div([
-                        *card_tabular(final_df, mode)
+                        card_tabular(final_df, mode)
                     ], className='card-level-table-wrapper'),
                     html.Div([
-                        card_eight(final_df, previous_year_df)
+                        card_eight(final_df, previous_year_df,current_sy, previous_sy),
                     ], className='card-eight-wrapper'),
                 ], className='card-eight-card-table-wrapper'),
                 html.Div([
@@ -210,14 +217,14 @@ def dashboard_content(final_df, previous_year_df, location, mode, tab):
         return [
             html.Div([
                 html.Div([
-                    html.Div(card_six(final_df,location,mode,'desc'), className='card-six-wrapper'),
-                    html.Div(card_six(final_df,location,mode,'asc'), className='card-six-wrapper'),
-                ], className='card-six-outside-wrapper'),
-                html.Div([
-                    # card_regional_table(final_df, mode),
-                    # card_tabular(final_df, mode)
-                ], className='card-three-four-five-wrapper')
-            ], className='card-one-two-three-five-wrapper'),
+                    card_ten(final_df, mode),
+                    html.Div([
+                        html.Div(card_six(final_df,location,mode,'desc'), className='card-six-wrapper'),
+                        html.Div(card_six(final_df,location,mode,'asc'), className='card-six-wrapper'),
+                    ], className='card-six-outside-wrapper')
+                ], className='card-six-ten-wrapper'),
+                html.Div(card_choropleth(final_df,mode, location), className='card-nine-wrapper')
+            ], className='geographic-based-wrapper'),
         ]
 
 

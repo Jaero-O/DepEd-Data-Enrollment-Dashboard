@@ -172,7 +172,6 @@ div.card-four-wrapper div.card-four div.card-header-wrapper div.card-title-main 
   font-size: 1em;
   color: #2a4d69;
   font-family: "Inter-Bold";
-  margin-bottom: 1em;
 }
 div.card-four-wrapper div.card-four div.sector-lines-wrapper {
   margin-top: 1em;
@@ -257,7 +256,6 @@ div.card-six-wrapper div.card-six div.card-header-wrapper div.card-title-main {
   font-size: 1em;
   color: #2a4d69;
   font-family: "Inter-Bold";
-  margin-bottom: 1em;
 }
 div.card-six-wrapper div.card-six div.card-header-wrapper div.filter-row {
   display: flex;
@@ -292,7 +290,6 @@ div.card-seven-wrapper div.card-seven div.card-header-wrapper div.card-title-mai
   font-size: 1em;
   color: #2a4d69;
   font-family: "Inter-Bold";
-  margin-bottom: 1em;
 }
 div.card-seven-wrapper div.card-seven div.card-seven-graph {
   width: auto;
