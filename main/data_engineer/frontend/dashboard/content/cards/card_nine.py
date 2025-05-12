@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 import plotly.express as px
+import numpy as np
 import dash_bootstrap_components as dbc
 from dash import dcc, html, Dash
 from geojson_rewind import rewind
@@ -11,7 +12,7 @@ def card_choropleth(df, mode='student', level='region'):
     if df is None or df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
-    if level == 'region':
+    if (level == 'region') or (level == 'division') or (level == 'district') or (level == 'legislative_district'):
         geojson_path = r"main\data_engineer\frontend\assets\geojson\ph.json"
         with open(geojson_path, "r", encoding="utf-8") as f:
             geojson_data = json.load(f)
@@ -41,7 +42,7 @@ def card_choropleth(df, mode='student', level='region'):
             df_count["geo_name"] = df_count["region"].map(region_mapping)
             card_choropleth_title = 'Enrollment by Region'
 
-    elif level == 'province':
+    elif (level == 'province') or (level == 'municipality') or (level == 'barangay'):
         geojson_path = r"main\data_engineer\frontend\assets\geojson\combined-provincial-districts-updated.geojson"
         with open(geojson_path, "r", encoding="utf-8") as f:
             geojson_data = json.load(f)
@@ -132,6 +133,17 @@ def card_choropleth(df, mode='student', level='region'):
         lataxis=dict(range=[4, 21]),
         bgcolor='rgba(0,0,0,0)'
     )
+    tick_vals = np.linspace(df_count['total'].min(), df_count['total'].max(), num=2)
+
+    def format_label(val):
+        if val >= 1_000_000:
+            return f"{val / 1_000_000:.1f}M"
+        elif val >= 1_000:
+            return f"{val / 1_000:.0f}K"
+        else:
+            return str(int(val))
+
+    tick_texts = [format_label(val) for val in tick_vals]
 
     fig.update_layout(
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
@@ -140,14 +152,50 @@ def card_choropleth(df, mode='student', level='region'):
         font=dict(family="Inter", size=12, color="black"),
         coloraxis_colorbar=dict(
             orientation='h', yanchor='bottom', y=-0.1, xanchor='center',
-            title=None, tickvals=[], x=0.5, len=0.70, thickness=18
+            title=None, tickvals=[], ticktext=[],
+            x=0.5, len=0.70, thickness=18
         )
+    )
+
+    min_val = df_count['total'].min()
+    max_val = df_count['total'].max()
+
+    # Format tick labels
+    def format_label(val):
+        if val >= 1_000_000:
+            return f"{val / 1_000_000:.1f}M"
+        elif val >= 1_000:
+            return f"{val / 1_000:.0f}K"
+        else:
+            return str(int(val))
+
+    tick_left = format_label(min_val)
+    tick_right = format_label(max_val)
+
+    fig.add_annotation(
+        text=tick_left,
+        x=0.5 - (0.35 + 0.02 * len(tick_left)),
+        y=-0.08,
+        showarrow=False,
+        xref="paper",
+        yref="paper",
+        font=dict(size=12, color="black"),
+    )
+
+    fig.add_annotation(
+        text=tick_right,
+        x=0.5 + (0.35 + 0.02 * len(tick_right)),
+        y=-0.08,
+        showarrow=False,
+        xref="paper",
+        yref="paper",
+        font=dict(size=12, color="black"),
     )
 
     return html.Div([
             html.Div([
                 html.Div(
-                    card_choropleth_title,  # or "Enrollment by Classification" if fixed title
+                    'National Snapshot',
                     className='card-title-main',
                 ),
             ], className='card-header-wrapper'),
