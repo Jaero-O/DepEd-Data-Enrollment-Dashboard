@@ -7,8 +7,15 @@ from main.data_engineer.frontend.dashboard.content.content import dashboard_cont
 from main.data_engineer.frontend.dashboard.content.cards.card_six_ni_lei import filter_location_dropdown
 from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
 from main.data_engineer.frontend.cache_file import cache
+import sqlite3
 
-data = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
+
+conn = sqlite3.connect(db_path)
+
+data = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+
+conn.close()
 
 column_rename_map = {
     'region': 'Region',
@@ -323,23 +330,28 @@ def content_layout_register_callbacks(app):
         prevent_initial_call=True,
         background=True,
     )
+
     def aggregated_years(year_range, current_years):
-        # ctx = dash.callback_context
-        # if ctx.triggered:
-        #     prop_id = ctx.triggered[0]['prop_id']
-        #     print("aggregated_years triggered by:", prop_id) 
+        ctx = dash.callback_context
+        if ctx.triggered:
+            prop_id = ctx.triggered[0]['prop_id']
+            print("aggregated_years triggered by:", prop_id) 
 
-        # # Optimization: cache previous value
-        # if hasattr(aggregated_years, '_prev_range'):
-        #     if aggregated_years._prev_range == year_range:
-        #         raise dash.exceptions.PreventUpdate
+        # Optimization: cache previous value
+        if hasattr(aggregated_years, '_prev_range'):
+            if aggregated_years._prev_range == year_range:
+                print("Skipping update, year range has not changed.")
+                raise dash.exceptions.PreventUpdate  # Prevent update if the range hasn't changed
 
-        # aggregated_years._prev_range = year_range
+        aggregated_years._prev_range = year_range
 
-        # filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
-        # aggregated_df = aggregateDataset(filtered_years).to_dict('records')
-        # return aggregated_df
-        return None
+        filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
+        aggregated_df = aggregateDataset(filtered_years).to_dict('records')
+
+        # Optionally, store the aggregated data in cache for further use
+        cache.set('aggregated_years_data', aggregated_df)
+
+        return aggregated_df
     
     import uuid  # For generating unique keys
 
@@ -366,19 +378,19 @@ def content_layout_register_callbacks(app):
             previous_year = filtered_years[selected_index - 1] if selected_index > 0 else selected_year_int
         except (ValueError, IndexError):
             previous_year = selected_year
+        
+        conn = sqlite3.connect(db_path)
 
         if selected_year == 'All School Years':
             # cache the big aggregated df
             agg_key = str(uuid.uuid4())
             cache.set(agg_key, aggregated_years_df)
             return agg_key, agg_key, None
-        else:
-            current_csv_path = f'enrollment_csv_file/cleaned_separate_datasets/{selected_year}.csv'
-            current_df = pd.read_csv(current_csv_path)
+        else:            
+            current_df = pd.read_sql_query(f"SELECT * FROM `{selected_year}`", conn)
 
             try:
-                prev_csv_path = f'enrollment_csv_file/cleaned_separate_datasets/{previous_year}.csv'
-                prev_df = pd.read_csv(prev_csv_path)
+                prev_df = pd.read_sql_query(f"SELECT * FROM `{previous_year}`", conn)
             except FileNotFoundError:
                 prev_df = current_df.copy()
 
@@ -415,6 +427,7 @@ def content_layout_register_callbacks(app):
     )
     def update_tab_content(filter_dict, location, mode, tab, current_year_df_key, previous_year_df_key, sy_labels, latest_tab_change_id):
         # # Check if the DataFrames are empty
+        
         ctx = dash.callback_context
         if ctx.triggered:
             prop_id = ctx.triggered[0]['prop_id']

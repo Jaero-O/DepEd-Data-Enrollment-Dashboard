@@ -1,5 +1,6 @@
 import plotly.graph_objects as go
 from dash import html, dcc
+import sqlite3
 
 def card_seven(df, mode, level):
     # Labels

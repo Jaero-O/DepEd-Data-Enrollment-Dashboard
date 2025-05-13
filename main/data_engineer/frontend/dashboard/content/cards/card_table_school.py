@@ -2,6 +2,7 @@ import pandas as pd
 from dash import html, dash_table
 import dash_bootstrap_components as dbc
 from dash import dcc, Input, Output, callback
+import sqlite3
 
 # Column labels with proper capitalization and translation
 COLUMN_LABELS = {
@@ -101,7 +102,13 @@ def update_school_table(search_value):
 
 def card_tabular(df, mode):
     if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+        db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
+
+        conn = sqlite3.connect(db_path)
+
+        df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+
+        conn.close()
 
     if mode != 'student':
         raise ValueError("This view is only for student-level data summarization")

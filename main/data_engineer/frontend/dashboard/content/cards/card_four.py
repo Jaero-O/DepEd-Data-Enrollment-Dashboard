@@ -1,11 +1,18 @@
 import pandas as pd
 import plotly.graph_objects as go
 from dash import html, dcc
+import sqlite3
 
 def card_four(df, mode):
     # Load backup data if df is empty
     if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+        db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
+
+        conn = sqlite3.connect(db_path)
+
+        df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+
+        conn.close()
 
     # Validate mode input
     if mode not in ['student', 'school']:

@@ -1,99 +1,93 @@
+import os
+import shutil
+import pandas as pd
+import sqlite3
+import hashlib
 
-def clean_data(base_dir = 'enrollment_database'):
-    import pandas as pd
-    import os
-    import shutil
+def dataframe_hash(df: pd.DataFrame) -> str:
+    """Returns a hash string of a DataFrame's contents."""
+    return hashlib.sha256(
+        pd.util.hash_pandas_object(df.sort_index(axis=1).reset_index(drop=True), index=False).values
+    ).hexdigest()
 
-    def clean_dataset(csv_path):
-        filename_no_ext = os.path.splitext(os.path.basename(csv_path))[0]
-        print(f"Processing file: {csv_path}")
-        
-        df = pd.read_csv(csv_path, skiprows=4, dtype={'BEIS School ID': 'object'})
+def table_exists_and_equal(conn, table_name, new_df):
+    try:
+        old_df = pd.read_sql_query(f"SELECT * FROM `{table_name}`", conn)
+        return dataframe_hash(old_df) == dataframe_hash(new_df)
+    except Exception:
+        return False
 
-        df = df.dropna(how='all')
-        df = df.dropna(axis=1, how='all')
-
+def clean_data(base_dir='enrollment_database'):
+    def preprocess_file(file_path):
+        df = pd.read_csv(file_path, skiprows=4, dtype={'BEIS School ID': 'object'})
+        df = df.dropna(how='all').dropna(axis=1, how='all')
         df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
-
         df = df.map(lambda x: x.strip() if isinstance(x, str) else x)
 
         if "beis_school" in df.columns:
             df = df.drop(columns=["beis_school"])
 
         df.loc[df['region'] == 'PSO', ['province', 'municipality', 'legislative_district', 'barangay']] = 'Others'
-
         df = df.drop_duplicates()
 
-        if 'beis_school_id' in df.columns:
-            valid_format = df['beis_school_id'].str.match(r'^\d{6}$')
-            print(f"Valid BEIS School IDs: {valid_format.sum()}")
-            print(f"Invalid BEIS School IDs: {(~valid_format).sum()}")
-        else:
-            print("Column 'beis_school_id' not found after cleaning.")
+        filename_no_ext = os.path.splitext(os.path.basename(file_path))[0]
+        if filename_no_ext.isdigit():
+            df['school_year'] = int(filename_no_ext)
 
+        return filename_no_ext, df
 
-        cleaned_dir = "enrollment_csv_file\\cleaned_separate_datasets"
-        data_type_dir = os.path.join(cleaned_dir, "data_types")
-        os.makedirs(cleaned_dir, exist_ok=True)
-        os.makedirs(data_type_dir, exist_ok=True)
-
-        df.dtypes.to_csv(os.path.join(data_type_dir, f"{filename_no_ext}_data_types.csv"))
-        df.to_csv(os.path.join(cleaned_dir, f"{filename_no_ext}.csv"), index=False)
-
-        print(f"Cleaned columns: {df.columns.tolist()}")
-
+    shared_db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
     unconverted_dir = os.path.join(base_dir, 'unconverted_xlsx_files')
     os.makedirs(unconverted_dir, exist_ok=True)
 
     files = [f for f in os.listdir(base_dir) if os.path.isfile(os.path.join(base_dir, f))]
+    cleaned_datasets = []
 
-    expected_csvs = set()
-
+    # Step 1: Identify and convert files
     for file_name in files:
         file_path = os.path.join(base_dir, file_name)
 
         if not file_name.endswith(('.csv', '.xlsx')):
             continue
 
-        base_name = ''.join(os.path.basename(file_name).strip().split())[:-5]
-        csv_name = f"{base_name}.csv"
-        csv_path = os.path.join(base_dir, csv_name)
-
-        counter = 1
-        while os.path.exists(csv_path):
-            csv_name = f"{base_name}_{counter}.csv"
-            csv_path = os.path.join(base_dir, csv_name)
-            counter += 1
-
         if file_name.endswith('.xlsx'):
-            temp = pd.read_excel(file_path)
-            temp.to_csv(csv_path, index=None, header=True)
+            base_name = ''.join(os.path.basename(file_name).strip().split())[:-5]
+            csv_name = f"{base_name}.csv"
+            csv_path = os.path.join(base_dir, csv_name)
+            counter = 1
+            while os.path.exists(csv_path):
+                csv_name = f"{base_name}_{counter}.csv"
+                csv_path = os.path.join(base_dir, csv_name)
+                counter += 1
+            pd.read_excel(file_path).to_csv(csv_path, index=None, header=True)
             shutil.move(file_path, os.path.join(unconverted_dir, os.path.basename(file_name)))
         else:
             csv_path = file_path
 
-        print("Using file:", csv_path)
-        clean_dataset(csv_path)
+        cleaned_datasets.append(csv_path)
 
-        cleaned_name = os.path.splitext(os.path.basename(csv_path))[0] + ".csv"
-        expected_csvs.add(cleaned_name)
+    # Step 2: Check if everything already exists and is equal
+    all_tables_unchanged = True
+    with sqlite3.connect(shared_db_path) as conn:
+        for csv_path in cleaned_datasets:
+            table_name, cleaned_df = preprocess_file(csv_path)
+            if not table_exists_and_equal(conn, table_name, cleaned_df):
+                all_tables_unchanged = False
+                break
 
-    cleaned_dir = 'enrollment_csv_file\\cleaned_separate_datasets'
-    data_type_dir = os.path.join(cleaned_dir, 'data_types')
-    cleaned_csvs = set(f for f in os.listdir(cleaned_dir) if f.endswith('.csv'))
+    if all_tables_unchanged:
+        print("All cleaned tables already exist and are unchanged. Skipping processing.")
+        return None
 
-    for csv_file in cleaned_csvs:
-        if csv_file not in expected_csvs:
-            file_path = os.path.join(cleaned_dir, csv_file)
-            print(f"Deleting outdated file: {file_path}")
-            os.remove(file_path)
-
-            data_type_file = os.path.join(data_type_dir, csv_file.replace('.csv', '_data_types.csv'))
-            if os.path.exists(data_type_file):
-                print(f"Deleting associated data type file: {data_type_file}")
-                os.remove(data_type_file)
-
-    testing = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
-    print(testing[testing['region'] == 'Region I'].count())
+    # Step 3: Save updated versions
+    print("⚙️ Some cleaned tables have changed. Reprocessing...")
+    with sqlite3.connect(shared_db_path) as conn:
+        for csv_path in cleaned_datasets:
+            table_name, cleaned_df = preprocess_file(csv_path)
+            if table_exists_and_equal(conn, table_name, cleaned_df):
+                print(f"Skipped saving table '{table_name}' (no changes)")
+            else:
+                cleaned_df.to_sql(table_name, conn, if_exists='replace', index=False)
+                print(f"Saved table '{table_name}' to {shared_db_path}")
 
     return None

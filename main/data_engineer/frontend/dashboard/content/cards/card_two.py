@@ -1,11 +1,17 @@
 import pandas as pd
 from dash import html, dcc
 import plotly.graph_objs as go
+import sqlite3
 
 def card_two(df, mode):
     if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
-        
+        db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
+
+        conn = sqlite3.connect(db_path)
+
+        df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+
+        conn.close()
 
     def compute_totals(df, level):
         grade_groups = {

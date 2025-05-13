@@ -5,12 +5,43 @@ import numpy as np
 import dash_bootstrap_components as dbc
 from dash import dcc, html, Dash
 from geojson_rewind import rewind
+from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
 
-df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+import sqlite3
+import os
+
+from pandas.errors import DatabaseError
+
+db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
+
+# Create the DB file if it doesn't exist
+if not os.path.exists(db_path):
+    print(f"{db_path} not found. Generating it using aggregateDataset()...")
+    aggregateDataset()
+
+try:
+    conn = sqlite3.connect(db_path)
+    df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+    conn.close()
+except DatabaseError as e:
+    if "no such table: aggregated_enrollment" in str(e):
+        print("Table 'aggregated_enrollment' not found. Regenerating it using aggregateDataset()...")
+        aggregateDataset()
+        conn = sqlite3.connect(db_path)
+        df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+        conn.close()
+    else:
+        raise
 
 def card_choropleth(df, mode='student', level='region'):
     if df is None or df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+        db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
+
+        conn = sqlite3.connect(db_path)
+
+        df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+
+        conn.close()
 
     if (level == 'region') or (level == 'division') or (level == 'district') or (level == 'legislative_district'):
         geojson_path = r"main\data_engineer\frontend\assets\geojson\ph.json"

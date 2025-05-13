@@ -7,6 +7,7 @@ from dash.dependencies import Input, Output
 
 from dash import html, dcc
 import dash_bootstrap_components as dbc
+import sqlite3
 
 filter1_dropdown = dbc.Select(
     id='location-filter',
@@ -41,8 +42,14 @@ order_radio = dbc.RadioItems(
 
 def get_total_by_mode(df, mode):
     if df.empty:
-        df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
+        db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
 
+        conn = sqlite3.connect(db_path)
+
+        df = pd.read_sql_query("SELECT * FROM aggregated_enrollment", conn)
+
+        conn.close()
+    
     if mode == 'student':
         cols = [col for col in df.columns if any(g in col for g in [
             'k_', 'g1_', 'g2_', 'g3_', 'g4_', 'g5_', 'g6_', 'elem_ng_',
