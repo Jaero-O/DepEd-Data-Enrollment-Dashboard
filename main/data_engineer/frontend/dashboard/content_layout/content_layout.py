@@ -8,7 +8,19 @@ from main.data_engineer.frontend.dashboard.content.cards.card_six_ni_lei import 
 from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
 from main.data_engineer.frontend.cache_file import cache
 import sqlite3
+import os
 
+base_dir = 'enrollment_database'
+
+filenames = [
+    os.path.splitext(f)[0]
+    for f in os.listdir(base_dir)
+    if os.path.isfile(os.path.join(base_dir, f)) and f.endswith('.csv')
+]
+
+if not os.path.exists('enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'):
+    aggregateDataset(filenames)
+    
 db_path = 'enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'
 
 conn = sqlite3.connect(db_path)
@@ -326,32 +338,13 @@ def content_layout_register_callbacks(app):
     @app.callback(
         Output('aggregated-years-df', 'data'),
         Input('year-range', 'value'),
-        State('current-years', 'data'),
+        Input('current-years', 'data'),
         prevent_initial_call=True,
         background=True,
     )
 
     def aggregated_years(year_range, current_years):
-        ctx = dash.callback_context
-        if ctx.triggered:
-            prop_id = ctx.triggered[0]['prop_id']
-            print("aggregated_years triggered by:", prop_id) 
-
-        # Optimization: cache previous value
-        if hasattr(aggregated_years, '_prev_range'):
-            if aggregated_years._prev_range == year_range:
-                print("Skipping update, year range has not changed.")
-                raise dash.exceptions.PreventUpdate  # Prevent update if the range hasn't changed
-
-        aggregated_years._prev_range = year_range
-
-        filtered_years = [y for y in current_years if year_range[0] <= y <= year_range[1]]
-        aggregated_df = aggregateDataset(filtered_years).to_dict('records')
-
-        # Optionally, store the aggregated data in cache for further use
-        cache.set('aggregated_years_data', aggregated_df)
-
-        return aggregated_df
+        return None
     
     import uuid  # For generating unique keys
 
@@ -360,7 +353,7 @@ def content_layout_register_callbacks(app):
         Output('previous-year-df', 'data'),       # now just a key
         Output('sy-labels', 'data'),
         Input('school-year-dropdown-select', 'value'),
-        State('current-years', 'data'),
+        Input('current-years', 'data'),
         State('year-range', 'value'),
         State('aggregated-years-df', 'data'),
     )
@@ -432,6 +425,7 @@ def content_layout_register_callbacks(app):
         if ctx.triggered:
             prop_id = ctx.triggered[0]['prop_id']
             print("update_tab_content triggered by:", prop_id)
+            
 
         callback_start_time = int(time.time() * 1000)
 

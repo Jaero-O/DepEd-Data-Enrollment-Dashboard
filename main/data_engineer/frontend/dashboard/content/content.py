@@ -21,7 +21,6 @@ from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregate
 
 # Path to preprocessed file
 cleaned_file = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
-
 # Mapping which filter fields are valid for each selection
 # Each selection maps to the filters you'd like to apply
 # Mapping which filter fields are valid for each selection

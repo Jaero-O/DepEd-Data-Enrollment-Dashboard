@@ -36,13 +36,25 @@ def aggregateDataset(range_school_year=[2023], db_path='enrollment_csv_file/prep
             metadata_rows.append({'table_name': str(year), 'school_year': year})
 
             numeric_cols = df.select_dtypes(include='number').columns
-            enrollment_cols = [col for col in numeric_cols if '_male' in col or '_female' in col]
-            total_enrollment = df[enrollment_cols].sum(numeric_only=True).sum()
-            enrollment_summary.append({'school_year': year, 'total_enrollment': int(total_enrollment)})
+            male_cols = [col for col in numeric_cols if '_male' in col]
+            female_cols = [col for col in numeric_cols if '_female' in col]
+
+            total_enrollment_male = df[male_cols].sum(numeric_only=True).sum()
+            total_enrollment_female = df[female_cols].sum(numeric_only=True).sum()
+            total_enrollment_overall = total_enrollment_male + total_enrollment_female
+
+            enrollment_summary.append({
+                'school_year': year,
+                'total_enrollment_male': int(total_enrollment_male),
+                'total_enrollment_female': int(total_enrollment_female),
+                'total_enrollment_overall': int(total_enrollment_overall)
+            })
 
         except Exception as e:
             conn.close()
             raise ValueError(f"Error reading table `{year}`: {e}")
+
+    print(enrollment_summary)
 
     merged_df = pd.concat(database, ignore_index=True)
 
