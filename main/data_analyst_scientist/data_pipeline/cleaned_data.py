@@ -80,7 +80,7 @@ def clean_data(base_dir='enrollment_database'):
         return None
 
     # Step 3: Save updated versions
-    print("⚙️ Some cleaned tables have changed. Reprocessing...")
+    print("Some cleaned tables have changed. Reprocessing...")
     with sqlite3.connect(shared_db_path) as conn:
         for csv_path in cleaned_datasets:
             table_name, cleaned_df = preprocess_file(csv_path)

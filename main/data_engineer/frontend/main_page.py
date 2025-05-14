@@ -8,7 +8,7 @@ import hashlib
 from dash import DiskcacheManager
 
 from main.data_engineer.frontend.cache_file import cache
-
+from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
 # Import pages
 from main.data_engineer.frontend.dashboard.content_layout.content_layout import content_layout, content_layout_register_callbacks
 from main.data_engineer.frontend.dashboard.upload_modal import upload_modal, upload_modal_register_callbacks
@@ -304,33 +304,38 @@ def toggle_upload_modal(open_clicks, close_clicks, close_clicks2):
     [Output('current-files', 'data'),
      Output('current-years', 'data'),
      Output('folder-hash', 'data')],
-    [Input('file-check', 'n_intervals'),
-     State('folder-hash', 'data')],
-    prevent_initial_callback=True  # Input to detect changes in folder
+    [Input('file-check', 'n_intervals')],
+    [State('folder-hash', 'data')],
+    prevent_initial_call=True
 )
 def update_file_list(n, last_folder_hash):
+    base_dir = 'enrollment_database'
     folder_path = Path('enrollment_database')
     filenames = [f.name for f in folder_path.iterdir() if f.is_file() and f.suffix == '.csv']
-    
-    # Calculate hash of the current folder contents (to detect changes)
+    def compute_filenames_hash(filenames):
+        return hashlib.md5(','.join(sorted(filenames)).encode()).hexdigest()
     current_hash = hashlib.md5(''.join(filenames).encode('utf-8')).hexdigest()
 
-    # If the folder hash is the same as the last stored hash, don't update
     if current_hash == last_folder_hash:
-        return dash.no_update  # No change, return no_update
-    
-    ctx = dash.callback_context
-    if ctx.triggered:
-        prop_id = ctx.triggered[0]['prop_id']
-        print("update_file_list triggered by:", prop_id) 
-    # If the folder contents have changed, process the filenames
+        return dash.no_update
+
+    # Safe logging
+    try:
+        ctx = dash.callback_context
+        if ctx.triggered:
+            prop_id = ctx.triggered[0]['prop_id']
+            print("update_file_list triggered by:", prop_id)
+
+        raise dash.exceptions.PreventUpdate
+    except Exception as e:
+        print("update_file_list context error:", str(e))
+
     years = []
     for f in filenames:
         name = f.replace('.csv', '')
         if name.isdigit():
             years.append(int(name))
-    
-    # Return new file list, years, and the updated folder hash
+
     return filenames, years, current_hash
 
 

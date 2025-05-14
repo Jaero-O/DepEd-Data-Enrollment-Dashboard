@@ -5,6 +5,10 @@ from dash import Input, Output, State, MATCH, ALL, ctx
 import requests
 import base64
 import io
+from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
+import os
+
+base_dir = 'enrollment_database'
 
 upload_modal = html.Div([
     html.Div('School Enrollment Upload Data', className='header'),
@@ -74,10 +78,16 @@ def upload_modal_register_callbacks(app):
         Output("output-data-upload", "children"),
         Input("upload-button", "n_clicks"),
         State("stored-file", "data"),
-        State("school-year-dropdown", "value"),  # ✅ get selected year
+        State("school-year-dropdown", "value"),
         prevent_initial_call=True
     )
     def upload_file(n_clicks, file_data, selected_year):
+        filenames = [
+            os.path.splitext(f)[0]
+            for f in os.listdir(base_dir)
+            if os.path.isfile(os.path.join(base_dir, f)) and f.endswith('.csv')
+        ]
+        aggregateDataset(filenames)
         if not file_data:
             return html.Div([html.H5("No file selected")])
 
@@ -90,7 +100,7 @@ def upload_modal_register_callbacks(app):
         content_type, content_string = contents.split(',')
         decoded = base64.b64decode(content_string)
 
-        # ✅ Rename file using the first part of the selected school year
+        # Rename file using the first part of the selected school year
         if selected_year:
             year_start = selected_year.split('-')[0]
             extension = '.' + original_filename.split('.')[-1]

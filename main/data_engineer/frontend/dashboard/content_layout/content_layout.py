@@ -1,4 +1,4 @@
-from dash import Input, Output, State, MATCH, ALL, ctx, html, dcc
+from dash import Input, Output, State, MATCH, ALL, ctx, html, dcc, no_update
 import dash
 import uuid 
 import dash_bootstrap_components as dbc
@@ -12,11 +12,16 @@ import os
 
 base_dir = 'enrollment_database'
 
+dcc.Interval(id='check-file-update-interval', interval=60 * 1000, n_intervals=0),  # Every 60 seconds
+dcc.Store(id='last-filenames-hash'),
+
 filenames = [
     os.path.splitext(f)[0]
     for f in os.listdir(base_dir)
     if os.path.isfile(os.path.join(base_dir, f)) and f.endswith('.csv')
 ]
+import hashlib
+
 
 if not os.path.exists('enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'):
     aggregateDataset(filenames)
@@ -299,14 +304,103 @@ content_layout = html.Div([
     html.Div(id="output-data-upload")
 ], className='tab-div')
 
-
-
-
-
 def content_layout_register_callbacks(app):
-
     import time
+    def compute_filenames_hash(folder):
+        filenames = sorted([
+            f for f in os.listdir(folder)
+            if os.path.isfile(os.path.join(folder, f)) and f.endswith('.csv')
+        ])
+        return hashlib.md5(''.join(filenames).encode()).hexdigest()
+
+    def compute_folder_size_hash(folder):
+        total_size = 0
+        for filename in os.listdir(folder):
+            filepath = os.path.join(folder, filename)
+            if os.path.isfile(filepath) and filename.endswith('.csv'):
+                total_size += os.path.getsize(filepath)
+        return hashlib.md5(str(total_size).encode()).hexdigest()
+
+    @app.callback(
+        Output('last-filenames-hash', 'data'),
+        Input('check-file-update-interval', 'n_intervals'),
+        State('last-filenames-hash', 'data'),
+        prevent_initial_call=True
+    )
+
+    def check_for_new_csv_files(n_intervals, last_hash):
+        current_hash = compute_filenames_hash(base_dir)
+
+        if current_hash != last_hash:
+            print("New CSV files detected. Reaggregating dataset...")
+            filenames = [
+                os.path.splitext(f)[0]
+                for f in os.listdir(base_dir)
+                if os.path.isfile(os.path.join(base_dir, f)) and f.endswith('.csv')
+            ]
+            aggregateDataset(filenames)
+            return current_hash
+
+        raise dash.exceptions.PreventUpdate
+
+    @app.callback(
+        Output('last-folder-size-hash', 'data'),
+        Input('check-file-update-interval', 'n_intervals'),
+        State('last-folder-size-hash', 'data'),
+        prevent_initial_call=True
+    )
+    def check_for_folder_size_change(n_intervals, last_size_hash):
+        current_size_hash = compute_folder_size_hash(base_dir)
+
+        if current_size_hash != last_size_hash:
+            print("Folder size changed. Reaggregating dataset...")
+            filenames = [
+                os.path.splitext(f)[0]
+                for f in os.listdir(base_dir)
+                if os.path.isfile(os.path.join(base_dir, f)) and f.endswith('.csv')
+            ]
+            aggregateDataset(filenames)
+            return current_size_hash
+
+        raise dash.exceptions.PreventUpdate
     
+    def compare_csv_to_db(csv_df, school_year, db_path='enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.db'):
+        try:
+            conn = sqlite3.connect(db_path)
+            db_df = pd.read_sql_query(f"SELECT * FROM `{school_year}`", conn)
+            conn.close()
+
+            # Sort and reset index for comparison
+            csv_df_sorted = csv_df.sort_index(axis=1).reset_index(drop=True)
+            db_df_sorted = db_df.sort_index(axis=1).reset_index(drop=True)
+
+            if csv_df_sorted.equals(db_df_sorted):
+                return "✅ CSV matches the database table."
+            else:
+                # Show summary of changes
+                diff = pd.concat([csv_df_sorted, db_df_sorted]).drop_duplicates(keep=False)
+                return html.Div([
+                    html.P("⚠️ CSV does NOT match the database table."),
+                    html.Pre(diff.to_string(index=False, max_cols=10))  # avoid overwhelming output
+                ])
+        except Exception as e:
+            return f"❌ Error during comparison: {e}"
+    @app.callback(
+        Output('csv-db-comparison', 'children'),
+        Input('interval', 'n_intervals'),
+        State('csv-store', 'data'),
+        State('year-store', 'data')  # You should store the detected school year here
+    )
+    def update_csv_db_comparison(n_intervals, csv_json, school_year):
+        if csv_json is None or school_year is None:
+            return "Awaiting CSV or school year..."
+
+        try:
+            csv_df = pd.read_json(csv_json, orient='split')
+            return compare_csv_to_db(csv_df, school_year)
+        except Exception as e:
+            return f"Error parsing CSV: {e}"
+
     @app.callback(
         [Output('year-range', 'min'),
         Output('year-range', 'max'),
@@ -323,7 +417,6 @@ def content_layout_register_callbacks(app):
         # Setting min and max values based on the years list
         min_year = min(years)
         max_year = max(years)
-
         # Creating marks for the years
         marks = {year: str(year) for year in years}
 
@@ -701,25 +794,29 @@ def content_layout_register_callbacks(app):
         Output('year-list', 'children'),
         Input('year-range', 'value'),
         State('current-years', 'data'),
-        prevent_initial_call = True
+        prevent_initial_call=True
     )
-    def update_year_list(selected_range, years_data):
+    def update_year_list(selected_range, current_years):
         ctx = dash.callback_context
         if ctx.triggered:
             prop_id = ctx.triggered[0]['prop_id']
-            print("update_year_list triggered by:", prop_id) 
-        # Check if the selected values are in the current-years list
+            print("update_year_list triggered by:", prop_id)
+
+        # If the selected range or current years are the same, don't trigger update
+        if not selected_range or current_years == selected_range:
+            print("Selected range or years unchanged, not updating.")
+            return no_update  # Don't trigger update if nothing has changed
+
         selected_start = selected_range[0]
         selected_end = selected_range[1]
 
-        # If the selected value is not in the years_data list, adjust to the nearest year
-        if selected_start not in years_data:
-            selected_start = min(years_data, key=lambda x: abs(x - selected_start))
-        if selected_end not in years_data:
-            selected_end = min(years_data, key=lambda x: abs(x - selected_end))
+        if selected_start not in current_years:
+            selected_start = min(current_years, key=lambda x: abs(x - selected_start))
+        if selected_end not in current_years:
+            selected_end = min(current_years, key=lambda x: abs(x - selected_end))
 
         children = []
-        for year in reversed(years_data):  # Show top-down
+        for year in reversed(current_years):  # Show top-down
             is_selected = selected_start <= year <= selected_end
             children.append(
                 html.Div(
@@ -729,6 +826,14 @@ def content_layout_register_callbacks(app):
                     n_clicks=0
                 )
             )
+        base_dir = 'enrollment_database'
+
+        filenames = [
+            os.path.splitext(f)[0]
+            for f in os.listdir(base_dir)
+            if os.path.isfile(os.path.join(base_dir, f)) and f.endswith('.csv')
+        ]
+        aggregateDataset(filenames)
         return children
     
     # @app.callback(
