@@ -1,3 +1,4 @@
+import sqlite3
 import pandas as pd
 from dash import html, dcc
 from main.data_engineer.frontend.dashboard.content.cards.card_one import card_one
@@ -5,13 +6,19 @@ from main.data_engineer.frontend.dashboard.content.cards.card_two import card_tw
 from main.data_engineer.frontend.dashboard.content.cards.card_three import card_three
 from main.data_engineer.frontend.dashboard.content.cards.card_four import card_four
 from main.data_engineer.frontend.dashboard.content.cards.card_five import card_five
-from main.data_engineer.frontend.dashboard.content.cards.card_six import card_six
-from main.data_engineer.frontend.dashboard.content.cards.card_seven_es import card_seven_es
+from main.data_engineer.frontend.dashboard.content.cards.card_six_ni_lei import card_six
+from main.data_engineer.frontend.dashboard.content.cards.card_seven import card_seven
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_jhs import card_seven_jhs
 from main.data_engineer.frontend.dashboard.content.cards.card_seven_shs import card_seven_shs
 from main.data_engineer.frontend.dashboard.content.cards.card_eight import card_eight
 from main.data_engineer.frontend.dashboard.content.cards.card_table_school import card_tabular
 from main.data_engineer.frontend.dashboard.content.cards.card_table_geography import card_regional_table
+<<<<<<< HEAD
+=======
+from main.data_engineer.frontend.dashboard.content.cards.card_nine import card_choropleth
+from main.data_engineer.frontend.dashboard.content.cards.card_ten import card_ten
+from main.data_analyst_scientist.data_pipeline.combine_datasets import aggregateDataset
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
 
 
 
@@ -76,11 +83,16 @@ hierarchy_order = [
 
 direct_filters = ['Sector', 'School Subclassification', 'School Type', 'Modified COC']
 
+<<<<<<< HEAD
 def convert_filter_to_df(filter_dict):
     csv_path = "enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv"
     df = pd.read_csv(csv_path)
 
     # Rename columns to match UI filters
+=======
+def convert_filter_to_df(filter_dict, df):
+
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
     column_rename_map = {
         'region': 'Region',
         'division': 'Division',
@@ -142,29 +154,29 @@ def convert_filter_to_df(filter_dict):
 # Load the dataset once to access filter options
 def dashboardContent(final_df, location, mode, order):
     return [
-        html.Div("School-Based Enrollment", className='card-group-title'),
-        html.Div([
-            html.Div([
-                card_one(final_df, mode),
-                *card_two(final_df, mode)
-            ], className='card-one-two-wrapper'),
-            html.Div([
-                card_three(final_df, mode), 
-                card_five(final_df, mode)
-            ], className='card-three-five-wrapper')
-        ], className='card-one-two-three-five-wrapper'),
-        html.Div([card_four(final_df, mode)], className='card-four-wrapper'),
-        html.Div("Education Level Enrollment", className='card-group-title'),
-        html.Div([
-            card_seven_es(final_df, mode),
-            card_seven_jhs(final_df, mode),
-            card_seven_shs(final_df, mode)
-        ],className='card-seven-wrapper'),
-        html.Div("Geographic-Based Enrollment", className='card-group-title'),
-        html.Div(
-            [card_six(final_df, location, mode,order)],
-            className='card-six-wrapper'
-        ),
+        # html.Div("School-Based Enrollment", className='card-group-title'),
+        # html.Div([
+        #     html.Div([
+        #         card_one(final_df, mode),
+        #         *card_two(final_df, mode)
+        #     ], className='card-one-two-wrapper'),
+        #     html.Div([
+        #         card_three(final_df, mode), 
+        #         card_five(final_df, mode)
+        #     ], className='card-three-five-wrapper')
+        # ], className='card-one-two-three-five-wrapper'),
+        # html.Div([card_four(final_df, mode)], className='card-four-wrapper'),
+        # html.Div("Education Level Enrollment", className='card-group-title'),
+        # html.Div([
+        #     card_seven_es(final_df, mode),
+        #     card_seven_jhs(final_df, mode),
+        #     card_seven_shs(final_df, mode)
+        # ],className='card-seven-wrapper'),
+        # html.Div("Geographic-Based Enrollment", className='card-group-title'),
+        # html.Div(
+        #     [card_six(final_df, location, mode,order)],
+        #     className='card-six-wrapper'
+        # ),
         # card_four(final_df, location, mode),
         # card_three(final_df, mode),
         # card_five(final_df, location, mode),        
@@ -174,8 +186,15 @@ def dashboardContent(final_df, location, mode, order):
         # add here your cards after importing  
     ]
 
-def dashboard_content(final_df,location,mode, order,tab):
-
+def dashboard_content(final_df, previous_year_df, location, mode, tab, current_sy, previous_sy):
+    # return None
+    print("=== dashboard_content inputs ===")
+    print("Location:", location)
+    print("Mode:", mode)
+    print("Tab:", tab)
+    print("Current SY:", current_sy)
+    print("Previous SY:", previous_sy)
+    print("================================")
     if tab == 'school-based':
         return[
             html.Div([
@@ -195,12 +214,33 @@ def dashboard_content(final_df,location,mode, order,tab):
         return[
             html.Div([
                 html.Div([
+<<<<<<< HEAD
                     card_seven_es(final_df, mode),
                     card_seven_jhs(final_df, mode),
                     card_seven_shs(final_df, mode)
                 ],className='card-seven-wrapper'),
                 html.Div([
                 ])
+=======
+                    html.Div([
+                        card_tabular(final_df, mode)
+                    ], className='card-level-table-wrapper'),
+                    html.Div([
+                        card_eight(final_df, previous_year_df,current_sy, previous_sy),
+                    ], className='card-eight-wrapper'),
+                ], className='card-eight-card-table-wrapper'),
+                html.Div([
+                    # html.Div([
+                    #     card_seven_es(final_df, mode),
+                    #     card_seven_jhs(final_df, mode),
+                    # ], className='card-seven-es-jhs-wrapper'),
+                    card_seven(final_df, mode, 'ES'),
+                    card_seven(final_df, mode, 'JHS'),
+                    card_seven(final_df, mode, 'SHS-Academic'),
+                    card_seven(final_df, mode, 'SHS-Non-Academic'),
+                ], className='card-seven-wrapper'),
+                
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
             ], className='level-based-wrapper'),
         ]
     
@@ -208,6 +248,7 @@ def dashboard_content(final_df,location,mode, order,tab):
         return [
             html.Div([
                 html.Div([
+<<<<<<< HEAD
                     card_one(final_df, mode),
                     *card_two(final_df, mode)
                 ], className='card-one-two-wrapper'),
@@ -217,6 +258,16 @@ def dashboard_content(final_df,location,mode, order,tab):
                     card_five(final_df, mode)
                 ], className='card-three-four-five-wrapper')
             ], className='card-one-two-three-five-wrapper'),
+=======
+                    card_ten(final_df, mode),
+                    html.Div([
+                        html.Div(card_six(final_df,location,mode,'desc'), className='card-six-wrapper'),
+                        html.Div(card_six(final_df,location,mode,'asc'), className='card-six-wrapper'),
+                    ], className='card-six-outside-wrapper')
+                ], className='card-six-ten-wrapper'),
+                html.Div(card_choropleth(final_df,mode, location), className='card-nine-wrapper')
+            ], className='geographic-based-wrapper'),
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
         ]
 
 

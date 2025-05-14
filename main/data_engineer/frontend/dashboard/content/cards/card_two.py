@@ -187,6 +187,7 @@ def card_two(df, mode):
                     textinfo='none')],
                 "layout": go.Layout(
                     height=200,
+                    width=150,
                     margin=dict(l=0, r=0, t=0, b=0),
                     showlegend=False,
                     paper_bgcolor='rgba(0,0,0,0)',

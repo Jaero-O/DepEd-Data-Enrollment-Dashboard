@@ -109,14 +109,24 @@ def card_three(df, mode):
 
 
     max_val = grouped[y_col].max()
-    if pd.isna(max_val) or max_val <= 0:
+    nonzero_min_val = grouped[y_col][grouped[y_col] > 0].min()
+
+    if pd.isna(max_val) or max_val <= 0 or pd.isna(nonzero_min_val) or nonzero_min_val <= 0:
         tickvals = []
         ticktext = []
     else:
         max_power = int(np.ceil(np.log10(max_val)))
+<<<<<<< HEAD
         min_power = 2 if max_val >= 100 else 0
         tickvals = [10 ** i for i in range(min_power, max_power + 1)]
         ticktext = [f"{int(v):,}" for v in tickvals]
+=======
+        min_power = int(np.floor(np.log10(nonzero_min_val)))
+        tickvals = [10 ** i for i in range(min_power, max_power + 1)]
+        ticktext = [f"{int(v):,}" for v in tickvals]
+        y_range = [min_power, max_power + 1]
+
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
 
     fig.update_layout(
         xaxis=dict(
@@ -131,6 +141,10 @@ def card_three(df, mode):
             ticktext=ticktext,
             tickfont=dict(family="Inter", size=12, color="#616C7E"),
             gridcolor='#F1E1CE',
+<<<<<<< HEAD
+=======
+            range=y_range
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
         ),
         showlegend=False,
         plot_bgcolor="white",
@@ -148,15 +162,8 @@ def card_three(df, mode):
         html.Div([
             html.Div([
                 html.Div(
-                    "Enrollment by Classification",
+                    "Enrollment by Subclassification",
                     className='card-title-main',
-                    style={
-                        'fontFamily': 'Inter',
-                        'fontSize': '1em',
-                        'fontWeight': '700',
-                        'color': '#44647E',
-                        'marginBottom': '10px'
-                    }
                 ),
             ], className='card-header-wrapper'),
         ], className="card-one-two-text"),

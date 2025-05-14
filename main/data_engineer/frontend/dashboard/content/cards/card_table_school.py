@@ -3,7 +3,6 @@ from dash import html, dash_table
 import dash_bootstrap_components as dbc
 from dash import dcc, Input, Output, callback
 
-
 # Column labels with proper capitalization and translation
 COLUMN_LABELS = {
     'school_name': 'School Name',
@@ -22,8 +21,8 @@ COLUMN_LABELS = {
     'g5_female': 'Grade 5 Female',
     'g6_male': 'Grade 6 Male',
     'g6_female': 'Grade 6 Female',
-    'elem_ng_male': 'Elementary Male',
-    'elem_ng_female': 'Elementary Female',
+    'elem_ng_male': 'Elementary NG Male',
+    'elem_ng_female': 'Elementary NG Female',
     'g7_male': 'Grade 7 Male',
     'g7_female': 'Grade 7 Female',
     'g8_male': 'Grade 8 Male',
@@ -32,8 +31,8 @@ COLUMN_LABELS = {
     'g9_female': 'Grade 9 Female',
     'g10_male': 'Grade 10 Male',
     'g10_female': 'Grade 10 Female',
-    'jhs_ng_male': 'Junior High Male',
-    'jhs_ng_female': 'Junior High Female',
+    'jhs_ng_male': 'Junior High NG Male',
+    'jhs_ng_female': 'Junior High NG Female',
     'g11_acad_-_abm_male': 'Grade 11 ABM Male',
     'g11_acad_-_abm_female': 'Grade 11 ABM Female',
     'g11_acad_-_humss_male': 'Grade 11 HUMSS Male',
@@ -84,6 +83,7 @@ def update_student_table(search_value):
     ]
     return filtered_df.to_dict("records")
 
+
 @callback(
     Output("school-data-table", "data"),
     Input("school-search-input", "value"),
@@ -98,24 +98,28 @@ def update_school_table(search_value):
     ]
     return filtered_df.to_dict("records")
 
+<<<<<<< HEAD
 def card_tabular(df, mode):
     global display_df
+=======
+
+def card_tabular(df, mode):
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
     if df.empty:
         df = pd.read_csv("enrollment_csv_file/preprocessed_data/cleaned_enrollment_data.csv")
 
-        if mode not in ['student', 'school']:
-            raise ValueError("Mode must be either 'student' or 'school'")
+    if mode != 'student':
+        raise ValueError("This view is only for student-level data summarization")
 
-    student_columns = list(COLUMN_LABELS.keys())
-    school_columns = [
-        'school_name', 'beis_school_id', 'sector', 'school_subclassification', 'school_type',
-        'modified_coc'
-    ]
+    def summarize_level(level_cols, ng_cols, labels_map):
+        data = []
+        total = df[level_cols + ng_cols].sum().sum()
 
-    selected_columns = student_columns if mode == 'student' else school_columns
-    display_df = df.loc[:, selected_columns].copy()
-    display_df.reset_index(drop=True, inplace=True)
+        # Define the correct order of levels
+        correct_order = ['k', 'g1', 'g2', 'g3', 'g4', 'g5', 'g6', 
+                        'g7', 'g8', 'g9', 'g10', 'g11', 'g12']
 
+<<<<<<< HEAD
     return dbc.Card(
         dbc.CardBody([
             html.Div(
@@ -148,3 +152,107 @@ def card_tabular(df, mode):
         ]),
         className="tabular-card"
     )
+=======
+        # Build unique group list based on the correct order
+        groups = []
+        seen = set()
+        for grade in correct_order:
+            for col in level_cols:
+                if col.startswith(grade + '_'):
+                    base = col.rsplit('_', 1)[0]
+                    if base not in seen:
+                        seen.add(base)
+                        groups.append(base)
+
+        for group in groups:
+            male = f"{group}_male"
+            female = f"{group}_female"
+            if male in df and female in df:
+                subtotal = df[[male, female]].sum().sum()
+                percentage = (subtotal / total * 100) if total > 0 else 0
+                label = labels_map.get(male, group.replace('_', ' ').title()).rsplit(' ', 1)[0]
+                data.append({
+                    "Grade / Strand": label,
+                    "Total Enrollment": int(subtotal),
+                    "% of Total": f"{percentage:.2f}%"
+                })
+
+        # Add NG total
+        ng_total = df[ng_cols].sum().sum()
+        if ng_total > 0:
+            label = labels_map.get(ng_cols[0], "NG Group").rsplit(' ', 2)[0]
+            percentage = (ng_total / total * 100) if total > 0 else 0
+            data.append({
+                "Grade / Strand": f"{label} NG",
+                "Total Enrollment": int(ng_total),
+                "% of Total": f"{percentage:.2f}%"
+            })
+
+        return pd.DataFrame(data)
+
+
+    def create_table(title, data):
+        return html.Div([
+            html.Div([html.Div(title, className='card-title-main')], className='card-header-wrapper'),
+            dash_table.DataTable(
+                data=data.to_dict("records"),
+                columns=[
+                    {"name": "Grade / Strand", "id": "Grade / Strand"},
+                    {"name": "Total Enrollment", "id": "Total Enrollment"},
+                    {"name": "% of Total", "id": "% of Total"}
+                ],
+                style_table={'overflowX': 'auto', 'width': '100%'},
+                style_header={
+                    'backgroundColor': '#d9f2ff',
+                    'fontWeight': 'bold',
+                    'textAlign': 'center',
+                    'color': '#2a4d69',
+                    'fontSize': '12px',
+                    'fontFamily': "Inter",
+                    'borderBottom': '1px solid #ccc',
+                },
+                style_cell={
+                    'textAlign': 'center',
+                    'padding': '6px',
+                    'fontFamily': "Inter-Medium",
+                    'fontSize': '11px',
+                    'color': '#4f4f4f',
+                    'backgroundColor': 'white',
+                    'border': 'none'
+                },
+                style_data_conditional=[{
+                    'if': {'row_index': 'odd'},
+                    'backgroundColor': '#f9f9f9',
+                    'border': 'none'
+                }]
+            )
+        ], className="card card-level-table", style={"marginBottom": "30px"})
+
+    # Define columns
+    elementary_cols = [col for col in COLUMN_LABELS if col.startswith(('k_', 'g1_', 'g2_', 'g3_', 'g4_', 'g5_', 'g6_'))]
+    elementary_ng_cols = ['elem_ng_male', 'elem_ng_female']
+
+    jhs_cols = [col for col in COLUMN_LABELS if col.startswith(('g7_', 'g8_', 'g9_', 'g10_'))]
+    jhs_ng_cols = ['jhs_ng_male', 'jhs_ng_female']
+
+    g11_cols = [col for col in COLUMN_LABELS if col.startswith('g11_')]
+    g12_cols = [col for col in COLUMN_LABELS if col.startswith('g12_')]
+
+    # Generate summarized data
+    elementary_df = summarize_level(elementary_cols, elementary_ng_cols, COLUMN_LABELS)
+    jhs_df = summarize_level(jhs_cols, jhs_ng_cols, COLUMN_LABELS)
+    g11_df = summarize_level(g11_cols, [], COLUMN_LABELS)
+    g12_df = summarize_level(g12_cols, [], COLUMN_LABELS)
+
+    # Return tables
+    return html.Div([
+        create_table("Elementary Level Enrollment", elementary_df),
+        create_table("Junior High School Enrollment", jhs_df),
+        create_table("Grade 11 Senior High School Enrollment", g11_df),
+        create_table("Grade 12 Senior High School Enrollment", g12_df)
+    ], style={
+        "maxHeight": "360px",
+        "overflowY": "auto",
+        "paddingRight": "8px"
+    })
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1

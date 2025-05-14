@@ -1,8 +1,8 @@
 div.card-two {
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100%;
+  flex: 1;
   border-radius: 1em;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   background: linear-gradient(135deg, #FFF0DC, #FFFFFF);
@@ -278,6 +278,7 @@ div.card-two div.header-legend-wrapper-donut div.card-two-donut-chart-container 
   display: flex;
   align-items: flex-end;
   height: auto;
+  width: auto;
   flex-shrink: 0;
   margin-left: 20px;
   margin-bottom: -25px;

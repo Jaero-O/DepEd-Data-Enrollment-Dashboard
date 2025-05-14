@@ -1,6 +1,6 @@
 div.card-one {
-    width: 100%;
     height: 100%;
+    flex:1;
     display: flex;
     flex-direction: column;
     padding: 30px 40px;
@@ -177,10 +177,10 @@ div.card-one {
           display: flex;
           align-items: flex-end;
           height: auto;
+          width: auto;
           flex-shrink: 0;
           margin-left: 20px;
           margin-bottom: -35px;
         }
       } 
   }
-  

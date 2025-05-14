@@ -6,7 +6,41 @@ from plotly.subplots import make_subplots
 import re
 
 def preserve_parentheses_title(text):
-    return re.sub(r'\((.*?)\)', lambda m: f"({m.group(1)})", text.title())
+    text = text.lower()  # Normalize first
+
+    def smart_title_case(s):
+        if not s.strip():
+            return ''
+        exceptions = {'or', 'and', 'of', 'the', 'in', 'on', 'by', 'to', 'with'}
+        words = s.split()
+        result = [words[0].capitalize()]
+        for word in words[1:]:
+            if word.lower() in exceptions:
+                result.append(word.lower())
+            else:
+                result.append(word.capitalize())
+        return ' '.join(result)
+
+    def sentence_case(s):
+        if not s.strip():
+            return ''
+        return s[0].lower() + s[1:].lower()
+
+    parts = re.split(r'(\(.*?\))', text)
+    processed_parts = []
+    for part in parts:
+        if part.startswith('(') and part.endswith(')'):
+            inner = part[1:-1]
+            processed_parts.append(f'({inner})'.lower())
+        else:
+            titled = smart_title_case(part)
+            # Apply slash rule only when `titled` is assigned
+            titled = re.sub(r'/\s*([a-z])', lambda m: '/' + m.group(1).upper(), titled)
+            processed_parts.append(titled)
+    return ''.join(processed_parts)
+
+
+
 
 def card_five(df, mode='student'):
     if df.empty:
@@ -27,7 +61,7 @@ def card_five(df, mode='student'):
     categories = [{"name": idx, "value": row["total"]} for idx, row in grouped.iterrows()]
 
     # Add some breathing room on the right for the labels
-    x_max = grouped['total'].max() * 1.45
+    x_max = grouped['total'].max() * 1.20
 
     # Create subplots
     subplots = make_subplots(
@@ -39,37 +73,50 @@ def card_five(df, mode='student'):
     )
 
     for k, x in enumerate(categories):
+        # Background gray bar
+        subplots.add_trace(go.Bar(
+            orientation='h',
+            y=[x["name"]],
+            x=[x_max],  # full length background bar
+            marker=dict(color="#e6e6e6"),  # light gray
+            hoverinfo='skip',
+        ), row=k + 1, col=1)
+
         subplots.add_trace(go.Bar(
             orientation='h',
             y=[x["name"]],
             x=[x["value"]],
-            text=[f"{x['value']:,}"],
-            textfont=dict(family="Inter", size=14, color="#081434", weight="bold"),
-            textposition='outside',
-            marker=dict(color="#7986cb"),
+            marker=dict(color="#21D7E4"),
             hoverinfo='text',
+            text=[f'{round(x["value"]):,}'],
+            textposition='none', 
+            showlegend=False
         ), row=k + 1, col=1)
+
+        buffer = x_max * 0.02  # 2% of full width, adjust if needed
 
     # Update layout
     for ann in subplots["layout"]["annotations"]:
         ann["x"] = 0
         ann["xanchor"] = "left"
         ann["align"] = "left"
-        ann["font"] = dict(size=12, family="Inter", weight="bold", color='#2a4d69')
+        ann["font"] = dict(size=14, family="Inter", weight=600, color='#2a4d69')
         if len(categories) > 1:
-            ann["yshift"] = -60 * (1/(len(categories)))
+            ann["yshift"] = -65 * (1/(len(categories)))
         else:
             ann["yshift"] = -45
 
     if len(categories) > 1:
-            width_gap = max(0.65, min(0.9, 1.5 / (len(categories))))
+            width_gap = max(0.40, min(0.9, 1.1 / (len(categories))))
     else:
-        width_gap = 0.82
+        width_gap = 0.65
     
     layout_updates = {
+        "barmode": "overlay",
         "showlegend": False,
-        "height": min(240, 60 + 40 * len(categories)),        
-        "margin": dict(t=10, b=0, l=0, r=10),
+        "width": 345,
+        "height": min(350, 70 +  80* len(categories)),     
+        "margin": dict(t=0, b=0, l=0, r=10),
         "template": "simple_white",
         "paper_bgcolor": 'rgba(0,0,0,0)',
         "plot_bgcolor": 'rgba(0,0,0,0)',
@@ -97,7 +144,7 @@ def card_five(df, mode='student'):
     return html.Div([
             html.Div([
                 html.Div(
-                f"Enrollment by School Type".upper(),
+                f"Enrollment by School Type",
                 className='card-title-main'),
             ],className='card-header-wrapper'),
             html.Div([

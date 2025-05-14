@@ -67,7 +67,7 @@ def aggregateDataset(range_school_year=[2023]):
     ]
 
     agg_dict = {col: 'last' for col in columns_to_last}
-    agg_dict.update({col: 'sum' for col in columns_to_sum})
+    agg_dict.update({col: 'mean' for col in columns_to_sum})
 
     aggregated_df = merged_df.groupby('beis_school_id', as_index=False).agg(agg_dict)
 
@@ -77,8 +77,5 @@ def aggregateDataset(range_school_year=[2023]):
     output_file = os.path.join(output_path, 'cleaned_enrollment_data.csv')
     aggregated_df.to_csv(output_file, index=False)
     print(f"Aggregated file saved to: {output_file}")
-
-    load_data('enrollment_csv_file\\preprocessed_data\\cleaned_enrollment_data.db', aggregated_df)
-    return aggregated_df 
-
-aggregated_df = aggregateDataset()
+    print(aggregated_df)
+    return aggregated_df

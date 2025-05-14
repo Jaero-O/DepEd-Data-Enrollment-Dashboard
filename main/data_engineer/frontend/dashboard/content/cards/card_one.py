@@ -136,6 +136,10 @@ def card_one(df, mode):
                 )],
                 layout=go.Layout(
                     height=200,
+<<<<<<< HEAD
+=======
+                    width=150,
+>>>>>>> cf9d28a4dfbf380b81c067e6e0371f8670e8f3b1
                     margin=dict(l=0, r=0, t=0, b=0),
                     showlegend=False,
                     paper_bgcolor='rgba(0,0,0,0)',
